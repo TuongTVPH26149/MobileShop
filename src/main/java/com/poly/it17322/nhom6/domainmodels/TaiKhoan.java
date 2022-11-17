@@ -83,9 +83,6 @@ public class TaiKhoan {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastModifiedDate;
 
-    @Column(name = "Deleted", insertable = false)
-    private boolean deleted;
-
     @OneToMany(mappedBy = "taiKhoan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HoaDon> lstHoaDon;
 }
