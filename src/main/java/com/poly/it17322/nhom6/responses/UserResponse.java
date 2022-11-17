@@ -4,6 +4,8 @@
  */
 package com.poly.it17322.nhom6.responses;
 
+import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +17,21 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class TaiKhoanResponse {
-    private String id;
+public class UserResponse {
+    private UUID id;
     private String ma;
     private String hoTen;
     private String matKhau;
     private String chucVu;
+
+    public UserResponse(TaiKhoan tk) {
+        this.id = tk.getId();
+        this.ma = tk.getMa();
+        this.hoTen = tk.getHoTen();
+        this.matKhau = tk.getMatKhau();
+        this.chucVu = tk.getChucVu().getTen();
+    }
+    
+    
 }

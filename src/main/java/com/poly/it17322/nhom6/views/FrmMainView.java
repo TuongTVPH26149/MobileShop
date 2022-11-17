@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.poly.it17322.nhom6.responses.TaiKhoanResponse;
+import com.poly.it17322.nhom6.responses.UserResponse;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
@@ -16,16 +16,15 @@ import javax.swing.ImageIcon;
 public class FrmMainView extends javax.swing.JFrame {
 
     private int chosser;
-    private TaiKhoanResponse tkreponse;
+    private UserResponse tkreponse;
 
     /**
      * Creates new form frmMain
      */
-    public FrmMainView(TaiKhoanResponse tk) {
+    public FrmMainView(UserResponse tk) {
         initComponents();
         setLocationRelativeTo(null);
         tkreponse = tk;
-        txtmaNV.setText(tk.getMa());
     }
 
     /**
@@ -65,7 +64,6 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlHome = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        txtmaNV = new javax.swing.JLabel();
         pnlTiltle = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
         lblMini = new javax.swing.JLabel();
@@ -543,10 +541,6 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        txtmaNV.setBackground(new java.awt.Color(51, 51, 51));
-        txtmaNV.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtmaNV.setForeground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout paneListServiceLayout = new javax.swing.GroupLayout(paneListService);
         paneListService.setLayout(paneListServiceLayout);
         paneListServiceLayout.setHorizontalGroup(
@@ -562,9 +556,6 @@ public class FrmMainView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneListServiceLayout.createSequentialGroup()
                 .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(paneListServiceLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtmaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(paneListServiceLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(pnlKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneListServiceLayout.createSequentialGroup()
@@ -579,9 +570,7 @@ public class FrmMainView extends javax.swing.JFrame {
         paneListServiceLayout.setVerticalGroup(
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(txtmaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(120, 120, 120)
                 .addComponent(pnlHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -599,7 +588,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addComponent(pnlKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pnlTiltle.setBackground(new java.awt.Color(30, 30, 30));
@@ -974,7 +963,6 @@ public class FrmMainView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMainView(new TaiKhoanResponse("test", "NV01", "Nguyễn Văn A", "abc", "NV")).setVisible(true);
             }
         });
     }
@@ -1013,7 +1001,6 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlThongKe;
     private javax.swing.JPanel pnlTiltle;
     private javax.swing.JPanel pnlView;
-    private javax.swing.JLabel txtmaNV;
     // End of variables declaration//GEN-END:variables
 
     private void clearChosserListService() {

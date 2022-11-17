@@ -8,6 +8,6 @@ package com.poly.it17322.nhom6.services.impl;
  *
  * @author LiamTrieu
  */
-public class BanHangService {
+public class BanHangServiceImpl {
     
 }

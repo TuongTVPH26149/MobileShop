@@ -4,7 +4,15 @@
  */
 package com.poly.it17322.nhom6.views;
 
+import com.poly.it17322.nhom6.responses.UserResponse;
+import com.poly.it17322.nhom6.services.IDangNhapService;
+import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
+import com.poly.it17322.nhom6.utilities.MD5Util;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,13 +20,15 @@ import javax.swing.ImageIcon;
  */
 public class FrmDangNhap extends javax.swing.JFrame {
 
+    private final IDangNhapService dangNhapService = new DangNhapServiceImpl();
+
     /**
      * Creates new form FrmDangNhap
      */
     public FrmDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -35,13 +45,13 @@ public class FrmDangNhap extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTaiKhoan = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        txtMatKhau = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JButton();
         lblQuenMatKhau = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,13 +102,13 @@ public class FrmDangNhap extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jTextField1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-        jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTextField1.setMaximumSize(new java.awt.Dimension(303, 20));
-        jTextField1.setMinimumSize(new java.awt.Dimension(303, 20));
-        jTextField1.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtTaiKhoan.setBackground(new java.awt.Color(51, 51, 51));
+        txtTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        txtTaiKhoan.setBorder(null);
+        txtTaiKhoan.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtTaiKhoan.setMaximumSize(new java.awt.Dimension(303, 20));
+        txtTaiKhoan.setMinimumSize(new java.awt.Dimension(303, 20));
+        txtTaiKhoan.setPreferredSize(new java.awt.Dimension(303, 20));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -111,7 +121,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTaiKhoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -122,7 +132,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 3, Short.MAX_VALUE))
@@ -161,13 +171,13 @@ public class FrmDangNhap extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        jPasswordField1.setBackground(new java.awt.Color(51, 51, 51));
-        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setBorder(null);
-        jPasswordField1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setMaximumSize(new java.awt.Dimension(303, 20));
-        jPasswordField1.setMinimumSize(new java.awt.Dimension(303, 20));
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtMatKhau.setBackground(new java.awt.Color(51, 51, 51));
+        txtMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        txtMatKhau.setBorder(null);
+        txtMatKhau.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtMatKhau.setMaximumSize(new java.awt.Dimension(303, 20));
+        txtMatKhau.setMinimumSize(new java.awt.Dimension(303, 20));
+        txtMatKhau.setPreferredSize(new java.awt.Dimension(303, 20));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -179,7 +189,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -188,32 +198,39 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(2, 2, 2)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Login");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setMaximumSize(new java.awt.Dimension(70, 25));
-        jButton1.setMinimumSize(new java.awt.Dimension(70, 25));
-        jButton1.setPreferredSize(new java.awt.Dimension(70, 25));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(51, 51, 51));
+        btnLogin.setText("Login");
+        btnLogin.setBorder(null);
+        btnLogin.setBorderPainted(false);
+        btnLogin.setMaximumSize(new java.awt.Dimension(70, 25));
+        btnLogin.setMinimumSize(new java.awt.Dimension(70, 25));
+        btnLogin.setPreferredSize(new java.awt.Dimension(70, 25));
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
+        lblQuenMatKhau.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblQuenMatKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lblQuenMatKhau.setText("Quên mật khẩu");
+        lblQuenMatKhau.setText("Forgot password ?");
         lblQuenMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblQuenMatKhauMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblQuenMatKhauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblQuenMatKhauMouseExited(evt);
             }
         });
 
@@ -222,7 +239,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,7 +255,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                         .addGap(57, 57, 57)
                         .addComponent(lblQuenMatKhau)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -248,16 +265,18 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(25, 25, 25)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuenMatKhau))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLogin, lblQuenMatKhau});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,14 +297,36 @@ public class FrmDangNhap extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lblExitMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            String tk = txtTaiKhoan.getText().trim();
+            String mk = MD5Util.md5EnCode(String.valueOf(txtMatKhau.getPassword()));
+            UserResponse tkrp = dangNhapService.checkTK(tk, mk);
+            if (tkrp.getId() != null) {
+                new FrmMainView(tkrp).setVisible(true);
+                return;
+            }
+        } catch (Exception e) {
+        }
+        JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblQuenMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseEntered
         // TODO add your handling code here:
-        
+        lblQuenMatKhau.setForeground(new Color(255, 153, 153));
     }//GEN-LAST:event_lblQuenMatKhauMouseEntered
+
+    private void lblQuenMatKhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseExited
+        // TODO add your handling code here:
+        lblQuenMatKhau.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_lblQuenMatKhauMouseExited
+
+    private void lblQuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new FrmQuenMatKhau().setVisible(true);
+    }//GEN-LAST:event_lblQuenMatKhauMouseClicked
 
     /**
      * @param args the command line arguments
@@ -323,7 +364,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -332,9 +373,9 @@ public class FrmDangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblQuenMatKhau;
+    private javax.swing.JPasswordField txtMatKhau;
+    private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }
