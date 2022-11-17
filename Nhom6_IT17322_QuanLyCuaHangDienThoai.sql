@@ -1,4 +1,13 @@
-﻿CREATE DATABASE Nhom6_IT17322_QuanLyCuaHangDienThoai
+﻿USE master
+GO
+
+DROP DATABASE IF EXISTS Nhom6_IT17322_QuanLyCuaHangDienThoai
+GO
+
+USE master
+GO
+
+CREATE DATABASE Nhom6_IT17322_QuanLyCuaHangDienThoai
 GO
 USE Nhom6_IT17322_QuanLyCuaHangDienThoai
 GO
