@@ -25,11 +25,10 @@ public class HDHRepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Query query = session.createQuery("FROM HDH", HDH.class);
             lstHDH = query.getResultList();
-            return lstHDH;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return lstHDH;
     }
     
     public HDH SelectHDHById(UUID id){
@@ -38,11 +37,10 @@ public class HDHRepository {
             Query query = session.createQuery("FROM HDH WHERE id =:id", HDH.class);
             query.setParameter("id", id);
             hdh = (HDH) query.getSingleResult();
-            return hdh;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return hdh;
     }
     
     public Boolean InsertHDH(HDH hdh){

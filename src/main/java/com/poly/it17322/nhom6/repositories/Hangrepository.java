@@ -25,11 +25,10 @@ public class Hangrepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Query query = session.createQuery("FROM Hang", Hang.class);
             lstHang = query.getResultList();
-            return lstHang;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return lstHang;
     }
     
     public Hang SelectHangById(UUID id){
@@ -38,11 +37,10 @@ public class Hangrepository {
             Query query = session.createQuery("FROM Hang WHERE id =:id", Hang.class);
             query.setParameter("id", id);
             hang = (Hang) query.getSingleResult();
-            return hang;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return hang;
     }
     
     public Boolean InsertHang(Hang hang){
@@ -63,7 +61,7 @@ public class Hangrepository {
             Transaction tran = session.getTransaction();
             tran.begin();
             Hang tk = hang;
-            tk.setLastModifiedDate(new Date());
+            hang.setLastModifiedDate(new Date());
             session.saveOrUpdate(hang);
             tran.commit();
             return true;

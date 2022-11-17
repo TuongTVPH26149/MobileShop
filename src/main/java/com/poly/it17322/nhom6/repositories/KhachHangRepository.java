@@ -25,11 +25,10 @@ public class KhachHangRepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Query query = session.createQuery("FROM KhachHang", KhachHang.class);
             lstKhachHang = query.getResultList();
-            return lstKhachHang;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return lstKhachHang;
     }
     
     public KhachHang SelectKhachHangById(UUID id){
@@ -38,11 +37,10 @@ public class KhachHangRepository {
             Query query = session.createQuery("FROM KhachHang WHERE id =:id", KhachHang.class);
             query.setParameter("id", id);
             khachHang = (KhachHang) query.getSingleResult();
-            return khachHang;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return khachHang;
     }
     
     public Boolean InsertKhachHang(KhachHang khachHang){
