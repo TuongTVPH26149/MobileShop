@@ -4,7 +4,9 @@
  */
 package com.poly.it17322.nhom6.application;
 
+import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import com.poly.it17322.nhom6.views.FrmDangNhap;
+import org.hibernate.Session;
 
 
 /**
@@ -13,6 +15,8 @@ import com.poly.it17322.nhom6.views.FrmDangNhap;
  */
 public class application {
     public static void main(String[] args) {
+        Session session = HibernatUtil.getFACTORY().openSession();
+        session.close();
         new FrmDangNhap().setVisible(true);
     }
 }
