@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.responses.UserResponse;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 
@@ -25,6 +26,9 @@ public class FrmMainView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         tkreponse = tk;
+        if (!tk.getChucVu().equals("QL")) {
+            pnlNhanVien.setVisible(false);
+        }
     }
 
     /**
@@ -595,6 +599,16 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlTiltle.setMaximumSize(new java.awt.Dimension(1280, 30));
         pnlTiltle.setMinimumSize(new java.awt.Dimension(1280, 30));
         pnlTiltle.setPreferredSize(new java.awt.Dimension(1280, 30));
+        pnlTiltle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlTiltleMouseDragged(evt);
+            }
+        });
+        pnlTiltle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlTiltleMousePressed(evt);
+            }
+        });
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -605,6 +619,9 @@ public class FrmMainView extends javax.swing.JFrame {
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExitMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblExitMouseEntered(evt);
             }
         });
 
@@ -617,6 +634,9 @@ public class FrmMainView extends javax.swing.JFrame {
         lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMiniMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
             }
         });
 
@@ -715,6 +735,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseEntered
         // TODO add your handling code here:
+        pnlThongKe.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 8)
             pnlThongKe.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlThongKeMouseEntered
@@ -741,6 +762,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseEntered
         // TODO add your handling code here:
+        pnlKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 7)
             pnlKhachHang.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlKhachHangMouseEntered
@@ -767,6 +789,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseEntered
         // TODO add your handling code here:
+        pnlNhanVien.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 6)
             pnlNhanVien.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlNhanVienMouseEntered
@@ -793,6 +816,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
         // TODO add your handling code here:
+        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 5)
             pnlBaoHanh.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlBaoHanhMouseEntered
@@ -819,6 +843,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseEntered
         // TODO add your handling code here:
+        pnlKhuyenMai.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 4)
             pnlKhuyenMai.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlKhuyenMaiMouseEntered
@@ -845,6 +870,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseEntered
         // TODO add your handling code here:
+        pnlHoaDon.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 3)
             pnlHoaDon.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlHoaDonMouseEntered
@@ -871,6 +897,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseEntered
         // TODO add your handling code here:
+        pnlSanPham.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 2)
             pnlSanPham.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlSanPhamMouseEntered
@@ -897,6 +924,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBanHangMouseEntered
         // TODO add your handling code here:
+        pnlBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 1)
             pnlBanHang.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlBanHangMouseEntered
@@ -917,6 +945,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void pnlHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHomeMouseEntered
         // TODO add your handling code here:
+        pnlHome.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
         if (chosser != 9)
             pnlHome.setBackground(new Color(80, 80, 80));
     }//GEN-LAST:event_pnlHomeMouseEntered
@@ -933,6 +962,30 @@ public class FrmMainView extends javax.swing.JFrame {
         chosser = 9;
         pnlHome.setBackground(new Color(102, 102, 102));
     }//GEN-LAST:event_pnlHomeMouseClicked
+
+    private void pnlTiltleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTiltleMouseDragged
+        // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_pnlTiltleMouseDragged
+    private int xMouse;
+    private int yMouse;
+    private void pnlTiltleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTiltleMousePressed
+        // TODO add your handling code here:
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_pnlTiltleMousePressed
+
+    private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
+        // TODO add your handling code here:
+        lblExit.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+    }//GEN-LAST:event_lblExitMouseEntered
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        // TODO add your handling code here:
+        lblMini.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+    }//GEN-LAST:event_lblMiniMouseEntered
 
     /**
      * @param args the command line arguments

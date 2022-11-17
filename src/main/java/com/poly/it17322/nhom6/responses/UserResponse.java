@@ -30,7 +30,7 @@ public class UserResponse {
         this.ma = tk.getMa();
         this.hoTen = tk.getHoTen();
         this.matKhau = tk.getMatKhau();
-        this.chucVu = tk.getChucVu().getTen();
+        this.chucVu = tk.getChucVu().getMa();
     }
     
     
