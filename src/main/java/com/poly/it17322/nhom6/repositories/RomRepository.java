@@ -55,8 +55,7 @@ public class RomRepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            Rom r = new Rom();
-            r.setLastModifiedDate(new Date());
+            rom.setLastModifiedDate(new Date());
             session.saveOrUpdate(rom);
             tran.commit();
             return true;

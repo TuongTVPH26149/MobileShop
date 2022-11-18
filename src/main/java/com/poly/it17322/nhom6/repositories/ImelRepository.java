@@ -20,19 +20,19 @@ import org.hibernate.query.Query;
  */
 public class ImelRepository {
     public List<Imel> SelectALlImel(){
-        List<Imel> lstKhuyenMai = new ArrayList<>();
+        List<Imel> lstImel = new ArrayList<>();
         try(Session session = HibernatUtil.getFACTORY().openSession()) {
-            Query query = session.createQuery("FROM KhuyenMai", Imel.class);
-            lstKhuyenMai = query.getResultList();
+            Query query = session.createQuery("FROM Imel", Imel.class);
+            lstImel = query.getResultList();
         } catch (Exception e) {
         }
-        return lstKhuyenMai;
+        return lstImel;
     }
     
     public Imel SelectImelId(UUID id){
         Imel imel = new Imel();
         try(Session session = HibernatUtil.getFACTORY().openSession()) {
-            Query query = session.createQuery("FROM KhuyenMai WHERE id = :id", Imel.class);
+            Query query = session.createQuery("FROM Imel WHERE id = :id", Imel.class);
             query.setParameter("id", id);
             imel = (Imel) query.getSingleResult();
             
@@ -54,12 +54,11 @@ public class ImelRepository {
         return false;
     }
     
-    public boolean UpdateKhuyenMai(Imel imel){
+    public boolean UpdateImel(Imel imel){
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            Imel im = imel;
-            im.setLastModifiedDate(new Date());
+            imel.setLastModifiedDate(new Date());
             session.saveOrUpdate(imel);
             tran.commit();
             return true;

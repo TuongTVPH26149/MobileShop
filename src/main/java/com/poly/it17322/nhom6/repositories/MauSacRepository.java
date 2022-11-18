@@ -60,8 +60,7 @@ public class MauSacRepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            MauSac tk = mauSac;
-            tk.setLastModifiedDate(new Date());
+            mauSac.setLastModifiedDate(new Date());
             session.saveOrUpdate(mauSac);
             tran.commit();
             return true;

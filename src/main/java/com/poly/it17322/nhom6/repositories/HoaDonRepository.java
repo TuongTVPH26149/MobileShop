@@ -58,8 +58,7 @@ public class HoaDonRepository {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            HoaDon tk = new HoaDon();
-            tk.setLastModifiedDate(new Date());
+            hd.setLastModifiedDate(new Date());
             session.saveOrUpdate(hd);
             tran.commit();
             return true;

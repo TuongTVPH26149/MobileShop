@@ -56,8 +56,7 @@ public class RamRepositry {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            Ram r = new Ram();
-            r.setLastModifiedDate(new Date());
+            ram.setLastModifiedDate(new Date());
             tran.commit();
             return true;
         } catch (Exception e) {

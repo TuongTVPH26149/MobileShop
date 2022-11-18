@@ -57,8 +57,7 @@ public class TrangThaiTaiKhoanRepository {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            TrangThaiTaiKhoan tk = trangThaiTk;
-            tk.setLastModifiedDate(new Date());
+            trangThaiTk.setLastModifiedDate(new Date());
             session.saveOrUpdate(trangThaiTk);
             tran.commit();
             return true;

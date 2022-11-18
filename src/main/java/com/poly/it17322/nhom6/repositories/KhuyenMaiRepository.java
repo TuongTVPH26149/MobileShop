@@ -58,8 +58,7 @@ public class KhuyenMaiRepository {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            KhuyenMai km = khuyenmai;
-            km.setLastModifiedDate(new Date());
+            khuyenmai.setLastModifiedDate(new Date());
             session.saveOrUpdate(khuyenmai);
             tran.commit();
             return true;
