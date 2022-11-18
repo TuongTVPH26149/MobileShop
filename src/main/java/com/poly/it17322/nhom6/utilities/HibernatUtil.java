@@ -34,6 +34,7 @@ public class HibernatUtil {
         conf.setProperties(properties);
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
+        conf.addAnnotatedClass(BaoHanh.class);
         conf.addAnnotatedClass(ChiTietSP.class);
         conf.addAnnotatedClass(CPU.class);
         conf.addAnnotatedClass(ChucVu.class);
