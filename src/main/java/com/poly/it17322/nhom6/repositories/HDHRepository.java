@@ -60,8 +60,7 @@ public class HDHRepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            HDH tk = hdh;
-            tk.setLastModifiedDate(new Date());
+            hdh.setLastModifiedDate(new Date());
             session.saveOrUpdate(hdh);
             tran.commit();
             return true;

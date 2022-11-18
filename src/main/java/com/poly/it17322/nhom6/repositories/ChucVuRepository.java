@@ -57,8 +57,7 @@ public class ChucVuRepository {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            ChucVu tk = chucVu;
-            tk.setLastModifiedDate(new Date());
+            chucVu.setLastModifiedDate(new Date());
             session.saveOrUpdate(chucVu);
             tran.commit();
             return true;

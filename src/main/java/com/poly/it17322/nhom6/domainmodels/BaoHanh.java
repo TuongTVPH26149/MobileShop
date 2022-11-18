@@ -4,11 +4,8 @@
  */
 package com.poly.it17322.nhom6.domainmodels;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
@@ -27,37 +23,44 @@ import lombok.ToString;
 
 /**
  *
- * @author admin
+ * @author LiamTrieu
  */
 @Entity
-@Table(name = "Imel")
-@Setter
+@Table(name = "BaoHanh")
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Imel implements Serializable {
+public class BaoHanh {
 
     @Id
     @Column(name = "Id")
     @GeneratedValue
-    private UUID id;
+    private UUID Id;
 
+    @Column(name = "Ma", unique = true, length = 20, insertable = false)
+    private String ma;
+
+    @Column(name = "TrangThai", nullable = false)
+    private int trangThai;
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdHoaDon", referencedColumnName = "id", insertable = false, nullable = true)
-    private HoaDon hoaDon;
+    @JoinColumn(name = "IdImel", referencedColumnName = "id")
+    private Imel imel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdChiTietSP", referencedColumnName = "id", insertable = false, nullable = true)
-    private ChiTietSP chiTietSP;
-
-    @Column(name = "Ma", unique = true)
-    private int ma;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdTrangThaiImel", referencedColumnName = "id")
-    private TrangThaiImel trangThaiImel;
-
+    @Column(name = "NgayBaoHanh")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayBaoHanh;
+    
+    @Column(name = "NgayHoanThanh")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayHoanThanh;
+    
+    @Column(name = "NgayKhachLay ")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayKhachLay;
+    
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
@@ -68,7 +71,4 @@ public class Imel implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-    
-    @OneToMany(mappedBy = "imel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<BaoHanh> lstBaoHanh;
 }

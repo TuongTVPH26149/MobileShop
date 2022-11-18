@@ -60,8 +60,7 @@ public class KhachHangRepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            KhachHang tk = khachHang;
-            tk.setLastModifiedDate(new Date());
+            khachHang.setLastModifiedDate(new Date());
             session.saveOrUpdate(khachHang);
             tran.commit();
             return true;

@@ -57,8 +57,7 @@ public class TaiKhoanRepository {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            TaiKhoan tk = taiKhoan;
-            tk.setLastModifiedDate(new Date());
+            taiKhoan.setLastModifiedDate(new Date());
             session.saveOrUpdate(taiKhoan);
             tran.commit();
             return true;

@@ -60,7 +60,6 @@ public class Hangrepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            Hang tk = hang;
             hang.setLastModifiedDate(new Date());
             session.saveOrUpdate(hang);
             tran.commit();

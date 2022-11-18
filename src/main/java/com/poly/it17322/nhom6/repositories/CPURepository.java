@@ -58,8 +58,8 @@ public class CPURepository {
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
-            CPU c = new CPU();
-            c.setLastModifiedDate(new Date());
+            cpu.setLastModifiedDate(new Date());
+            session.saveOrUpdate(cpu);
             tran.commit();
             return true;
         } catch (Exception e) {
