@@ -57,6 +57,7 @@ public class RamRepositry {
             Transaction tran = session.getTransaction();
             tran.begin();
             ram.setLastModifiedDate(new Date());
+            session.saveOrUpdate(ram);
             tran.commit();
             return true;
         } catch (Exception e) {

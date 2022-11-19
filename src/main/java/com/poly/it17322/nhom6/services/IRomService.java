@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.services;
 
 import com.poly.it17322.nhom6.domainmodels.Rom;
+import com.poly.it17322.nhom6.responses.RomRespone;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author admin
  */
 public interface IRomService {
-    public List<Rom> getlist();
-    public boolean insert(Rom rom);
-    public boolean update(Rom rom);
+    public List<RomRespone> getlist();
+    public boolean insert(RomRespone rom);
+    public boolean update(RomRespone rom);
 }

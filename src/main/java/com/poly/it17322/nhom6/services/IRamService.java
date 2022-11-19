@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.services;
 
 import com.poly.it17322.nhom6.domainmodels.Ram;
+import com.poly.it17322.nhom6.responses.RamRespone;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author admin
  */
 public interface IRamService {
-    public List<Ram> getlist();
-    public boolean insert(Ram ram);
-    public boolean update(Ram ram);
+    public List<RamRespone> getlist();
+    public boolean insert(RamRespone ram);
+    public boolean update(RamRespone ram);
 }

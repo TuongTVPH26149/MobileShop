@@ -506,7 +506,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel13" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jPanel13" alignment="0" pref="139" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -583,6 +583,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaddhdhActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -679,6 +682,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaddromActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -874,6 +880,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaddmauActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -893,7 +902,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel21" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jPanel21" alignment="0" pref="139" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="117" max="32767" attributes="0"/>
@@ -968,6 +977,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaddcpuActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1064,6 +1076,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaddhangActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

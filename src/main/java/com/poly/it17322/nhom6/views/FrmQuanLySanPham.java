@@ -10,6 +10,11 @@ package com.poly.it17322.nhom6.views;
  */
 public class FrmQuanLySanPham extends javax.swing.JPanel {
 FrmRam ram = new FrmRam();
+FrmRom rom = new FrmRom();
+FrmHang hang = new FrmHang();
+FrmHDH hdh = new FrmHDH();
+FrmCPU cpu = new FrmCPU();
+FrmMauSac mausac = new FrmMauSac();
     /**
      * Creates new form frmBanHang
      */
@@ -296,6 +301,11 @@ FrmRam ram = new FrmRam();
         txthdh.setBorder(null);
 
         btnaddhdh.setText("jButton5");
+        btnaddhdh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddhdhActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -304,7 +314,7 @@ FrmRam ram = new FrmRam();
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, Short.MAX_VALUE)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -351,6 +361,11 @@ FrmRam ram = new FrmRam();
         txtrom.setBorder(null);
 
         btnaddrom.setText("jButton5");
+        btnaddrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddromActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -466,6 +481,11 @@ FrmRam ram = new FrmRam();
         txtmausac.setBorder(null);
 
         btnaddmau.setText("jButton5");
+        btnaddmau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddmauActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -521,6 +541,11 @@ FrmRam ram = new FrmRam();
         txtcpu.setBorder(null);
 
         btnaddcpu.setText("jButton5");
+        btnaddcpu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddcpuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -529,7 +554,7 @@ FrmRam ram = new FrmRam();
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, 139, Short.MAX_VALUE)
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(0, 117, Short.MAX_VALUE))
@@ -575,6 +600,11 @@ FrmRam ram = new FrmRam();
         txthangsp.setBorder(null);
 
         btnaddhang.setText("jButton5");
+        btnaddhang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddhangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -784,6 +814,26 @@ FrmRam ram = new FrmRam();
     private void btnaddramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddramActionPerformed
         ram.setVisible(true);
     }//GEN-LAST:event_btnaddramActionPerformed
+
+    private void btnaddromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddromActionPerformed
+        rom.setVisible(true);
+    }//GEN-LAST:event_btnaddromActionPerformed
+
+    private void btnaddhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddhangActionPerformed
+        hang.setVisible(true);
+    }//GEN-LAST:event_btnaddhangActionPerformed
+
+    private void btnaddhdhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddhdhActionPerformed
+       hdh.setVisible(true);
+    }//GEN-LAST:event_btnaddhdhActionPerformed
+
+    private void btnaddcpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddcpuActionPerformed
+        cpu.setVisible(true);
+    }//GEN-LAST:event_btnaddcpuActionPerformed
+
+    private void btnaddmauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddmauActionPerformed
+        mausac.setVisible(true);
+    }//GEN-LAST:event_btnaddmauActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,10 @@
 package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.domainmodels.Ram;
+import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.services.impl.RamServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jdk.javadoc.doclet.Reporter;
@@ -18,6 +21,7 @@ public class FrmRam extends javax.swing.JFrame {
 
     RamServiceImpl ram = new RamServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
+    List<RamRespone> lstram = new ArrayList<>();
 
     /**
      * Creates new form FrmRam
@@ -247,8 +251,6 @@ public class FrmRam extends javax.swing.JFrame {
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         update();
-        JOptionPane.showMessageDialog(this, "Update thành công");
-        FilltoTableRam();
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void tblramMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblramMouseClicked
@@ -317,8 +319,9 @@ public class FrmRam extends javax.swing.JFrame {
     private void FilltoTableRam() {
         model = (DefaultTableModel) tblram.getModel();
         model.setRowCount(0);
-        for (Ram x : ram.getlist()) {
-            model.addRow(new Object[]{x.getMa(), x.getTen()});
+        for (RamRespone x : ram.getlist()) {
+            model.addRow(x.toDataRow());
+            lstram.add(x);
         }
     }
 
@@ -329,7 +332,7 @@ public class FrmRam extends javax.swing.JFrame {
                 || ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
         }
-        Ram r = new Ram();
+        RamRespone r = new RamRespone();
         r.setMa(txtloai.getText().trim());
         r.setTen(txtdungluong.getText().trim());
         boolean dung = ram.insert(r);
@@ -341,15 +344,23 @@ public class FrmRam extends javax.swing.JFrame {
     }
 
     public void update() {
+        int index = tblram.getSelectedRow();
         String ma = txtloai.getText();
         String ten = txtdungluong.getText();
         if (ma.length() == 0
                 || ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
         }
-        Ram r = new Ram();
+        RamRespone r = new RamRespone();
+        System.out.println(index);
+        System.out.println(ten);
+        r.setId(lstram.get(index).getId());
         r.setMa(ma);
         r.setTen(ten);
-        ram.update(r);
+        if (ram.update(r)) {
+            JOptionPane.showMessageDialog(this, "Thành công");
+
+        }
+        FilltoTableRam();
     }
 }
