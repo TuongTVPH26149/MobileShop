@@ -9,11 +9,8 @@ import com.poly.it17322.nhom6.services.IDangNhapService;
 import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
 import com.poly.it17322.nhom6.utilities.MD5Util;
 import java.awt.Color;
-import java.awt.Cursor;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -29,7 +26,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
     public FrmDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
-
     }
 
     /**
@@ -68,15 +64,13 @@ public class FrmDangNhap extends javax.swing.JFrame {
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblExit.setIcon(new ImageIcon("src/main/resource/icon/close.png"));
+        lblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblExit.setMaximumSize(new java.awt.Dimension(30, 30));
         lblExit.setMinimumSize(new java.awt.Dimension(30, 30));
         lblExit.setPreferredSize(new java.awt.Dimension(30, 30));
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExitMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblExitMouseEntered(evt);
             }
         });
 
@@ -166,7 +160,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(340, 30));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new ImageIcon("src/main/resource/icon/passworld.png"));
+        jLabel3.setIcon(new ImageIcon("src/main/resource/icon/password.png"));
         jLabel3.setMaximumSize(new java.awt.Dimension(24, 24));
         jLabel3.setMinimumSize(new java.awt.Dimension(24, 24));
         jLabel3.setPreferredSize(new java.awt.Dimension(24, 24));
@@ -224,14 +218,10 @@ public class FrmDangNhap extends javax.swing.JFrame {
         btnLogin.setText("Login");
         btnLogin.setBorder(null);
         btnLogin.setBorderPainted(false);
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.setMaximumSize(new java.awt.Dimension(70, 25));
         btnLogin.setMinimumSize(new java.awt.Dimension(70, 25));
         btnLogin.setPreferredSize(new java.awt.Dimension(70, 25));
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLoginMouseEntered(evt);
-            }
-        });
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -241,6 +231,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         lblQuenMatKhau.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblQuenMatKhau.setForeground(new java.awt.Color(255, 255, 255));
         lblQuenMatKhau.setText("Forgot password ?");
+        lblQuenMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblQuenMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblQuenMatKhauMouseClicked(evt);
@@ -335,7 +326,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
     private void lblQuenMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseEntered
         // TODO add your handling code here:
         lblQuenMatKhau.setForeground(new Color(255, 153, 153));
-        lblQuenMatKhau.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
     }//GEN-LAST:event_lblQuenMatKhauMouseEntered
 
     private void lblQuenMatKhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhauMouseExited
@@ -363,19 +353,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_lblTitileMousePressed
 
-    private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
-        // TODO add your handling code here:
-        lblExit.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
-    }//GEN-LAST:event_lblExitMouseEntered
-
-    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
-        // TODO add your handling code here:
-        btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
-    }//GEN-LAST:event_btnLoginMouseEntered
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

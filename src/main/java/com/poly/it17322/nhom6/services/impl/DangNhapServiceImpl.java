@@ -4,9 +4,11 @@
  */
 package com.poly.it17322.nhom6.services.impl;
 
+import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
 import com.poly.it17322.nhom6.repositories.TaiKhoanDangNhapRepository;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.services.IDangNhapService;
+import java.util.UUID;
 
 /**
  *
@@ -18,6 +20,23 @@ public class DangNhapServiceImpl implements IDangNhapService {
 
     @Override
     public UserResponse checkTK(String tk, String pass) {
-        return new UserResponse(tkdnRepo.checkTK(tk, pass));
+        UserResponse user = new UserResponse(tkdnRepo.checkTK(tk, pass));
+        if (user.getTrangThai().equals("TT01")) {
+            return user;
+        }
+        return null;
+    }
+
+    @Override
+    public UUID checkMail(String mail) {
+        return tkdnRepo.checkEmail(mail);
+    }
+
+    @Override
+    public boolean resetPass(String pass, String mail) {
+        UUID id = tkdnRepo.checkEmail(mail);
+        TaiKhoan tk = tkdnRepo.SelectTaiKhoanById(id);
+        tk.setMatKhau(pass);
+        return tkdnRepo.UpdateTaiKhoan(tk);
     }
 }

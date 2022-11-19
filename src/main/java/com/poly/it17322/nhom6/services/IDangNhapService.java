@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.services;
 
 import com.poly.it17322.nhom6.responses.UserResponse;
+import java.util.UUID;
 
 /**
  *
@@ -12,4 +13,6 @@ import com.poly.it17322.nhom6.responses.UserResponse;
  */
 public interface IDangNhapService {
     UserResponse checkTK(String tk, String pass);
+    UUID checkMail(String mail);
+    boolean resetPass(String pass, String mail);
 }
