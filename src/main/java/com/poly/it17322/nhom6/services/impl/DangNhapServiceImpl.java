@@ -20,7 +20,11 @@ public class DangNhapServiceImpl implements IDangNhapService {
 
     @Override
     public UserResponse checkTK(String tk, String pass) {
-        return new UserResponse(tkdnRepo.checkTK(tk, pass));
+        UserResponse user = new UserResponse(tkdnRepo.checkTK(tk, pass));
+        if (user.getTrangThai().equals("TT01")) {
+            return user;
+        }
+        return null;
     }
 
     @Override

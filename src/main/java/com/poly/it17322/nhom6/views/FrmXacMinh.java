@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
  */
 public class FrmXacMinh extends javax.swing.JFrame {
 
-    private Thread undocode = new Thread();
+    private Thread undocode;
+    private Thread t2;
     private String email;
     private int code;
 
@@ -318,11 +319,15 @@ public class FrmXacMinh extends javax.swing.JFrame {
     private void btnUndoCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUndoCodeActionPerformed
         // TODO add your handling code here:
         code = genCode();
-        if (new SenderMailUtil().sendMail("Mobiking mã xác minh", "Code: " + code, email)) {
-            JOptionPane.showMessageDialog(this, "Hệ thống đang bận");
-        } else {
-            JOptionPane.showMessageDialog(this, "Mã xác minh đã được gửi tới email");
-        }
+        t2 = new Thread() {
+            @Override
+            public void run() {
+                new SenderMailUtil().sendMail("Mobiking mã xác minh", "Code: " + code, email);
+                t2.stop();
+            }
+        };
+        t2.start();
+        JOptionPane.showMessageDialog(this, "Mã xác minh đã được gửi tới email");
         undocode = new Thread() {
             @Override
             public void run() {
@@ -339,10 +344,9 @@ public class FrmXacMinh extends javax.swing.JFrame {
                     try {
                         undocode.sleep(1000);
                     } catch (InterruptedException ex) {
-
                     }
                 }
-
+                undocode.stop();
             }
         };
         undocode.start();

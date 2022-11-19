@@ -26,7 +26,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
     public FrmDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
-
     }
 
     /**

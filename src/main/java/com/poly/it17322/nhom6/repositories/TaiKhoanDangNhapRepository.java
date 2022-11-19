@@ -6,7 +6,6 @@ package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -24,16 +23,11 @@ public class TaiKhoanDangNhapRepository extends TaiKhoanRepository {
         Query query = session.createQuery("FROM TaiKhoan WHERE email = :tk and matKhau = :mk");
         query.setParameter("tk", tk);
         query.setParameter("mk", mk);
-        TaiKhoan result = (TaiKhoan) query.getSingleResult();
         try {
-            result = (TaiKhoan) query.getSingleResult(); 
-            if (result.getTrangThaiTK().getMa().equals("TT01")) {
-                return result;
-            }
+            return (TaiKhoan) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
-        return null;
     }
 
     public UUID checkEmail(String mail) {
@@ -41,10 +35,9 @@ public class TaiKhoanDangNhapRepository extends TaiKhoanRepository {
         query.setParameter("mail", mail);
         TaiKhoan result = new TaiKhoan();
         try {
-            result = (TaiKhoan) query.getSingleResult(); 
+            return ((TaiKhoan) query.getSingleResult()).getId();
         } catch (NoResultException e) {
             return null;
         }
-        return result.getId();
     }
 }

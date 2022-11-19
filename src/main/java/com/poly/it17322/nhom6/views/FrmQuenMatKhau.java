@@ -19,6 +19,8 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
     private IDangNhapService dnService = new DangNhapServiceImpl();
     private int code;
     private String email;
+    private int check = 0;
+    private Thread t1;
 
     /**
      * Creates new form FrmQuenMatKhau
@@ -268,10 +270,15 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
             return;
         }
         code = genCode();
-        if(new SenderMailUtil().sendMail("Mobiking mã xác minh", "Code: "+code, email)){
-            JOptionPane.showMessageDialog(this, "Hệ thống đang bận");
-            return;
-        }
+
+        t1 = new Thread() {
+            @Override
+            public void run() {
+                new SenderMailUtil().sendMail("Mobiking mã xác minh", "Code: " + code, email);
+                t1.stop();
+            }
+        };
+        t1.start();
         JOptionPane.showMessageDialog(this, "Mã xác minh đã được gửi tới email");
         this.dispose();
         new FrmXacMinh(email, code).setVisible(true);

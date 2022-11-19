@@ -41,7 +41,7 @@ public class ChucVu implements Serializable {
     @GeneratedValue
     private UUID Id;
 
-    @Column(name = "Ma", length = 20, unique = true, nullable = false)
+    @Column(name = "Ma", length = 20, unique = true)
     private String ma;
 
     @Column(name = "Ten", length = 50, nullable = false)
