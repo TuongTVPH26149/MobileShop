@@ -6,7 +6,6 @@ package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +23,7 @@ public class UserResponse {
     private String hoTen;
     private String matKhau;
     private String chucVu;
+    private String trangThai;
 
     public UserResponse(TaiKhoan tk) {
         this.id = tk.getId();
@@ -31,7 +31,6 @@ public class UserResponse {
         this.hoTen = tk.getHoTen();
         this.matKhau = tk.getMatKhau();
         this.chucVu = tk.getChucVu().getMa();
+        this.trangThai = tk.getTrangThaiTK().getMa();
     }
-    
-    
 }

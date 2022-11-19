@@ -41,7 +41,7 @@ public class LoaiKM implements Serializable {
     @GeneratedValue
     private UUID Id;
 
-    @Column(name = "Ma", unique = true, length = 20, nullable = false)
+    @Column(name = "Ma", unique = true, length = 20)
     private String ma;
 
     @Column(name = "Ten", length = 30, nullable = false)

@@ -39,7 +39,7 @@ public class TrangThaiTaiKhoan implements Serializable {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "Ma", unique = true, length = 20, insertable = false)
+    @Column(name = "Ma", unique = true, length = 20)
     private String ma;
 
     @Column(name = "Ten", length = 30, nullable = false)
