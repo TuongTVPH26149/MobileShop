@@ -504,7 +504,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         String diachi = txtdiachi.getText().trim();
         Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
 
-        KhachHang kh = new KhachHang(null, ma, hoten, gioitinh, sdt, diachi, ngaysinh, null, null, true, null);
+       KhachHang kh = new KhachHang(null, ma, hoten, gioitinh, sdt, diachi, ngaysinh, null, null, true);
 
         return kh;
     }
