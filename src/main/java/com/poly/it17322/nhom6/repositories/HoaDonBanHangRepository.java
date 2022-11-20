@@ -42,7 +42,6 @@ public class HoaDonBanHangRepository {
         }
         return kh;
     }
-
     public boolean checkMa(String ma) {
         HoaDon hd = new HoaDon();
         try {

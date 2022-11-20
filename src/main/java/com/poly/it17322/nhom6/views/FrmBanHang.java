@@ -8,7 +8,6 @@ import com.poly.it17322.nhom6.responses.GioHangResponse;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangResponse;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.UserResponse;
-import com.poly.it17322.nhom6.services.IBanHangService;
 import com.poly.it17322.nhom6.services.impl.BanHangServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class FrmBanHang extends javax.swing.JPanel {
 
     private UserResponse nhanVien = new UserResponse();
     private DefaultTableModel dtm = new DefaultTableModel();
-    private IBanHangService bhService = new BanHangServiceImpl();
+    private BanHangServiceImpl bhService = new BanHangServiceImpl();
     private List<HoaDonBanHangResponse> lstHoaDon = new ArrayList<>();
     private List<SanPhamBanHangResponse> lstSanPham = new ArrayList<>();
     private List<GioHangResponse> lstGioHang = new ArrayList<>();

@@ -4,7 +4,6 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-<<<<<<< HEAD
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
@@ -15,14 +14,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-=======
->>>>>>> 74db302df430c4384d56ea96e03bc6c015da1722
 /**
  *
  * @author LiamTrieu
  */
 public class ChiTietSPRepository {
-<<<<<<< HEAD
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
@@ -74,7 +70,4 @@ public class ChiTietSPRepository {
         }
         return false;
     }
-=======
-    
->>>>>>> 74db302df430c4384d56ea96e03bc6c015da1722
 }

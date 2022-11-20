@@ -4,7 +4,6 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-<<<<<<< HEAD
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
@@ -16,17 +15,12 @@ import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-=======
-
->>>>>>> 74db302df430c4384d56ea96e03bc6c015da1722
 
 /**
  *
  * @author LiamTrieu
  */
 public class HoaDonChiTietRepository {
-<<<<<<< HEAD
-
     private Session session = HibernatUtil.getFACTORY().openSession();
 
     public List<HoaDonChiTiet> SelectHoaDonChiTiet() {
@@ -77,7 +71,5 @@ public class HoaDonChiTietRepository {
         }
         return false;
     }
-=======
     
->>>>>>> 74db302df430c4384d56ea96e03bc6c015da1722
 }
