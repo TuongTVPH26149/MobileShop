@@ -4,8 +4,6 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-<<<<<<< HEAD
-=======
 import com.poly.it17322.nhom6.domainmodels.SanPham;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
@@ -16,15 +14,12 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
->>>>>>> a3388de90b061e903d91f247062cb3a0f569c9c4
 /**
  *
  * @author LiamTrieu
  */
 public class SanPhamReposiry {
     
-<<<<<<< HEAD
-=======
     private Session session = HibernatUtil.getFACTORY().openSession();
 
     public List<SanPham> selectALLSanPham() {
@@ -76,5 +71,4 @@ public class SanPhamReposiry {
         }
         return false;
     }
->>>>>>> a3388de90b061e903d91f247062cb3a0f569c9c4
 }
