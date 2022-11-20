@@ -56,10 +56,10 @@ public class KhachHangRepository {
         return false;
     }
     
-    public Boolean UpdateKhachHang(KhachHang khachHang){
+    public Boolean UpdateKhachHang(KhachHang khachHang ){
         try (Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
-            tran.begin();
+            tran.begin();           
             khachHang.setLastModifiedDate(new Date());
             session.saveOrUpdate(khachHang);
             tran.commit();
@@ -69,5 +69,5 @@ public class KhachHangRepository {
         }
         return false;
     }
-    
+
 }
