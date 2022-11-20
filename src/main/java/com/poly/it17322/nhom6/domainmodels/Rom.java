@@ -56,7 +56,4 @@ public class Rom implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-   
-   @OneToMany(mappedBy = "rom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private List<ChiTietSP> lstChiTietSP;
 }

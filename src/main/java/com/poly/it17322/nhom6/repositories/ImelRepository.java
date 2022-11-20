@@ -19,31 +19,33 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class ImelRepository {
-    public List<Imel> SelectALlImel(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<Imel> SelectALlImel() {
         List<Imel> lstImel = new ArrayList<>();
-        try(Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM Imel", Imel.class);
             lstImel = query.getResultList();
         } catch (Exception e) {
         }
         return lstImel;
     }
-    
-    public Imel SelectImelId(UUID id){
+
+    public Imel SelectImelId(UUID id) {
         Imel imel = new Imel();
-        try(Session session = HibernatUtil.getFACTORY().openSession()) {
+        try  {
             Query query = session.createQuery("FROM Imel WHERE id = :id", Imel.class);
             query.setParameter("id", id);
             imel = (Imel) query.getSingleResult();
-            
-            
+
         } catch (Exception e) {
         }
         return imel;
     }
-    
-    public boolean InsertImel(Imel imel){
-        try(Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean InsertImel(Imel imel) {
+        try  {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(imel);
@@ -53,9 +55,9 @@ public class ImelRepository {
         }
         return false;
     }
-    
-    public boolean UpdateImel(Imel imel){
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean UpdateImel(Imel imel) {
+        try  {
             Transaction tran = session.getTransaction();
             tran.begin();
             imel.setLastModifiedDate(new Date());

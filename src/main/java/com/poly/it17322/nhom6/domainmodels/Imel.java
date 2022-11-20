@@ -68,7 +68,4 @@ public class Imel implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-    
-    @OneToMany(mappedBy = "imel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<BaoHanh> lstBaoHanh;
 }

@@ -57,7 +57,4 @@ public class Hang implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "hang", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SanPham> lstSanPham;
 }

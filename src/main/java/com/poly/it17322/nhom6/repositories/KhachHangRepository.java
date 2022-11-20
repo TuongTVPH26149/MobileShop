@@ -19,10 +19,12 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class KhachHangRepository {
-    
-    public List<KhachHang> SelectAllKhachHang(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<KhachHang> SelectAllKhachHang() {
         List<KhachHang> lstKhachHang = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM KhachHang", KhachHang.class);
             lstKhachHang = query.getResultList();
         } catch (Exception e) {
@@ -30,10 +32,10 @@ public class KhachHangRepository {
         }
         return lstKhachHang;
     }
-    
-    public KhachHang SelectKhachHangById(UUID id){
+
+    public KhachHang SelectKhachHangById(UUID id) {
         KhachHang khachHang = new KhachHang();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try  {
             Query query = session.createQuery("FROM KhachHang WHERE id =:id", KhachHang.class);
             query.setParameter("id", id);
             khachHang = (KhachHang) query.getSingleResult();
@@ -42,9 +44,9 @@ public class KhachHangRepository {
         }
         return khachHang;
     }
-    
-    public Boolean InsertKhachHang(KhachHang khachHang){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean InsertKhachHang(KhachHang khachHang) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(khachHang);
@@ -55,9 +57,9 @@ public class KhachHangRepository {
         }
         return false;
     }
-    
-    public Boolean UpdateKhachHang(KhachHang khachHang){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UpdateKhachHang(KhachHang khachHang) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             khachHang.setLastModifiedDate(new Date());
@@ -69,5 +71,5 @@ public class KhachHangRepository {
         }
         return false;
     }
-    
+
 }

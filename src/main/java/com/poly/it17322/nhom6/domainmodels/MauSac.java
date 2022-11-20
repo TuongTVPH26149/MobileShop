@@ -56,7 +56,4 @@ public class MauSac implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-   
-   @OneToMany(mappedBy = "mauSac", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private List<ChiTietSP> lstChiTietSP;
 }

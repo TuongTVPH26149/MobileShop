@@ -19,10 +19,12 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class HDHRepository {
-    
-    public List<HDH> SelestAllHDH(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<HDH> SelestAllHDH() {
         List<HDH> lstHDH = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM HDH", HDH.class);
             lstHDH = query.getResultList();
         } catch (Exception e) {
@@ -30,10 +32,10 @@ public class HDHRepository {
         }
         return lstHDH;
     }
-    
-    public HDH SelectHDHById(UUID id){
+
+    public HDH SelectHDHById(UUID id) {
         HDH hdh = new HDH();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM HDH WHERE id =:id", HDH.class);
             query.setParameter("id", id);
             hdh = (HDH) query.getSingleResult();
@@ -42,9 +44,9 @@ public class HDHRepository {
         }
         return hdh;
     }
-    
-    public Boolean InsertHDH(HDH hdh){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean InsertHDH(HDH hdh) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(hdh);
@@ -55,9 +57,9 @@ public class HDHRepository {
         }
         return false;
     }
-    
-    public Boolean UpdateHDH(HDH hdh){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UpdateHDH(HDH hdh) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             hdh.setLastModifiedDate(new Date());

@@ -19,31 +19,33 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class KhuyenMaiRepository {
-    public List<KhuyenMai> SelectALlKhuyenMai(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<KhuyenMai> SelectALlKhuyenMai() {
         List<KhuyenMai> lstKhuyenMai = new ArrayList<>();
-        try(Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
             lstKhuyenMai = query.getResultList();
         } catch (Exception e) {
         }
         return lstKhuyenMai;
     }
-    
-    public KhuyenMai SelectKhuyenMaiId(UUID id){
+
+    public KhuyenMai SelectKhuyenMaiId(UUID id) {
         KhuyenMai khuyenmai = new KhuyenMai();
-        try(Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM KhuyenMai WHERE id = :id", KhuyenMai.class);
             query.setParameter("id", id);
             khuyenmai = (KhuyenMai) query.getSingleResult();
-            
-            
+
         } catch (Exception e) {
         }
         return khuyenmai;
     }
-    
-    public boolean InsertKhuyeMai(KhuyenMai khuyenmai){
-        try(Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean InsertKhuyeMai(KhuyenMai khuyenmai) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(khuyenmai);
@@ -53,9 +55,9 @@ public class KhuyenMaiRepository {
         }
         return false;
     }
-    
-    public boolean UpdateKhuyenMai(KhuyenMai khuyenmai){
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean UpdateKhuyenMai(KhuyenMai khuyenmai) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             khuyenmai.setLastModifiedDate(new Date());
