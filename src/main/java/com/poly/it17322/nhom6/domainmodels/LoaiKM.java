@@ -57,7 +57,4 @@ public class LoaiKM implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "loaiKM", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<KhuyenMai> lstKhuyenMai;
 }

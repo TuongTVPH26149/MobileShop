@@ -87,10 +87,4 @@ public class ChiTietSP implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "chiTietSP", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HoaDonChiTiet> lstHoaDonChiTiet;
-    
-    @OneToMany(mappedBy = "chiTietSP", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Imel> lstImel;
 }

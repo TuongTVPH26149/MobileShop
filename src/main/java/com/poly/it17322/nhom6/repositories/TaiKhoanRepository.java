@@ -20,9 +20,11 @@ import org.hibernate.Transaction;
  */
 public class TaiKhoanRepository {
 
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
     public List<TaiKhoan> SelectALLTaiKhoan() {
         List<TaiKhoan> lstTaiKhoan = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM TaiKhoan", TaiKhoan.class);
             lstTaiKhoan = query.getResultList();
         } catch (Exception e) {
@@ -32,7 +34,7 @@ public class TaiKhoanRepository {
 
     public TaiKhoan SelectTaiKhoanById(UUID id) {
         TaiKhoan taiKhoan = new TaiKhoan();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM TaiKhoan WHERE id = :id", TaiKhoan.class);
             query.setParameter("id", id);
             taiKhoan = (TaiKhoan) query.getSingleResult();
@@ -42,7 +44,7 @@ public class TaiKhoanRepository {
     }
 
     public boolean InsertTaiKhoan(TaiKhoan taiKhoan) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(taiKhoan);
@@ -54,7 +56,7 @@ public class TaiKhoanRepository {
     }
 
     public boolean UpdateTaiKhoan(TaiKhoan taiKhoan) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             taiKhoan.setLastModifiedDate(new Date());

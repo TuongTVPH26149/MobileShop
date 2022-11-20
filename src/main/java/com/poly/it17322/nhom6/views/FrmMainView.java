@@ -936,7 +936,7 @@ public class FrmMainView extends javax.swing.JFrame {
             chosser = 1;
             pnlBanHang.setBackground(new Color(102, 102, 102));
             pnlView.removeAll();
-            pnlView.add(new FrmBanHang());
+            pnlView.add(new FrmBanHang(tkreponse));
             pnlView.setLayout(new FlowLayout());
             this.pack();
         } catch (Exception e) {

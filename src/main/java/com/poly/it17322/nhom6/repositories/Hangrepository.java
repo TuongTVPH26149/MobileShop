@@ -19,10 +19,12 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class Hangrepository {
-    
-    public List<Hang> SelestAllHang(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<Hang> SelestAllHang() {
         List<Hang> lstHang = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM Hang", Hang.class);
             lstHang = query.getResultList();
         } catch (Exception e) {
@@ -30,10 +32,10 @@ public class Hangrepository {
         }
         return lstHang;
     }
-    
-    public Hang SelectHangById(UUID id){
+
+    public Hang SelectHangById(UUID id) {
         Hang hang = new Hang();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM Hang WHERE id =:id", Hang.class);
             query.setParameter("id", id);
             hang = (Hang) query.getSingleResult();
@@ -42,9 +44,9 @@ public class Hangrepository {
         }
         return hang;
     }
-    
-    public Boolean InsertHang(Hang hang){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean InsertHang(Hang hang) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(hang);
@@ -55,9 +57,9 @@ public class Hangrepository {
         }
         return false;
     }
-    
-    public Boolean UpdateHang(Hang hang){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UpdateHang(Hang hang) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             hang.setLastModifiedDate(new Date());

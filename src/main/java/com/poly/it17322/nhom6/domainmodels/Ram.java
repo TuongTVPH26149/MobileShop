@@ -56,7 +56,4 @@ public class Ram implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-   
-   @OneToMany(mappedBy = "ram", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private List<ChiTietSP> lstChiTietSP;
 }

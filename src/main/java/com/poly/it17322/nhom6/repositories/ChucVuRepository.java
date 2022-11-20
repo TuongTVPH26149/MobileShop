@@ -5,7 +5,6 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.ChucVu;
-import com.poly.it17322.nhom6.domainmodels.ChucVu;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,18 +20,21 @@ import org.hibernate.Transaction;
  */
 public class ChucVuRepository {
 
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
     public List<ChucVu> SelectALLChucVu() {
         List<ChucVu> lstChucVu = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM ChucVu", ChucVu.class);
             lstChucVu = query.getResultList();
+        } catch (Exception e) {
         }
         return lstChucVu;
     }
 
     public ChucVu SelectChucVuById(UUID id) {
         ChucVu chucVu = new ChucVu();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM ChucVu WHERE id = :id", ChucVu.class);
             query.setParameter("id", id);
             chucVu = (ChucVu) query.getSingleResult();
@@ -42,7 +44,7 @@ public class ChucVuRepository {
     }
 
     public boolean InsertChucVu(ChucVu chucVu) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(chucVu);
@@ -54,7 +56,7 @@ public class ChucVuRepository {
     }
 
     public boolean UpdateChucVu(ChucVu chucVu) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             chucVu.setLastModifiedDate(new Date());

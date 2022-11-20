@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,32 +21,35 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class HoaDonChiTietRepository {
-public List<HoaDonChiTiet> SelectHoaDonChiTiet(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<HoaDonChiTiet> SelectHoaDonChiTiet() {
         List<HoaDonChiTiet> listCTHoaDon = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM HoaDonChiTiet " , HoaDonChiTiet.class);
+        try {
+            Query query = session.createQuery("FROM HoaDonChiTiet ", HoaDonChiTiet.class);
             listCTHoaDon = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listCTHoaDon;
     }
-    
-    public HoaDonChiTiet SelectAllHoaDonById(UUID IdHoaDon){
-        HoaDonChiTiet hdct = new HoaDonChiTiet();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon" , HoaDonChiTiet.class);
+
+    public List<HoaDonChiTiet> SelectAllHoaDonById(UUID IdHoaDon, UUID IdChiTietSP) {
+        List<HoaDonChiTiet> lsthdct = new ArrayList<>();
+        try {
+            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon and IdChiTietSP = :IdChiTietSP", HoaDonChiTiet.class);
             query.setParameter("IdHoaDon", IdHoaDon);
-            hdct =  (HoaDonChiTiet) query.getSingleResult();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
+            query.setParameter("IdChiTietSP", IdChiTietSP);
+            lsthdct = query.getResultList();
+        } catch (NoResultException e) {
+            return null;
         }
-        return hdct;
+        return lsthdct;
     }
-    
-      public boolean InsertHoaDon(HoaDonChiTiet hdct) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean InsertHoaDon(HoaDonChiTiet hdct) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(hdct);
@@ -55,8 +59,9 @@ public List<HoaDonChiTiet> SelectHoaDonChiTiet(){
         }
         return false;
     }
-       public boolean UpdateChiTietSP(HoaDonChiTiet hdct) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean UpdateChiTietSP(HoaDonChiTiet hdct) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             hdct.setLastModifiedDate(new Date());
@@ -67,9 +72,4 @@ public List<HoaDonChiTiet> SelectHoaDonChiTiet(){
         }
         return false;
     }
-        public static void main(String[] args) {
-        new HoaDonChiTietRepository().SelectHoaDonChiTiet().forEach(s -> System.out.println(s.toString()));
-        
-    }
 }
-

@@ -57,7 +57,4 @@ public class CPU implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "cpu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ChiTietSP> lstChiTietSP;
 }

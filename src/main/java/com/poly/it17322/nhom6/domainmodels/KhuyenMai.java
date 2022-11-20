@@ -77,7 +77,4 @@ public class KhuyenMai {
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
 
-    @OneToMany(mappedBy = "khuyenMai", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ChiTietSP> lstChiTietSP;
-
 }

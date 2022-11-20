@@ -55,7 +55,4 @@ public class TrangThaiTaiKhoan implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "trangThaiTK", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TaiKhoan> lstTaiKhoan;
 }

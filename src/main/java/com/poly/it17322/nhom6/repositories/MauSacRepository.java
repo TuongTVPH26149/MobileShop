@@ -19,10 +19,12 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class MauSacRepository {
-    
-    public List<MauSac> SelectAllMauSac(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<MauSac> SelectAllMauSac() {
         List<MauSac> lstMauSac = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM MauSac", MauSac.class);
             lstMauSac = query.getResultList();
         } catch (Exception e) {
@@ -30,10 +32,10 @@ public class MauSacRepository {
         }
         return lstMauSac;
     }
-    
-    public MauSac SelectMauSacById(UUID id){
+
+    public MauSac SelectMauSacById(UUID id) {
         MauSac mauSac = new MauSac();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
             Query query = session.createQuery("FROM MauSac WHERE id =:id", MauSac.class);
             query.setParameter("id", id);
             mauSac = (MauSac) query.getSingleResult();
@@ -41,10 +43,10 @@ public class MauSacRepository {
             e.printStackTrace();
         }
         return mauSac;
-        }
-    
-    public Boolean InsertMauSac(MauSac mauSac){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+    }
+
+    public Boolean InsertMauSac(MauSac mauSac) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(mauSac);
@@ -55,9 +57,9 @@ public class MauSacRepository {
         }
         return false;
     }
-    
-    public Boolean UpdateMauSac(MauSac mauSac){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UpdateMauSac(MauSac mauSac) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             mauSac.setLastModifiedDate(new Date());

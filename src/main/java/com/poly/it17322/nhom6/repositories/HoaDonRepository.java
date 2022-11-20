@@ -19,32 +19,35 @@ import org.hibernate.Transaction;
  * @author LiamTrieu
  */
 public class HoaDonRepository {
-    public List<HoaDon> SelectHoaDon(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<HoaDon> SelectALLHoaDon() {
         List<HoaDon> listHoaDon = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM HoaDon " , HoaDon.class);
+        try {
+            Query query = session.createQuery("FROM HoaDon", HoaDon.class);
             listHoaDon = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listHoaDon;
     }
-    
-    public HoaDon SelectAllHoaDonById(UUID Id){
+
+    public HoaDon SelectAllHoaDonById(UUID Id) {
         HoaDon hd = new HoaDon();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM HoaDon where Id = :Id" , HoaDon.class);
+        try {
+            Query query = session.createQuery("FROM HoaDon where Id = :Id", HoaDon.class);
             query.setParameter("Id", Id);
             hd = (HoaDon) query.getSingleResult();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return hd;
     }
-    
-      public boolean InsertHoaDon(HoaDon hd) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean InsertHoaDon(HoaDon hd) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(hd);
@@ -54,8 +57,9 @@ public class HoaDonRepository {
         }
         return false;
     }
-       public boolean UpdateHoaDon(HoaDon hd) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+
+    public boolean UpdateHoaDon(HoaDon hd) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             hd.setLastModifiedDate(new Date());

@@ -19,21 +19,24 @@ import org.hibernate.Transaction;
  * @author LiamTrieu
  */
 public class CPURepository {
-    public List<CPU> SelectCPU(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<CPU> SelectCPU() {
         List<CPU> listCPU = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM CPU" , CPU.class);
+        try {
+            Query query = session.createQuery("FROM CPU", CPU.class);
             listCPU = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listCPU;
     }
-    
-    public CPU SelectAllById(UUID Id){
+
+    public CPU SelectAllById(UUID Id) {
         CPU c = new CPU();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM CPU where Id = :Id" , CPU.class);
+        try {
+            Query query = session.createQuery("FROM CPU where Id = :Id", CPU.class);
             query.setParameter("Id", Id);
             c = (CPU) query.getSingleResult();
         } catch (Exception e) {
@@ -41,8 +44,9 @@ public class CPURepository {
         }
         return c;
     }
-    public Boolean InsertCPU(CPU cpu){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean InsertCPU(CPU cpu) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(cpu);
@@ -53,9 +57,9 @@ public class CPURepository {
         }
         return false;
     }
-    
-    public Boolean UIpdate(CPU cpu){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UIpdate(CPU cpu) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             cpu.setLastModifiedDate(new Date());

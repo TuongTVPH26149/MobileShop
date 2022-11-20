@@ -57,7 +57,4 @@ public class HDH implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "hDH", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SanPham> lstSanPham;
 }

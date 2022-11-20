@@ -14,49 +14,53 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 public class RamRepositry {
-    public List<Ram> SelectAllRam(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<Ram> SelectAllRam() {
         List<Ram> listram = new ArrayList<>();
-        try (Session session =HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM Ram" , Ram.class);
+        try {
+            Query query = session.createQuery("FROM Ram", Ram.class);
             listram = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listram;
     }
-    
-    public Ram SelectRamById(UUID Id){
+
+    public Ram SelectRamById(UUID Id) {
         Ram ram = new Ram();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM Ram where Id = :Id" , Ram.class);
+        try {
+            Query query = session.createQuery("FROM Ram where Id = :Id", Ram.class);
             query.setParameter("Id", Id);
-            ram = (Ram) query.getSingleResult();           
+            ram = (Ram) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return ram;
     }
-    
-    public Boolean InsertRam(Ram ram){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean InsertRam(Ram ram) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(ram);
             tran.commit();
             return true;
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-    public Boolean UpdateRam(Ram ram){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UpdateRam(Ram ram) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             ram.setLastModifiedDate(new Date());
+            session.save(ram);
             tran.commit();
             return true;
         } catch (Exception e) {
@@ -64,5 +68,5 @@ public class RamRepositry {
         }
         return false;
     }
-    
+
 }

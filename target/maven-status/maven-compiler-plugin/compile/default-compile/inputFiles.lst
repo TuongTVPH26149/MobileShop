@@ -29,6 +29,7 @@ C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\repositories\ChucVuRepository.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\services\IBanHangService.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\domainmodels\SanPham.java
+C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\repositories\HoaDonBanHangRepository.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\domainmodels\TaiKhoan.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\utilities\MD5Util.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\views\FrmNhanVienSanPham.java
@@ -62,5 +63,6 @@ C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\views\FrmNhanVien.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\repositories\MauSacRepository.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\repositories\RamRepositry.java
+C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\responses\HoaDonBanHangResponse.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\views\FrmQuenMatKhau.java
 C:\Users\LiamTrieu\Desktop\QuanLyCuaHangDienThoai\src\main\java\com\poly\it17322\nhom6\domainmodels\TrangThaiTaiKhoan.java

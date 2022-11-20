@@ -14,32 +14,35 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 public class RomRepository {
-    public List<Rom>selectALLRom(){
+
+    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    public List<Rom> selectALLRom() {
         List<Rom> listRom = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){ 
-            Query query = session.createQuery("FROM Rom" , Rom.class);
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM Rom", Rom.class);
             listRom = query.getResultList();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }        
-        return listRom;       
+        }
+        return listRom;
     }
-    
-    public Rom SelectRomById(UUID Id){
+
+    public Rom SelectRomById(UUID Id) {
         Rom rom = new Rom();
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
-            Query query = session.createQuery("FROM Rom where Id = :Id" , Rom.class);
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM Rom where Id = :Id", Rom.class);
             query.setParameter("Id", Id);
             rom = (Rom) query.getSingleResult();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }   
+        }
         return rom;
     }
-    public Boolean InsertRom(Rom rom){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean InsertRom(Rom rom) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(rom);
@@ -50,9 +53,9 @@ public class RomRepository {
         }
         return false;
     }
-    
-    public Boolean UpdateRom(Rom rom){
-        try (Session session = HibernatUtil.getFACTORY().openSession()){
+
+    public Boolean UpdateRom(Rom rom) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             rom.setLastModifiedDate(new Date());
@@ -64,5 +67,5 @@ public class RomRepository {
         }
         return false;
     }
-    
+
 }
