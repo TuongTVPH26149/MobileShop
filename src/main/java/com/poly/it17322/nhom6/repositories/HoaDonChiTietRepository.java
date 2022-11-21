@@ -35,12 +35,24 @@ public class HoaDonChiTietRepository {
         return listCTHoaDon;
     }
 
-    public List<HoaDonChiTiet> SelectAllHoaDonById(UUID IdHoaDon, UUID IdChiTietSP) {
-        List<HoaDonChiTiet> lsthdct = new ArrayList<>();
+    public HoaDonChiTiet SelectAllHoaDonById(UUID IdHoaDon, UUID IdChiTietSP) {
+        HoaDonChiTiet lsthdct = new HoaDonChiTiet();
         try {
             Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon and IdChiTietSP = :IdChiTietSP", HoaDonChiTiet.class);
             query.setParameter("IdHoaDon", IdHoaDon);
             query.setParameter("IdChiTietSP", IdChiTietSP);
+            lsthdct = (HoaDonChiTiet) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        return lsthdct;
+    }
+    
+    public List<HoaDonChiTiet> SelectGH(UUID IdHD) {
+        List<HoaDonChiTiet> lsthdct = new ArrayList<>();
+        try {
+            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon", HoaDonChiTiet.class);
+            query.setParameter("IdHoaDon", IdHD);
             lsthdct = query.getResultList();
         } catch (NoResultException e) {
             return null;

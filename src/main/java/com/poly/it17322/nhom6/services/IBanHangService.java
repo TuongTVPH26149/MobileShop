@@ -23,7 +23,19 @@ public interface IBanHangService {
 
     boolean createHoaDon(UUID idNV);
 
-    List<GioHangResponse> getGioHang(UUID idHD, UUID idCTSP);
+    List<ImelBanHangResponse> getImelBH(UUID idSP);
 
-    public List<ImelBanHangResponse> getImelBH(UUID idSP);
+    boolean thanhToan(HoaDonBanHangResponse hd);
+
+    boolean huyHoaDon(UUID idHD);
+
+    List<ImelBanHangResponse> getImelGioHang(UUID idHD, UUID idCTSP);
+
+    boolean setGiohang(UUID idImel, UUID idSP, UUID idHD);
+
+    List<GioHangResponse> getGH(UUID idHD);
+
+    GioHangResponse getHDCT(UUID idHD, UUID idCTSP);
+
+    List<ImelBanHangResponse> getImelSearch(String ma, UUID idSP);
 }

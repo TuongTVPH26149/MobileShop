@@ -52,7 +52,7 @@ public class HoaDonChiTiet implements Serializable {
     @Column(name = "SoLuong", nullable = false)
     private int soLuong;
 
-    @Column(name = "Gia", nullable = false)
+    @Column(name = "Gia", nullable = true)
     private BigDecimal gia;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)

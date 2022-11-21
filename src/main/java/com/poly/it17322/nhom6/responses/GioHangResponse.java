@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import java.math.BigDecimal;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,12 +17,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GioHangResponse {
-
+    
+    private UUID idSp;
     private String tenSP;
     private int soLuong;
     private BigDecimal giaBan;
 
     public GioHangResponse(HoaDonChiTiet hdct) {
+        this.idSp = hdct.getChiTietSP().getId();
         this.tenSP = hdct.getTenSP();
         this.soLuong = hdct.getSoLuong();
         this.giaBan = hdct.getGia();

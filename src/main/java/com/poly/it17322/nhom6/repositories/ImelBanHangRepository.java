@@ -5,9 +5,12 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.TrangThaiImel;
+import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 /**
@@ -16,4 +19,28 @@ import org.hibernate.query.Query;
  */
 public class ImelBanHangRepository extends ImelRepository {
 
+    public TrangThaiImel SelectAllTrangThaiImelById(String ma) {
+        TrangThaiImel ttImel = new TrangThaiImel();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM TrangThaiImel where ma = :ma", TrangThaiImel.class);
+            query.setParameter("ma", ma);
+            ttImel = (TrangThaiImel) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ttImel;
+    }
+
+    public List<Imel> Selectmamel(String ma, UUID ctSP) {
+        List<Imel> lstImel = new ArrayList<>();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM Imel WHERE Ma = :ma and IdChiTietSP = :ctsp", Imel.class);
+            query.setParameter("ma", ma);
+            query.setParameter("ctsp", ctSP);
+            lstImel = query.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+        return lstImel;
+    }
 }
