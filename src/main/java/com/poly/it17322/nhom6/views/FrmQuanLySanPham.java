@@ -74,11 +74,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         btnhang = new javax.swing.JButton();
         btnhdh = new javax.swing.JButton();
         btncpu = new javax.swing.JButton();
-        jPanel29 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jPanel30 = new javax.swing.JPanel();
-        txtram = new javax.swing.JTextField();
-        btnram = new javax.swing.JButton();
         jPanel31 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel32 = new javax.swing.JPanel();
@@ -93,6 +88,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         btnupdate = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
         btnclear = new javax.swing.JButton();
+        btnram = new javax.swing.JButton();
+        jPanel35 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel36 = new javax.swing.JPanel();
+        txtrom1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -109,6 +109,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1080, 720));
         setMinimumSize(new java.awt.Dimension(1080, 720));
+
+        jPanel2.setMaximumSize(new java.awt.Dimension(55, 692));
+        jPanel2.setMinimumSize(new java.awt.Dimension(55, 692));
+        jPanel2.setPreferredSize(new java.awt.Dimension(55, 692));
 
         jPanel4.setMaximumSize(new java.awt.Dimension(400, 51));
         jPanel4.setMinimumSize(new java.awt.Dimension(400, 51));
@@ -561,68 +565,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
-        jPanel29.setMaximumSize(new java.awt.Dimension(150, 34));
-        jPanel29.setMinimumSize(new java.awt.Dimension(150, 34));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setText("RAM");
-
-        jPanel30.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel30.setMaximumSize(new java.awt.Dimension(480, 1));
-        jPanel30.setMinimumSize(new java.awt.Dimension(480, 1));
-        jPanel30.setVerifyInputWhenFocusTarget(false);
-
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
-        jPanel30.setLayout(jPanel30Layout);
-        jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        txtram.setBorder(null);
-
-        btnram.setText("jButton1");
-        btnram.setPreferredSize(new java.awt.Dimension(73, 20));
-        btnram.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnramActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(txtram, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 1, Short.MAX_VALUE)))
-                .addGap(1, 1, 1)
-                .addComponent(btnram, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addComponent(jLabel14)
-                .addGap(1, 1, 1)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         jPanel31.setMaximumSize(new java.awt.Dimension(150, 34));
         jPanel31.setMinimumSize(new java.awt.Dimension(150, 34));
 
@@ -659,7 +601,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             .addGroup(jPanel31Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, 182, Short.MAX_VALUE)
                     .addGroup(jPanel31Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -712,7 +654,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             .addGroup(jPanel33Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, 155, Short.MAX_VALUE)
                     .addGroup(jPanel33Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -759,6 +701,67 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
         btnclear.setText("Clear");
 
+        btnram.setText("jButton1");
+        btnram.setPreferredSize(new java.awt.Dimension(73, 20));
+        btnram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnramActionPerformed(evt);
+            }
+        });
+
+        jPanel35.setMaximumSize(new java.awt.Dimension(150, 34));
+        jPanel35.setMinimumSize(new java.awt.Dimension(150, 34));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setText("ROM");
+
+        jPanel36.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel36.setMaximumSize(new java.awt.Dimension(480, 1));
+        jPanel36.setMinimumSize(new java.awt.Dimension(480, 1));
+        jPanel36.setVerifyInputWhenFocusTarget(false);
+
+        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
+        jPanel36.setLayout(jPanel36Layout);
+        jPanel36Layout.setHorizontalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel36Layout.setVerticalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+
+        txtrom1.setBorder(null);
+        txtrom1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtrom1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
+        jPanel35.setLayout(jPanel35Layout);
+        jPanel35Layout.setHorizontalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel35Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel35Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtrom1)))
+        );
+        jPanel35Layout.setVerticalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel35Layout.createSequentialGroup()
+                .addComponent(jLabel17)
+                .addGap(4, 4, 4)
+                .addComponent(txtrom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -768,17 +771,18 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(574, Short.MAX_VALUE))
+                        .addContainerGap(549, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(btnhang, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(53, 53, 53)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnhang, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnram, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(55, 55, 55)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                                     .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -854,19 +858,24 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                         .addComponent(btncpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btninsert)
                         .addComponent(btnupdate)))
-                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnmausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btndelete)
-                            .addComponent(btnclear))
-                        .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnmausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btndelete)
+                                    .addComponent(btnclear))
+                                .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sản phẩm", jPanel2);
@@ -936,6 +945,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         mausac.setVisible(true);
     }//GEN-LAST:event_btnmausacActionPerformed
 
+    private void txtrom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrom1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrom1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnclear;
@@ -950,15 +963,14 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnupdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -967,8 +979,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
@@ -976,13 +986,13 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -998,8 +1008,8 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JTextField txthdh;
     private javax.swing.JTextField txtimel;
     private javax.swing.JTextField txtmausac;
-    private javax.swing.JTextField txtram;
     private javax.swing.JTextField txtrom;
+    private javax.swing.JTextField txtrom1;
     private javax.swing.JTextField txtsoluong;
     private javax.swing.JTextField txttensp;
     private javax.swing.JTextField txttimkiem;

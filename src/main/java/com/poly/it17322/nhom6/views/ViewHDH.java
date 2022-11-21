@@ -53,7 +53,7 @@ public class ViewHDH extends javax.swing.JFrame {
         btnupdate = new javax.swing.JButton();
         btnclear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hệ điều hành");
 
         tblbang.setModel(new javax.swing.table.DefaultTableModel(
