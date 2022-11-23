@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +29,8 @@ public class HoaDonBanHangResponse {
     private Date ngayTao;
     private String nhanVien;
     private String khachHang;
+    private BigDecimal tongTien;
+    private boolean loaiThanhToan;
     private String trangThai;
 
     public HoaDonBanHangResponse(HoaDon hd) {
@@ -37,6 +40,8 @@ public class HoaDonBanHangResponse {
         this.trangThai = hd.getTrangThaiHD().getMa();
         this.ma = hd.getMa();
         this.ngayTao = hd.getCreatedDate();
+        this.tongTien = hd.getTongTien();
+        this.loaiThanhToan = hd.isLoaiThanhToan();
     }
 
     public Object[] toDataRow() {

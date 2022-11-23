@@ -53,7 +53,7 @@ public class FrmXacMinh extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(377, 165));
         setUndecorated(true);
 
-        pnlMainLogin.setBackground(new java.awt.Color(51, 51, 51));
+        pnlMainLogin.setBackground(new java.awt.Color(0, 102, 102));
         pnlMainLogin.setMaximumSize(new java.awt.Dimension(377, 165));
         pnlMainLogin.setMinimumSize(new java.awt.Dimension(377, 165));
         pnlMainLogin.setPreferredSize(new java.awt.Dimension(377, 165));
@@ -74,7 +74,7 @@ public class FrmXacMinh extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setMaximumSize(new java.awt.Dimension(267, 30));
         jPanel2.setMinimumSize(new java.awt.Dimension(267, 30));
 
@@ -99,13 +99,19 @@ public class FrmXacMinh extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        txtCode.setBackground(new java.awt.Color(51, 51, 51));
+        txtCode.setBackground(new java.awt.Color(0, 102, 102));
+        txtCode.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCode.setForeground(new java.awt.Color(255, 255, 255));
         txtCode.setBorder(null);
         txtCode.setCaretColor(new java.awt.Color(255, 255, 255));
         txtCode.setMaximumSize(new java.awt.Dimension(260, 20));
         txtCode.setMinimumSize(new java.awt.Dimension(260, 20));
         txtCode.setPreferredSize(new java.awt.Dimension(260, 20));
+        txtCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -356,6 +362,10 @@ public class FrmXacMinh extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_btnUndoCodeMouseClicked
+
+    private void txtCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
