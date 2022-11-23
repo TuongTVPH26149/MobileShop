@@ -21,6 +21,7 @@ import org.hibernate.query.Query;
  * @author LiamTrieu
  */
 public class HoaDonChiTietRepository {
+
     private Session session = HibernatUtil.getFACTORY().openSession();
 
     public List<HoaDonChiTiet> SelectHoaDonChiTiet() {
@@ -45,6 +46,19 @@ public class HoaDonChiTietRepository {
             return null;
         }
         return lsthdct;
+    }
+    public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID IdHoaDon) {
+        List<HoaDonChiTiet> hdct = new ArrayList();
+        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon", HoaDonChiTiet.class);
+            query.setParameter("IdHoaDon", IdHoaDon);
+            hdct = query.list();
+            return hdct;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hdct;
     }
 
     public boolean InsertHoaDon(HoaDonChiTiet hdct) {
@@ -71,5 +85,5 @@ public class HoaDonChiTietRepository {
         }
         return false;
     }
-    
+
 }
