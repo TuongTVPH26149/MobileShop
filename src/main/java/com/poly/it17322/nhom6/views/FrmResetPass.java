@@ -55,7 +55,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        pnlMainLogin.setBackground(new java.awt.Color(51, 51, 51));
+        pnlMainLogin.setBackground(new java.awt.Color(0, 153, 153));
         pnlMainLogin.setMaximumSize(new java.awt.Dimension(380, 210));
         pnlMainLogin.setMinimumSize(new java.awt.Dimension(380, 210));
         pnlMainLogin.setPreferredSize(new java.awt.Dimension(380, 210));
@@ -91,7 +91,7 @@ public class FrmResetPass extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
         jPanel4.setMaximumSize(new java.awt.Dimension(340, 30));
         jPanel4.setMinimumSize(new java.awt.Dimension(340, 30));
         jPanel4.setPreferredSize(new java.awt.Dimension(340, 30));
@@ -116,7 +116,7 @@ public class FrmResetPass extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        txtpass.setBackground(new java.awt.Color(51, 51, 51));
+        txtpass.setBackground(new java.awt.Color(0, 153, 153));
         txtpass.setForeground(new java.awt.Color(255, 255, 255));
         txtpass.setBorder(null);
         txtpass.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -165,7 +165,7 @@ public class FrmResetPass extends javax.swing.JFrame {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setBackground(new java.awt.Color(0, 153, 153));
         jPanel6.setMaximumSize(new java.awt.Dimension(340, 30));
         jPanel6.setMinimumSize(new java.awt.Dimension(340, 30));
 
@@ -189,7 +189,7 @@ public class FrmResetPass extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        txtpass2.setBackground(new java.awt.Color(51, 51, 51));
+        txtpass2.setBackground(new java.awt.Color(0, 153, 153));
         txtpass2.setForeground(new java.awt.Color(255, 255, 255));
         txtpass2.setBorder(null);
         txtpass2.setCaretColor(new java.awt.Color(255, 255, 255));
