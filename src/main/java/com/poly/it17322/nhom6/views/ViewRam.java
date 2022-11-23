@@ -6,7 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.responses.RamRespone;
-import com.poly.it17322.nhom6.services.impl.RamServiceImpl;
+import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ViewRam extends javax.swing.JFrame {
     /**
      * Creates new form ViewRam
      */
-    RamServiceImpl ram = new RamServiceImpl();
+    SanPhamChiTietServiceImpl ram = new SanPhamChiTietServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
     List<RamRespone> lstram = new ArrayList<>();
     public ViewRam() {
@@ -305,7 +305,7 @@ public class ViewRam extends javax.swing.JFrame {
     private void FilltoTable() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (RamRespone x : ram.getlist()) {
+        for (RamRespone x : ram.getlistRam()) {
             model.addRow(x.toDataRow());
             lstram.add(x);
         }
@@ -321,7 +321,7 @@ public class ViewRam extends javax.swing.JFrame {
         RamRespone r = new RamRespone();
         r.setMa(ma);
         r.setTen(ten);
-        if(ram.insert(r)){
+        if(ram.insertRam(r)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
@@ -340,7 +340,7 @@ public class ViewRam extends javax.swing.JFrame {
         r.setId(lstram.get(index).getId());
         r.setMa(ma);
         r.setTen(ten);
-        if(ram.update(r)){
+        if(ram.updateRam(r)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();

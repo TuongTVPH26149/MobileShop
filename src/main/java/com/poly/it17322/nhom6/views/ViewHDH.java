@@ -6,7 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 
 import com.poly.it17322.nhom6.responses.HDHRespone;
-import com.poly.it17322.nhom6.services.impl.HDHServiceImpl;
+import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ViewHDH extends javax.swing.JFrame {
     /**
      * Creates new form ViewRam
      */
-    HDHServiceImpl hdh = new HDHServiceImpl();
+    SanPhamChiTietServiceImpl hdh = new SanPhamChiTietServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
     List<HDHRespone> lsthdh = new ArrayList<>();
     public ViewHDH() {
@@ -312,7 +312,7 @@ public class ViewHDH extends javax.swing.JFrame {
     private void FilltoTable() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (HDHRespone x : hdh.getlist()) {
+        for (HDHRespone x : hdh.getlistHDH()) {
             model.addRow(x.toDataRow());
             lsthdh.add(x);
         }
@@ -328,7 +328,7 @@ public class ViewHDH extends javax.swing.JFrame {
         HDHRespone h = new HDHRespone();
         h.setMa(ma);
         h.setTen(ten);
-        if(hdh.insert(h)){
+        if(hdh.insertHDH(h)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
@@ -347,7 +347,7 @@ public class ViewHDH extends javax.swing.JFrame {
         h.setId(lsthdh.get(index).getId());
         h.setMa(ma);
         h.setTen(ten);
-        if(hdh.update(h)){
+        if(hdh.updatehdh(h)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
