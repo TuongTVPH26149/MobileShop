@@ -6,7 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 
 import com.poly.it17322.nhom6.responses.MauSacRespone;
-import com.poly.it17322.nhom6.services.impl.MauSacServiceImpl;
+import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ViewMauSac extends javax.swing.JFrame {
     /**
      * Creates new form ViewRam
      */
-    MauSacServiceImpl mausac = new MauSacServiceImpl();
+    SanPhamChiTietServiceImpl mausac = new SanPhamChiTietServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
     List<MauSacRespone> lstmau = new ArrayList<>();
     public ViewMauSac() {
@@ -308,7 +308,7 @@ public class ViewMauSac extends javax.swing.JFrame {
     private void FilltoTable() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (MauSacRespone x : mausac.getlist()) {
+        for (MauSacRespone x : mausac.getlistMauSac()) {
             model.addRow(x.toDataRow());
             lstmau.add(x);
         }
@@ -324,7 +324,7 @@ public class ViewMauSac extends javax.swing.JFrame {
         MauSacRespone m = new MauSacRespone();
         m.setMa(ma);
         m.setTen(ten);
-        if(mausac.insert(m)){
+        if(mausac.insertMauSac(m)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
@@ -343,7 +343,7 @@ public class ViewMauSac extends javax.swing.JFrame {
         m.setId(lstmau.get(index).getId());
         m.setMa(ma);
         m.setTen(ten);
-        if(mausac.update(m)){
+        if(mausac.updateMauSac(m)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();

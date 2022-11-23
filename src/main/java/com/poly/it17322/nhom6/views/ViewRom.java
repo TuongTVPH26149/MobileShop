@@ -6,7 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.responses.RomRespone;
-import com.poly.it17322.nhom6.services.impl.RomServiceImpl;
+import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ViewRom extends javax.swing.JFrame {
     /**
      * Creates new form ViewRam
      */
-    RomServiceImpl rom = new RomServiceImpl();
+    SanPhamChiTietServiceImpl rom = new SanPhamChiTietServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
     List<RomRespone> lstrom = new ArrayList<>();
     public ViewRom() {
@@ -306,7 +306,7 @@ public class ViewRom extends javax.swing.JFrame {
     private void FilltoTable() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (RomRespone x : rom.getlist()) {
+        for (RomRespone x : rom.getlistRom()) {
             model.addRow(x.toDataRow());
             lstrom.add(x);
         }
@@ -322,7 +322,7 @@ public class ViewRom extends javax.swing.JFrame {
         RomRespone r = new RomRespone();
         r.setMa(ma);
         r.setTen(ten);
-        if(rom.insert(r)){
+        if(rom.insertRom(r)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
@@ -341,7 +341,7 @@ public class ViewRom extends javax.swing.JFrame {
         r.setId(lstrom.get(index).getId());
         r.setMa(ma);
         r.setTen(ten);
-        if(rom.update(r)){
+        if(rom.updateRom(r)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();

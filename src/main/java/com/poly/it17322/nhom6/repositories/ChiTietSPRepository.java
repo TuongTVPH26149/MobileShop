@@ -36,7 +36,7 @@ public class ChiTietSPRepository {
     public ChiTietSP SelectAllCTSanPhamById(UUID id) {
         ChiTietSP hdct = new ChiTietSP();
         try {
-            Query query = session.createQuery("FROM ChiTietSP where id = :id", ChiTietSP.class);
+            Query query = session.createQuery("FROM ChiTietSP WHERE Id = :id", ChiTietSP.class);
             query.setParameter("id", id);
             hdct = (ChiTietSP) query.getSingleResult();
 

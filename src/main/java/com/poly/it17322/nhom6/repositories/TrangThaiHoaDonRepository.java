@@ -42,6 +42,17 @@ public class TrangThaiHoaDonRepository {
         }
         return trangThaihd;
     }
+    
+    public TrangThaiHoaDon SelectTrangThaiHoaDonByMa(String ma) {
+        TrangThaiHoaDon trangThaihd = new TrangThaiHoaDon();
+        try {
+            Query query = session.createQuery("FROM TrangThaiHoaDon WHERE Ma = :ma", TrangThaiHoaDon.class);
+            query.setParameter("ma", ma);
+            trangThaihd = (TrangThaiHoaDon) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return trangThaihd;
+    }
 
     public boolean InsertTrangThaiHoaDon(TrangThaiHoaDon trangThaihd) {
         try {

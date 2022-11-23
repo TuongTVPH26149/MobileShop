@@ -26,6 +26,13 @@ public class FrmMainView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         tkreponse = tk;
+        clearChosserListService();
+        chosser = 1;
+        pnlBanHang.setBackground(new Color(0, 153, 153));
+        pnlView.removeAll();
+        pnlView.add(new FrmBanHang(tkreponse));
+        pnlView.setLayout(new FlowLayout());
+        this.pack();
         if (!tk.getChucVu().equals("QL")) {
             pnlNhanVien.setVisible(false);
         }
@@ -65,9 +72,6 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlThongKe = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        pnlHome = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         pnlTiltle = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
         lblMini = new javax.swing.JLabel();
@@ -81,12 +85,12 @@ public class FrmMainView extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
 
-        paneListService.setBackground(new java.awt.Color(51, 51, 51));
+        paneListService.setBackground(new java.awt.Color(0, 123, 123));
         paneListService.setMaximumSize(new java.awt.Dimension(200, 690));
         paneListService.setMinimumSize(new java.awt.Dimension(200, 690));
         paneListService.setPreferredSize(new java.awt.Dimension(200, 690));
 
-        pnlBanHang.setBackground(new java.awt.Color(51, 51, 51));
+        pnlBanHang.setBackground(new java.awt.Color(0, 123, 123));
         pnlBanHang.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlBanHang.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlBanHang.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -137,7 +141,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlSanPham.setBackground(new java.awt.Color(51, 51, 51));
+        pnlSanPham.setBackground(new java.awt.Color(0, 123, 123));
         pnlSanPham.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlSanPham.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlSanPham.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -188,7 +192,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlHoaDon.setBackground(new java.awt.Color(51, 51, 51));
+        pnlHoaDon.setBackground(new java.awt.Color(0, 123, 123));
         pnlHoaDon.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlHoaDon.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlHoaDon.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -239,7 +243,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlKhuyenMai.setBackground(new java.awt.Color(51, 51, 51));
+        pnlKhuyenMai.setBackground(new java.awt.Color(0, 123, 123));
         pnlKhuyenMai.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlKhuyenMai.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlKhuyenMai.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -290,7 +294,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlBaoHanh.setBackground(new java.awt.Color(51, 51, 51));
+        pnlBaoHanh.setBackground(new java.awt.Color(0, 123, 123));
         pnlBaoHanh.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlBaoHanh.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlBaoHanh.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -341,7 +345,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlNhanVien.setBackground(new java.awt.Color(51, 51, 51));
+        pnlNhanVien.setBackground(new java.awt.Color(0, 123, 123));
         pnlNhanVien.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlNhanVien.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlNhanVien.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -392,7 +396,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlKhachHang.setBackground(new java.awt.Color(51, 51, 51));
+        pnlKhachHang.setBackground(new java.awt.Color(0, 123, 123));
         pnlKhachHang.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlKhachHang.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlKhachHang.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -443,7 +447,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlThongKe.setBackground(new java.awt.Color(51, 51, 51));
+        pnlThongKe.setBackground(new java.awt.Color(0, 123, 123));
         pnlThongKe.setMaximumSize(new java.awt.Dimension(200, 50));
         pnlThongKe.setMinimumSize(new java.awt.Dimension(200, 50));
         pnlThongKe.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -494,68 +498,15 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlHome.setBackground(new java.awt.Color(102, 102, 102));
-        pnlHome.setMaximumSize(new java.awt.Dimension(200, 50));
-        pnlHome.setMinimumSize(new java.awt.Dimension(200, 50));
-        pnlHome.setPreferredSize(new java.awt.Dimension(200, 50));
-        pnlHome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlHomeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlHomeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlHomeMouseExited(evt);
-            }
-        });
-
-        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel20.setText("Trang chủ");
-        jLabel20.setMaximumSize(new java.awt.Dimension(110, 50));
-        jLabel20.setMinimumSize(new java.awt.Dimension(110, 50));
-        jLabel20.setPreferredSize(new java.awt.Dimension(110, 50));
-
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel21.setIcon(new ImageIcon("src/main/resource/icon/home.png"));
-        jLabel21.setMaximumSize(new java.awt.Dimension(30, 50));
-        jLabel21.setMinimumSize(new java.awt.Dimension(30, 50));
-        jLabel21.setPreferredSize(new java.awt.Dimension(30, 50));
-
-        javax.swing.GroupLayout pnlHomeLayout = new javax.swing.GroupLayout(pnlHome);
-        pnlHome.setLayout(pnlHomeLayout);
-        pnlHomeLayout.setHorizontalGroup(
-            pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHomeLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        pnlHomeLayout.setVerticalGroup(
-            pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHomeLayout.createSequentialGroup()
-                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout paneListServiceLayout = new javax.swing.GroupLayout(paneListService);
         paneListService.setLayout(paneListServiceLayout);
         paneListServiceLayout.setHorizontalGroup(
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(pnlSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(pnlHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneListServiceLayout.createSequentialGroup()
                 .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -574,9 +525,7 @@ public class FrmMainView extends javax.swing.JFrame {
         paneListServiceLayout.setVerticalGroup(
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(pnlHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(170, 170, 170)
                 .addComponent(pnlBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -595,7 +544,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addContainerGap(120, Short.MAX_VALUE))
         );
 
-        pnlTiltle.setBackground(new java.awt.Color(30, 30, 30));
+        pnlTiltle.setBackground(new java.awt.Color(0, 102, 102));
         pnlTiltle.setMaximumSize(new java.awt.Dimension(1280, 30));
         pnlTiltle.setMinimumSize(new java.awt.Dimension(1280, 30));
         pnlTiltle.setPreferredSize(new java.awt.Dimension(1280, 30));
@@ -730,14 +679,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseExited
         // TODO add your handling code here:
         if (chosser != 8)
-            pnlThongKe.setBackground(new Color(51, 51, 51));
+            pnlThongKe.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlThongKeMouseExited
 
     private void pnlThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseEntered
         // TODO add your handling code here:
-        pnlThongKe.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlThongKe.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 8)
-            pnlThongKe.setBackground(new Color(80, 80, 80));
+            pnlThongKe.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlThongKeMouseEntered
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
@@ -745,7 +695,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 8;
-            pnlThongKe.setBackground(new Color(102, 102, 102));
+            pnlThongKe.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(new FrmThongKe());
             pnlView.setLayout(new FlowLayout());
@@ -757,14 +707,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseExited
         // TODO add your handling code here:
         if (chosser != 7)
-            pnlKhachHang.setBackground(new Color(51, 51, 51));
+            pnlKhachHang.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlKhachHangMouseExited
 
     private void pnlKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseEntered
         // TODO add your handling code here:
-        pnlKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlKhachHang.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 7)
-            pnlKhachHang.setBackground(new Color(80, 80, 80));
+            pnlKhachHang.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlKhachHangMouseEntered
 
     private void pnlKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseClicked
@@ -772,7 +723,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 7;
-            pnlKhachHang.setBackground(new Color(102, 102, 102));
+            pnlKhachHang.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(new FrmKhachhang());
             pnlView.setLayout(new FlowLayout());
@@ -784,14 +735,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseExited
         // TODO add your handling code here:
         if (chosser != 6)
-            pnlNhanVien.setBackground(new Color(51, 51, 51));
+            pnlNhanVien.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlNhanVienMouseExited
 
     private void pnlNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseEntered
         // TODO add your handling code here:
-        pnlNhanVien.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlNhanVien.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 6)
-            pnlNhanVien.setBackground(new Color(80, 80, 80));
+            pnlNhanVien.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlNhanVienMouseEntered
 
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
@@ -799,7 +751,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 6;
-            pnlNhanVien.setBackground(new Color(102, 102, 102));
+            pnlNhanVien.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(new FrmNhanVien());
             pnlView.setLayout(new FlowLayout());
@@ -811,14 +763,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
         // TODO add your handling code here:
         if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(51, 51, 51));
+            pnlBaoHanh.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlBaoHanhMouseExited
 
     private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
         // TODO add your handling code here:
-        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(80, 80, 80));
+            pnlBaoHanh.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlBaoHanhMouseEntered
 
     private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
@@ -826,7 +779,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 5;
-            pnlBaoHanh.setBackground(new Color(102, 102, 102));
+            pnlBaoHanh.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(new FrmBaoHanh());
             pnlView.setLayout(new FlowLayout());
@@ -838,14 +791,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseExited
         // TODO add your handling code here:
         if (chosser != 4)
-            pnlKhuyenMai.setBackground(new Color(51, 51, 51));
+            pnlKhuyenMai.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlKhuyenMaiMouseExited
 
     private void pnlKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseEntered
         // TODO add your handling code here:
-        pnlKhuyenMai.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlKhuyenMai.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 4)
-            pnlKhuyenMai.setBackground(new Color(80, 80, 80));
+            pnlKhuyenMai.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlKhuyenMaiMouseEntered
 
     private void pnlKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseClicked
@@ -853,7 +807,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 4;
-            pnlKhuyenMai.setBackground(new Color(102, 102, 102));
+            pnlKhuyenMai.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(tkreponse.getChucVu().equals("QL") ? new FrmQuanLyKhuyenMai() : new FrmNhanVienKhuyenMai());
             pnlView.setLayout(new FlowLayout());
@@ -865,14 +819,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseExited
         // TODO add your handling code here:
         if (chosser != 3)
-            pnlHoaDon.setBackground(new Color(51, 51, 51));
+            pnlHoaDon.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlHoaDonMouseExited
 
     private void pnlHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseEntered
         // TODO add your handling code here:
-        pnlHoaDon.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlHoaDon.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 3)
-            pnlHoaDon.setBackground(new Color(80, 80, 80));
+            pnlHoaDon.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlHoaDonMouseEntered
 
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
@@ -880,7 +835,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 3;
-            pnlHoaDon.setBackground(new Color(102, 102, 102));
+            pnlHoaDon.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(new FrmHoaDon());
             pnlView.setLayout(new FlowLayout());
@@ -892,14 +847,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseExited
         // TODO add your handling code here:
         if (chosser != 2)
-            pnlSanPham.setBackground(new Color(51, 51, 51));
+            pnlSanPham.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlSanPhamMouseExited
 
     private void pnlSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseEntered
         // TODO add your handling code here:
-        pnlSanPham.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlSanPham.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 2)
-            pnlSanPham.setBackground(new Color(80, 80, 80));
+            pnlSanPham.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlSanPhamMouseEntered
 
     private void pnlSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseClicked
@@ -907,7 +863,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 2;
-            pnlSanPham.setBackground(new Color(102, 102, 102));
+            pnlSanPham.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(tkreponse.getChucVu().equals("QL") ? new FrmQuanLySanPham() : new FrmNhanVienSanPham());
             pnlView.setLayout(new FlowLayout());
@@ -919,14 +875,15 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlBanHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBanHangMouseExited
         // TODO add your handling code here:
         if (chosser != 1)
-            pnlBanHang.setBackground(new Color(51, 51, 51));
+            pnlBanHang.setBackground(new Color(0,123,123));
     }//GEN-LAST:event_pnlBanHangMouseExited
 
     private void pnlBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBanHangMouseEntered
         // TODO add your handling code here:
-        pnlBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        pnlBanHang.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
         if (chosser != 1)
-            pnlBanHang.setBackground(new Color(80, 80, 80));
+            pnlBanHang.setBackground(new Color(0, 180, 180));
     }//GEN-LAST:event_pnlBanHangMouseEntered
 
     private void pnlBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBanHangMouseClicked
@@ -934,7 +891,7 @@ public class FrmMainView extends javax.swing.JFrame {
         try {
             clearChosserListService();
             chosser = 1;
-            pnlBanHang.setBackground(new Color(102, 102, 102));
+            pnlBanHang.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
             pnlView.add(new FrmBanHang(tkreponse));
             pnlView.setLayout(new FlowLayout());
@@ -942,26 +899,6 @@ public class FrmMainView extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_pnlBanHangMouseClicked
-
-    private void pnlHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHomeMouseEntered
-        // TODO add your handling code here:
-        pnlHome.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
-        if (chosser != 9)
-            pnlHome.setBackground(new Color(80, 80, 80));
-    }//GEN-LAST:event_pnlHomeMouseEntered
-
-    private void pnlHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHomeMouseExited
-        // TODO add your handling code here:
-        if (chosser != 9)
-            pnlHome.setBackground(new Color(51, 51, 51));
-    }//GEN-LAST:event_pnlHomeMouseExited
-
-    private void pnlHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHomeMouseClicked
-        // TODO add your handling code here:
-        clearChosserListService();
-        chosser = 9;
-        pnlHome.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_pnlHomeMouseClicked
 
     private void pnlTiltleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTiltleMouseDragged
         // TODO add your handling code here:
@@ -979,46 +916,16 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
         // TODO add your handling code here:
-        lblExit.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        lblExit.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
     }//GEN-LAST:event_lblExitMouseEntered
 
     private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
         // TODO add your handling code here:
-        lblMini.setCursor(new Cursor(Cursor.HAND_CURSOR) {});
+        lblMini.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
     }//GEN-LAST:event_lblMiniMouseEntered
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Window".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -1031,8 +938,6 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1046,7 +951,6 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBanHang;
     private javax.swing.JPanel pnlBaoHanh;
     private javax.swing.JPanel pnlHoaDon;
-    private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlKhachHang;
     private javax.swing.JPanel pnlKhuyenMai;
     private javax.swing.JPanel pnlNhanVien;
@@ -1057,14 +961,13 @@ public class FrmMainView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void clearChosserListService() {
-        pnlBanHang.setBackground(new Color(51, 51, 51));
-        pnlSanPham.setBackground(new Color(51, 51, 51));
-        pnlHoaDon.setBackground(new Color(51, 51, 51));
-        pnlKhuyenMai.setBackground(new Color(51, 51, 51));
-        pnlBaoHanh.setBackground(new Color(51, 51, 51));
-        pnlNhanVien.setBackground(new Color(51, 51, 51));
-        pnlKhachHang.setBackground(new Color(51, 51, 51));
-        pnlThongKe.setBackground(new Color(51, 51, 51));
-        pnlHome.setBackground(new Color(51, 51, 51));
+        pnlBanHang.setBackground(new Color(0,123,123));
+        pnlSanPham.setBackground(new Color(0,123,123));
+        pnlHoaDon.setBackground(new Color(0,123,123));
+        pnlKhuyenMai.setBackground(new Color(0,123,123));
+        pnlBaoHanh.setBackground(new Color(0,123,123));
+        pnlNhanVien.setBackground(new Color(0,123,123));
+        pnlKhachHang.setBackground(new Color(0,123,123));
+        pnlThongKe.setBackground(new Color(0,123,123));
     }
 }

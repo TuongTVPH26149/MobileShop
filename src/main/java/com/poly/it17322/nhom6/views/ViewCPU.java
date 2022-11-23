@@ -6,7 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.services.impl.CPUServiceImpl;
+import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ViewCPU extends javax.swing.JFrame {
     /**
      * Creates new form ViewRam
      */
-    CPUServiceImpl cpu = new CPUServiceImpl();
+    SanPhamChiTietServiceImpl cpu = new SanPhamChiTietServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
     List<CPURespone> lstspu = new ArrayList<>();
     public ViewCPU() {
@@ -306,7 +306,7 @@ public class ViewCPU extends javax.swing.JFrame {
     private void FilltoTable() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (CPURespone x : cpu.getlist()) {
+        for (CPURespone x : cpu.getlistCPU()) {
             model.addRow(x.toDataRow());
             lstspu.add(x);
         }
@@ -322,7 +322,7 @@ public class ViewCPU extends javax.swing.JFrame {
         CPURespone c = new CPURespone();
         c.setMa(ma);
         c.setTen(ten);
-        if(cpu.insert(c)){
+        if(cpu.insertCPU(c)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
@@ -341,7 +341,7 @@ public class ViewCPU extends javax.swing.JFrame {
         c.setId(lstspu.get(index).getId());
         c.setMa(ma);
         c.setTen(ten);
-        if(cpu.update(c)){
+        if(cpu.updateCPU(c)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();

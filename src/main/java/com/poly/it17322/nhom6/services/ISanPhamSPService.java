@@ -4,18 +4,20 @@
  */
 package com.poly.it17322.nhom6.services;
 
-import com.poly.it17322.nhom6.responses.RomRespone;
+import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import java.util.List;
 
 /**
  *
  * @author admin
  */
-public interface IRomService {
+public interface ISanPhamSPService {
 
-    public List<RomRespone> getlist();
+    public List<SanPhamSPRespone> getlist();
 
-    public boolean insert(RomRespone rom);
+    public boolean insert(SanPhamSPRespone sp);
 
-    public boolean update(RomRespone rom);
+    public boolean update(SanPhamSPRespone sp);
+    
+    
 }
