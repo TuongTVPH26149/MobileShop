@@ -16,12 +16,12 @@ import java.util.UUID;
  */
 public interface IKhachHangService {
 
-    public List<KhachHang> SelectAllKhachHang();
+    public List<KhachHangResponse> getlist();
 
     public KhachHang SelectKhachHangById(UUID id);
 
-    public Boolean InsertKhachHang(KhachHang khachHang);
+    public boolean Insert(KhachHangResponse khachHang);
 
-    public Boolean UpdateKhachHang(KhachHang khachHang);
+    public boolean Update(KhachHangResponse khachHang);
     
 }
