@@ -54,7 +54,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(377, 165));
         setUndecorated(true);
 
-        pnlMainLogin.setBackground(new java.awt.Color(0, 153, 153));
+        pnlMainLogin.setBackground(new java.awt.Color(0, 102, 102));
         pnlMainLogin.setMaximumSize(new java.awt.Dimension(377, 165));
         pnlMainLogin.setMinimumSize(new java.awt.Dimension(377, 165));
         pnlMainLogin.setPreferredSize(new java.awt.Dimension(377, 165));
@@ -75,7 +75,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setMaximumSize(new java.awt.Dimension(340, 30));
         jPanel2.setMinimumSize(new java.awt.Dimension(340, 30));
 
@@ -99,7 +99,8 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        txtTaiKhoan.setBackground(new java.awt.Color(0, 153, 153));
+        txtTaiKhoan.setBackground(new java.awt.Color(0, 102, 102));
+        txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
         txtTaiKhoan.setBorder(null);
         txtTaiKhoan.setCaretColor(new java.awt.Color(255, 255, 255));
