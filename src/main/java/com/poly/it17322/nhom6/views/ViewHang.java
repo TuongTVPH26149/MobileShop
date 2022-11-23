@@ -6,7 +6,7 @@ package com.poly.it17322.nhom6.views;
 
 
 import com.poly.it17322.nhom6.responses.HangRespone;
-import com.poly.it17322.nhom6.services.impl.HangServiceImpl;
+import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ViewHang extends javax.swing.JFrame {
     /**
      * Creates new form ViewRam
      */
-    HangServiceImpl hang = new HangServiceImpl();
+    SanPhamChiTietServiceImpl hang = new SanPhamChiTietServiceImpl();
     DefaultTableModel model = new DefaultTableModel();
     List<HangRespone> lsthang = new ArrayList<>();
     public ViewHang() {
@@ -320,7 +320,7 @@ public class ViewHang extends javax.swing.JFrame {
     private void FilltoTable() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (HangRespone x : hang.getlist()) {
+        for (HangRespone x : hang.getlistHang()) {
             model.addRow(x.toDataRow());
             lsthang.add(x);
         }
@@ -336,7 +336,7 @@ public class ViewHang extends javax.swing.JFrame {
         HangRespone h = new HangRespone();
         h.setMa(ma);
         h.setTen(ten);
-        if(hang.insert(h)){
+        if(hang.insertHang(h)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
@@ -355,7 +355,7 @@ public class ViewHang extends javax.swing.JFrame {
         h.setId(lsthang.get(index).getId());
         h.setMa(ma);
         h.setTen(ten);
-        if(hang.update(h)){
+        if(hang.updateHang(h)){
             JOptionPane.showMessageDialog(this, "thành công");
         }
         FilltoTable();
