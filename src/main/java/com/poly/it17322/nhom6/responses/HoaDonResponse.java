@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import lombok.Getter;
@@ -26,6 +27,8 @@ public class HoaDonResponse {
     private BigDecimal tongTien;
     private Date ngayTao;
     private Date ngayThanhToan;
+    private boolean loaiThanhToan;
+    private String nhanVien;
 
     public HoaDonResponse() {
     }
@@ -38,10 +41,17 @@ public class HoaDonResponse {
         this.tongTien = hd.getTongTien();
         this.ngayTao = hd.getCreatedDate();
         this.ngayThanhToan = hd.getLastModifiedDate();
+        this.loaiThanhToan = hd.isLoaiThanhToan();
+        this.nhanVien = hd.getTaiKhoan().getMa();
+    }
 
+    public String getloaiThanhToan() {
+        return loaiThanhToan == true ? "Tiền mặt" : "Chuyển khoản";
     }
 
     public Object[] toDataRow() {
-        return new Object[]{Id, ma, hoTen, sdt, tongTien, ngayTao, ngayThanhToan};
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return new Object[]{ma, hoTen, sdt, nhanVien,
+            sdf.format(ngayTao), sdf.format(ngayThanhToan), getloaiThanhToan(), tongTien};
     }
 }

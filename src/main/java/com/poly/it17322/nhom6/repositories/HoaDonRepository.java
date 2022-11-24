@@ -45,6 +45,46 @@ public class HoaDonRepository {
         }
         return hd;
     }
+     public List<HoaDon> getByCodeAndCreateDate(String ma, Date from, Date to) {
+        List<HoaDon> list = new ArrayList<>();
+        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+            if (from != null && to != null) {
+                Query query = session.createQuery("FROM HoaDon where ma like :ma and CreatedDate >= :from and CreatedDate <= :to", HoaDon.class);
+                query.setParameter("ma", "%" + ma + "%");
+                query.setParameter("from", from);
+                query.setParameter("to", to);
+                list = query.getResultList();
+            } else {
+                Query query = session.createQuery("FROM HoaDon where ma like :ma", HoaDon.class);
+                query.setParameter("ma", "%" + ma + "%");
+                list = query.getResultList();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+        public List<HoaDon> getByCodeAndUpdateDate(String ma, Date from, Date to) {
+        List<HoaDon> list = new ArrayList<>();
+        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+            if (from != null && to != null) {
+                Query query = session.createQuery("FROM HoaDon where ma like :ma and lastModifiedDate >= :from and lastModifiedDate <= :to", HoaDon.class);
+                query.setParameter("ma", "%" + ma + "%");
+                query.setParameter("from", from);
+                query.setParameter("to", to);
+                list = query.getResultList();
+            } else {
+                Query query = session.createQuery("FROM HoaDon where ma like :ma", HoaDon.class);
+                query.setParameter("ma", "%" + ma + "%");
+                list = query.getResultList();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     public boolean InsertHoaDon(HoaDon hd) {
         try {
