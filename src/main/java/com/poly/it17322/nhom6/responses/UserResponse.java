@@ -22,6 +22,7 @@ public class UserResponse {
     private String ma;
     private String hoTen;
     private String matKhau;
+    private String hinhAnh;
     private int chucVu;
     private int trangThai;
 
@@ -30,6 +31,7 @@ public class UserResponse {
         this.ma = tk.getMa();
         this.hoTen = tk.getHoTen();
         this.matKhau = tk.getMatKhau();
+        this.hinhAnh = tk.getHinhAnh();
         this.chucVu = tk.getChucVu();
         this.trangThai = tk.getTrangThai();
     }
