@@ -22,7 +22,7 @@ public class KhuyenMaiServiceImpl implements IKhuyenMaiService {
 
     @Override
     public List<KhuyenMaiResponse> SelectKhuyenMai() {
-        List<KhuyenMai> khuyenMais = khuyenMaiRepository.SelectALlKhuyenMai();
+        List<KhuyenMai> khuyenMais = khuyenMaiRepository.selectALLKhuyenMai();
         return khuyenMais.stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
     }
 

@@ -17,12 +17,6 @@ import java.util.List;
  * @author admin
  */
 public interface ISanPhamChiTietService {
-    public List<HangRespone> getlistHang();
-    
-    public boolean insertHang(HangRespone hang);
-    
-    public boolean updateHang(HangRespone hang);
-    
     public List<RomRespone> getlistRom();
     
     public boolean insertRom(RomRespone rom);
@@ -40,12 +34,6 @@ public interface ISanPhamChiTietService {
     public boolean insertMauSac(MauSacRespone ms);
     
     public boolean updateMauSac(MauSacRespone ms);
-    
-    public List<HDHRespone> getlistHDH();
-    
-    public boolean insertHDH(HDHRespone hdh);
-    
-    public boolean updatehdh(HDHRespone hdh);
     
     public List<CPURespone> getlistCPU();
     

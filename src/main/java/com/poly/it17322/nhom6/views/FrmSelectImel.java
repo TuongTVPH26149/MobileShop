@@ -4,34 +4,23 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.poly.it17322.nhom6.responses.HoaDonBanHangResponse;
-import com.poly.it17322.nhom6.responses.ImelBanHangResponse;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
-import com.poly.it17322.nhom6.services.IBanHangService;
-import com.poly.it17322.nhom6.services.impl.BanHangServiceImpl;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author LiamTrieu
  */
 public class FrmSelectImel extends javax.swing.JFrame {
-    private List<ImelBanHangResponse> lstSelectImel = new ArrayList<>();
-    private IBanHangService bhservice = new BanHangServiceImpl();
     /**
      * Creates new form FrmDangNhap
      */
     public FrmSelectImel(SanPhamBanHangResponse sp) {
         initComponents();
         setLocationRelativeTo(null);
-        FillToTableImel(sp.getId());
         tblSelectImel.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblSelectImel.getTableHeader().setBackground(new Color(255,255,255));
         tblSelectImel.getTableHeader().setForeground(new Color(0,102,102));
@@ -294,11 +283,5 @@ public class FrmSelectImel extends javax.swing.JFrame {
     private javax.swing.JTable tblSelectImel;
     // End of variables declaration//GEN-END:variables
 
-    private void FillToTableImel(UUID idsp) {
-        DefaultTableModel dtm = (DefaultTableModel) tblSelectImel.getModel();
-        dtm.setRowCount(0);
-        lstSelectImel = bhservice.getImelBH(idsp);
-        lstSelectImel.forEach(s -> dtm.addRow(new Object[]{s.getMa()}));
-    }
 
 }

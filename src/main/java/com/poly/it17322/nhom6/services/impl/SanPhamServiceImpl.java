@@ -24,7 +24,7 @@ private SanPhamReposiry sprepo = new SanPhamReposiry();
     @Override
     public List<SanPhamSPRespone> getlist() {
         List<SanPhamSPRespone> lstsp = new ArrayList<>();
-        List<ChiTietSP> ctsp = ctsprepo.SelectCTSanPham();
+        List<ChiTietSP> ctsp = ctsprepo.selectALLChiTietSP();
         for (SanPhamSPRespone o : ctsp.stream().map(SanPhamSPRespone::new).collect(Collectors.toList())) {
             if (o.getSoluong() > 0) {
                 lstsp.add(o);

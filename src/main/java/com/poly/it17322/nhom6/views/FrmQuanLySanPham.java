@@ -24,9 +24,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     /**
      * Creates new form frmBanHang
      */
-    private ViewCPU cpu = new ViewCPU();
-    private ViewHDH hdh = new ViewHDH();
-    private ViewHang hang = new ViewHang();
     private ViewMauSac mausac = new ViewMauSac();
     private ViewRam ram = new ViewRam();
     private ViewRom rom = new ViewRom();
@@ -36,9 +33,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private SanPhamChiTietServiceImpl spct = new SanPhamChiTietServiceImpl();
     public FrmQuanLySanPham() {
         initComponents();
-
         FilltoTableSanPham();
-        setCboHang();
         designTable();
     }
 
@@ -693,11 +688,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhangActionPerformed
-        hang.setVisible(true);
+
     }//GEN-LAST:event_btnhangActionPerformed
 
     private void btnhdhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhdhActionPerformed
-        hdh.setVisible(true);
+
     }//GEN-LAST:event_btnhdhActionPerformed
 
     private void btnromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnromActionPerformed
@@ -705,7 +700,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnromActionPerformed
 
     private void btncpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncpuActionPerformed
-        cpu.setVisible(true);
+ 
     }//GEN-LAST:event_btncpuActionPerformed
 
     private void btnmausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmausacActionPerformed
@@ -778,13 +773,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
     }
 
-    private void setCboHang() {
-
-        cbo = (DefaultComboBoxModel) cbohang.getModel();
-        for (HangRespone x : spct.getlistHang()) {
-            cbo.addElement(x.getTen());
-        }
-    }
     private void designTable(){
         tblbang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblbang.getTableHeader().setBackground(new Color(0,123,123));

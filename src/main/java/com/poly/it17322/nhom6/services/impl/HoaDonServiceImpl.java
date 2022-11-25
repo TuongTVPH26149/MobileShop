@@ -25,7 +25,7 @@ public class HoaDonServiceImpl implements IHoaDonService {
 
     @Override
     public List<HoaDonResponse> SelectHoaDon() {
-        List<HoaDon> hoadons = hoadonRepository.SelectALLHoaDon();
+        List<HoaDon> hoadons = hoadonRepository.selectALLHoaDon();
         return hoadons.stream().map(HoaDonResponse::new).collect(Collectors.toList());
     }
      @Override

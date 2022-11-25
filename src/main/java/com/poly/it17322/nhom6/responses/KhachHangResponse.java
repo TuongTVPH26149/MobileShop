@@ -18,7 +18,7 @@ public class KhachHangResponse {
     private UUID id;
     private String ma;
     private String hoten;
-    private String gioitinh;
+    private int gioitinh;
     private String sdt;
     private String diachi;
     private Date ngaysinh;

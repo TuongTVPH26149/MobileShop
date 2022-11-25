@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-import com.poly.it17322.nhom6.domainmodels.Hang;
+import com.poly.it17322.nhom6.domainmodels.Pin;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,38 +18,38 @@ import org.hibernate.query.Query;
  *
  * @author LiamTrieu
  */
-public class Hangrepository {
+public class PinRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<Hang> SelestAllHang() {
-        List<Hang> lstHang = new ArrayList<>();
-        try {
-            Query query = session.createQuery("FROM Hang", Hang.class);
-            lstHang = query.getResultList();
+    public List<Pin> selectALLPin() {
+        List<Pin> listPin = new ArrayList<>();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM Pin", Pin.class);
+            listPin = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lstHang;
+        return listPin;
     }
 
-    public Hang SelectHangById(UUID id) {
-        Hang hang = new Hang();
-        try {
-            Query query = session.createQuery("FROM Hang WHERE id =:id", Hang.class);
-            query.setParameter("id", id);
-            hang = (Hang) query.getSingleResult();
+    public Pin SelectPinById(UUID Id) {
+        Pin pin = new Pin();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM Pin where Id = :Id", Pin.class);
+            query.setParameter("Id", Id);
+            pin = (Pin) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return hang;
+        return pin;
     }
 
-    public Boolean InsertHang(Hang hang) {
-        try {
+    public Boolean InsertPin(Pin pin) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(hang);
+            session.save(pin);
             tran.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +58,12 @@ public class Hangrepository {
         return false;
     }
 
-    public Boolean UpdateHang(Hang hang) {
-        try {
+    public Boolean UpdatePin(Pin pin) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            hang.setLastModifiedDate(new Date());
-            session.saveOrUpdate(hang);
+            pin.setLastModifiedDate(new Date());
+            session.saveOrUpdate(pin);
             tran.commit();
             return true;
         } catch (Exception e) {

@@ -5,7 +5,6 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.KhuyenMai;
-import com.poly.it17322.nhom6.responses.KhuyenMaiRespone;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,54 +22,57 @@ public class KhuyenMaiRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<KhuyenMai> SelectALlKhuyenMai() {
-        List<KhuyenMai> lstKhuyenMai = new ArrayList<>();
-        try {
+    public List<KhuyenMai> selectALLKhuyenMai() {
+        List<KhuyenMai> listKhuyenMai = new ArrayList<>();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Query query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
-            lstKhuyenMai = query.getResultList();
+            listKhuyenMai = query.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return lstKhuyenMai;
+        return listKhuyenMai;
     }
 
-    public KhuyenMai SelectKhuyenMaiId(UUID id) {
-        KhuyenMai khuyenmai = new KhuyenMai();
-        try {
-            Query query = session.createQuery("FROM KhuyenMai WHERE id = :id", KhuyenMai.class);
-            query.setParameter("id", id);
-            khuyenmai = (KhuyenMai) query.getSingleResult();
-
+    public KhuyenMai SelectKhuyenMaiById(UUID Id) {
+        KhuyenMai sanPham = new KhuyenMai();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM KhuyenMai where Id = :Id", KhuyenMai.class);
+            query.setParameter("Id", Id);
+            sanPham = (KhuyenMai) query.getSingleResult();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return khuyenmai;
+        return sanPham;
     }
 
-    public boolean InsertKhuyeMai(KhuyenMai khuyenmai) {
-        try {
+    public Boolean InsertKhuyenMai(KhuyenMai sanPham) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(khuyenmai);
+            session.save(sanPham);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public boolean UpdateKhuyenMai(KhuyenMai khuyenmai) {
-        try {
+    public Boolean UpdateKhuyenMai(KhuyenMai sanPham) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            khuyenmai.setLastModifiedDate(new Date());
-            session.saveOrUpdate(khuyenmai);
+            sanPham.setLastModifiedDate(new Date());
+            session.saveOrUpdate(sanPham);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
     public static void main(String[] args) {
-        List<KhuyenMai> lists = new KhuyenMaiRepository().SelectALlKhuyenMai();
+        List<KhuyenMai> lists = new KhuyenMaiRepository().selectALLKhuyenMai();
         for (KhuyenMai km : lists) {
             System.out.println(km.toString());
         }
