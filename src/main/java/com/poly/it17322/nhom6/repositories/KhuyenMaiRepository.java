@@ -71,4 +71,18 @@ public class KhuyenMaiRepository {
         }
         return false;
     }
+    public static void main(String[] args) {
+        List<KhuyenMai> lists = new KhuyenMaiRepository().selectALLKhuyenMai();
+        for (KhuyenMai km : lists) {
+            System.out.println(km.toString());
+        }
+    }
+
+    public List<KhuyenMai> getByCodeAndCreateDate(String ma, Date from, Date to) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KhuyenMai> getByCodeAndUpdateDate(String ma, Date from, Date to) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
