@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.HDH;
+import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class HDHRespone {
     private String ma;
     private String ten;
 
-    public HDHRespone(HDH hdh) {
+    public HDHRespone(ManHinh hdh) {
         this.id = hdh.getId();
         this.ma = hdh.getMa();
         this.ten = hdh.getTen();

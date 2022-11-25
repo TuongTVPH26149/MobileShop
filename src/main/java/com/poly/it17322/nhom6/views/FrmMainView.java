@@ -33,7 +33,7 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlView.add(new FrmBanHang(tkreponse));
         pnlView.setLayout(new FlowLayout());
         this.pack();
-        if (!tk.getChucVu().equals("QL")) {
+        if (tk.getChucVu() == 0) {
             pnlNhanVien.setVisible(false);
         }
     }
@@ -809,7 +809,7 @@ public class FrmMainView extends javax.swing.JFrame {
             chosser = 4;
             pnlKhuyenMai.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
-            pnlView.add(tkreponse.getChucVu().equals("QL") ? new FrmQuanLyKhuyenMai() : new FrmNhanVienKhuyenMai());
+            pnlView.add(tkreponse.getChucVu() == 0 ? new FrmQuanLyKhuyenMai() : new FrmNhanVienKhuyenMai());
             pnlView.setLayout(new FlowLayout());
             this.pack();
         } catch (Exception e) {
@@ -865,7 +865,7 @@ public class FrmMainView extends javax.swing.JFrame {
             chosser = 2;
             pnlSanPham.setBackground(new Color(0, 153, 153));
             pnlView.removeAll();
-            pnlView.add(tkreponse.getChucVu().equals("QL") ? new FrmQuanLySanPham() : new FrmNhanVienSanPham());
+            pnlView.add(tkreponse.getChucVu() == 0 ? new FrmQuanLySanPham() : new FrmNhanVienSanPham());
             pnlView.setLayout(new FlowLayout());
             this.pack();
         } catch (Exception e) {

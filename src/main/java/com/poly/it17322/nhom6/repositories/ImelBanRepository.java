@@ -4,8 +4,8 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-import com.poly.it17322.nhom6.domainmodels.CPU;
-import com.poly.it17322.nhom6.domainmodels.CPU;
+
+import com.poly.it17322.nhom6.domainmodels.ImelBan;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,43 +14,41 @@ import java.util.UUID;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 /**
  *
  * @author LiamTrieu
  */
-public class CPURepository {
-
+public class ImelBanRepository {
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<CPU> selectALLCPU() {
-        List<CPU> listCPU = new ArrayList<>();
+    public List<ImelBan> selectALLImelBan() {
+        List<ImelBan> listImelBan = new ArrayList<>();
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Query query = session.createQuery("FROM CPU", CPU.class);
-            listCPU = query.getResultList();
+            Query query = session.createQuery("FROM ImelBan", ImelBan.class);
+            listImelBan = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listCPU;
+        return listImelBan;
     }
 
-    public CPU SelectCPUById(UUID Id) {
-        CPU cpu = new CPU();
+    public ImelBan SelectImelBanById(UUID Id) {
+        ImelBan imelBan = new ImelBan();
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Query query = session.createQuery("FROM CPU where Id = :Id", CPU.class);
+            Query query = session.createQuery("FROM ImelBan where Id = :Id", ImelBan.class);
             query.setParameter("Id", Id);
-            cpu = (CPU) query.getSingleResult();
+            imelBan = (ImelBan) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return cpu;
+        return imelBan;
     }
 
-    public Boolean InsertCPU(CPU cpu) {
+    public Boolean InsertImelBan(ImelBan imelBan) {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(cpu);
+            session.save(imelBan);
             tran.commit();
             return true;
         } catch (Exception e) {
@@ -59,12 +57,12 @@ public class CPURepository {
         return false;
     }
 
-    public Boolean UpdateCPU(CPU cpu) {
+    public Boolean UpdateImelBan(ImelBan imelBan) {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            cpu.setLastModifiedDate(new Date());
-            session.saveOrUpdate(cpu);
+            imelBan.setLastModifiedDate(new Date());
+            session.saveOrUpdate(imelBan);
             tran.commit();
             return true;
         } catch (Exception e) {

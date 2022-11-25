@@ -6,44 +6,49 @@ package com.poly.it17322.nhom6.domainmodels;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author admin
  */
 @Entity
-@Table(name = "TrangThaiImel")
-@Getter
+@Table(name = "Imel")
 @Setter
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrangThaiImel implements Serializable {
+public class ImelBan implements Serializable {
 
     @Id
     @Column(name = "Id")
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "Ma", unique = true, length = 20)
-    private String ma;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdHoaDonChiTiet", referencedColumnName = "id", insertable = false, nullable = true)
+    private HoaDonChiTiet hoaDonChiTiet;
 
-    @Column(name = "Ten", length = 30, nullable = false)
-    private String ten;
+    @Column(name = "Ma", unique = true)
+    private int ma;
+    
+    @Column(name = "TrangThai")
+    private int trangThai;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -52,7 +57,4 @@ public class TrangThaiImel implements Serializable {
     @Column(name = "lastModifiedDate", insertable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastModifiedDate;
-
-    @Column(name = "Deleted", insertable = false)
-    private boolean deleted;
 }

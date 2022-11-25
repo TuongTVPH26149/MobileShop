@@ -6,15 +6,11 @@ package com.poly.it17322.nhom6.domainmodels;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
@@ -22,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
@@ -44,15 +41,17 @@ public class KhachHang implements Serializable {
     @Column(name = "Ma", unique = true, length = 20)
     private String ma;
 
+    @Nationalized
     @Column(name = "HoTen", length = 50, nullable = false)
     private String hoTen;
 
-    @Column(name = "GioiTinh", length = 10, nullable = true)
-    private String gioiTinh;
+    @Column(name = "GioiTinh", nullable = true)
+    private int gioiTinh;
 
-    @Column(name = "Sdt", length = 30, nullable = false)
+    @Column(name = "Sdt", length = 15, nullable = false)
     private String sdt;
-
+    
+    @Nationalized
     @Column(name = "DiaChi", length = 100, nullable = true)
     private String diaChi;
 

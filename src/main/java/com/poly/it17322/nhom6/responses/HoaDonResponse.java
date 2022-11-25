@@ -14,12 +14,12 @@ import lombok.Setter;
 
 /**
  *
- * @author Rùa
+ * @author LiamTrieu
  */
 @Getter
 @Setter
 public class HoaDonResponse {
-
+    
     private UUID Id;
     private String ma;
     private String hoTen;
@@ -27,11 +27,11 @@ public class HoaDonResponse {
     private BigDecimal tongTien;
     private Date ngayTao;
     private Date ngayThanhToan;
-    private boolean loaiThanhToan;
+    private int loaiThanhToan;
     private String nhanVien;
 
     public HoaDonResponse() {
-    }
+}
 
     public HoaDonResponse(HoaDon hd) {
         this.Id = hd.getId();
@@ -39,14 +39,14 @@ public class HoaDonResponse {
         this.hoTen = hd.getKhachHang().getHoTen();
         this.sdt = hd.getKhachHang().getSdt();
         this.tongTien = hd.getTongTien();
-        this.ngayTao = hd.getCreatedDate();
+        this.ngayTao = hd.getNgayTao();
         this.ngayThanhToan = hd.getLastModifiedDate();
-        this.loaiThanhToan = hd.isLoaiThanhToan();
+        this.loaiThanhToan = hd.getLoaiThanhToan();
         this.nhanVien = hd.getTaiKhoan().getMa();
     }
 
     public String getloaiThanhToan() {
-        return loaiThanhToan == true ? "Tiền mặt" : "Chuyển khoản";
+        return loaiThanhToan == 0 ? "Tiền mặt" : "Chuyển khoản";
     }
 
     public Object[] toDataRow() {

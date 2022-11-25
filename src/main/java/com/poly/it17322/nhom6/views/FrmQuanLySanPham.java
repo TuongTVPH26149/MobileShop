@@ -45,7 +45,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
     public FrmQuanLySanPham() {
         initComponents();
-
         FilltoTableSanPham();
         FilltoTableHang();
         FilltoTableHDH();
@@ -1870,6 +1869,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhangActionPerformed
+
         frmhang.setVisible(true);
         frmhang.setLocationRelativeTo(null);
         setCboHang();
@@ -1888,6 +1888,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnromActionPerformed
 
     private void btncpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncpuActionPerformed
+
         frmcpu.setVisible(true);
         frmcpu.setLocationRelativeTo(null);
         setCboCPU();
