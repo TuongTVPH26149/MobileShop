@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.KhuyenMai;
+import com.poly.it17322.nhom6.responses.KhuyenMaiRespone;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,5 +68,19 @@ public class KhuyenMaiRepository {
         } catch (Exception e) {
         }
         return false;
+    }
+    public static void main(String[] args) {
+        List<KhuyenMai> lists = new KhuyenMaiRepository().SelectALlKhuyenMai();
+        for (KhuyenMai km : lists) {
+            System.out.println(km.toString());
+        }
+    }
+
+    public List<KhuyenMai> getByCodeAndCreateDate(String ma, Date from, Date to) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KhuyenMai> getByCodeAndUpdateDate(String ma, Date from, Date to) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
