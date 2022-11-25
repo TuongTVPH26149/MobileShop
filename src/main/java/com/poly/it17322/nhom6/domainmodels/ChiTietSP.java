@@ -73,6 +73,9 @@ public class ChiTietSP implements Serializable {
 
     @Column(name = "SoLuong")
     private int soLuong;
+    
+    @Column(name = "MoTa")
+    private String moTa;
 
     @Column(name = "HinhAnh", length = 100)
     private String hinhAnh;

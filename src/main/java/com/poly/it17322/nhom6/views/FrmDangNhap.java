@@ -24,9 +24,9 @@ public class FrmDangNhap extends javax.swing.JFrame {
      * Creates new form FrmDangNhap
      */
     public FrmDangNhap() {
-            initComponents();
-            setLocationRelativeTo(null);
-        }
+        initComponents();
+        setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -316,12 +316,12 @@ public class FrmDangNhap extends javax.swing.JFrame {
             String mk = MD5Util.md5EnCode(String.valueOf(txtMatKhau.getPassword()));
             UserResponse tkrp = dangNhapService.checkTK(tk, mk);
             if (tkrp.getId() != null) {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
                 new FrmMainView(tkrp).setVisible(true);
                 this.dispose();
                 return;
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
     }//GEN-LAST:event_btnLoginActionPerformed
