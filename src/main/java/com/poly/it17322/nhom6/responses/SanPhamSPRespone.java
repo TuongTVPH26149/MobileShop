@@ -24,8 +24,8 @@ import lombok.ToString;
 public class SanPhamSPRespone {
     private UUID id;
     private String ten;
-    private String hang;
-    private String hdh;
+    private String pin;
+    private String manhinh;
     private String cpu;
     private String ram;
     private String rom;
@@ -35,6 +35,8 @@ public class SanPhamSPRespone {
     public SanPhamSPRespone(ChiTietSP sp) {
         this.id = sp.getId();
         this.ten = sp.getSanPham().getTen();
+        this.pin = sp.getPin().getTen();
+        this.manhinh = sp.getManHinh().getTen();
         this.cpu = sp.getCpu().getTen();
         this.ram = sp.getRam().getTen();
         this.rom = sp.getRom().getTen();
@@ -43,6 +45,6 @@ public class SanPhamSPRespone {
     }
     
     public Object[] toDataRow(){
-        return new Object[]{ten,hang,hdh,cpu,ram,rom,gia,soluong};
+        return new Object[]{ten,pin,manhinh,cpu,ram,rom,gia,soluong};
     }
 }

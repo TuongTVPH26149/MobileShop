@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-import com.poly.it17322.nhom6.domainmodels.MauSac;
+import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,34 +22,34 @@ public class ManHinhRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<MauSac> SelectAllMauSac() {
-        List<MauSac> lstMauSac = new ArrayList<>();
+    public List<ManHinh> SelectAllManHinh() {
+        List<ManHinh> lstManhinh = new ArrayList<>();
         try {
-            Query query = session.createQuery("FROM MauSac", MauSac.class);
-            lstMauSac = query.getResultList();
+            Query query = session.createQuery("FROM ManHinh", ManHinh.class);
+            lstManhinh = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lstMauSac;
+        return lstManhinh;
     }
 
-    public MauSac SelectMauSacById(UUID id) {
-        MauSac mauSac = new MauSac();
+    public ManHinh SelectManHinhById(UUID id) {
+        ManHinh manhinh = new ManHinh();
         try {
-            Query query = session.createQuery("FROM MauSac WHERE id =:id", MauSac.class);
+            Query query = session.createQuery("FROM ManHinh WHERE id =:id", ManHinh.class);
             query.setParameter("id", id);
-            mauSac = (MauSac) query.getSingleResult();
+            manhinh = (ManHinh) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mauSac;
+        return manhinh;
     }
 
-    public Boolean InsertMauSac(MauSac mauSac) {
+    public Boolean InsertManHinh(ManHinh manhinh) {
         try {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(mauSac);
+            session.save(manhinh);
             tran.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +58,12 @@ public class ManHinhRepository {
         return false;
     }
 
-    public Boolean UpdateMauSac(MauSac mauSac) {
+    public Boolean UpdateManHinh(ManHinh manhinh) {
         try {
             Transaction tran = session.getTransaction();
             tran.begin();
-            mauSac.setLastModifiedDate(new Date());
-            session.saveOrUpdate(mauSac);
+            manhinh.setLastModifiedDate(new Date());
+            session.saveOrUpdate(manhinh);
             tran.commit();
             return true;
         } catch (Exception e) {
