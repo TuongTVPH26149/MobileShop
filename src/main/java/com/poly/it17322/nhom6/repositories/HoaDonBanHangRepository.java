@@ -6,9 +6,7 @@ package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.KhachHang;
-import com.poly.it17322.nhom6.domainmodels.TrangThaiHoaDon;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
-import java.util.UUID;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -20,17 +18,6 @@ import org.hibernate.Session;
 public class HoaDonBanHangRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
-
-    public TrangThaiHoaDon SelectTrangThaiHoaDonByMa(String ma) {
-        TrangThaiHoaDon trangThaihd = new TrangThaiHoaDon();
-        try {
-            Query query = session.createQuery("FROM TrangThaiHoaDon WHERE ma = :ma", TrangThaiHoaDon.class);
-            query.setParameter("ma", ma);
-            trangThaihd = (TrangThaiHoaDon) query.getSingleResult();
-        } catch (Exception e) {
-        }
-        return trangThaihd;
-    }
 
     public KhachHang SelectKHByMa(String ma) {
         KhachHang kh = new KhachHang();

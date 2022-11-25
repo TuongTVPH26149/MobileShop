@@ -35,8 +35,6 @@ public class SanPhamSPRespone {
     public SanPhamSPRespone(ChiTietSP sp) {
         this.id = sp.getId();
         this.ten = sp.getSanPham().getTen();
-        this.hang = sp.getSanPham().getHang().getTen();
-        this.hdh = sp.getSanPham().getHDH().getTen();
         this.cpu = sp.getCpu().getTen();
         this.ram = sp.getRam().getTen();
         this.rom = sp.getRom().getTen();
