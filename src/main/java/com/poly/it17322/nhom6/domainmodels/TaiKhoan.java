@@ -69,6 +69,9 @@ public class TaiKhoan {
 
     @Column(name = "TrangThai", nullable = false)
     private int trangThai;
+    
+    @Column(name = "HinhAnh")
+    private String hinhAnh;
 
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
