@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.Pin;
+import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,16 +19,16 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class HangRespone {
+public class ManHinhRespone {
 
     private UUID id;
     private String ma;
     private String ten;
 
-    public HangRespone(Pin hang) {
-        this.id = hang.getId();
-        this.ma = hang.getMa();
-        this.ten = hang.getTen();
+    public ManHinhRespone(ManHinh mh) {
+        this.id = mh.getId();
+        this.ma = mh.getMa();
+        this.ten = mh.getTen();
     }
 
     public Object[] toDataRow() {

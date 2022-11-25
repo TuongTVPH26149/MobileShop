@@ -11,12 +11,14 @@ import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
+import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
+import com.poly.it17322.nhom6.repositories.PinRepository;
 import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.responses.HDHRespone;
-import com.poly.it17322.nhom6.responses.HangRespone;
+import com.poly.it17322.nhom6.responses.ManHinhRespone;
+import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
 import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.responses.RomRespone;
@@ -34,6 +36,8 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     RamRepositry ramrepo = new RamRepositry();
     MauSacRepository mausacrepo = new MauSacRepository();
     CPURepository cpurepo = new CPURepository();
+    ManHinhRepository mhrepo = new ManHinhRepository();
+    PinRepository pinrepo = new PinRepository();
 
 
 
@@ -126,6 +130,50 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         c.setMa(cpu.getMa());
         c.setTen(cpu.getTen());
         return cpurepo.UpdateCPU(c);
+    }
+
+    @Override
+    public List<ManHinhRespone> getlistManHinh() {
+        List<ManHinh> mahinhs = mhrepo.SelectAllManHinh();
+        return mahinhs.stream().map(ManHinhRespone::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean insertManHinh(ManHinhRespone manhinh) {
+        ManHinh m = new ManHinh();
+        m.setMa(manhinh.getMa());
+        m.setTen(manhinh.getTen());
+        return mhrepo.InsertManHinh(m);
+    }
+
+    @Override
+    public boolean updateManHinh(ManHinhRespone manhinh) {
+        ManHinh m = mhrepo.SelectManHinhById(manhinh.getId());
+        m.setMa(manhinh.getMa());
+        m.setTen(manhinh.getTen());
+        return mhrepo.UpdateManHinh(m);
+    }
+
+    @Override
+    public List<PinRespone> getlistPin() {
+        List<Pin> pins = pinrepo.selectALLPin();
+        return pins.stream().map(PinRespone ::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean insertPin(PinRespone pin) {
+        Pin p = new Pin();
+        p.setMa(pin.getMa());
+        p.setTen(pin.getTen());
+        return pinrepo.InsertPin(p);
+    }
+
+    @Override
+    public boolean updatePin(PinRespone pin) {
+        Pin p = pinrepo.SelectPinById(pin.getId());
+        p.setMa(pin.getMa());
+        p.setTen(pin.getTen());
+        return pinrepo.UpdatePin(p);
     }
 
 }
