@@ -4,8 +4,6 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.poly.it17322.nhom6.domainmodels.KhachHang;
-import com.poly.it17322.nhom6.repositories.KhachHangRepository;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import com.poly.it17322.nhom6.services.impl.KhachHangService;
 import java.awt.Color;
@@ -13,9 +11,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +28,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
     public FrmKhachhang() {
         initComponents();
         KHSer = new KhachHangService();
-        
+
         setBackground(new Color(0, 0, 0, 0));
         tblkhachhang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 20));
         tblkhachhang.getTableHeader().setBackground(new Color(0,123,123));
@@ -521,8 +517,8 @@ public class FrmKhachhang extends javax.swing.JPanel {
     }//GEN-LAST:event_rdonuActionPerformed
 
     private void btnendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnendActionPerformed
-       index = listkh.size()-1;
-       writeForm();
+        index = listkh.size() - 1;
+        writeForm();
     }//GEN-LAST:event_btnendActionPerformed
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
@@ -628,7 +624,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         model = (DefaultTableModel) tblkhachhang.getModel();
         model.setRowCount(0);
         for (KhachHangResponse x : KHSer.getlist()) {
-            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh(), x.getSdt(), x.getDiachi(), x.getNgaysinh()});
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh()==0?"Nam":"Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh()});
             listkh.add(x);
         }
 
@@ -651,11 +647,11 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private void Insert() {
         String ma = txtma.getText().trim();
         String hoten = txthoten.getText().trim();
-        String gioitinh = rdonam.isSelected() == true ? "Nam" : "Nữ";
+        int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
         Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
-        if (ma.length() == 0 || hoten.length() == 0 || gioitinh.length() == 0 || sdt.length() == 0 || diachi.length() == 0 || ngaysinh.equals("")) {
+        if (ma.length() == 0 || hoten.length() == 0 || rdonam.isSelected() || rdonu.isSelected() || sdt.length() == 0 || diachi.length() == 0 || ngaysinh.equals("")) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
         }
@@ -676,11 +672,11 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private void Update() {
         String ma = txtma.getText().trim();
         String hoten = txthoten.getText().trim();
-        String gioitinh = rdonam.isSelected() == true ? "Nam" : "Nữ";
+        int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
         Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
-        if (ma.length() == 0 || hoten.length() == 0 || gioitinh.length() == 0 || sdt.length() == 0 || diachi.length() == 0 || ngaysinh.equals("")) {
+        if (ma.length() == 0 || hoten.length() == 0 || rdonam.isSelected() || rdonu.isSelected()  || diachi.length() == 0 || ngaysinh.equals("")) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
         }
@@ -705,7 +701,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         txtsdt.setText(tblkhachhang.getValueAt(index, 3).toString());
         txtdiachi.setText(tblkhachhang.getValueAt(index, 4).toString());
         txtngaysinh.setText(tblkhachhang.getValueAt(index, 5).toString());
-        if (tblkhachhang.getValueAt(index, 2).equals("Nam")) {
+        if (tblkhachhang.getValueAt(index, 2).toString().equals("Nam")) {
             rdonam.setSelected(true);
         } else {
             rdonu.setSelected(true);

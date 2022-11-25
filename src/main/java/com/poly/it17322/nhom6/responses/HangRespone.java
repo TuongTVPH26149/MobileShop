@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.Hang;
+import com.poly.it17322.nhom6.domainmodels.Pin;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class HangRespone {
     private String ma;
     private String ten;
 
-    public HangRespone(Hang hang) {
+    public HangRespone(Pin hang) {
         this.id = hang.getId();
         this.ma = hang.getMa();
         this.ten = hang.getTen();

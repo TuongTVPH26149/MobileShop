@@ -22,15 +22,15 @@ public class UserResponse {
     private String ma;
     private String hoTen;
     private String matKhau;
-    private String chucVu;
-    private String trangThai;
+    private int chucVu;
+    private int trangThai;
 
     public UserResponse(TaiKhoan tk) {
         this.id = tk.getId();
         this.ma = tk.getMa();
         this.hoTen = tk.getHoTen();
         this.matKhau = tk.getMatKhau();
-        this.chucVu = tk.getChucVu().getMa();
-        this.trangThai = tk.getTrangThaiTK().getMa();
+        this.chucVu = tk.getChucVu();
+        this.trangThai = tk.getTrangThai();
     }
 }

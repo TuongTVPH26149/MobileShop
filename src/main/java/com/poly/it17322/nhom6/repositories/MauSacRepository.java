@@ -22,22 +22,22 @@ public class MauSacRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<MauSac> SelectAllMauSac() {
-        List<MauSac> lstMauSac = new ArrayList<>();
-        try {
+    public List<MauSac> selectALLMauSac() {
+        List<MauSac> listMauSac = new ArrayList<>();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Query query = session.createQuery("FROM MauSac", MauSac.class);
-            lstMauSac = query.getResultList();
+            listMauSac = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lstMauSac;
+        return listMauSac;
     }
 
-    public MauSac SelectMauSacById(UUID id) {
+    public MauSac SelectMauSacById(UUID Id) {
         MauSac mauSac = new MauSac();
-        try {
-            Query query = session.createQuery("FROM MauSac WHERE id =:id", MauSac.class);
-            query.setParameter("id", id);
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM MauSac where Id = :Id", MauSac.class);
+            query.setParameter("Id", Id);
             mauSac = (MauSac) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class MauSacRepository {
     }
 
     public Boolean InsertMauSac(MauSac mauSac) {
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(mauSac);
@@ -59,7 +59,7 @@ public class MauSacRepository {
     }
 
     public Boolean UpdateMauSac(MauSac mauSac) {
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             mauSac.setLastModifiedDate(new Date());

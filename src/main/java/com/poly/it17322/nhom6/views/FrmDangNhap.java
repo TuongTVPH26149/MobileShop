@@ -321,6 +321,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 return;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
     }//GEN-LAST:event_btnLoginActionPerformed
