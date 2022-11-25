@@ -46,8 +46,13 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     public FrmQuanLySanPham() {
         initComponents();
         FilltoTableSanPham();
+<<<<<<< HEAD
 
         FilltoTableManHinh();
+=======
+        FilltoTableHang();
+        FilltoTableHDH();
+>>>>>>> abcd1e794a2f8e9bb1eccb8ae350f006cea9b0a5
         FilltoTableCPU();
         FilltoTableRom();
         FilltoTableRam();
@@ -1797,6 +1802,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btndeleteActionPerformed
 
+<<<<<<< HEAD
     private void btnpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpinActionPerformed
 
         frmpin.setVisible(true);
@@ -1804,6 +1810,20 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         setCboPin();
     }//GEN-LAST:event_btnpinActionPerformed
                                      
+=======
+    private void btnhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhangActionPerformed
+
+        frmhang.setVisible(true);
+        frmhang.setLocationRelativeTo(null);
+        setCboHang();
+    }//GEN-LAST:event_btnhangActionPerformed
+
+    private void btnhdhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhdhActionPerformed
+        frmhdh.setVisible(true);
+        frmhdh.setLocationRelativeTo(null);
+        setCboHDH();
+    }//GEN-LAST:event_btnhdhActionPerformed
+>>>>>>> abcd1e794a2f8e9bb1eccb8ae350f006cea9b0a5
 
     private void btnromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnromActionPerformed
         frmrom.setVisible(true);
@@ -1816,7 +1836,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         frmcpu.setVisible(true);
         frmcpu.setLocationRelativeTo(null);
         setCboCPU();
+<<<<<<< HEAD
  
+=======
+>>>>>>> abcd1e794a2f8e9bb1eccb8ae350f006cea9b0a5
     }//GEN-LAST:event_btncpuActionPerformed
 
     private void btnmausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmausacActionPerformed
@@ -2124,8 +2147,13 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
     }
 
+<<<<<<< HEAD
     private void FilltoTablePin() {
         model = (DefaultTableModel) tblpin.getModel();
+=======
+    private void FilltoTableHang() {
+        model = (DefaultTableModel) tblhang.getModel();
+>>>>>>> abcd1e794a2f8e9bb1eccb8ae350f006cea9b0a5
         model.setRowCount(0);
         for (PinRespone x : spct.getlistPin()) {
             model.addRow(x.toDataRow());
