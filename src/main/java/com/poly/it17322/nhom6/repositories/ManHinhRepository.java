@@ -4,66 +4,70 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-import com.poly.it17322.nhom6.domainmodels.ChucVu;
+import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
  * @author LiamTrieu
  */
-public class ChucVuRepository {
+public class ManHinhRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<ChucVu> SelectALLChucVu() {
-        List<ChucVu> lstChucVu = new ArrayList<>();
+    public List<ManHinh> SelectAllManHinh() {
+        List<ManHinh> lstManhinh = new ArrayList<>();
         try {
-            Query query = session.createQuery("FROM ChucVu", ChucVu.class);
-            lstChucVu = query.getResultList();
+            Query query = session.createQuery("FROM ManHinh", ManHinh.class);
+            lstManhinh = query.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return lstChucVu;
+        return lstManhinh;
     }
 
-    public ChucVu SelectChucVuById(UUID id) {
-        ChucVu chucVu = new ChucVu();
+    public ManHinh SelectManHinhById(UUID id) {
+        ManHinh manhinh = new ManHinh();
         try {
-            Query query = session.createQuery("FROM ChucVu WHERE id = :id", ChucVu.class);
+            Query query = session.createQuery("FROM ManHinh WHERE id =:id", ManHinh.class);
             query.setParameter("id", id);
-            chucVu = (ChucVu) query.getSingleResult();
+            manhinh = (ManHinh) query.getSingleResult();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return chucVu;
+        return manhinh;
     }
 
-    public boolean InsertChucVu(ChucVu chucVu) {
+    public Boolean InsertManHinh(ManHinh manhinh) {
         try {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(chucVu);
+            session.save(manhinh);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public boolean UpdateChucVu(ChucVu chucVu) {
+    public Boolean UpdateManHinh(ManHinh manhinh) {
         try {
             Transaction tran = session.getTransaction();
             tran.begin();
-            chucVu.setLastModifiedDate(new Date());
-            session.saveOrUpdate(chucVu);
+            manhinh.setLastModifiedDate(new Date());
+            session.saveOrUpdate(manhinh);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

@@ -25,7 +25,7 @@ public class KhachHangService implements IKhachHangService {
 
     @Override
     public List<KhachHangResponse> getlist() {
-        List<KhachHang> khs = KHRepo.SelectAllKhachHang();
+        List<KhachHang> khs = KHRepo.selectALLKhachHang();
       return khs.stream().map(KhachHangResponse::new).collect(Collectors.toList()); 
     }
 

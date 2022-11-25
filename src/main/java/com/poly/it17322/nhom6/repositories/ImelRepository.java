@@ -22,42 +22,44 @@ public class ImelRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<Imel> SelectALlImel() {
-        List<Imel> lstImel = new ArrayList<>();
-        try {
+    public List<Imel> selectALLImel() {
+        List<Imel> listImel = new ArrayList<>();
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Query query = session.createQuery("FROM Imel", Imel.class);
-            lstImel = query.getResultList();
+            listImel = query.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return lstImel;
+        return listImel;
     }
 
-    public Imel SelectImelId(UUID id) {
+    public Imel SelectImelById(UUID Id) {
         Imel imel = new Imel();
-        try  {
-            Query query = session.createQuery("FROM Imel WHERE id = :id", Imel.class);
-            query.setParameter("id", id);
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Query query = session.createQuery("FROM Imel where Id = :Id", Imel.class);
+            query.setParameter("Id", Id);
             imel = (Imel) query.getSingleResult();
-
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return imel;
     }
 
-    public boolean InsertImel(Imel imel) {
-        try  {
+    public Boolean InsertImel(Imel imel) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(imel);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public boolean UpdateImel(Imel imel) {
-        try  {
+    public Boolean UpdateImel(Imel imel) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             imel.setLastModifiedDate(new Date());
@@ -65,6 +67,7 @@ public class ImelRepository {
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

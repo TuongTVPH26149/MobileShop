@@ -22,9 +22,9 @@ public class HoaDonRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<HoaDon> SelectALLHoaDon() {
+    public List<HoaDon> selectALLHoaDon() {
         List<HoaDon> listHoaDon = new ArrayList<>();
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Query query = session.createQuery("FROM HoaDon", HoaDon.class);
             listHoaDon = query.getResultList();
         } catch (Exception e) {
@@ -33,23 +33,49 @@ public class HoaDonRepository {
         return listHoaDon;
     }
 
-    public HoaDon SelectAllHoaDonById(UUID Id) {
+    public HoaDon SelectHoaDonById(UUID Id) {
         HoaDon hd = new HoaDon();
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Query query = session.createQuery("FROM HoaDon where Id = :Id", HoaDon.class);
             query.setParameter("Id", Id);
             hd = (HoaDon) query.getSingleResult();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return hd;
     }
+
+    public Boolean InsertHoaDon(HoaDon hd) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Transaction tran = session.getTransaction();
+            tran.begin();
+            session.save(hd);
+            tran.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Boolean UpdateHoaDon(HoaDon hd) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            Transaction tran = session.getTransaction();
+            tran.begin();
+            hd.setLastModifiedDate(new Date());
+            session.saveOrUpdate(hd);
+            tran.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
      public List<HoaDon> getByCodeAndCreateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try (Session session = HibernatUtil.getFACTORY().openSession()) {
             if (from != null && to != null) {
-                Query query = session.createQuery("FROM HoaDon where ma like :ma and CreatedDate >= :from and CreatedDate <= :to", HoaDon.class);
+                Query query = session.createQuery("FROM HoaDon where ma like :ma and NgayTao >= :from and NgayTao <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
                 query.setParameter("from", from);
                 query.setParameter("to", to);
@@ -84,31 +110,6 @@ public class HoaDonRepository {
             e.printStackTrace();
         }
         return list;
-    }
-
-    public boolean InsertHoaDon(HoaDon hd) {
-        try {
-            Transaction tran = session.getTransaction();
-            tran.begin();
-            session.save(hd);
-            tran.commit();
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
-    }
-
-    public boolean UpdateHoaDon(HoaDon hd) {
-        try {
-            Transaction tran = session.getTransaction();
-            tran.begin();
-            hd.setLastModifiedDate(new Date());
-            session.saveOrUpdate(hd);
-            tran.commit();
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
     }
 
 }

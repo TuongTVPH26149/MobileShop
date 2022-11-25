@@ -5,20 +5,20 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.CPU;
-import com.poly.it17322.nhom6.domainmodels.HDH;
-import com.poly.it17322.nhom6.domainmodels.Hang;
+import com.poly.it17322.nhom6.domainmodels.ManHinh;
+import com.poly.it17322.nhom6.domainmodels.Pin;
 import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
-import com.poly.it17322.nhom6.repositories.HDHRepository;
-import com.poly.it17322.nhom6.repositories.Hangrepository;
+import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
+import com.poly.it17322.nhom6.repositories.PinRepository;
 import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.responses.HDHRespone;
-import com.poly.it17322.nhom6.responses.HangRespone;
+import com.poly.it17322.nhom6.responses.ManHinhRespone;
+import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
 import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.responses.RomRespone;
@@ -32,34 +32,15 @@ import java.util.stream.Collectors;
  */
 public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
 
-    Hangrepository hangrepo = new Hangrepository();
     RomRepository romrepo = new RomRepository();
     RamRepositry ramrepo = new RamRepositry();
     MauSacRepository mausacrepo = new MauSacRepository();
-    HDHRepository hdhrepo = new HDHRepository();
     CPURepository cpurepo = new CPURepository();
+    ManHinhRepository mhrepo = new ManHinhRepository();
+    PinRepository pinrepo = new PinRepository();
 
-    @Override
-    public List<HangRespone> getlistHang() {
-        List<Hang> hangs = hangrepo.SelestAllHang();
-        return hangs.stream().map(HangRespone::new).collect(Collectors.toList());
-    }
 
-    @Override
-    public boolean insertHang(HangRespone hang) {
-        Hang h = new Hang();
-        h.setMa(hang.getMa());
-        h.setTen(hang.getTen());
-        return hangrepo.InsertHang(h);
-    }
 
-    @Override
-    public boolean updateHang(HangRespone hang) {
-        Hang h = hangrepo.SelectHangById(hang.getId());
-        h.setMa(hang.getMa());
-        h.setTen(hang.getTen());
-        return hangrepo.UpdateHang(h);
-    }
 
     @Override
     public List<RomRespone> getlistRom() {
@@ -85,7 +66,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
 
     @Override
     public List<RamRespone> getlistRam() {
-        List<Ram> rams = ramrepo.SelectAllRam();
+        List<Ram> rams = ramrepo.selectALLRam();
         return rams.stream().map(RamRespone::new).collect(Collectors.toList());
     }
 
@@ -107,7 +88,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
 
     @Override
     public List<MauSacRespone> getlistMauSac() {
-        List<MauSac> mausacs = mausacrepo.SelectAllMauSac();
+        List<MauSac> mausacs = mausacrepo.selectALLMauSac();
         return mausacs.stream().map(MauSacRespone::new).collect(Collectors.toList());
     }
 
@@ -127,31 +108,11 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return mausacrepo.UpdateMauSac(m);
     }
 
-    @Override
-    public List<HDHRespone> getlistHDH() {
-        List<HDH> hdhs = hdhrepo.SelestAllHDH();
-        return hdhs.stream().map(HDHRespone::new).collect(Collectors.toList());
-    }
 
-    @Override
-    public boolean insertHDH(HDHRespone hdh) {
-        HDH h = new HDH();
-        h.setMa(hdh.getMa());
-        h.setTen(hdh.getTen());
-        return hdhrepo.InsertHDH(h);
-    }
-
-    @Override
-    public boolean updatehdh(HDHRespone hdh) {
-        HDH h = hdhrepo.SelectHDHById(hdh.getId());
-        h.setMa(hdh.getMa());
-        h.setTen(hdh.getTen());
-        return hdhrepo.UpdateHDH(h);
-    }
 
     @Override
     public List<CPURespone> getlistCPU() {
-        List<CPU> cpu = cpurepo.SelectCPU();
+        List<CPU> cpu = cpurepo.selectALLCPU();
         return cpu.stream().map(CPURespone::new).collect(Collectors.toList());
     }
 
@@ -165,10 +126,54 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
 
     @Override
     public boolean updateCPU(CPURespone cpu) {
-        CPU c = cpurepo.SelectAllById(cpu.getId());
+        CPU c = cpurepo.SelectCPUById(cpu.getId());
         c.setMa(cpu.getMa());
         c.setTen(cpu.getTen());
-        return cpurepo.UIpdate(c);
+        return cpurepo.UpdateCPU(c);
+    }
+
+    @Override
+    public List<ManHinhRespone> getlistManHinh() {
+        List<ManHinh> mahinhs = mhrepo.SelectAllManHinh();
+        return mahinhs.stream().map(ManHinhRespone::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean insertManHinh(ManHinhRespone manhinh) {
+        ManHinh m = new ManHinh();
+        m.setMa(manhinh.getMa());
+        m.setTen(manhinh.getTen());
+        return mhrepo.InsertManHinh(m);
+    }
+
+    @Override
+    public boolean updateManHinh(ManHinhRespone manhinh) {
+        ManHinh m = mhrepo.SelectManHinhById(manhinh.getId());
+        m.setMa(manhinh.getMa());
+        m.setTen(manhinh.getTen());
+        return mhrepo.UpdateManHinh(m);
+    }
+
+    @Override
+    public List<PinRespone> getlistPin() {
+        List<Pin> pins = pinrepo.selectALLPin();
+        return pins.stream().map(PinRespone ::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean insertPin(PinRespone pin) {
+        Pin p = new Pin();
+        p.setMa(pin.getMa());
+        p.setTen(pin.getTen());
+        return pinrepo.InsertPin(p);
+    }
+
+    @Override
+    public boolean updatePin(PinRespone pin) {
+        Pin p = pinrepo.SelectPinById(pin.getId());
+        p.setMa(pin.getMa());
+        p.setTen(pin.getTen());
+        return pinrepo.UpdatePin(p);
     }
 
 }

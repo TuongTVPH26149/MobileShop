@@ -20,6 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
@@ -61,6 +62,14 @@ public class BaoHanh {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayKhachLay;
     
+    @Nationalized
+    @Column(name = "LyDo", unique = true, length = 100)
+    private String lyDo;
+    
+    @Nationalized
+    @Column(name = "MoTa", unique = true, length = 100)
+    private String moTa;
+    
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
@@ -68,7 +77,4 @@ public class BaoHanh {
     @Column(name = "lastModifiedDate", insertable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastModifiedDate;
-
-    @Column(name = "Deleted", insertable = false)
-    private boolean deleted;
 }

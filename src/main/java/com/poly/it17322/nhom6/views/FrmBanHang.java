@@ -4,11 +4,8 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.poly.it17322.nhom6.responses.GioHangResponse;
-import com.poly.it17322.nhom6.responses.HoaDonBanHangResponse;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.UserResponse;
-import com.poly.it17322.nhom6.services.impl.BanHangServiceImpl;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,10 +23,6 @@ public class FrmBanHang extends javax.swing.JPanel {
 
     private UserResponse nhanVien = new UserResponse();
     private DefaultTableModel dtm = new DefaultTableModel();
-    private BanHangServiceImpl bhService = new BanHangServiceImpl();
-    private List<HoaDonBanHangResponse> lstHoaDon = new ArrayList<>();
-    private List<SanPhamBanHangResponse> lstSanPham = new ArrayList<>();
-    private List<GioHangResponse> lstGioHang = new ArrayList<>();
     private int indexHD = -1;
     private int indexSP = -1;
     private int indexGH = -1;
@@ -41,8 +34,6 @@ public class FrmBanHang extends javax.swing.JPanel {
     public FrmBanHang(UserResponse tk) {
         initComponents();
         nhanVien = tk;
-        fillToTableHoaDon();
-        fillToTableSanPham();
         designTable();
     }
 
@@ -579,62 +570,18 @@ public class FrmBanHang extends javax.swing.JPanel {
 
     private void btnHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyHoaDonActionPerformed
         // TODO add your handling code here:
-        if (bhService.huyHoaDon(lstHoaDon.get(indexHD).getId())) {
-            JOptionPane.showMessageDialog(this, "Hủy hóa đơn không thành công");
-            return;
-        }
-        JOptionPane.showMessageDialog(this, "Hủy hóa đơn thành công");
-        fillToTableHoaDon();
-        fillToTableSanPham();
-        lstGioHang = new ArrayList<>();
-        fillToTableGioHang();
     }//GEN-LAST:event_btnHuyHoaDonActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         // TODO add your handling code here:
-        if (bhService.createHoaDon(nhanVien.getId())) {
-            JOptionPane.showMessageDialog(this, "Thêm 1 hóa đơn thành công");
-            fillToTableHoaDon();
-            fillToTableSanPham();
-            lstGioHang = new ArrayList<>();
-            fillToTableGioHang();
-            return;
-        }
-        JOptionPane.showMessageDialog(this, "Thêm 1 hóa đơn thất bại");
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        try {
-            if (Integer.parseInt(txtTienKhachDua.getText()) < Integer.parseInt(lblTongtien.getText())) {
-                JOptionPane.showMessageDialog(this, "Không thể thanh toán");
-                return;
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Không thể thanh toán");
-            return;
-        }
-        if (indexHD == -1) {
-            return;
-        }
-        HoaDonBanHangResponse hd = lstHoaDon.get(indexHD);
-        if (!bhService.thanhToan(hd)) {
-            JOptionPane.showMessageDialog(this, "Thanh toán không thành công");
-            return;
-        }
-        JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-        fillToTableHoaDon();
-        lstGioHang = new ArrayList<>();
-        fillToTableGioHang();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:
-        indexHD = tblHoaDon.getSelectedRow();
-        lblMaHoaDon.setText(tblHoaDon.getValueAt(indexHD, 0).toString());
-        lblMaNhanVien.setText(tblHoaDon.getValueAt(indexHD, 2).toString());
-        lstGioHang = bhService.getGH(lstHoaDon.get(indexHD).getId());
-        fillToTableGioHang();
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void txtTienKhachDuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKhachDuaCaretUpdate
@@ -644,12 +591,6 @@ public class FrmBanHang extends javax.swing.JPanel {
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
-        if (indexHD == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn");
-            return;
-        }
-        indexSP = tblSanPham.getSelectedRow();
-        new FrmSelectImel(lstSanPham.get(indexSP)).setVisible(true);
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
@@ -696,38 +637,6 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtTienKhachDua;
     // End of variables declaration//GEN-END:variables
 
-    private void fillToTableHoaDon() {
-        indexHD = -1;
-        dtm = (DefaultTableModel) tblHoaDon.getModel();
-        dtm.setRowCount(0);
-        lstHoaDon = bhService.getHoaDonTreo();
-        for (HoaDonBanHangResponse o : lstHoaDon) {
-            dtm.addRow(o.toDataRow());
-        }
-    }
-
-    private void fillToTableSanPham() {
-        indexSP = -1;
-        dtm = (DefaultTableModel) tblSanPham.getModel();
-        dtm.setRowCount(0);
-        lstSanPham = bhService.getAllSpBh();
-        for (SanPhamBanHangResponse o : lstSanPham) {
-            dtm.addRow(o.toDataRow());
-        }
-    }
-
-    private void fillToTableGioHang() {
-        lblTongtien.setText("0");
-        indexGH = -1;
-        dtm = (DefaultTableModel) tblGioHang.getModel();
-        dtm.setRowCount(0);
-        for (GioHangResponse o : lstGioHang) {
-            dtm.addRow(o.toDataRow());
-            lblTongtien.setText(Integer.parseInt(lblTongtien.getText()) + (Integer.parseInt(o.getGiaBan().toString()) * o.getSoLuong()) + "");
-        }
-    }
-    
-    
     private void designTable(){
         tblSanPham.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblSanPham.getTableHeader().setBackground(new Color(0,123,123));
