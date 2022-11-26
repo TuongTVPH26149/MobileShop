@@ -18,8 +18,7 @@ public class FrmThongKe extends javax.swing.JPanel {
      */
     public FrmThongKe() {
         initComponents();
-        Webcam webcam = Webcam.getDefault();
-        webcam.close();
+        Webcam.getDefault().close();
     }
 
     /**

@@ -27,7 +27,7 @@ public class HoaDonChiTietRepository {
 
     public List<HoaDonChiTiet> selectALLHoaDonChiTiet() {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet", HoaDonChiTiet.class);
             listHoaDonChiTiet = query.getResultList();
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class HoaDonChiTietRepository {
     
     public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID Id) {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :Id", HoaDonChiTiet.class);
             query.setParameter("Id", Id);
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class HoaDonChiTietRepository {
 
     public HoaDonChiTiet SelectHoaDonChiTietById(UUID Id) {
         HoaDonChiTiet hdct = new HoaDonChiTiet();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet where Id = :Id", HoaDonChiTiet.class);
             query.setParameter("Id", Id);
             hdct = (HoaDonChiTiet) query.getSingleResult();

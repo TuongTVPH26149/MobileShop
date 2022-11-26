@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.services;
 
+import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public interface IBanHangService {
 
     List<SanPhamBanHangResponse> getAllSpBh();
+    List<HoaDonBanHangRespone> getAllHdBh();
 
     boolean createHoaDon(UUID idNV);
 

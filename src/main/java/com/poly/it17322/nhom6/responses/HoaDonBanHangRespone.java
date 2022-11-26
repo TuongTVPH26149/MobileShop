@@ -4,10 +4,59 @@
  */
 package com.poly.it17322.nhom6.responses;
 
+import com.poly.it17322.nhom6.domainmodels.HoaDon;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author LiamTrieu
  */
+@Setter
+@Getter
 public class HoaDonBanHangRespone {
-    
+
+    private UUID id;
+    private String ma;
+    private Date ngayTao;
+    private String nguoiTao;
+    private String khachHang;
+    private int trangThai;
+    private BigDecimal tongTien;
+    private BigDecimal giamGia;
+    private int loaiThanhToan;
+    private BigDecimal tienMat;
+    private BigDecimal chuyenKhoan;
+
+    public HoaDonBanHangRespone(HoaDon hd) {
+        try {
+            this.id = hd.getId();
+            this.ma = hd.getMa();
+            this.ngayTao = hd.getNgayTao();
+            this.nguoiTao = hd.getTaiKhoan().getMa();
+            this.khachHang = hd.getKhachHang().getMa();
+            this.trangThai = hd.getTrangThai();
+            this.tongTien = hd.getTongTien();
+            this.giamGia = hd.getGiamGia();
+            this.loaiThanhToan = hd.getLoaiThanhToan();
+            this.tienMat = hd.getTienMat();
+            this.chuyenKhoan = hd.getChuyenKhoan();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Object[] toDataRow() {
+        return new Object[]{
+            ma,
+            ngayTao,
+            nguoiTao,
+            khachHang,
+            trangThai == 1 ? "chờ thanh toán" : (trangThai == 2 ? "Chờ giao" : "Đang giao")
+        };
+    }
+
 }

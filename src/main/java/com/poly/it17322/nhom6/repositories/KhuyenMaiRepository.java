@@ -24,7 +24,7 @@ public class KhuyenMaiRepository {
 
     public List<KhuyenMai> selectALLKhuyenMai() {
         List<KhuyenMai> listKhuyenMai = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
             listKhuyenMai = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class KhuyenMaiRepository {
 
     public KhuyenMai SelectKhuyenMaiById(UUID Id) {
         KhuyenMai sanPham = new KhuyenMai();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM KhuyenMai where Id = :Id", KhuyenMai.class);
             query.setParameter("Id", Id);
             sanPham = (KhuyenMai) query.getSingleResult();

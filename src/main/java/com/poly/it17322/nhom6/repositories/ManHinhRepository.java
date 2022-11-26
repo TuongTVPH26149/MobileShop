@@ -46,7 +46,7 @@ public class ManHinhRepository {
     }
 
     public Boolean InsertManHinh(ManHinh manhinh) {
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(manhinh);
@@ -59,7 +59,7 @@ public class ManHinhRepository {
     }
 
     public Boolean UpdateManHinh(ManHinh manhinh) {
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()){
             Transaction tran = session.getTransaction();
             tran.begin();
             manhinh.setLastModifiedDate(new Date());
