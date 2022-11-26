@@ -23,7 +23,7 @@ public class BaoHanhRepository {
 
     public List<BaoHanh> selectALLBaoHanh() {
         List<BaoHanh> listBaoHanh = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM BaoHanh", BaoHanh.class);
             listBaoHanh = query.getResultList();
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class BaoHanhRepository {
 
     public BaoHanh SelectBaoHanhById(UUID Id) {
         BaoHanh baoHanh = new BaoHanh();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM BaoHanh where Id = :Id", BaoHanh.class);
             query.setParameter("Id", Id);
             baoHanh = (BaoHanh) query.getSingleResult();

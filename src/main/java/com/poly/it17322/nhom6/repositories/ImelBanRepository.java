@@ -23,7 +23,7 @@ public class ImelBanRepository {
 
     public List<ImelBan> selectALLImelBan() {
         List<ImelBan> listImelBan = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM ImelBan", ImelBan.class);
             listImelBan = query.getResultList();
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class ImelBanRepository {
 
     public ImelBan SelectImelBanById(UUID Id) {
         ImelBan imelBan = new ImelBan();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM ImelBan where Id = :Id", ImelBan.class);
             query.setParameter("Id", Id);
             imelBan = (ImelBan) query.getSingleResult();

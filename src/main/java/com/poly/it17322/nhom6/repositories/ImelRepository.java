@@ -24,7 +24,7 @@ public class ImelRepository {
 
     public List<Imel> selectALLImel() {
         List<Imel> listImel = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM Imel", Imel.class);
             listImel = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class ImelRepository {
 
     public Imel SelectImelById(UUID Id) {
         Imel imel = new Imel();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM Imel where Id = :Id", Imel.class);
             query.setParameter("Id", Id);
             imel = (Imel) query.getSingleResult();

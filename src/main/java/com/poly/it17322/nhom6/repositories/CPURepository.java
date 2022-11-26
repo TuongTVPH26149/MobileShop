@@ -25,7 +25,7 @@ public class CPURepository {
 
     public List<CPU> selectALLCPU() {
         List<CPU> listCPU = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM CPU", CPU.class);
             listCPU = query.getResultList();
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class CPURepository {
 
     public CPU SelectCPUById(UUID Id) {
         CPU cpu = new CPU();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM CPU where Id = :Id", CPU.class);
             query.setParameter("Id", Id);
             cpu = (CPU) query.getSingleResult();

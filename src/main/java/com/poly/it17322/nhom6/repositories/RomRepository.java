@@ -31,7 +31,7 @@ public class RomRepository {
 
     public Rom SelectRomById(UUID Id) {
         Rom rom = new Rom();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try  {
             Query query = session.createQuery("FROM Rom where Id = :Id", Rom.class);
             query.setParameter("Id", Id);
             rom = (Rom) query.getSingleResult();

@@ -24,7 +24,7 @@ public class KhachHangRepository {
 
     public List<KhachHang> selectALLKhachHang() {
         List<KhachHang> listKhachHang = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM KhachHang", KhachHang.class);
             listKhachHang = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class KhachHangRepository {
 
     public KhachHang SelectKhachHangById(UUID Id) {
         KhachHang kh = new KhachHang();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM KhachHang where Id = :Id", KhachHang.class);
             query.setParameter("Id", Id);
             kh = (KhachHang) query.getSingleResult();

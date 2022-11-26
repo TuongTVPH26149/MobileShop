@@ -24,7 +24,7 @@ public class MauSacRepository {
 
     public List<MauSac> selectALLMauSac() {
         List<MauSac> listMauSac = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM MauSac", MauSac.class);
             listMauSac = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class MauSacRepository {
 
     public MauSac SelectMauSacById(UUID Id) {
         MauSac mauSac = new MauSac();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM MauSac where Id = :Id", MauSac.class);
             query.setParameter("Id", Id);
             mauSac = (MauSac) query.getSingleResult();
