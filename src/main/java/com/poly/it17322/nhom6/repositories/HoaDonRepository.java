@@ -24,7 +24,7 @@ public class HoaDonRepository {
 
     public List<HoaDon> selectALLHoaDon() {
         List<HoaDon> listHoaDon = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM HoaDon", HoaDon.class);
             listHoaDon = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class HoaDonRepository {
 
     public HoaDon SelectHoaDonById(UUID Id) {
         HoaDon hd = new HoaDon();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM HoaDon where Id = :Id", HoaDon.class);
             query.setParameter("Id", Id);
             hd = (HoaDon) query.getSingleResult();

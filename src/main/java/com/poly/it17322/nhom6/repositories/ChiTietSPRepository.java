@@ -25,7 +25,7 @@ public class ChiTietSPRepository {
 
     public List<ChiTietSP> selectALLChiTietSP() {
         List<ChiTietSP> listChiTietSP = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             javax.persistence.Query query = session.createQuery("FROM ChiTietSP", ChiTietSP.class);
             listChiTietSP = query.getResultList();
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class ChiTietSPRepository {
 
     public ChiTietSP SelectChiTietSPById(UUID Id) {
         ChiTietSP ctsp = new ChiTietSP();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             javax.persistence.Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
             query.setParameter("Id", Id);
             ctsp = (ChiTietSP) query.getSingleResult();

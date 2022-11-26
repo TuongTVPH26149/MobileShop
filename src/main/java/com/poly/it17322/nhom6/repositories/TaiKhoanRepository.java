@@ -24,7 +24,7 @@ public class TaiKhoanRepository {
 
     public List<TaiKhoan> selectALLTaiKhoan() {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM TaiKhoan", TaiKhoan.class);
             listTaiKhoan = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class TaiKhoanRepository {
 
     public TaiKhoan SelectTaiKhoanById(UUID Id) {
         TaiKhoan tk = new TaiKhoan();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM TaiKhoan where Id = :Id", TaiKhoan.class);
             query.setParameter("Id", Id);
             tk = (TaiKhoan) query.getSingleResult();

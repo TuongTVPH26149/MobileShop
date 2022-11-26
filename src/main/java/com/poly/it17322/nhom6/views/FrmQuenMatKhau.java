@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.views;
 
+import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.services.IDangNhapService;
 import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
 import com.poly.it17322.nhom6.utilities.SenderMailUtil;

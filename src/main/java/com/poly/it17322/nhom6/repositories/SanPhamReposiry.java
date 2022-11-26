@@ -24,7 +24,7 @@ public class SanPhamReposiry {
 
     public List<SanPham> selectALLSanPham() {
         List<SanPham> listSanPham = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM SanPham", SanPham.class);
             listSanPham = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class SanPhamReposiry {
 
     public SanPham SelectSanPhamById(UUID Id) {
         SanPham sanPham = new SanPham();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
             Query query = session.createQuery("FROM SanPham where Id = :Id", SanPham.class);
             query.setParameter("Id", Id);
             sanPham = (SanPham) query.getSingleResult();

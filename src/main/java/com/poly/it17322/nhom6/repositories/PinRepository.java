@@ -24,7 +24,7 @@ public class PinRepository {
 
     public List<Pin> selectALLPin() {
         List<Pin> listPin = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Query query = session.createQuery("FROM Pin", Pin.class);
             listPin = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class PinRepository {
 
     public Pin SelectPinById(UUID Id) {
         Pin pin = new Pin();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try  {
             Query query = session.createQuery("FROM Pin where Id = :Id", Pin.class);
             query.setParameter("Id", Id);
             pin = (Pin) query.getSingleResult();

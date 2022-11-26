@@ -68,8 +68,11 @@ public class HoaDon implements Serializable {
     @Column(name = "TienShip")
     private BigDecimal tienShip;
     
-    @Column(name = "TienCoc")
-    private BigDecimal tienCoc;
+    @Column(name = "TienMat")
+    private BigDecimal tienMat;
+    
+    @Column(name = "ChuyenKhoan")
+    private BigDecimal chuyenKhoan;
     
     @Column(name = "NgayNhan")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -88,9 +91,6 @@ public class HoaDon implements Serializable {
     
     @Column(name = "TrangThai")
     private int trangThai;
-    
-    @Column(name = "SdtNguoiNhan", length = 30)
-    private String sdtNguoiNhan;
     
     @Column(name = "SdtNguoiShip", length = 30)
     private String sdtNguoiShip;
