@@ -24,4 +24,8 @@ public interface IKhachHangService {
 
     public boolean Update(KhachHangResponse khachHang);
     
+    public List<KhachHangResponse> timkiem(String sdt);
+    
+     public List<KhachHangResponse> LocKH(int GioiTinh);
+    
 }
