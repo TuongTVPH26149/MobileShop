@@ -36,17 +36,16 @@ public class InHoaDon {
         String date = format.format(new Date());
         try {
 
-            OutputStream file = new FileOutputStream(new File("D:/" + hoaDon.getMahd()+ ".pdf"));
+            OutputStream file = new FileOutputStream(new File("D:/" + hoaDon.getMahd() + ".pdf"));
             Document document = new Document();
             PdfWriter.getInstance(document, file);
 
-            PdfPTable billTable = new PdfPTable(7);
+            PdfPTable billTable = new PdfPTable(6);
             billTable.setWidthPercentage(100);
-            billTable.setWidths(new float[]{1, 3, 4, 2, 2, 2, 2});
+            billTable.setWidths(new float[]{1, 3, 2, 2, 2, 2});
             billTable.setSpacingBefore(30.0f);
             billTable.addCell(getBillHeaderCell("STT"));
             billTable.addCell(getBillHeaderCell("Tên sản phẩm"));
-            billTable.addCell(getBillHeaderCell("Mô tả"));
             billTable.addCell(getBillHeaderCell("Đơn giá"));
             billTable.addCell(getBillHeaderCell("Khuyến mại"));
             billTable.addCell(getBillHeaderCell("Số lượng"));
@@ -55,15 +54,13 @@ public class InHoaDon {
             for (int i = 0; i < gioHang.size(); i++) {
                 billTable.addCell(getBillRowCell((i + 1) + ""));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getTenSP()));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getMoTa()));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getDonGia() + ""));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getKhuyenMai() + ""));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getSoLuong() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien()+ ""));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien() + ""));
             }
             for (int j = 0; j < gioHang.size() + 10 - gioHang.size(); j++) {
                 billTable.addCell(getBillRowCell(" "));
-                billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
@@ -135,8 +132,14 @@ public class InHoaDon {
         return cell;
     }
 
-    public static PdfPCell getBillRowCell(String text) {
-        PdfPCell cell = new PdfPCell(new Paragraph(text));
+    public static PdfPCell getBillRowCell(String text) throws Exception {
+        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        FontSelector fs = new FontSelector();
+        Font font = new Font(bf, 10);
+        font.setColor(BaseColor.BLACK);
+        fs.addFont(font);
+        Phrase phrase = fs.process(text);
+        PdfPCell cell = new PdfPCell(phrase);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setPadding(5.0f);
         cell.setBorderWidthBottom(0);
@@ -144,8 +147,14 @@ public class InHoaDon {
         return cell;
     }
 
-    public static PdfPCell getBillFooterCell(String text) {
-        PdfPCell cell = new PdfPCell(new Paragraph(text));
+    public static PdfPCell getBillFooterCell(String text) throws Exception{
+        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        FontSelector fs = new FontSelector();
+        Font font = new Font(bf, 10);
+        font.setColor(BaseColor.BLACK);
+        fs.addFont(font);
+        Phrase phrase = fs.process(text);
+        PdfPCell cell = new PdfPCell(phrase);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setPadding(5.0f);
         cell.setBorderWidthBottom(0);
@@ -232,11 +241,11 @@ public class InHoaDon {
         tieuDe.addCell(c2);
         return tieuDe;
     }
-    
+
     public static PdfPTable ttHoaDon(HoaDonInRespone hd) throws Exception {
         PdfPTable tieuDe = new PdfPTable(3);
         tieuDe.setWidthPercentage(100);
-        tieuDe.setWidths(new float[]{5, 4 ,3});
+        tieuDe.setWidths(new float[]{5, 4, 3});
         BaseFont bf = BaseFont.createFont("src/main/resource/font/tieude.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs1 = new FontSelector();
         FontSelector fs2 = new FontSelector();
@@ -245,11 +254,11 @@ public class InHoaDon {
         font1.setColor(BaseColor.BLACK);
         fs1.addFont(font1);
         fs2.addFont(font2);
-        Phrase p2 = fs1.process("Mã HD: "+hd.getMahd()+"\nNgày tạo: "+new SimpleDateFormat("dd/MM/yyyy").format(new Date())+"\n"
-                + "Nhân viên: "+hd.getNhanVien()+"\n");
+        Phrase p2 = fs1.process("Mã HD: " + hd.getMahd() + "\nNgày tạo: " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + "\n"
+                + "Nhân viên: " + hd.getNhanVien() + "\n");
         Phrase p3 = fs2.process(" ");
-        Phrase p1 = fs2.process("Tên khách hàng: "+hd.getKhachhang()+"\nSố điện thoại: "+hd.getSdtKH()+"\nNơi nhận: "+hd.getDiaChi()+"\n"
-                + "Hình thức thanh toán: "+hd.getHinhThucThanhToan());
+        Phrase p1 = fs2.process("Tên khách hàng: " + hd.getKhachhang() + "\nSố điện thoại: " + hd.getSdtKH() + "\nNơi nhận: " + hd.getDiaChi() + "\n"
+                + "Hình thức thanh toán: " + hd.getHinhThucThanhToan());
         PdfPCell c1 = new PdfPCell(p1);
         PdfPCell c2 = new PdfPCell(p2);
         PdfPCell c3 = new PdfPCell(p3);

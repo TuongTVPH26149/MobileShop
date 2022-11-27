@@ -4,9 +4,9 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import java.math.BigDecimal;
+import com.poly.it17322.nhom6.domainmodels.Imel;
+import java.util.UUID;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -15,12 +15,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-public class GioHangInRespone {
+public class ImelBanHangRespone {
+    private UUID id;
+    private String ma;
 
-    private String tenSP;
-    private BigDecimal donGia;
-    private BigDecimal khuyenMai;
-    private int soLuong;
-    private BigDecimal thanhTien;
+    public ImelBanHangRespone(Imel imel) {
+        this.id = imel.getId();
+        this.ma = imel.getMa();
+    }
 }

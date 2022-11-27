@@ -19,19 +19,23 @@ import lombok.Setter;
 public class SanPhamBanHangResponse {
     private UUID id;
     private String tenSanPham;
+    private String manHinh;
     private String cpu;
+    private String pin;
     private int soLuong;
     private BigDecimal giaBan;
 
     public SanPhamBanHangResponse(ChiTietSP sp) {
         this.id = sp.getId();
-        this.tenSanPham = sp.getSanPham().getTen()+ " " + sp.getMauSac().getTen() + " " + sp.getRam().getTen()+"/"+sp.getRom().getTen();
+        this.tenSanPham = sp.getSanPham().getTen()+ " " + sp.getMauSac().getTen() + " " + sp.getRam().getTen()+"/"+sp.getRom().getTen()+" "+((sp.getLoaiHang()==0)?"Mới":"Cũ");
+        this.manHinh = sp.getManHinh().getTen();
         this.cpu = sp.getCpu().getTen();
+        this.pin = sp.getPin().getTen();
         this.soLuong = sp.getSoLuong();
         this.giaBan = sp.getGia();
     }
     
     public Object[] toDataRow(){
-        return new Object[]{this.tenSanPham,this.cpu,this.soLuong,this.giaBan};
+        return new Object[]{this.tenSanPham,this.manHinh,this.cpu,this.pin,this.soLuong,this.giaBan};
     }
 }

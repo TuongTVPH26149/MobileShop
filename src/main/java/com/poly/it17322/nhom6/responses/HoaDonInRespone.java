@@ -28,5 +28,4 @@ public class HoaDonInRespone {
     private BigDecimal phiShip;
     private BigDecimal tongTien;
     private String hinhThucThanhToan;
-    List<String> gioHang;
 }
