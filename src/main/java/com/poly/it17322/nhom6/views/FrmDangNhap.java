@@ -56,7 +56,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        pnlMainLogin.setBackground(new java.awt.Color(51, 51, 51));
+        pnlMainLogin.setBackground(new java.awt.Color(0, 102, 102));
         pnlMainLogin.setMaximumSize(new java.awt.Dimension(380, 210));
         pnlMainLogin.setMinimumSize(new java.awt.Dimension(380, 210));
         pnlMainLogin.setPreferredSize(new java.awt.Dimension(380, 210));
@@ -74,7 +74,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setMaximumSize(new java.awt.Dimension(340, 30));
         jPanel2.setMinimumSize(new java.awt.Dimension(340, 30));
         jPanel2.setPreferredSize(new java.awt.Dimension(340, 30));
@@ -100,7 +100,8 @@ public class FrmDangNhap extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        txtTaiKhoan.setBackground(new java.awt.Color(51, 51, 51));
+        txtTaiKhoan.setBackground(new java.awt.Color(0, 102, 102));
+        txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
         txtTaiKhoan.setBorder(null);
         txtTaiKhoan.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -154,7 +155,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
         jPanel4.setMaximumSize(new java.awt.Dimension(340, 30));
         jPanel4.setMinimumSize(new java.awt.Dimension(340, 30));
         jPanel4.setPreferredSize(new java.awt.Dimension(340, 30));
@@ -179,7 +180,8 @@ public class FrmDangNhap extends javax.swing.JFrame {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
-        txtMatKhau.setBackground(new java.awt.Color(51, 51, 51));
+        txtMatKhau.setBackground(new java.awt.Color(0, 102, 102));
+        txtMatKhau.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtMatKhau.setForeground(new java.awt.Color(255, 255, 255));
         txtMatKhau.setBorder(null);
         txtMatKhau.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -314,6 +316,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
             String mk = MD5Util.md5EnCode(String.valueOf(txtMatKhau.getPassword()));
             UserResponse tkrp = dangNhapService.checkTK(tk, mk);
             if (tkrp.getId() != null) {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
                 new FrmMainView(tkrp).setVisible(true);
                 this.dispose();
                 return;

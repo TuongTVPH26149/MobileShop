@@ -4,8 +4,7 @@
  */
 package com.poly.it17322.nhom6.services;
 
-import com.poly.it17322.nhom6.responses.GioHangResponse;
-import com.poly.it17322.nhom6.responses.HoaDonBanHangResponse;
+import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import java.util.List;
 import java.util.UUID;
@@ -16,11 +15,12 @@ import java.util.UUID;
  */
 public interface IBanHangService {
 
-    List<HoaDonBanHangResponse> getHoaDonTreo();
-
     List<SanPhamBanHangResponse> getAllSpBh();
+    List<HoaDonBanHangRespone> getAllHdBh();
 
     boolean createHoaDon(UUID idNV);
-    
-    List<GioHangResponse> getGioHang(UUID idHD, UUID idCTSP);
+
+    boolean huyHoaDon(UUID idHD);
+
+    boolean setGiohang(UUID idImel, UUID idSP, UUID idHD);
 }

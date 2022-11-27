@@ -4,18 +4,11 @@
  */
 package com.poly.it17322.nhom6.services.impl;
 
-import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.repositories.HoaDonChiTietRepository;
-import com.poly.it17322.nhom6.repositories.HoaDonRepository;
 import com.poly.it17322.nhom6.responses.HoaDonChiTietResponse;
-import com.poly.it17322.nhom6.responses.HoaDonResponse;
-
 import com.poly.it17322.nhom6.services.IChiTietHoaDonService;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Id;
-import com.poly.it17322.nhom6.services.IHoaDonService;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

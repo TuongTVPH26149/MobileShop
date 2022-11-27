@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
+import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,57 +25,55 @@ public class HoaDonChiTietRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<HoaDonChiTiet> SelectHoaDonChiTiet() {
-        List<HoaDonChiTiet> listCTHoaDon = new ArrayList<>();
-        try {
-            Query query = session.createQuery("FROM HoaDonChiTiet ", HoaDonChiTiet.class);
-            listCTHoaDon = query.getResultList();
+    public List<HoaDonChiTiet> selectALLHoaDonChiTiet() {
+        List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
+        try{
+            javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet", HoaDonChiTiet.class);
+            listHoaDonChiTiet = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listCTHoaDon;
+        return listHoaDonChiTiet;
     }
-
-    public List<HoaDonChiTiet> SelectAllHoaDonById(UUID IdHoaDon, UUID IdChiTietSP) {
-        List<HoaDonChiTiet> lsthdct = new ArrayList<>();
-        try {
-            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon and IdChiTietSP = :IdChiTietSP", HoaDonChiTiet.class);
-            query.setParameter("IdHoaDon", IdHoaDon);
-            query.setParameter("IdChiTietSP", IdChiTietSP);
-            lsthdct = query.getResultList();
-        } catch (NoResultException e) {
-            return null;
+    
+    public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID Id) {
+        List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
+        try{
+            javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :Id", HoaDonChiTiet.class);
+            query.setParameter("Id", Id);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return lsthdct;
+        return listHoaDonChiTiet;
     }
-    public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID IdHoaDon) {
-        List<HoaDonChiTiet> hdct = new ArrayList();
-        try (Session session = HibernatUtil.getFACTORY().openSession()) {
-            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon", HoaDonChiTiet.class);
-            query.setParameter("IdHoaDon", IdHoaDon);
-            hdct = query.list();
-            return hdct;
 
+    public HoaDonChiTiet SelectHoaDonChiTietById(UUID Id) {
+        HoaDonChiTiet hdct = new HoaDonChiTiet();
+        try {
+            javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet where Id = :Id", HoaDonChiTiet.class);
+            query.setParameter("Id", Id);
+            hdct = (HoaDonChiTiet) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return hdct;
     }
 
-    public boolean InsertHoaDon(HoaDonChiTiet hdct) {
-        try {
+    public Boolean InsertHoaDonChiTiet(HoaDonChiTiet hdct) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(hdct);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public boolean UpdateChiTietSP(HoaDonChiTiet hdct) {
-        try {
+    public Boolean UpdateHoaDonChiTiet(HoaDonChiTiet hdct) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             hdct.setLastModifiedDate(new Date());
@@ -82,6 +81,7 @@ public class HoaDonChiTietRepository {
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

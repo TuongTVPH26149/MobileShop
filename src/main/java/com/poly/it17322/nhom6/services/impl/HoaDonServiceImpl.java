@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Id;
 import com.poly.it17322.nhom6.services.IHoaDonService;
+import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,18 @@ public class HoaDonServiceImpl implements IHoaDonService {
 
     @Override
     public List<HoaDonResponse> SelectHoaDon() {
-        List<HoaDon> hoadons = hoadonRepository.SelectALLHoaDon();
+        List<HoaDon> hoadons = hoadonRepository.selectALLHoaDon();
+        return hoadons.stream().map(HoaDonResponse::new).collect(Collectors.toList());
+    }
+     @Override
+    public List<HoaDonResponse> getByCodeAndCreateDate(String ma, Date from, Date to) {
+        List<HoaDon> hoadons = hoadonRepository.getByCodeAndCreateDate(ma, from, to);
+        return hoadons.stream().map(HoaDonResponse::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HoaDonResponse> getByCodeAndUpdateDate(String ma, Date from, Date to) {
+        List<HoaDon> hoadons = hoadonRepository.getByCodeAndUpdateDate(ma, from, to);
         return hoadons.stream().map(HoaDonResponse::new).collect(Collectors.toList());
     }
 }

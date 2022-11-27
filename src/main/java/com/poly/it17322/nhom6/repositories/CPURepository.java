@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.CPU;
+import com.poly.it17322.nhom6.domainmodels.CPU;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,9 +23,9 @@ public class CPURepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<CPU> SelectCPU() {
+    public List<CPU> selectALLCPU() {
         List<CPU> listCPU = new ArrayList<>();
-        try {
+        try{
             Query query = session.createQuery("FROM CPU", CPU.class);
             listCPU = query.getResultList();
         } catch (Exception e) {
@@ -33,20 +34,20 @@ public class CPURepository {
         return listCPU;
     }
 
-    public CPU SelectAllById(UUID Id) {
-        CPU c = new CPU();
-        try {
+    public CPU SelectCPUById(UUID Id) {
+        CPU cpu = new CPU();
+        try{
             Query query = session.createQuery("FROM CPU where Id = :Id", CPU.class);
             query.setParameter("Id", Id);
-            c = (CPU) query.getSingleResult();
+            cpu = (CPU) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return c;
+        return cpu;
     }
 
     public Boolean InsertCPU(CPU cpu) {
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(cpu);
@@ -58,8 +59,8 @@ public class CPURepository {
         return false;
     }
 
-    public Boolean UIpdate(CPU cpu) {
-        try {
+    public Boolean UpdateCPU(CPU cpu) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             cpu.setLastModifiedDate(new Date());

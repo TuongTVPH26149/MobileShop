@@ -7,11 +7,12 @@ package com.poly.it17322.nhom6.domainmodels;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
@@ -28,7 +30,6 @@ import lombok.ToString;
  */
 @Entity
 @Table(name = "HoaDonChiTiet")
-@IdClass(HoaDonChiTietID.class)
 @Getter
 @Setter
 @ToString
@@ -37,23 +38,33 @@ import lombok.ToString;
 public class HoaDonChiTiet implements Serializable {
 
     @Id
+    @Column(name = "Id")
+    @GeneratedValue
+    private UUID Id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdHoaDon", nullable = false)
     private HoaDon hoaDon;
 
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdChiTietSP", nullable = false)
     private ChiTietSP chiTietSP;
 
+    @Nationalized
     @Column(name = "TenSP", length = 100, nullable = false)
     private String tenSP;
-
+    
+    @Column(name = "DonGia", nullable = true)
+    private BigDecimal donGia;
+    
     @Column(name = "SoLuong", nullable = false)
     private int soLuong;
-
-    @Column(name = "Gia", nullable = false)
-    private BigDecimal gia;
+    
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
+    @Column(name = "GiaBan", nullable = true)
+    private BigDecimal giaBan;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)

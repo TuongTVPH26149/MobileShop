@@ -18,20 +18,20 @@ public class RamRepositry {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<Ram> SelectAllRam() {
-        List<Ram> listram = new ArrayList<>();
+    public List<Ram> selectALLRam() {
+        List<Ram> listRam = new ArrayList<>();
         try {
             Query query = session.createQuery("FROM Ram", Ram.class);
-            listram = query.getResultList();
+            listRam = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listram;
+        return listRam;
     }
 
     public Ram SelectRamById(UUID Id) {
         Ram ram = new Ram();
-        try {
+        try  {
             Query query = session.createQuery("FROM Ram where Id = :Id", Ram.class);
             query.setParameter("Id", Id);
             ram = (Ram) query.getSingleResult();
@@ -48,7 +48,6 @@ public class RamRepositry {
             session.save(ram);
             tran.commit();
             return true;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,11 +55,11 @@ public class RamRepositry {
     }
 
     public Boolean UpdateRam(Ram ram) {
-        try {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             ram.setLastModifiedDate(new Date());
-            session.save(ram);
+            session.saveOrUpdate(ram);
             tran.commit();
             return true;
         } catch (Exception e) {

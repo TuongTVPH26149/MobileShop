@@ -22,48 +22,52 @@ public class TaiKhoanRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<TaiKhoan> SelectALLTaiKhoan() {
-        List<TaiKhoan> lstTaiKhoan = new ArrayList<>();
+    public List<TaiKhoan> selectALLTaiKhoan() {
+        List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
             Query query = session.createQuery("FROM TaiKhoan", TaiKhoan.class);
-            lstTaiKhoan = query.getResultList();
+            listTaiKhoan = query.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return lstTaiKhoan;
+        return listTaiKhoan;
     }
 
-    public TaiKhoan SelectTaiKhoanById(UUID id) {
-        TaiKhoan taiKhoan = new TaiKhoan();
+    public TaiKhoan SelectTaiKhoanById(UUID Id) {
+        TaiKhoan tk = new TaiKhoan();
         try {
-            Query query = session.createQuery("FROM TaiKhoan WHERE id = :id", TaiKhoan.class);
-            query.setParameter("id", id);
-            taiKhoan = (TaiKhoan) query.getSingleResult();
+            Query query = session.createQuery("FROM TaiKhoan where Id = :Id", TaiKhoan.class);
+            query.setParameter("Id", Id);
+            tk = (TaiKhoan) query.getSingleResult();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return taiKhoan;
+        return tk;
     }
 
-    public boolean InsertTaiKhoan(TaiKhoan taiKhoan) {
-        try {
+    public Boolean InsertTaiKhoan(TaiKhoan tk) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(taiKhoan);
+            session.save(tk);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public boolean UpdateTaiKhoan(TaiKhoan taiKhoan) {
-        try {
+    public Boolean UpdateTaiKhoan(TaiKhoan tk) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            taiKhoan.setLastModifiedDate(new Date());
-            session.saveOrUpdate(taiKhoan);
+            tk.setLastModifiedDate(new Date());
+            session.saveOrUpdate(tk);
             tran.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

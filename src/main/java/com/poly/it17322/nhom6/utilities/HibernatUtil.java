@@ -37,21 +37,17 @@ public class HibernatUtil {
         conf.addAnnotatedClass(BaoHanh.class);
         conf.addAnnotatedClass(ChiTietSP.class);
         conf.addAnnotatedClass(CPU.class);
-        conf.addAnnotatedClass(ChucVu.class);
-        conf.addAnnotatedClass(HDH.class);
-        conf.addAnnotatedClass(Hang.class);
+        conf.addAnnotatedClass(ManHinh.class);
+        conf.addAnnotatedClass(Pin.class);
         conf.addAnnotatedClass(Imel.class);
         conf.addAnnotatedClass(KhachHang.class);
         conf.addAnnotatedClass(KhuyenMai.class);
-        conf.addAnnotatedClass(LoaiKM.class);
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(Ram.class);
         conf.addAnnotatedClass(Rom.class);
         conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(TaiKhoan.class);
-        conf.addAnnotatedClass(TrangThaiHoaDon.class);
-        conf.addAnnotatedClass(TrangThaiImel.class);
-        conf.addAnnotatedClass(TrangThaiTaiKhoan.class);
+        conf.addAnnotatedClass(ImelBan.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

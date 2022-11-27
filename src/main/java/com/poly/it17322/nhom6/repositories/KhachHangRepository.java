@@ -22,34 +22,34 @@ public class KhachHangRepository {
 
     private Session session = HibernatUtil.getFACTORY().openSession();
 
-    public List<KhachHang> SelectAllKhachHang() {
-        List<KhachHang> lstKhachHang = new ArrayList<>();
-        try {
+    public List<KhachHang> selectALLKhachHang() {
+        List<KhachHang> listKhachHang = new ArrayList<>();
+        try{
             Query query = session.createQuery("FROM KhachHang", KhachHang.class);
-            lstKhachHang = query.getResultList();
+            listKhachHang = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lstKhachHang;
+        return listKhachHang;
     }
 
-    public KhachHang SelectKhachHangById(UUID id) {
-        KhachHang khachHang = new KhachHang();
-        try  {
-            Query query = session.createQuery("FROM KhachHang WHERE id =:id", KhachHang.class);
-            query.setParameter("id", id);
-            khachHang = (KhachHang) query.getSingleResult();
+    public KhachHang SelectKhachHangById(UUID Id) {
+        KhachHang kh = new KhachHang();
+        try{
+            Query query = session.createQuery("FROM KhachHang where Id = :Id", KhachHang.class);
+            query.setParameter("Id", Id);
+            kh = (KhachHang) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return khachHang;
+        return kh;
     }
 
-    public Boolean InsertKhachHang(KhachHang khachHang) {
-        try {
+    public Boolean InsertKhachHang(KhachHang kh) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            session.save(khachHang);
+            session.save(kh);
             tran.commit();
             return true;
         } catch (Exception e) {
@@ -58,12 +58,12 @@ public class KhachHangRepository {
         return false;
     }
 
-    public Boolean UpdateKhachHang(KhachHang khachHang) {
-        try {
+    public Boolean UpdateKhachHang(KhachHang kh) {
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
-            khachHang.setLastModifiedDate(new Date());
-            session.saveOrUpdate(khachHang);
+            kh.setLastModifiedDate(new Date());
+            session.saveOrUpdate(kh);
             tran.commit();
             return true;
         } catch (Exception e) {

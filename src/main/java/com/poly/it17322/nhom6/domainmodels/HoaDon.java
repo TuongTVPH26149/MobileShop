@@ -22,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
@@ -51,20 +52,62 @@ public class HoaDon implements Serializable {
 
     @Column(name = "Ma", unique = true, nullable = false, length = 20)
     private String ma;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdTrangThaiHD", referencedColumnName = "id")
-    private TrangThaiHoaDon trangThaiHD;
     
-    @Column(name = "LoaiThanhToan", nullable = false)
-    private boolean loaiThanhToan;
+    @Column(name = "NgayTao")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayTao;
+    
+    @Column(name = "NgayThanhToan")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayThanhToan;
+    
+    @Column(name = "NgayShip")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayShip;
+    
+    @Column(name = "TienShip")
+    private BigDecimal tienShip;
+    
+    @Column(name = "TienMat")
+    private BigDecimal tienMat;
+    
+    @Column(name = "ChuyenKhoan")
+    private BigDecimal chuyenKhoan;
+    
+    @Column(name = "NgayNhan")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayNhan;
+    
+    @Nationalized
+    @Column(name = "TenKH", length = 50)
+    private String tenKH;
+    
+    @Nationalized
+    @Column(name = "DiaChi", length = 100)
+    private String diaChi;
     
     @Column(name = "TongTien")
     private BigDecimal tongTien;
-
-    @Column(name = "CreatedDate" , updatable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date createdDate;
+    
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
+    @Column(name = "SdtNguoiShip", length = 30)
+    private String sdtNguoiShip;
+    
+    @Nationalized
+    @Column(name = "TenNguoiShip", length = 50)
+    private String tenNguoiShip;
+    
+    @Column(name = "LoaiThanhToan")
+    private int loaiThanhToan;
+    
+    @Column(name = "GiamGia")
+    private BigDecimal giamGia;
+    
+    @Nationalized
+    @Column(name = "LyDo", length = 100)
+    private String lyDo;
     
     @Column(name = "lastModifiedDate", insertable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
