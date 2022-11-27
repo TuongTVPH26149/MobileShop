@@ -1267,10 +1267,12 @@ public class FrmBanHang extends javax.swing.JPanel {
         tblSanPham.getTableHeader().setForeground(new Color(255, 255, 255));
         tblSanPham.setRowHeight(30);
         tblSanPham.getTableHeader().setPreferredSize(new Dimension(100, 30));
+        tblSanPham.getTableHeader().setPreferredSize(new Dimension(100, 30));
         tblGioHang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblGioHang.getTableHeader().setBackground(new Color(0, 123, 123));
         tblGioHang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblGioHang.setRowHeight(30);
+        tblGioHang.getTableHeader().setPreferredSize(new Dimension(100, 30));
         tblGioHang.getTableHeader().setPreferredSize(new Dimension(100, 30));
         tblHoaDon.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblHoaDon.getTableHeader().setBackground(new Color(0, 123, 123));
@@ -1293,7 +1295,7 @@ public class FrmBanHang extends javax.swing.JPanel {
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(1);
                     } catch (InterruptedException e) {
                     }
                     BufferedImage image = null;
@@ -1312,7 +1314,16 @@ public class FrmBanHang extends javax.swing.JPanel {
                     } catch (Exception e) {
                     }
                     if (result != null) {
-                        t1.stop();
+                        JOptionPane.showMessageDialog(null, result.getText());
+                        if (indexHD != -1) {
+                            if (bhs.addSpSanner(result.getText(), lstHoaDon.get(indexHD).getId())) {
+                                JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công");
+                                fillTableGH(bhs.getAllGH(lstHoaDon.get(indexHD).getId()));
+                                fillTableSP(bhs.getAllSpBh());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Sản phẩm không tồn tại");
+                            }
+                        }
                     }
                 }
             }

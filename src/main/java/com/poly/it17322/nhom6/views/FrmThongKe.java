@@ -4,7 +4,6 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.github.sarxos.webcam.Webcam;
 
 
 /**
@@ -18,7 +17,6 @@ public class FrmThongKe extends javax.swing.JPanel {
      */
     public FrmThongKe() {
         initComponents();
-        Webcam.getDefault().close();
     }
 
     /**

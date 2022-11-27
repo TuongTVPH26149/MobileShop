@@ -18,9 +18,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class ImelAoSPRespone {
-    private int ma;
+    private String ma;
 
-    public ImelAoSPRespone(int ma) {
+    public ImelAoSPRespone(String ma) {
         this.ma = ma;
     }
     

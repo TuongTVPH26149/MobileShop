@@ -244,6 +244,7 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return false;
     }
+
     @Override
     public boolean thanhToan(DonHangRespone dh) {
         try {
@@ -262,6 +263,26 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setLoaiThanhToan(dh.getHinhThuc());
             hd.setGiamGia(dh.getGiamGia());
             return hdrepo.UpdateHoaDon(hd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addSpSanner(String maImel, UUID idHD) {
+        try {
+            Imel imel = imelbhRepo.SelectImelBanByMa(maImel);
+            if (imel.getId() == null) {
+                return false;
+            } else if (imel.getTrangThai() == 0) {
+                return false;
+            }
+            if (updateGH(idHD, imel.getChiTietSP().getId(), 1)) {
+                if (createImelBan(maImel, getGH(idHD, imel.getChiTietSP().getId()).getId())) {
+                    return true;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

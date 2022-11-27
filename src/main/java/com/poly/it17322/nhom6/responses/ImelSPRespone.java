@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 public class ImelSPRespone {
     private UUID id;
-    private int ma;
+    private String ma;
     private int trangthai;
 
     public ImelSPRespone(Imel imel) {

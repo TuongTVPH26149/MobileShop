@@ -32,6 +32,7 @@ public interface IBanHangService {
     boolean thanhToan(DonHangRespone dh);
 
     List<ImelBanHangRespone> getImel(UUID id);
+    boolean addSpSanner(String maImel, UUID idHD);
 
     DonHangRespone getDonHang(UUID id);
 
