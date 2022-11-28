@@ -4,8 +4,11 @@
  */
 package com.poly.it17322.nhom6.services;
 
+import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImelSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -15,9 +18,9 @@ public interface ISanPhamSPService {
 
     public List<SanPhamSPRespone> getlist();
 
-    public boolean insert(SanPhamSPRespone sp);
+    public boolean insert(SanPhamSPRespone sp,UUID idcpu,UUID idrom,UUID idram,UUID idms,UUID idmh,UUID idpin,List<ImelAoSPRespone> lstao);
 
-    public boolean update(SanPhamSPRespone sp);
+    public boolean update(SanPhamSPRespone sp,UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin);
     
     
 }
