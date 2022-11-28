@@ -2289,7 +2289,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btninsertActionPerformed
 
     private void btnaddimelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddimelActionPerformed
-        int maimel = Integer.parseInt(txtmaimel.getText());
+        String maimel = txtmaimel.getText();
         ImelAoSPRespone imelao = new ImelAoSPRespone();
         imelao.setMa(maimel);
         lstimelao.add(imelao);

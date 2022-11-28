@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.responses;
 
 import java.math.BigDecimal;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -14,10 +15,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class GioHangInRespone {
 
     private String tenSP;
-    private String moTa;
     private BigDecimal donGia;
     private BigDecimal khuyenMai;
     private int soLuong;
