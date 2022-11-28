@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-
+import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.ImelBan;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
@@ -14,16 +14,18 @@ import java.util.UUID;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 /**
  *
  * @author LiamTrieu
  */
 public class ImelBanRepository {
+
     private Session session = HibernatUtil.getFACTORY().openSession();
 
     public List<ImelBan> selectALLImelBan() {
         List<ImelBan> listImelBan = new ArrayList<>();
-        try{
+        try {
             Query query = session.createQuery("FROM ImelBan", ImelBan.class);
             listImelBan = query.getResultList();
         } catch (Exception e) {
@@ -37,6 +39,18 @@ public class ImelBanRepository {
         try {
             Query query = session.createQuery("FROM ImelBan where Id = :Id", ImelBan.class);
             query.setParameter("Id", Id);
+            imelBan = (ImelBan) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imelBan;
+    }
+    
+    public ImelBan SelectImelBanByMa(String ma) {
+        ImelBan imelBan = new ImelBan();
+        try(Session session = HibernatUtil.getFACTORY().openSession();) {
+            Query query = session.createQuery("FROM ImelBan where Ma = :ma", ImelBan.class);
+            query.setParameter("ma", ma);
             imelBan = (ImelBan) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,6 +81,19 @@ public class ImelBanRepository {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Boolean delete(ImelBan imelb) {
+        Transaction transaction = null;
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(imelb);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
         return false;
     }

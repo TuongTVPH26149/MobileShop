@@ -41,11 +41,11 @@ public class Imel implements Serializable {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdChiTietSP", referencedColumnName = "id", insertable = false, nullable = true)
+    @JoinColumn(name = "IdChiTietSP", nullable = true)
     private ChiTietSP chiTietSP;
 
-    @Column(name = "Ma", unique = true)
-    private int ma;
+    @Column(name = "Ma", unique = true, length = 15)
+    private String ma;
     
     @Column(name = "TrangThai")
     private int trangThai;

@@ -4,34 +4,27 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.CPU;
+import com.poly.it17322.nhom6.domainmodels.KhachHang;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
- * @author admin
+ * @author LiamTrieu
  */
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
-public class CPURespone {
-
+public class khachHangBanHangRespone {
     private UUID id;
-    private String ma;
     private String ten;
+    private String sdt;
 
-    public CPURespone(CPU cpu) {
-        this.id = cpu.getId();
-        this.ma = cpu.getMa();
-        this.ten = cpu.getTen();
+    public khachHangBanHangRespone(KhachHang kh) {
+        this.id = kh.getId();
+        this.ten = kh.getMa()+"-"+kh.getHoTen();
+        this.sdt = kh.getSdt();
     }
-
-    public Object[] toDataRow() {
-        return new Object[]{ma, ten};
-    }
-    
 }

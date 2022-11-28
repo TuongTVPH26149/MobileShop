@@ -4,8 +4,6 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.CPU;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,20 +16,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CPURespone {
-
-    private UUID id;
+@ToString
+public class ImelAoSPRespone {
     private String ma;
-    private String ten;
 
-    public CPURespone(CPU cpu) {
-        this.id = cpu.getId();
-        this.ma = cpu.getMa();
-        this.ten = cpu.getTen();
+    public ImelAoSPRespone(String ma) {
+        this.ma = ma;
     }
-
-    public Object[] toDataRow() {
-        return new Object[]{ma, ten};
-    }
+    
     
 }

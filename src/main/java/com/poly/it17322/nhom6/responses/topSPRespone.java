@@ -5,27 +5,21 @@
 package com.poly.it17322.nhom6.responses;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
  * @author LiamTrieu
  */
-@Getter
+@NoArgsConstructor
 @Setter
-public class HoaDonInRespone {
-    private String mahd;
-    private String nhanVien;
-    private String khachhang;
-    private String sdtKH;
-    private String diaChi;
-    private BigDecimal tongTienTam;
-    private BigDecimal giamGia;
-    private BigDecimal phiShip;
+@Getter
+public class topSPRespone {
+    private UUID idsp;
+    private int sl;
     private BigDecimal tongTien;
-    private String hinhThucThanhToan;
+
 }
