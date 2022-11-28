@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class HoaDonResponse {
-    
+
     private UUID Id;
     private String ma;
     private String hoTen;
@@ -28,10 +28,13 @@ public class HoaDonResponse {
     private Date ngayTao;
     private Date ngayThanhToan;
     private int loaiThanhToan;
-    private String nhanVien;
+    private String maNV;
+    private String tenNV;
+    private String diaChi;
+    private int trangThai;
 
     public HoaDonResponse() {
-}
+    }
 
     public HoaDonResponse(HoaDon hd) {
         this.Id = hd.getId();
@@ -40,18 +43,33 @@ public class HoaDonResponse {
         this.sdt = hd.getKhachHang().getSdt();
         this.tongTien = hd.getTongTien();
         this.ngayTao = hd.getNgayTao();
-        this.ngayThanhToan = hd.getLastModifiedDate();
+        this.ngayThanhToan = hd.getNgayThanhToan();
         this.loaiThanhToan = hd.getLoaiThanhToan();
-        this.nhanVien = hd.getTaiKhoan().getMa();
+        this.maNV = hd.getTaiKhoan().getMa();
+        this.tenNV = hd.getTaiKhoan().getHoTen();
+        this.diaChi = hd.getKhachHang().getDiaChi();
+        this.trangThai = hd.getTrangThai();
     }
 
     public String getloaiThanhToan() {
         return loaiThanhToan == 0 ? "Tiền mặt" : "Chuyển khoản";
     }
 
+    public String getTrangThai() {
+        if (trangThai == 0) {
+            return "Chờ thanh toán ";
+        } else if (trangThai == 1) {
+            return "Đã thanh toán";
+        } else if (trangThai == 2) {
+            return "Đang giao";
+        } else {
+            return "Đã giao";
+        }
+    }
+
     public Object[] toDataRow() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return new Object[]{ma, hoTen, sdt, nhanVien,
-            sdf.format(ngayTao), sdf.format(ngayThanhToan), getloaiThanhToan(), tongTien};
+
+        return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
+            ngayTao, ngayThanhToan, getloaiThanhToan(), tongTien, getTrangThai()};
     }
 }
