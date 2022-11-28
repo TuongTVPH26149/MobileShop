@@ -4,18 +4,15 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-import com.poly.it17322.nhom6.domainmodels.HoaDon;
-import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,20 +24,21 @@ public class HoaDonChiTietRepository {
 
     public List<HoaDonChiTiet> selectALLHoaDonChiTiet() {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-        try{
-            javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet", HoaDonChiTiet.class);
+        try {
+            Query query = session.createQuery("FROM HoaDonChiTiet", HoaDonChiTiet.class);
             listHoaDonChiTiet = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listHoaDonChiTiet;
     }
-    
+
     public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID Id) {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-        try{
-            javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :Id", HoaDonChiTiet.class);
+        try {
+            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :Id", HoaDonChiTiet.class);
             query.setParameter("Id", Id);
+            listHoaDonChiTiet = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,7 +71,7 @@ public class HoaDonChiTietRepository {
     }
 
     public Boolean UpdateHoaDonChiTiet(HoaDonChiTiet hdct) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
             Transaction tran = session.getTransaction();
             tran.begin();
             hdct.setLastModifiedDate(new Date());
@@ -82,6 +80,19 @@ public class HoaDonChiTietRepository {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Boolean delete(HoaDonChiTiet hdct) {
+        Transaction transaction = null;
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(hdct);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
         return false;
     }

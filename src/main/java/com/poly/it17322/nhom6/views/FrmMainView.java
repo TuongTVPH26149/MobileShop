@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.views;
 
+import com.github.sarxos.webcam.Webcam;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -33,7 +34,7 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlView.removeAll();
         pnlView.add(new FrmBanHang(tkreponse));
         pnlView.setLayout(new FlowLayout());
-        avatar.setIcon(new ImageIcon("src/main/resource/avatar/"+tk.getHinhAnh()+".png"));
+        avatar.setIcon(new ImageIcon("src/main/resource/avatar/" + tk.getHinhAnh() + ".png"));
         this.pack();
         if (tk.getChucVu() != 0) {
             pnlNhanVien.setVisible(false);
@@ -744,6 +745,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 8;
             pnlThongKe.setBackground(new Color(0, 153, 153));
@@ -772,6 +774,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 7;
             pnlKhachHang.setBackground(new Color(0, 153, 153));
@@ -800,6 +803,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 6;
             pnlNhanVien.setBackground(new Color(0, 153, 153));
@@ -828,6 +832,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 5;
             pnlBaoHanh.setBackground(new Color(0, 153, 153));
@@ -856,6 +861,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 4;
             pnlKhuyenMai.setBackground(new Color(0, 153, 153));
@@ -884,6 +890,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 3;
             pnlHoaDon.setBackground(new Color(0, 153, 153));
@@ -912,6 +919,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private void pnlSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseClicked
         // TODO add your handling code here:
         try {
+            Webcam.getDefault().close();
             clearChosserListService();
             chosser = 2;
             pnlSanPham.setBackground(new Color(0, 153, 153));

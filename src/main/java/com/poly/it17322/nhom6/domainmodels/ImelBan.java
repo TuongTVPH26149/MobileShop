@@ -27,7 +27,7 @@ import lombok.ToString;
  * @author admin
  */
 @Entity
-@Table(name = "Imel")
+@Table(name = "ImelBan")
 @Setter
 @Getter
 @ToString
@@ -41,12 +41,12 @@ public class ImelBan implements Serializable {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdHoaDonChiTiet", referencedColumnName = "id", insertable = false, nullable = true)
+    @JoinColumn(name = "IdHoaDonChiTiet",nullable = true)
     private HoaDonChiTiet hoaDonChiTiet;
 
-    @Column(name = "Ma", unique = true)
-    private int ma;
-    
+    @Column(name = "Ma", length = 15)
+    private String ma;
+
     @Column(name = "TrangThai")
     private int trangThai;
 

@@ -43,7 +43,7 @@ public class SenderMailUtil {
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail, false));
             msg.setSubject(subject);
             msg.setSentDate(new Date());
-            msg.setText(text);
+            msg.setContent(text, "text/plain; charset=utf-8");
             Transport.send(msg);
             return false;
         } catch (Exception e) {

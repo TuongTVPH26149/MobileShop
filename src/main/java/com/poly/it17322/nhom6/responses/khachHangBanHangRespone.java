@@ -4,33 +4,27 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.KhachHang;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
- * @author admin
+ * @author LiamTrieu
  */
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
-public class ImelSPRespone {
+public class khachHangBanHangRespone {
     private UUID id;
-    private String ma;
-    private int trangthai;
+    private String ten;
+    private String sdt;
 
-    public ImelSPRespone(Imel imel) {
-        this.id = imel.getId();
-        this.ma = imel.getMa();
-        this.trangthai = imel.getTrangThai();
-    }
-    
-    public Object[] toDataRow(){
-        return new Object[]{ma};
+    public khachHangBanHangRespone(KhachHang kh) {
+        this.id = kh.getId();
+        this.ten = kh.getMa()+"-"+kh.getHoTen();
+        this.sdt = kh.getSdt();
     }
 }
