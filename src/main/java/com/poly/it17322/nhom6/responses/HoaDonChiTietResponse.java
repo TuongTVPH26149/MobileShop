@@ -20,30 +20,30 @@ import lombok.Setter;
 @Getter
 @Setter
 public class HoaDonChiTietResponse {
-    
+
     private UUID IdHoaDon;
     private UUID IdChiTietSP;
     private String tenSP;
-    private BigDecimal gia;
+    private BigDecimal donGia;
+    private BigDecimal giaBan;
+    private BigDecimal giamGia;
     private int soLuong;
-    private Date ngayTao;
-    private Date ngayThanhToan;
 
     public HoaDonChiTietResponse() {
-}
+    }
 
     public HoaDonChiTietResponse(HoaDonChiTiet hdct) {
         this.IdHoaDon = hdct.getHoaDon().getId();
         this.IdChiTietSP = hdct.getChiTietSP().getId();
         this.tenSP = hdct.getTenSP();
-        this.gia = hdct.getGiaBan();
+        this.donGia = hdct.getDonGia();
+        this.giaBan = hdct.getGiaBan();
         this.soLuong = hdct.getSoLuong();
-        this.ngayTao = hdct.getCreatedDate();
-        this.ngayThanhToan = hdct.getLastModifiedDate();
+        this.giamGia = hdct.getHoaDon().getGiamGia();
+
     }
 
     public Object[] toDataRow() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return new Object[]{tenSP, soLuong, gia, sdf.format(ngayTao), sdf.format(ngayThanhToan)};
+        return new Object[]{tenSP, soLuong, donGia, giaBan, giamGia, ((new BigDecimal(soLuong).multiply(giaBan)).subtract(giamGia))};
     }
 }
