@@ -45,6 +45,18 @@ public class ImelBanRepository {
         }
         return imelBan;
     }
+    
+    public ImelBan SelectImelBanByMa(String ma) {
+        ImelBan imelBan = new ImelBan();
+        try(Session session = HibernatUtil.getFACTORY().openSession();) {
+            Query query = session.createQuery("FROM ImelBan where Ma = :ma", ImelBan.class);
+            query.setParameter("ma", ma);
+            imelBan = (ImelBan) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imelBan;
+    }
 
     public Boolean InsertImelBan(ImelBan imelBan) {
         try ( Session session = HibernatUtil.getFACTORY().openSession()) {
@@ -83,6 +95,6 @@ public class ImelBanRepository {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return false;
     }
 }

@@ -10,6 +10,7 @@ import com.poly.it17322.nhom6.responses.GioHangInRespone;
 import com.poly.it17322.nhom6.responses.GioHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
+import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
@@ -25,6 +26,9 @@ public interface IBanHangService {
     List<SanPhamBanHangResponse> getAllSpBh();
 
     List<HoaDonBanHangRespone> getAllHdBh();
+    List<ImelDaBanRespone> getImelBan(UUID idHDCT);
+    boolean deleteImelBan(String ma);
+    boolean updateGHXoa(UUID idHDCT, int sl);
 
     List<GioHangRespone> getAllGH(UUID id);
 

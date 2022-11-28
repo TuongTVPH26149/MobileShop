@@ -20,6 +20,7 @@ import com.poly.it17322.nhom6.responses.GioHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonInRespone;
 import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
+import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
@@ -57,6 +58,7 @@ public class FrmBanHang extends javax.swing.JPanel {
     private int indexSP = -1;
     private int indexGH = -1;
     private int indexImel = -1;
+    private int indexImelBan = -1;
 
     /**
      * Creates new form frmBanHang
@@ -87,6 +89,12 @@ public class FrmBanHang extends javax.swing.JPanel {
         tblImel = new javax.swing.JTable();
         btnXacNhanImel = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
+        ImelXoa = new javax.swing.JFrame();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblImelBan = new javax.swing.JTable();
+        btnXacNhanImel1 = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -203,6 +211,72 @@ public class FrmBanHang extends javax.swing.JPanel {
         SelectImelLayout.setVerticalGroup(
             SelectImelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        ImelXoa.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        ImelXoa.setTitle("Xóa Imel đã bán");
+        ImelXoa.setMinimumSize(new java.awt.Dimension(400, 300));
+        ImelXoa.setResizable(false);
+        ImelXoa.setSize(new java.awt.Dimension(400, 300));
+
+        tblImelBan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã imel", "Chọn"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tblImelBan);
+
+        btnXacNhanImel1.setText("Xóa");
+        btnXacNhanImel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanImel1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnXacNhanImel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addComponent(jTextField4))
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnXacNhanImel1)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout ImelXoaLayout = new javax.swing.GroupLayout(ImelXoa.getContentPane());
+        ImelXoa.getContentPane().setLayout(ImelXoaLayout);
+        ImelXoaLayout.setHorizontalGroup(
+            ImelXoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ImelXoaLayout.setVerticalGroup(
+            ImelXoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -728,11 +802,11 @@ public class FrmBanHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên sản phẩm", "Màn hình", "CPU", "Pin", "Số lượng", "Giá", "Trạng thái"
+                "Tên sản phẩm", "Màn hình", "CPU", "Pin", "Số lượng", "Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -877,7 +951,6 @@ public class FrmBanHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblGioHang.setAutoscrolls(false);
         tblGioHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblGioHang.setFillsViewportHeight(true);
         tblGioHang.setGridColor(new java.awt.Color(0, 102, 102));
@@ -899,12 +972,22 @@ public class FrmBanHang extends javax.swing.JPanel {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Chọn tất cả");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Xóa");
         jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1164,6 +1247,9 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (indexGH == -1) {
             return;
         }
+        ImelXoa.setVisible(true);
+        ImelXoa.setLocationRelativeTo(null);
+        fillTableImelBan();
     }//GEN-LAST:event_tblGioHangMouseClicked
 
     private void btnXacNhanImelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanImelActionPerformed
@@ -1200,8 +1286,61 @@ public class FrmBanHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lblTienThuaPropertyChange
 
+    private void btnXacNhanImel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanImel1ActionPerformed
+        // TODO add your handling code here:
+        int count = 0;
+        for (int i = 0; i < tblImelBan.getRowCount(); i++) {
+            boolean check = Boolean.parseBoolean(tblImelBan.getValueAt(i, 1).toString());
+            if (check) {
+                if (bhs.deleteImelBan(tblImelBan.getValueAt(i, 0).toString())) {
+                    count++;
+                }
+            }
+        }
+        if (bhs.updateGHXoa(lstGH.get(indexGH).getId(), count)) {
+            JOptionPane.showMessageDialog(this, "Xóa sản phẩm thành công");
+            fillTableSP(bhs.getAllSpBh());
+            fillTableGH(bhs.getAllGH(lstHoaDon.get(indexHD).getId()));
+            ImelXoa.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Xóa sản phẩm thất bại");
+        }
+    }//GEN-LAST:event_btnXacNhanImel1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                boolean check = Boolean.parseBoolean(tblGioHang.getValueAt(i, 7).toString());
+                if (check) {
+                    UUID idHDCT = lstGH.get(indexGH).getId();
+                    List<ImelDaBanRespone> lstImelXoa = bhs.getImelBan(idHDCT);
+                    for (ImelDaBanRespone imel : lstImelXoa) {
+                        bhs.deleteImelBan(imel.getMa());
+                    }
+                    bhs.updateGHXoa(idHDCT, Integer.parseInt(tblGioHang.getValueAt(i, 6).toString()));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Không xóa được giỏ hàng");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Đã xóa các sản phẩm chọn khỏi giỏ hàng");
+        fillTableGH(bhs.getAllGH(lstHoaDon.get(indexHD).getId()));
+        fillTableSP(bhs.getAllSpBh());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame ImelXoa;
     private javax.swing.JFrame SelectImel;
     private javax.swing.JButton btnChonKH;
     private javax.swing.JButton btnHuyHoaDon;
@@ -1209,6 +1348,7 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JButton btnTaoHoaDon;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnXacNhanImel;
+    private javax.swing.JButton btnXacNhanImel1;
     private javax.swing.JComboBox<String> cboHinhThuc;
     private javax.swing.JComboBox<String> cboNoiNhan;
     private javax.swing.JComboBox<String> cboTrangThaiHoaDon;
@@ -1228,6 +1368,7 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1241,9 +1382,11 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblMaHoaDon;
     private javax.swing.JLabel lblMaNhanVien;
     private javax.swing.JLabel lblTienThua;
@@ -1254,6 +1397,7 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblImel;
+    private javax.swing.JTable tblImelBan;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtChuyenKhoan;
     private javax.swing.JTextArea txtDiaChi;
@@ -1432,6 +1576,16 @@ public class FrmBanHang extends javax.swing.JPanel {
             lblTienThua.setText(tienThua + "");
         } catch (Exception e) {
         }
+    }
+
+    private void fillTableImelBan() {
+        dtm = (DefaultTableModel) tblImelBan.getModel();
+        dtm.setRowCount(0);
+        System.out.println(lstGH.get(indexGH).getId());
+        for (ImelDaBanRespone s : bhs.getImelBan(lstGH.get(indexGH).getId())) {
+            dtm.addRow(new Object[]{s.getMa(), false});
+        }
+        indexImelBan = -1;
     }
 
 }

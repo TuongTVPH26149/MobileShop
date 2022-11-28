@@ -22,6 +22,7 @@ import com.poly.it17322.nhom6.responses.DonHangRespone;
 import com.poly.it17322.nhom6.responses.GioHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
+import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import com.poly.it17322.nhom6.services.IBanHangService;
@@ -222,9 +223,32 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
+    public boolean updateGHXoa(UUID idHDCT, int sl) {
+        HoaDonChiTiet hdct = hdctrepo.SelectHoaDonChiTietById(idHDCT);
+        ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(hdct.getChiTietSP().getId());
+        int soLuong = hdct.getSoLuong();
+        hdct.setSoLuong(soLuong - sl);
+        int solg = ctsp.getSoLuong();
+        ctsp.setSoLuong(solg + sl);
+        soLuong = hdct.getSoLuong();
+        if (soLuong <= 0) {
+            hdctrepo.delete(hdct);
+        } else {
+            hdctrepo.UpdateHoaDonChiTiet(hdct);
+        }
+        return ctsprepo.UpdateChiTietSP(ctsp);
+    }
+
+    @Override
     public List<ImelBanHangRespone> getImel(UUID id) {
         List<Imel> imels = imelbhRepo.Selectmamel(id);
         return imels.stream().map(ImelBanHangRespone::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ImelDaBanRespone> getImelBan(UUID idHDCT) {
+        List<ImelBan> imels = imelbhRepo.selectALLImelBan(idHDCT);
+        return imels.stream().map(ImelDaBanRespone::new).collect(Collectors.toList());
     }
 
     @Override
@@ -288,4 +312,15 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return false;
     }
+
+    @Override
+    public boolean deleteImelBan(String ma) {
+        ImelBan iml = imlbrepo.SelectImelBanByMa(ma);
+        Imel im = imelbhRepo.SelectImelBanByMa(ma);
+        if (imlbrepo.delete(iml)) {
+            im.setTrangThai(1);
+        }
+        return imelrepo.UpdateImel(im);
+    }
+
 }

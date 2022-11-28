@@ -83,5 +83,18 @@ public class HoaDonChiTietRepository {
         }
         return false;
     }
+    
+    public Boolean delete(HoaDonChiTiet hdct) {
+        Transaction transaction = null;
+        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(hdct);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
 
 }
