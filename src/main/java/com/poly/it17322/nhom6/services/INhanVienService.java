@@ -4,8 +4,10 @@
  */
 package com.poly.it17322.nhom6.services;
 
+import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
 import com.poly.it17322.nhom6.responses.NhanVienRespone;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -13,9 +15,15 @@ import java.util.List;
  */
 public interface INhanVienService {
     
-    public List<NhanVienRespone> getList();
-    
-    public boolean insert(NhanVienRespone nv);
+    public List<NhanVienRespone> getlist();
 
-    public boolean update(NhanVienRespone nv);
+    public TaiKhoan SelectNhanVienById(UUID id);
+
+    public boolean Insert(NhanVienRespone nhanVien);
+
+    public boolean Update(NhanVienRespone nhanVien);
+    
+    public List<TaiKhoan> timKiem(String ten);
+    
+    public List<TaiKhoan> selectTaiKhoan(int trangThai);
 }
