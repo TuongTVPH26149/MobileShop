@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.views;
 
+import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import com.poly.it17322.nhom6.services.IKhachHangService;
 import com.poly.it17322.nhom6.services.impl.KhachHangService;
@@ -81,8 +82,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
         txttimkiem = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txttimkiemngaysinh = new javax.swing.JTextField();
         cbolocgioitinh = new javax.swing.JComboBox<>();
         btnloc = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -332,6 +331,11 @@ public class FrmKhachhang extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblkhachhang);
 
+        txttimkiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txttimkiemCaretUpdate(evt);
+            }
+        });
         txttimkiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txttimkiemKeyReleased(evt);
@@ -344,21 +348,22 @@ public class FrmKhachhang extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Giới tính:");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Ngày Sinh:");
-
-        txttimkiemngaysinh.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
         cbolocgioitinh.setBackground(new java.awt.Color(0, 123, 123));
         cbolocgioitinh.setForeground(new java.awt.Color(255, 255, 255));
-        cbolocgioitinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Nam", "Nữ" }));
+        cbolocgioitinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", "ALL", " " }));
         cbolocgioitinh.setFocusable(false);
         cbolocgioitinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbolocgioitinhActionPerformed(evt);
             }
         });
+        cbolocgioitinh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cbolocgioitinhKeyReleased(evt);
+            }
+        });
 
+        btnloc.setBackground(new java.awt.Color(0, 123, 123));
         btnloc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlocActionPerformed(evt);
@@ -372,10 +377,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel8)
-                        .addComponent(txttimkiemngaysinh)
-                        .addComponent(cbolocgioitinh, 0, 129, Short.MAX_VALUE))
+                    .addComponent(cbolocgioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(btnloc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,11 +392,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnloc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbolocgioitinh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txttimkiemngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jLabel10.setText("Tìm kiếm:");
@@ -420,13 +418,13 @@ public class FrmKhachhang extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -438,7 +436,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã HD", "Mã NV", "Ngày Tạo", "Ngày TT", "Loại TT", "Tổng tièn"
+                "Mã HD", "Ngày Tạo", "Ngày TT", "Loại TT", "Tổng tièn"
             }
         ));
         tblhoadondamua.setFocusable(false);
@@ -531,10 +529,8 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         try {
             Insert();
-            JOptionPane.showMessageDialog(this, "Insert Thanh Cong");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Insert That bai");
             return;
         }
 
@@ -544,9 +540,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
         try {
             Update();
-            JOptionPane.showMessageDialog(this, "Update Thanh Cong");
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Update That bai");
+            e.printStackTrace();
             return;
         }
 
@@ -574,6 +570,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
     private void tblkhachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblkhachhangMouseClicked
         index = tblkhachhang.getSelectedRow();
+        fillHDDaMua();
         showdetail();
     }//GEN-LAST:event_tblkhachhangMouseClicked
 
@@ -583,22 +580,38 @@ public class FrmKhachhang extends javax.swing.JPanel {
     }//GEN-LAST:event_tblhoadondamuaMouseClicked
 
     private void cbolocgioitinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbolocgioitinhActionPerformed
-      
+
     }//GEN-LAST:event_cbolocgioitinhActionPerformed
 
     private void txttimkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyReleased
-         try {
-            KHSer.timkiem((txttimkiem.getText()));
-            timkiem();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }//GEN-LAST:event_txttimkiemKeyReleased
 
     private void btnlocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlocActionPerformed
-        KHSer.LocKH((int) cbolocgioitinh.getSelectedItem());
-       LocKH();
+        try {
+            if (cbolocgioitinh.getSelectedIndex() == 2) {
+                filltiTable();
+                return;
+            }
+            LocKH();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnlocActionPerformed
+
+    private void txttimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttimkiemCaretUpdate
+        try {
+            if (txttimkiem.getText().trim().equals("")) {
+                return;
+            }
+            timkiem();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txttimkiemCaretUpdate
+
+    private void cbolocgioitinhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbolocgioitinhKeyReleased
+
+    }//GEN-LAST:event_cbolocgioitinhKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -620,7 +633,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -639,7 +651,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private javax.swing.JTextField txtngaysinh;
     private javax.swing.JTextField txtsdt;
     private javax.swing.JTextField txttimkiem;
-    private javax.swing.JTextField txttimkiemngaysinh;
     // End of variables declaration//GEN-END:variables
 
     private void filltiTable() {
@@ -653,20 +664,30 @@ public class FrmKhachhang extends javax.swing.JPanel {
     }
 
     private void timkiem() {
+        model = (DefaultTableModel) tblkhachhang.getModel();
         model.setRowCount(0);
         listkh = KHSer.timkiem((txttimkiem.getText()));
         for (KhachHangResponse x : listkh) {
             model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh()});
-            listkh.add(x);
         }
 
     }
+
     private void LocKH() {
+        model = (DefaultTableModel) tblkhachhang.getModel();
         model.setRowCount(0);
-        listkh = KHSer.LocKH((int) cbolocgioitinh.getSelectedItem());
+        listkh = KHSer.LocKH(cbolocgioitinh.getSelectedIndex());
         for (KhachHangResponse x : listkh) {
             model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh()});
-            listkh.add(x);
+        }
+
+    }
+
+    private void fillHDDaMua() {
+        model = (DefaultTableModel) tblhoadondamua.getModel();
+        model.setRowCount(0);
+        for (HoaDon x : KHSer.selectallhoadon(listkh.get(index).getId())) {
+            model.addRow(new Object[]{x.getMa(), x.getNgayTao(), x.getNgayThanhToan(), x.getLoaiThanhToan(), x.getTongTien()});
         }
 
     }
@@ -686,13 +707,18 @@ public class FrmKhachhang extends javax.swing.JPanel {
     }
 
     private void Insert() {
+        index = tblkhachhang.getSelectedRow();
+        if (txtngaysinh.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Khong duoc de trong");
+            return;
+        }
         String ma = txtma.getText().trim();
         String hoten = txthoten.getText().trim();
         int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
         Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
-        if (ma.length() == 0 || hoten.length() == 0 || sdt.length() == 0 || diachi.length() == 0 || ngaysinh.equals("")) {
+        if (ma.length() == 0 || hoten.length() == 0 || sdt.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
         }
@@ -704,20 +730,28 @@ public class FrmKhachhang extends javax.swing.JPanel {
         kh.setDiachi(diachi);
         kh.setNgaysinh(ngaysinh);
 
-        KHSer.Insert(kh);
+        if (KHSer.Insert(kh)) {
+            JOptionPane.showMessageDialog(this, "Insert Thanh Cong");
+        } else {
+            JOptionPane.showMessageDialog(this, "Insert Khong Thanh Cong");
+        }
         clearForm();
         filltiTable();
 
     }
 
     private void Update() {
+        if (txtngaysinh.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Khong duoc de trong");
+            return;
+        }
         String ma = txtma.getText().trim();
         String hoten = txthoten.getText().trim();
         int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
         Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
-        if (ma.length() == 0 || hoten.length() == 0 || diachi.length() == 0 || ngaysinh.equals("")) {
+        if (ma.length() == 0 || hoten.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
         }
@@ -731,7 +765,11 @@ public class FrmKhachhang extends javax.swing.JPanel {
         kh.setDiachi(diachi);
         kh.setNgaysinh(ngaysinh);
 
-        KHSer.Update(kh);
+        if (KHSer.Update(kh)) {
+            JOptionPane.showMessageDialog(this, "Update Thanh Cong");
+        } else {
+            JOptionPane.showMessageDialog(this, "Update Khong Thanh Cong");
+        }
         clearForm();
         filltiTable();
     }
