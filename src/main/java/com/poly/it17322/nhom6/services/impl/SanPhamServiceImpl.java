@@ -10,7 +10,6 @@ import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.domainmodels.SanPham;
 import com.poly.it17322.nhom6.repositories.CPURepository;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
-import com.poly.it17322.nhom6.repositories.ImelBanHangRepository;
 import com.poly.it17322.nhom6.repositories.ImelRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
@@ -20,8 +19,6 @@ import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.repositories.SanPhamReposiry;
 import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
 import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
-import com.poly.it17322.nhom6.responses.RomRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import com.poly.it17322.nhom6.services.ISanPhamSPService;
 import java.text.SimpleDateFormat;
@@ -45,9 +42,8 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
     CPURepository cpurepo = new CPURepository();
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
-    ImelRepository imelrepo = new ImelBanHangRepository();
+    ImelRepository imelrepo = new ImelRepository();
     SpCTSPRepository timkiemrepo = new SpCTSPRepository();
-
     @Override
     public List<SanPhamSPRespone> getlist() {
         List<SanPhamSPRespone> lstsp = new ArrayList<>();

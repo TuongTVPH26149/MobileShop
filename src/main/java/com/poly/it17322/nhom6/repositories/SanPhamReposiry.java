@@ -19,12 +19,13 @@ import org.hibernate.Transaction;
  * @author LiamTrieu
  */
 public class SanPhamReposiry {
-    
-    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    private Session session = HibernatUtil.getSession();
 
     public List<SanPham> selectALLSanPham() {
         List<SanPham> listSanPham = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM SanPham", SanPham.class);
             listSanPham = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +36,8 @@ public class SanPhamReposiry {
 
     public SanPham SelectSanPhamById(UUID Id) {
         SanPham sanPham = new SanPham();
-        try{
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM SanPham where Id = :Id", SanPham.class);
             query.setParameter("Id", Id);
             sanPham = (SanPham) query.getSingleResult();
@@ -46,7 +48,8 @@ public class SanPhamReposiry {
     }
 
     public Boolean InsertSanPham(SanPham sanPham) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(sanPham);
@@ -59,12 +62,14 @@ public class SanPhamReposiry {
     }
 
     public Boolean UpdateSanPham(SanPham sanPham) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             sanPham.setLastModifiedDate(new Date());
             session.saveOrUpdate(sanPham);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

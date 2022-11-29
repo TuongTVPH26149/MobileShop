@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -18,6 +19,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@NoArgsConstructor
 public class HoaDonBanHangRespone {
 
     private UUID id;
@@ -33,7 +35,7 @@ public class HoaDonBanHangRespone {
             this.ma = hd.getMa();
             this.ngayTao = hd.getNgayTao();
             this.nguoiTao = hd.getTaiKhoan().getMa();
-            this.khachHang = hd.getKhachHang().getMa();
+            this.khachHang = hd.getKhachHang().getHoTen();
             this.trangThai = hd.getTrangThai();
         } catch (Exception e) {
             e.printStackTrace();

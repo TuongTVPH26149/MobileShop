@@ -5,7 +5,6 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
-import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import javax.persistence.Query;
 
 /**
  *
@@ -21,12 +20,13 @@ import org.hibernate.query.Query;
  */
 public class ChiTietSPRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<ChiTietSP> selectALLChiTietSP() {
         List<ChiTietSP> listChiTietSP = new ArrayList<>();
         try {
-            javax.persistence.Query query = session.createQuery("FROM ChiTietSP", ChiTietSP.class);
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP", ChiTietSP.class);
             listChiTietSP = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,8 +36,9 @@ public class ChiTietSPRepository {
 
     public ChiTietSP SelectChiTietSPById(UUID Id) {
         ChiTietSP ctsp = new ChiTietSP();
-        try{
-            javax.persistence.Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
             query.setParameter("Id", Id);
             ctsp = (ChiTietSP) query.getSingleResult();
         } catch (Exception e) {
@@ -47,7 +48,8 @@ public class ChiTietSPRepository {
     }
 
     public Boolean InsertChiTietSP(ChiTietSP ctsp) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(ctsp);
@@ -60,16 +62,30 @@ public class ChiTietSPRepository {
     }
 
     public Boolean UpdateChiTietSP(ChiTietSP ctsp) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction transaction = null;
+        try {
+            session = HibernatUtil.getSession();
+            transaction = session.beginTransaction();
             ctsp.setLastModifiedDate(new Date());
             session.saveOrUpdate(ctsp);
-            tran.commit();
+            transaction.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<ChiTietSP> getSP() {
+        List<ChiTietSP> listChiTietSP = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP Where deleted = 0 and soLuong > 0", ChiTietSP.class);
+            listChiTietSP = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listChiTietSP;
     }
 }

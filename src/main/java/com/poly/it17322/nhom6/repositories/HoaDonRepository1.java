@@ -20,11 +20,12 @@ import org.hibernate.Session;
  */
 public class HoaDonRepository1 {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<HoaDon> selectALLHoaDon() {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon", HoaDon.class);
             listHoaDon = query.getResultList();
         } catch (Exception e) {
@@ -35,7 +36,8 @@ public class HoaDonRepository1 {
 
     public List<HoaDon> getByCodeAndCreateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             if (from != null && to != null) {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma and NgayTao >= :from and NgayTao <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
@@ -57,7 +59,8 @@ public class HoaDonRepository1 {
 
     public List<HoaDon> getByCodeAndUpdateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+        try  {
+            session = HibernatUtil.getSession();
             if (from != null && to != null) {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma and NgayThanhToan >= :from and NgayThanhToan <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
@@ -79,7 +82,8 @@ public class HoaDonRepository1 {
 
     public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID IdHoaDon) {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon", HoaDonChiTiet.class);
             query.setParameter("IdHoaDon", IdHoaDon);
             listHoaDonChiTiet = query.getResultList();
@@ -90,7 +94,8 @@ public class HoaDonRepository1 {
     }
     public List<HoaDonChiTiet> SelectByHoaDonCTID2(UUID IdHoaDon) {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-        try (Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :IdHoaDon", HoaDonChiTiet.class);
             query.setParameter("IdHoaDon", IdHoaDon);
             listHoaDonChiTiet = query.getResultList();

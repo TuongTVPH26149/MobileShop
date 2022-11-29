@@ -22,11 +22,12 @@ import org.hibernate.Session;
  */
 public class SpCTSPRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<Imel> SelectCBOImelById(UUID Idctsp) {
         List<Imel> lstimel = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where IdChiTietSP = :Idctsp", Imel.class);
             query.setParameter("Idctsp", Idctsp);
             lstimel = query.getResultList();
@@ -38,7 +39,8 @@ public class SpCTSPRepository {
 
     public List<SanPham> timKiem(String ten) {
         List<SanPham> lstsprp = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM SanPham where Ten Like :ten", SanPham.class);
             query.setParameter("ten", "%" + ten + "%");
             lstsprp = query.getResultList();
@@ -50,7 +52,8 @@ public class SpCTSPRepository {
 
     public List<Imel> timKiemImel(String ma) {
         List<Imel> lstimel = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where Ma Like :ma", Imel.class);
             query.setParameter("ma", "%" + ma + "%");
             lstimel = query.getResultList();
@@ -59,29 +62,35 @@ public class SpCTSPRepository {
         }
         return lstimel;
     }
-        public List<ChiTietSP> selectALLChiTietSPXoa() {
+
+    public List<ChiTietSP> selectALLChiTietSPXoa() {
         List<ChiTietSP> listChiTietSP = new ArrayList<>();
         try {
-            javax.persistence.Query query = session.createQuery("FROM ChiTietSP WHERE Deleted = 1 " , ChiTietSP.class);
+            session = HibernatUtil.getSession();
+            javax.persistence.Query query = session.createQuery("FROM ChiTietSP WHERE Deleted = 1 ", ChiTietSP.class);
             listChiTietSP = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listChiTietSP;
     }
-                public List<ChiTietSP> selectALLChiTietSP() {
+
+    public List<ChiTietSP> selectALLChiTietSP() {
         List<ChiTietSP> listChiTietSP = new ArrayList<>();
         try {
-            javax.persistence.Query query = session.createQuery("FROM ChiTietSP WHERE Deleted = 0 " , ChiTietSP.class);
+            session = HibernatUtil.getSession();
+            javax.persistence.Query query = session.createQuery("FROM ChiTietSP WHERE Deleted = 0 ", ChiTietSP.class);
             listChiTietSP = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listChiTietSP;
     }
-        public ChiTietSP SelectChiTietSPById(UUID Id) {
+
+    public ChiTietSP SelectChiTietSPById(UUID Id) {
         ChiTietSP ctsp = new ChiTietSP();
-        try( Session session = HibernatUtil.getFACTORY().openSession()){
+        try {
+            session = HibernatUtil.getSession();
             javax.persistence.Query query = session.createQuery("FROM ChiTietSP where id = :Id", ChiTietSP.class);
             query.setParameter("Id", Id);
             ctsp = (ChiTietSP) query.getSingleResult();

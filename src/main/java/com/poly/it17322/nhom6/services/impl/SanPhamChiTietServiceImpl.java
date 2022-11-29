@@ -12,7 +12,6 @@ import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
-import com.poly.it17322.nhom6.repositories.ImelBanHangRepository;
 import com.poly.it17322.nhom6.repositories.ImelRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
@@ -45,7 +44,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
     SpCTSPRepository imelrepo = new SpCTSPRepository();
-    ImelRepository imrepo = new ImelBanHangRepository();
+    ImelRepository imrepo = new ImelRepository();
 
     @Override
     public List<RomRespone> getlistRom() {

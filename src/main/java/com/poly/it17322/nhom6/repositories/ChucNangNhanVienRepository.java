@@ -16,12 +16,13 @@ import org.hibernate.query.Query;
  * @author tuan0
  */
 public class ChucNangNhanVienRepository {
-    
-    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    private Session session = HibernatUtil.getSession();
     
     public List<TaiKhoan> timKiem(String ten) {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM TaiKhoan WHERE HoTen like :ten", TaiKhoan.class);
             query.setParameter("ten", ten + "%");
             listTaiKhoan = query.getResultList();
@@ -30,10 +31,11 @@ public class ChucNangNhanVienRepository {
         }
         return listTaiKhoan;
     }
-    
+
     public List<TaiKhoan> selectTaiKhoan(int trangThai) {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM TaiKhoan WHERE TrangThai = :trangThai", TaiKhoan.class);
             query.setParameter("trangThai", trangThai);
             listTaiKhoan = query.getResultList();
