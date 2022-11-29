@@ -5,7 +5,7 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
-import com.poly.it17322.nhom6.repositories.TaiKhoanDangNhapRepository;
+import com.poly.it17322.nhom6.repositories.TaiKhoanRepository;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.services.IDangNhapService;
 import java.util.UUID;
@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class DangNhapServiceImpl implements IDangNhapService {
 
-    private TaiKhoanDangNhapRepository tkdnRepo = new TaiKhoanDangNhapRepository();
+    private TaiKhoanRepository tkdnRepo = new TaiKhoanRepository();
 
     @Override
     public UserResponse checkTK(String tk, String pass) {

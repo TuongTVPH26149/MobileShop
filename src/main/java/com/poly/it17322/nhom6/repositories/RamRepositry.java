@@ -16,11 +16,12 @@ import org.hibernate.Transaction;
 
 public class RamRepositry {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<Ram> selectALLRam() {
         List<Ram> listRam = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Ram", Ram.class);
             listRam = query.getResultList();
         } catch (Exception e) {
@@ -31,7 +32,8 @@ public class RamRepositry {
 
     public Ram SelectRamById(UUID Id) {
         Ram ram = new Ram();
-        try  {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Ram where Id = :Id", Ram.class);
             query.setParameter("Id", Id);
             ram = (Ram) query.getSingleResult();
@@ -43,6 +45,7 @@ public class RamRepositry {
 
     public Boolean InsertRam(Ram ram) {
         try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(ram);
@@ -55,12 +58,14 @@ public class RamRepositry {
     }
 
     public Boolean UpdateRam(Ram ram) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+       Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             ram.setLastModifiedDate(new Date());
             session.saveOrUpdate(ram);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,11 +20,12 @@ import org.hibernate.query.Query;
  */
 public class ManHinhRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<ManHinh> SelectAllManHinh() {
         List<ManHinh> lstManhinh = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ManHinh", ManHinh.class);
             lstManhinh = query.getResultList();
         } catch (Exception e) {
@@ -36,6 +37,7 @@ public class ManHinhRepository {
     public ManHinh SelectManHinhById(UUID id) {
         ManHinh manhinh = new ManHinh();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ManHinh WHERE id =:id", ManHinh.class);
             query.setParameter("id", id);
             manhinh = (ManHinh) query.getSingleResult();
@@ -46,7 +48,8 @@ public class ManHinhRepository {
     }
 
     public Boolean InsertManHinh(ManHinh manhinh) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()){
+        try{
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(manhinh);
@@ -59,12 +62,14 @@ public class ManHinhRepository {
     }
 
     public Boolean UpdateManHinh(ManHinh manhinh) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()){
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             manhinh.setLastModifiedDate(new Date());
             session.saveOrUpdate(manhinh);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
