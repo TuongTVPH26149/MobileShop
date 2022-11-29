@@ -20,11 +20,12 @@ import javax.persistence.Query;
  */
 public class ChucNangKHRepository extends KhachHangRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<KhachHang> timkiem(String sdt) {
         List<KhachHang> lstKH = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang where Sdt LIKE :sdt", KhachHang.class);
             query.setParameter("sdt", sdt + "%");
             lstKH = query.getResultList();
@@ -37,6 +38,7 @@ public class ChucNangKHRepository extends KhachHangRepository {
     public List<KhachHang> LocKH(int gioitinh) {
         List<KhachHang> lstKH = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang where GioiTinh = :gioitinh", KhachHang.class);
             query.setParameter("gioitinh", gioitinh);
             lstKH = query.getResultList();
@@ -49,6 +51,7 @@ public class ChucNangKHRepository extends KhachHangRepository {
     public List<HoaDon> selectallhoadon(UUID IdKH) {
         List<HoaDon> lstHD = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon where IdKH = :IdKH", HoaDon.class);
             query.setParameter("IdKH", IdKH);
             lstHD = query.getResultList();
