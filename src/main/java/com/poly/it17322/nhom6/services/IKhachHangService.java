@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.services;
 
+import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.KhachHang;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import java.util.Date;
@@ -27,5 +28,7 @@ public interface IKhachHangService {
     public List<KhachHangResponse> timkiem(String sdt);
     
      public List<KhachHangResponse> LocKH(int GioiTinh);
+     
+      public List<HoaDon> selectallhoadon(UUID IdKH);
     
 }
