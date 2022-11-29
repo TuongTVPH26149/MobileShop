@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.services;
 
+import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
 import com.poly.it17322.nhom6.responses.ImelSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
@@ -22,5 +23,9 @@ public interface ISanPhamSPService {
 
     public boolean update(SanPhamSPRespone sp,UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin);
     
+//    public List<SanPhamSPRespone> getlistTimKiem(String ten);
+//    
+//    public List<ImelSPRespone> getlistTimKiemImel(String ma);
     
+    public List<SanPhamSPRespone> selectALLChiTietSPXoa();
 }
