@@ -5,18 +5,23 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.CPU;
+import com.poly.it17322.nhom6.domainmodels.Imel;
 import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import com.poly.it17322.nhom6.domainmodels.Pin;
 import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
+import com.poly.it17322.nhom6.repositories.ImelBanHangRepository;
+import com.poly.it17322.nhom6.repositories.ImelRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
 import com.poly.it17322.nhom6.repositories.PinRepository;
 import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
+import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
 import com.poly.it17322.nhom6.responses.CPURespone;
+import com.poly.it17322.nhom6.responses.ImelSPRespone;
 import com.poly.it17322.nhom6.responses.ManHinhRespone;
 import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
@@ -24,6 +29,7 @@ import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.responses.RomRespone;
 import com.poly.it17322.nhom6.services.ISanPhamChiTietService;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -38,9 +44,8 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     CPURepository cpurepo = new CPURepository();
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
-
-
-
+    SpCTSPRepository imelrepo = new SpCTSPRepository();
+    ImelRepository imrepo = new ImelBanHangRepository();
 
     @Override
     public List<RomRespone> getlistRom() {
@@ -108,8 +113,6 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return mausacrepo.UpdateMauSac(m);
     }
 
-
-
     @Override
     public List<CPURespone> getlistCPU() {
         List<CPU> cpu = cpurepo.selectALLCPU();
@@ -157,7 +160,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public List<PinRespone> getlistPin() {
         List<Pin> pins = pinrepo.selectALLPin();
-        return pins.stream().map(PinRespone ::new).collect(Collectors.toList());
+        return pins.stream().map(PinRespone::new).collect(Collectors.toList());
     }
 
     @Override
@@ -176,4 +179,14 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return pinrepo.UpdatePin(p);
     }
 
+    @Override
+    public List<Imel> getListImel(UUID Idctsp) {       
+        return imelrepo.SelectCBOImelById(Idctsp);
+    }
+    
+    public boolean updateImel(ImelSPRespone imel){
+        Imel im = imrepo.SelectImelById(imel.getId());
+        im.setMa(imel.getMa());
+        return imrepo.UpdateImel(im);
+    }
 }
