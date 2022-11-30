@@ -33,7 +33,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(1080, 720));
         setMinimumSize(new java.awt.Dimension(1080, 720));
 
-        jLabel2.setText("quan ly khuyen mai");
+        jLabel2.setText("nhan vien khuyen mai");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

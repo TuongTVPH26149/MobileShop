@@ -41,19 +41,14 @@ public class Imel implements Serializable {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdHoaDon", referencedColumnName = "id", insertable = false, nullable = true)
-    private HoaDon hoaDon;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdChiTietSP", referencedColumnName = "id", insertable = false, nullable = true)
+    @JoinColumn(name = "IdChiTietSP", nullable = true)
     private ChiTietSP chiTietSP;
 
-    @Column(name = "Ma", unique = true)
-    private int ma;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdTrangThaiImel", referencedColumnName = "id")
-    private TrangThaiImel trangThaiImel;
+    @Column(name = "Ma", unique = true, length = 15)
+    private String ma;
+    
+    @Column(name = "TrangThai")
+    private int trangThai;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -62,7 +57,4 @@ public class Imel implements Serializable {
     @Column(name = "lastModifiedDate", insertable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastModifiedDate;
-
-    @Column(name = "Deleted", insertable = false)
-    private boolean deleted;
 }

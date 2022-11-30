@@ -5,9 +5,7 @@
 package com.poly.it17322.nhom6.domainmodels;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
@@ -23,6 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
@@ -42,9 +40,10 @@ public class KhuyenMai {
     @GeneratedValue
     private UUID Id;
 
-    @Column(name = "Ma", unique = true, length = 20, nullable = false)
+    @Column(name = "Ma", unique = true, length = 20)
     private String ma;
 
+    @Nationalized
     @Column(name = "Ten", length = 30, nullable = false)
     private String ten;
 
@@ -62,10 +61,6 @@ public class KhuyenMai {
     @Column(name = "TrangThai")
     private int trangThai;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdLoaiKM", referencedColumnName = "id")
-    private LoaiKM loaiKM;
-
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
@@ -74,10 +69,5 @@ public class KhuyenMai {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastModifiedDate;
 
-    @Column(name = "Deleted", insertable = false)
-    private boolean deleted;
-
-    @OneToMany(mappedBy = "khuyenMai", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ChiTietSP> lstChiTietSP;
 
 }

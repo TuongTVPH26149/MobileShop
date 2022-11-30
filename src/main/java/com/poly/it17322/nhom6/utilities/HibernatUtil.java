@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.utilities;
 
 import com.poly.it17322.nhom6.domainmodels.*;
 import java.util.Properties;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -19,6 +20,7 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernatUtil {
 
     private static final SessionFactory FACTORY;
+    private static Session SESSION = null;
 
     static {
         Configuration conf = new Configuration();
@@ -34,23 +36,20 @@ public class HibernatUtil {
         conf.setProperties(properties);
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
+        conf.addAnnotatedClass(BaoHanh.class);
         conf.addAnnotatedClass(ChiTietSP.class);
         conf.addAnnotatedClass(CPU.class);
-        conf.addAnnotatedClass(ChucVu.class);
-        conf.addAnnotatedClass(HDH.class);
-        conf.addAnnotatedClass(Hang.class);
+        conf.addAnnotatedClass(ManHinh.class);
+        conf.addAnnotatedClass(Pin.class);
         conf.addAnnotatedClass(Imel.class);
         conf.addAnnotatedClass(KhachHang.class);
         conf.addAnnotatedClass(KhuyenMai.class);
-        conf.addAnnotatedClass(LoaiKM.class);
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(Ram.class);
         conf.addAnnotatedClass(Rom.class);
         conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(TaiKhoan.class);
-        conf.addAnnotatedClass(TrangThaiHoaDon.class);
-        conf.addAnnotatedClass(TrangThaiImel.class);
-        conf.addAnnotatedClass(TrangThaiTaiKhoan.class);
+        conf.addAnnotatedClass(ImelBan.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
@@ -58,11 +57,10 @@ public class HibernatUtil {
 
     }
 
-    public static SessionFactory getFACTORY() {
-        return FACTORY;
-    }
-
-    public static void main(String[] args) {
-        getFACTORY();
+    public static Session getSession() {
+        if (SESSION == null || !SESSION.isConnected()) {
+            SESSION = FACTORY.openSession();
+        }
+        return SESSION;
     }
 }

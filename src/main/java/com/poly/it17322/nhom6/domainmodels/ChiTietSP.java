@@ -7,9 +7,7 @@ package com.poly.it17322.nhom6.domainmodels;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
@@ -60,11 +57,25 @@ public class ChiTietSP implements Serializable {
     @JoinColumn(name = "IdCPU", referencedColumnName = "id")
     private CPU cpu;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdManHinh", referencedColumnName = "id")
+    private ManHinh manHinh;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdPin", referencedColumnName = "id")
+    private Pin pin;
+
+    @Column(name = "LoaiHang")
+    private int loaiHang;
+
     @Column(name = "Gia")
     private BigDecimal gia;
 
     @Column(name = "SoLuong")
     private int soLuong;
+    
+    @Column(name = "MoTa")
+    private String moTa;
 
     @Column(name = "HinhAnh", length = 100)
     private String hinhAnh;
@@ -87,10 +98,4 @@ public class ChiTietSP implements Serializable {
 
     @Column(name = "Deleted", insertable = false)
     private boolean deleted;
-
-    @OneToMany(mappedBy = "chiTietSP", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HoaDonChiTiet> lstHoaDonChiTiet;
-    
-    @OneToMany(mappedBy = "chiTietSP", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Imel> lstImel;
 }
