@@ -381,8 +381,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         btnTaoHoaDon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTaoHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         btnTaoHoaDon.setIcon(new ImageIcon("src/main/resource/icon/createbill.png"));
-        btnTaoHoaDon.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
-        btnTaoHoaDon.setBorderPainted(false);
         btnTaoHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTaoHoaDon.setFocusPainted(false);
         btnTaoHoaDon.setFocusable(false);
@@ -399,7 +397,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         btnHuyHoaDon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnHuyHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         btnHuyHoaDon.setIcon(new ImageIcon("src/main/resource/icon/removebill.png"));
-        btnHuyHoaDon.setBorderPainted(false);
         btnHuyHoaDon.setEnabled(false);
         btnHuyHoaDon.setMaximumSize(new java.awt.Dimension(145, 40));
         btnHuyHoaDon.setMinimumSize(new java.awt.Dimension(145, 40));
@@ -414,8 +411,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         btnThanhToan.setIcon(new ImageIcon("src/main/resource/icon/Cash.png"));
-        btnThanhToan.setBorder(null);
-        btnThanhToan.setBorderPainted(false);
         btnThanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThanhToan.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         btnThanhToan.setEnabled(false);
@@ -484,7 +479,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         btnShipping.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnShipping.setForeground(new java.awt.Color(255, 255, 255));
         btnShipping.setIcon(new ImageIcon("src/main/resource/icon/shipping.png"));
-        btnShipping.setBorderPainted(false);
         btnShipping.setEnabled(false);
         btnShipping.setMaximumSize(new java.awt.Dimension(145, 40));
         btnShipping.setMinimumSize(new java.awt.Dimension(145, 40));
@@ -1058,7 +1052,7 @@ public class FrmBanHang extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Chọn tất cả");
-        jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1069,7 +1063,7 @@ public class FrmBanHang extends javax.swing.JPanel {
         btnxoagh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnxoagh.setForeground(new java.awt.Color(255, 255, 255));
         btnxoagh.setText("Xóa");
-        btnxoagh.setBorder(null);
+        btnxoagh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnxoagh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnxoaghActionPerformed(evt);
@@ -1084,18 +1078,15 @@ public class FrmBanHang extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnxoagh)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
-
-        jPanel9Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnxoagh, jButton1});
-
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnxoagh, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(btnxoagh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1159,9 +1150,9 @@ public class FrmBanHang extends javax.swing.JPanel {
             int trangThai = lstHoaDon.get(indexHD).getTrangThai();
             int cbo = cboNoiNhan.getSelectedIndex();
             if (trangThai == 0 && cbo == 1) {
-                bhs.updateHD(lstHoaDon.get(indexHD).getId(), cbo);
+                bhs.updateHD(lstHoaDon.get(indexHD).getId(), cbo, txtDiaChi.getText());
             } else if (trangThai == 1 && cbo == 0) {
-                bhs.updateHD(lstHoaDon.get(indexHD).getId(), cbo);
+                bhs.updateHD(lstHoaDon.get(indexHD).getId(), cbo, txtDiaChi.getText());
             }
         }
         try {
@@ -1268,8 +1259,9 @@ public class FrmBanHang extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Chưa nhập địa chỉ");
                 return;
             }
-            if (bhs.updateHD(lstHoaDon.get(indexHD).getId(), 2)) {
+            if (bhs.updateHD(lstHoaDon.get(indexHD).getId(), 2, txtDiaChi.getText())) {
                 JOptionPane.showMessageDialog(this, "Đơn hàng đã được giao");
+                fillTableHoaDon();
             }
         }
     }//GEN-LAST:event_btnShippingActionPerformed
@@ -1689,6 +1681,22 @@ public class FrmBanHang extends javax.swing.JPanel {
         txtGiamGiaDacbiet.setText(dh.getGiamGia() + "");
         cboHinhThuc.setSelectedIndex(dh.getHinhThuc());
         cboNoiNhan.setSelectedIndex(dh.getNhanHang());
+        if (dh.getTrangThai() == 1) {
+            btnShipping.setEnabled(false);
+            btnShipping.setBackground(Color.yellow);
+            txtDiaChi.setText(dh.getDiaChi());
+        } 
+        if (dh.getTrangThai() == 2) {
+            btnShipping.setEnabled(false);
+            btnShipping.setBackground(Color.gray);
+            txtDiaChi.setText(dh.getDiaChi());
+            txtDiaChi.setEnabled(false);
+            cboNoiNhan.setEnabled(false);
+        } else {
+            txtDiaChi.setEnabled(true);
+            cboNoiNhan.setEnabled(true);
+        }
+
     }
 
     private void fillTableSP() {

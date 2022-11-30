@@ -20,11 +20,11 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class LineChart_AWT extends JFrame {
 
-    public LineChart_AWT(String applicationTitle, String chartTitle, List<BigDecimal> tong, List<String> date) {
+    public LineChart_AWT(String applicationTitle, String chartTitle, List<BigDecimal> tong, List<String> date, String title) {
         super(applicationTitle);
         JFreeChart lineChart = ChartFactory.createLineChart(
                 chartTitle,
-                "ngày", "Thu nhập",
+                title, "Tổng tiền bán sản phẩm",
                 createDataset(tong, date),
                 PlotOrientation.VERTICAL,
                 true, true, false);

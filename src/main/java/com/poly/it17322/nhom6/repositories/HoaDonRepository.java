@@ -82,6 +82,7 @@ public class HoaDonRepository {
     public List<HoaDon> getByCodeAndCreateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             if (from != null && to != null) {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma and NgayTao >= :from and NgayTao <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
@@ -107,6 +108,7 @@ public class HoaDonRepository {
     public List<HoaDon> getByCodeAndUpdateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             if (from != null && to != null) {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma and lastModifiedDate >= :from and lastModifiedDate <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
@@ -132,6 +134,7 @@ public class HoaDonRepository {
     public List<HoaDon> getHD() {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon where trangThai in (0,1,2) order by ma desc", HoaDon.class);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listHoaDon = query.getResultList();
@@ -145,6 +148,7 @@ public class HoaDonRepository {
     public List<HoaDon> getHDByDate(Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai = 4", HoaDon.class);
             query.setParameter("from", from);
             query.setParameter("to", to);

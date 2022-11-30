@@ -225,7 +225,7 @@ public class FrmThongKe extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Biểu đồ tháng");
+        jButton2.setText("Biểu đồ năm");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 204, 0), new java.awt.Color(102, 255, 0)));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -545,10 +545,10 @@ public class FrmThongKe extends javax.swing.JPanel {
             tongHd++;
             tongSP += h.getSl();
             tongTien += Long.parseLong(h.getTongTien().toString());
-            lblTongTien.setText(tongTien + "");
-            lblTongsp.setText(tongSP + "");
-            lblTonghd.setText(tongHd + "");
         }
+        lblTongTien.setText(tongTien + "");
+        lblTongsp.setText(tongSP + "");
+        lblTonghd.setText(tongHd + "");
     }
 
     private void fillTableTop() {
@@ -573,7 +573,7 @@ public class FrmThongKe extends javax.swing.JPanel {
             lsts.add(sdf.format(to));
             to = new Date(now.getTime() - 86400000 * i);
         }
-        LineChart_AWT chart = new LineChart_AWT("Biểu đồ thống kê doanh thu", "Thu nhập", lst, lsts);
+        LineChart_AWT chart = new LineChart_AWT("Biểu đồ thống kê doanh thu", "Thu nhập", lst, lsts, "Ngày");
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);
@@ -596,7 +596,7 @@ public class FrmThongKe extends javax.swing.JPanel {
             } catch (ParseException ex) {
             }
         }
-        LineChart_AWT chart = new LineChart_AWT("Biểu đồ thống kê doanh thu", "Thu nhập", lst, lsts);
+        LineChart_AWT chart = new LineChart_AWT("Biểu đồ thống kê doanh thu", "Thu nhập", lst, lsts, "Tháng");
         chart.pack();
         RefineryUtilities.centerFrameOnScreen(chart);
         chart.setVisible(true);

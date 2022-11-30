@@ -1659,7 +1659,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         jPanel13.setMinimumSize(new java.awt.Dimension(184, 55));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("Số lượng");
+        jLabel6.setText("Số lượng tồn");
 
         jPanel14.setBackground(new java.awt.Color(51, 51, 51));
         jPanel14.setMaximumSize(new java.awt.Dimension(174, 1));
@@ -1676,6 +1676,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             .addGap(0, 1, Short.MAX_VALUE)
         );
 
+        txtsoluong.setEditable(false);
         txtsoluong.setBorder(null);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -2341,13 +2342,15 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void btninsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertActionPerformed
         addDataCTSP();
     }//GEN-LAST:event_btninsertActionPerformed
-
+    int sl = 1;
     private void btnaddimelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddimelActionPerformed
         String maimel = txtmaimel.getText();
         ImelAoSPRespone imelao = new ImelAoSPRespone();
         imelao.setMa(maimel);
+        txtsoluong.setText(sl + "");
         lstimelao.add(imelao);
         FilltoTableImelAO();
+        sl++;
         setCboImel();
     }//GEN-LAST:event_btnaddimelActionPerformed
 

@@ -48,8 +48,9 @@ public class BanHangServiceIml implements IBanHangService {
 
     @Override
     public List<HoaDonBanHangRespone> getALLHoaDonBanHang() {
+        List<HoaDonBanHangRespone> lstHd = new ArrayList<>();
         List<HoaDon> hds = hdrepo.getHD();
-        List<HoaDonBanHangRespone> lstHd = hds.stream().map(HoaDonBanHangRespone::new).collect(Collectors.toList());
+        lstHd = hds.stream().map(HoaDonBanHangRespone::new).collect(Collectors.toList());
         List<HoaDonBanHangRespone> lstHDBH = new ArrayList<>();
         for (HoaDonBanHangRespone s : lstHd) {
             HoaDonBanHangRespone hd = new HoaDonBanHangRespone();
@@ -95,7 +96,7 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setMa(maHD);
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(idNV));
             hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
-            hd.setTrangThai(1);
+            hd.setTrangThai(0);
             hd.setNgayTao(new Date());
             hd.setDiaChi("Tại cửa hàng");
             hd.setTongTien(new BigDecimal(0));
@@ -322,9 +323,10 @@ public class BanHangServiceIml implements IBanHangService {
         return imelrepo.UpdateImel(im);
     }
     @Override
-    public boolean updateHD(UUID idhd, int trangThai) {
+    public boolean updateHD(UUID idhd, int trangThai, String diaChi) {
         HoaDon hd = hdrepo.SelectHoaDonById(idhd);
         hd.setTrangThai(trangThai);
+        hd.setDiaChi(diaChi);
         return hdrepo.UpdateHoaDon(hd);
     }
     

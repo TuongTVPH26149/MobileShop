@@ -22,7 +22,7 @@ public interface IBanHangService {
 
     List<HoaDonBanHangRespone> getALLHoaDonBanHang();
 
-    boolean updateHD(UUID idhd, int trangThai);
+    boolean updateHD(UUID idhd, int trangThai,String diaChi);
 
     khachHangBanHangRespone getkh(UUID ma);
 
