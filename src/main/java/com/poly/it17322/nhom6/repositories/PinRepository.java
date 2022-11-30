@@ -27,7 +27,9 @@ public class PinRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Pin", Pin.class);
-            listPin = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listPin = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

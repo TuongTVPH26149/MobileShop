@@ -28,7 +28,9 @@ public class TaiKhoanRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM TaiKhoan", TaiKhoan.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             listTaiKhoan = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

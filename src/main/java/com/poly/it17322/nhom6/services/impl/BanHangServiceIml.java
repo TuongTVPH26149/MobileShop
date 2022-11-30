@@ -22,6 +22,7 @@ import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
+import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import com.poly.it17322.nhom6.services.IBanHangService;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -76,7 +77,7 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return lstSP;
     }
-    
+
     @Override
     public List<GioHangRespone> getAllGH(UUID id) {
         HoaDon hd = hdrepo.SelectHoaDonById(id);
@@ -97,9 +98,11 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setTrangThai(1);
             hd.setNgayTao(new Date());
             hd.setDiaChi("Tại cửa hàng");
+            hd.setTongTien(new BigDecimal(0));
             hd.setTienMat(new BigDecimal(0));
             hd.setChuyenKhoan(new BigDecimal(0));
             hd.setGiamGia(new BigDecimal(0));
+            hd.setLoaiThanhToan(0);
             hdrepo.InsertHoaDon(hd);
             return true;
         } catch (Exception e) {
@@ -155,7 +158,7 @@ public class BanHangServiceIml implements IBanHangService {
     public boolean updateDonHang(DonHangRespone dh) {
         try {
             HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getMaKH()));
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setTongTien(dh.getTongTien());
             hd.setGiamGia(dh.getGiamGia());
@@ -170,7 +173,6 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return false;
     }
-
 
     @Override
     public GioHangRespone getGH(UUID idhd, UUID idsp) {
@@ -266,7 +268,7 @@ public class BanHangServiceIml implements IBanHangService {
     public boolean thanhToan(DonHangRespone dh) {
         try {
             HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getMaKH()));
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setMa(dh.getMaHD());
             hd.setNgayThanhToan(new Date());
@@ -284,6 +286,10 @@ public class BanHangServiceIml implements IBanHangService {
             e.printStackTrace();
         }
         return false;
+    }
+    @Override
+    public khachHangBanHangRespone getkh(UUID id) {
+        return new khachHangBanHangRespone(khrepo.SelectKhachHangById(id));
     }
 
     @Override
@@ -315,5 +321,13 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return imelrepo.UpdateImel(im);
     }
+    @Override
+    public boolean updateHD(UUID idhd, int trangThai) {
+        HoaDon hd = hdrepo.SelectHoaDonById(idhd);
+        hd.setTrangThai(trangThai);
+        return hdrepo.UpdateHoaDon(hd);
+    }
+    
+    
 
 }

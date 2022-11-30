@@ -27,7 +27,9 @@ public class KhachHangRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang", KhachHang.class);
-            listKhachHang = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listKhachHang = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +40,7 @@ public class KhachHangRepository {
         KhachHang kh = new KhachHang();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM KhachHang where Id = :Id", KhachHang.class);
+            Query query = session.createQuery("FROM KhachHang where id = :Id", KhachHang.class);
             query.setParameter("Id", Id);
             kh = (KhachHang) query.getSingleResult();
         } catch (Exception e) {
@@ -81,7 +83,7 @@ public class KhachHangRepository {
         KhachHang kh = new KhachHang();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM KhachHang WHERE ma = :ma", KhachHang.class);
+            Query query = session.createQuery("FROM KhachHang WHERE Ma = :ma", KhachHang.class);
             query.setParameter("ma", ma);
             kh = (KhachHang) query.getSingleResult();
         } catch (Exception e) {

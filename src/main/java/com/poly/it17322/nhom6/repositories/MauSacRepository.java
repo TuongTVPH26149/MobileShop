@@ -27,7 +27,9 @@ public class MauSacRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM MauSac", MauSac.class);
-            listMauSac = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listMauSac = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

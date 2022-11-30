@@ -27,7 +27,9 @@ public class SanPhamReposiry {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM SanPham", SanPham.class);
-            listSanPham = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listSanPham = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

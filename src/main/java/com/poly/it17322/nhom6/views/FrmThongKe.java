@@ -9,14 +9,24 @@ import com.poly.it17322.nhom6.responses.HoaDonThongKeRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.responses.top5sprespone;
 import com.poly.it17322.nhom6.services.impl.ThongKeServiceIml;
+import com.poly.it17322.nhom6.utilities.LineChart_AWT;
 import com.poly.it17322.nhom6.utilities.SenderMailUtil;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -28,8 +38,8 @@ public class FrmThongKe extends javax.swing.JPanel {
     private DefaultTableModel dtm = new DefaultTableModel();
     private ThongKeServiceIml tk = new ThongKeServiceIml();
     private List<HoaDonThongKeRespone> lsthd = new ArrayList<>();
-    private List<top5sprespone> lsttop5 = new ArrayList<>();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyy");
+    private SimpleDateFormat sdfs = new SimpleDateFormat("MM");
 
     /**
      * Creates new form frmBanHang
@@ -38,13 +48,9 @@ public class FrmThongKe extends javax.swing.JPanel {
         initComponents();
         txtFrom.setDate(new Date());
         txtTo.setDate(new Date());
-        for (int i = 0; i < 5; i++) {
-            top5sprespone t = new top5sprespone("SP00"+i, i+4, new BigDecimal(10000000*(i+2)));
-            lsttop5.add(t);
-        }
-        fillTableTop();
         lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
         filltabelhd();
+        fillTableTop();
     }
 
     /**
@@ -56,6 +62,7 @@ public class FrmThongKe extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
@@ -77,6 +84,17 @@ public class FrmThongKe extends javax.swing.JPanel {
         txtFrom = new com.toedter.calendar.JDateChooser();
         txtTo = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1080, 720));
@@ -195,16 +213,26 @@ public class FrmThongKe extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Biểu đồ tháng");
+        jButton1.setText("Biểu đồ tuần");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(51, 255, 204), new java.awt.Color(102, 255, 204)));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Biểu đồ năm");
+        jButton2.setText("Biểu đồ tháng");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 204, 0), new java.awt.Color(102, 255, 0)));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 102, 102));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -285,6 +313,11 @@ public class FrmThongKe extends javax.swing.JPanel {
         });
 
         txtTo.setDateFormatString("dd-MM-yyyy");
+        txtTo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtToPropertyChange(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Đến");
@@ -396,18 +429,21 @@ public class FrmThongKe extends javax.swing.JPanel {
                 txtFrom.setDate(new Date());
                 lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
                 filltabelhd();
+                fillTableTop();
                 break;
             case 1:
                 txtTo.setDate(new Date());
                 txtFrom.setDate(new Date(new Date().getTime() - 86400000));
                 lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
                 filltabelhd();
+                fillTableTop();
                 break;
             case 2:
                 txtTo.setDate(new Date());
                 txtFrom.setDate(new Date(new Date().getTime() - 86400000 * 7));
                 lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
                 filltabelhd();
+                fillTableTop();
                 break;
             case 3:
                 txtTo.setDate(new Date());
@@ -418,6 +454,7 @@ public class FrmThongKe extends javax.swing.JPanel {
                 txtFrom.setDate(d);
                 lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
                 filltabelhd();
+                fillTableTop();
                 break;
         }
     }//GEN-LAST:event_cboselectngayItemStateChanged
@@ -425,15 +462,15 @@ public class FrmThongKe extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String email = JOptionPane.showInputDialog("Email cần báo cáo");
-        String top5 = "\nTên sản phẩm\tSố lượng\tTổng tiền";
-        for (top5sprespone s : lsttop5) {
-            top5 += "\n"+s.getTen()+"\t"+s.getSl()+"\t"+s.getTongTien()+"";
+        String top5 = "";
+        for (top5sprespone s : tk.getTop(txtFrom.getDate(), txtTo.getDate())) {
+            top5 += "\n" + s.getTen() + "\t" + s.getSl() + "\t" + s.getTongTien() + "";
         }
         String noiDung = "báo cáo thống kê từ ngày " + sdf.format(txtFrom.getDate()) + " đến ngày " + sdf.format(txtTo.getDate()) + " \n"
                 + "Tổng tiền: " + lblTongTien.getText() + " VND "
                 + "Tổng hóa đơn: " + lblTonghd.getText() + "\n"
                 + "Tổng Sản phẩm: " + lblTongsp.getText() + "\n"
-                + "-------Top 5 sản phẩm bán chạy-------"+top5;
+                + "-------Top 5 sản phẩm bán chạy-------" + top5;
         if (!new SenderMailUtil().sendMail("Báo cáo thống kê", noiDung, email)) {
             JOptionPane.showMessageDialog(this, "Gửi báo cáo thành công");
         } else {
@@ -445,7 +482,25 @@ public class FrmThongKe extends javax.swing.JPanel {
         // TODO add your handling code here:
         lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
         filltabelhd();
+        fillTableTop();
     }//GEN-LAST:event_txtFromPropertyChange
+
+    private void txtToPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtToPropertyChange
+        // TODO add your handling code here:
+        lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
+        filltabelhd();
+        fillTableTop();
+    }//GEN-LAST:event_txtToPropertyChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        genChartWeek();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        genChartMonth();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -453,6 +508,7 @@ public class FrmThongKe extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -498,12 +554,51 @@ public class FrmThongKe extends javax.swing.JPanel {
     private void fillTableTop() {
         dtm = (DefaultTableModel) tblTop.getModel();
         dtm.setRowCount(0);
-        for (top5sprespone h : lsttop5) {
+        for (top5sprespone h : tk.getTop(txtFrom.getDate(), txtTo.getDate())) {
             dtm.addRow(new Object[]{
                 h.getTen(),
                 h.getSl(),
                 h.getTongTien()
             });
         }
+    }
+
+    private void genChartWeek() {
+        List<BigDecimal> lst = new ArrayList<>();
+        List<String> lsts = new ArrayList<>();
+        Date now = new Date();
+        Date to = now;
+        for (int i = 1; i <= 7; i++) {
+            lst.add(tk.getWeekChar(to));
+            lsts.add(sdf.format(to));
+            to = new Date(now.getTime() - 86400000 * i);
+        }
+        LineChart_AWT chart = new LineChart_AWT("Biểu đồ thống kê doanh thu", "Thu nhập", lst, lsts);
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
+    }
+
+    private void genChartMonth() {
+        List<BigDecimal> lst = new ArrayList<>();
+        List<String> lsts = new ArrayList<>();
+        Date now = new Date();
+        Date to = now;
+        for (int i = 1; i <= 12; i++) {
+            try {
+                lst.add(tk.getYearChar(now, to));
+                lsts.add("T" + sdfs.format(to));
+                LocalDateTime ldt = LocalDateTime.now().minusMonths(i);
+                DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.getDefault());
+                String formatter = formmat1.format(ldt);
+                now = to;
+                to = sdf.parse(formatter);
+            } catch (ParseException ex) {
+            }
+        }
+        LineChart_AWT chart = new LineChart_AWT("Biểu đồ thống kê doanh thu", "Thu nhập", lst, lsts);
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
     }
 }

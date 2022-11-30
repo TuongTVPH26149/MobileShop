@@ -28,7 +28,9 @@ public class ChucNangKHRepository extends KhachHangRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang where Sdt LIKE :sdt", KhachHang.class);
             query.setParameter("sdt", sdt + "%");
-            lstKH = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                lstKH = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +43,9 @@ public class ChucNangKHRepository extends KhachHangRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang where GioiTinh = :gioitinh", KhachHang.class);
             query.setParameter("gioitinh", gioitinh);
-            lstKH = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                lstKH = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +58,9 @@ public class ChucNangKHRepository extends KhachHangRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon where IdKH = :IdKH", HoaDon.class);
             query.setParameter("IdKH", IdKH);
-            lstHD = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                lstHD = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

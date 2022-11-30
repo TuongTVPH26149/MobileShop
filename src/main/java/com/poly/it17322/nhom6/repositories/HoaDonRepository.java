@@ -27,7 +27,9 @@ public class HoaDonRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon", HoaDon.class);
-            listHoaDon = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDon = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +64,7 @@ public class HoaDonRepository {
     }
 
     public Boolean UpdateHoaDon(HoaDon hd) {
-       Transaction tran = null;
+        Transaction tran = null;
         try {
             session = HibernatUtil.getSession();
             tran = session.beginTransaction();
@@ -85,11 +87,15 @@ public class HoaDonRepository {
                 query.setParameter("ma", "%" + ma + "%");
                 query.setParameter("from", from);
                 query.setParameter("to", to);
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             } else {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             }
 
         } catch (Exception e) {
@@ -106,11 +112,15 @@ public class HoaDonRepository {
                 query.setParameter("ma", "%" + ma + "%");
                 query.setParameter("from", from);
                 query.setParameter("to", to);
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             } else {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             }
 
         } catch (Exception e) {
@@ -122,8 +132,10 @@ public class HoaDonRepository {
     public List<HoaDon> getHD() {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
-            Query query = session.createQuery("FROM HoaDon where trangThai in (1,2,3) order by ma desc", HoaDon.class);
-            listHoaDon = query.getResultList();
+            Query query = session.createQuery("FROM HoaDon where trangThai in (0,1,2) order by ma desc", HoaDon.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDon = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,7 +148,9 @@ public class HoaDonRepository {
             Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai = 4", HoaDon.class);
             query.setParameter("from", from);
             query.setParameter("to", to);
-            list = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                list = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

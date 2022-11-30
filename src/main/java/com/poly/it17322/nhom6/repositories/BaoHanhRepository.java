@@ -19,14 +19,17 @@ import org.hibernate.Transaction;
  * @author LiamTrieu
  */
 public class BaoHanhRepository {
+
     private Session session = HibernatUtil.getSession();
 
     public List<BaoHanh> selectALLBaoHanh() {
         List<BaoHanh> listBaoHanh = new ArrayList<>();
-        try{
+        try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM BaoHanh", BaoHanh.class);
-            listBaoHanh = query.getResultList();
+            if (query.getSingleResult() != null) {
+                listBaoHanh = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,12 +37,14 @@ public class BaoHanhRepository {
     }
 
     public BaoHanh SelectBaoHanhById(UUID Id) {
-        BaoHanh baoHanh = new BaoHanh();
-        try{
+        BaoHanh baoHanh = null;
+        try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM BaoHanh where Id = :Id", BaoHanh.class);
             query.setParameter("Id", Id);
-            baoHanh = (BaoHanh) query.getSingleResult();
+            if (query.getSingleResult() != null) {
+                baoHanh = (BaoHanh) query.getSingleResult();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

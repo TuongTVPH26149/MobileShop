@@ -28,6 +28,9 @@ public class KhuyenMaiRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
             listKhuyenMai = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listKhuyenMai = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

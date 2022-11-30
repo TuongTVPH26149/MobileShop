@@ -47,7 +47,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="quan ly khuyen mai"/>
+        <Property name="text" type="java.lang.String" value="nhan vien khuyen mai"/>
       </Properties>
     </Component>
   </SubComponents>

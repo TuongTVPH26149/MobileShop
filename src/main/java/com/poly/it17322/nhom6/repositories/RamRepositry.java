@@ -23,7 +23,9 @@ public class RamRepositry {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Ram", Ram.class);
-            listRam = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listRam = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

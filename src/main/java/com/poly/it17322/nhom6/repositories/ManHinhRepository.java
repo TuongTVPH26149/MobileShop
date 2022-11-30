@@ -27,7 +27,9 @@ public class ManHinhRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ManHinh", ManHinh.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             lstManhinh = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

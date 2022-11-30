@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -27,7 +28,9 @@ public class ImelRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel", Imel.class);
-            listImel = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImel = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +39,7 @@ public class ImelRepository {
 
     public Imel SelectImelById(UUID Id) {
         Imel imel = new Imel();
-        try{
+        try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where Id = :Id", Imel.class);
             query.setParameter("Id", Id);
@@ -48,7 +51,7 @@ public class ImelRepository {
     }
 
     public Boolean InsertImel(Imel imel) {
-        try{
+        try {
             session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
@@ -83,7 +86,9 @@ public class ImelRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel WHERE IdChiTietSP = :ctsp and TrangThai = 1", Imel.class);
             query.setParameter("ctsp", ctSP);
-            lstImel = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                lstImel = query.getResultList();
+            }
         } catch (Exception e) {
             return new ArrayList<>();
         }
@@ -92,11 +97,12 @@ public class ImelRepository {
 
     public Imel SelectImelBanByMa(String ma) {
         Imel imel = new Imel();
-        try{
+        try {
             session = HibernatUtil.getSession();
             javax.persistence.Query query = session.createQuery("FROM Imel where ma = :ma", Imel.class);
             query.setParameter("ma", ma);
             imel = (Imel) query.getSingleResult();
+        } catch (NoResultException e) {
         } catch (Exception e) {
             e.printStackTrace();
         }
