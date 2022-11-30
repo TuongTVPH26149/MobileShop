@@ -49,7 +49,7 @@ public class HoaDonBanHangRespone {
             sdf.format(ngayTao),
             nguoiTao,
             khachHang,
-            trangThai == 1 ? "chờ thanh toán" : (trangThai == 2 ? "Chờ giao" : "Đang giao")
+            trangThai == 0 ? "chờ thanh toán" : (trangThai == 1 ? "Chờ giao" : "Đang giao")
         };
     }
 

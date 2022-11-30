@@ -28,7 +28,9 @@ public class ImelBanRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ImelBan", ImelBan.class);
-            listImelBan = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImelBan = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,7 +112,9 @@ public class ImelBanRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ImelBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 1", ImelBan.class);
             query.setParameter("hdct", hdct);
-            listImelBan = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImelBan = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

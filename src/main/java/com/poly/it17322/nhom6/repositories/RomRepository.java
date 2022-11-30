@@ -23,7 +23,9 @@ public class RomRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Rom", Rom.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             listRom = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

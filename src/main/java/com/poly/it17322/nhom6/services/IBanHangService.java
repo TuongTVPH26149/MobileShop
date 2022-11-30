@@ -10,6 +10,7 @@ import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
+import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,10 @@ import java.util.UUID;
 public interface IBanHangService {
 
     List<HoaDonBanHangRespone> getALLHoaDonBanHang();
+
+    boolean updateHD(UUID idhd, int trangThai,String diaChi);
+
+    khachHangBanHangRespone getkh(UUID ma);
 
     List<SanPhamBanHangResponse> getAllSpBh();
 

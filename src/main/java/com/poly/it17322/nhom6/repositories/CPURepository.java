@@ -28,7 +28,9 @@ public class CPURepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM CPU", CPU.class);
-            listCPU = query.getResultList();
+            if (query.getResultList() != null) {
+                listCPU = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +43,9 @@ public class CPURepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM CPU where Id = :Id", CPU.class);
             query.setParameter("Id", Id);
+            if (query.getSingleResult() != null) {
             cpu = (CPU) query.getSingleResult();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -27,7 +27,9 @@ public class HoaDonRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon", HoaDon.class);
-            listHoaDon = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDon = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +64,7 @@ public class HoaDonRepository {
     }
 
     public Boolean UpdateHoaDon(HoaDon hd) {
-       Transaction tran = null;
+        Transaction tran = null;
         try {
             session = HibernatUtil.getSession();
             tran = session.beginTransaction();
@@ -80,16 +82,21 @@ public class HoaDonRepository {
     public List<HoaDon> getByCodeAndCreateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             if (from != null && to != null) {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma and NgayTao >= :from and NgayTao <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
                 query.setParameter("from", from);
                 query.setParameter("to", to);
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             } else {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             }
 
         } catch (Exception e) {
@@ -101,16 +108,21 @@ public class HoaDonRepository {
     public List<HoaDon> getByCodeAndUpdateDate(String ma, Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             if (from != null && to != null) {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma and lastModifiedDate >= :from and lastModifiedDate <= :to", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
                 query.setParameter("from", from);
                 query.setParameter("to", to);
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             } else {
                 Query query = session.createQuery("FROM HoaDon where ma like :ma", HoaDon.class);
                 query.setParameter("ma", "%" + ma + "%");
-                list = query.getResultList();
+                if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                    list = query.getResultList();
+                }
             }
 
         } catch (Exception e) {
@@ -122,8 +134,11 @@ public class HoaDonRepository {
     public List<HoaDon> getHD() {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
-            Query query = session.createQuery("FROM HoaDon where trangThai in (1,2,3) order by ma desc", HoaDon.class);
-            listHoaDon = query.getResultList();
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM HoaDon where trangThai in (0,1,2) order by ma desc", HoaDon.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDon = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,10 +148,13 @@ public class HoaDonRepository {
     public List<HoaDon> getHDByDate(Date from, Date to) {
         List<HoaDon> list = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai = 4", HoaDon.class);
             query.setParameter("from", from);
             query.setParameter("to", to);
-            list = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                list = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,10 +18,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class top5sprespone {
     private String ten;
-    private int sl;
-    private BigDecimal tongTien;
+    private String sl;
+    private String tongTien;
 
-    public top5sprespone(String ten, int sl, BigDecimal tongTien) {
+    public top5sprespone(String ten, String sl, String tongTien) {
         this.ten = ten;
         this.sl = sl;
         this.tongTien = tongTien;

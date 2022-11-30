@@ -30,6 +30,8 @@ public class SpCTSPRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where IdChiTietSP = :Idctsp", Imel.class);
             query.setParameter("Idctsp", Idctsp);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+            }
             lstimel = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +45,9 @@ public class SpCTSPRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM SanPham where Ten Like :ten", SanPham.class);
             query.setParameter("ten", "%" + ten + "%");
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             lstsprp = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,7 +60,9 @@ public class SpCTSPRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where Ma Like :ma", Imel.class);
             query.setParameter("ma", "%" + ma + "%");
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             lstimel = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +74,10 @@ public class SpCTSPRepository {
         try {
             session = HibernatUtil.getSession();
             javax.persistence.Query query = session.createQuery("FROM ChiTietSP WHERE Deleted = 1 ", ChiTietSP.class);
-            listChiTietSP = query.getResultList();
+            
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listChiTietSP = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,7 +89,10 @@ public class SpCTSPRepository {
         try {
             session = HibernatUtil.getSession();
             javax.persistence.Query query = session.createQuery("FROM ChiTietSP WHERE Deleted = 0 ", ChiTietSP.class);
-            listChiTietSP = query.getResultList();
+            
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listChiTietSP = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

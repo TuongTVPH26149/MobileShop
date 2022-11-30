@@ -28,7 +28,9 @@ public class HoaDonChiTietRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDonChiTiet", HoaDonChiTiet.class);
-            listHoaDonChiTiet = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDonChiTiet = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +43,9 @@ public class HoaDonChiTietRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :id", HoaDonChiTiet.class);
             query.setParameter("id", id);
-            listHoaDonChiTiet = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDonChiTiet = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,7 +116,9 @@ public class HoaDonChiTietRepository {
             Query query = session.createQuery("FROM HoaDonChiTiet WHERE IdHoaDon = :idhd and IdChiTietSP = :idsp", HoaDonChiTiet.class);
             query.setParameter("idhd", idhd);
             query.setParameter("idsp", idsp);
-            hds = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                hds = query.getResultList();
+            }
             return hds;
         } catch (NoResultException e) {
             return new ArrayList<>();

@@ -27,7 +27,9 @@ public class ChiTietSPRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ChiTietSP", ChiTietSP.class);
-            listChiTietSP = query.getResultList();
+            if (query.getResultList() != null) {
+                listChiTietSP = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,7 +42,9 @@ public class ChiTietSPRepository {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
             query.setParameter("Id", Id);
-            ctsp = (ChiTietSP) query.getSingleResult();
+            if (query.getSingleResult() != null) {
+                ctsp = (ChiTietSP) query.getSingleResult();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,7 +86,9 @@ public class ChiTietSPRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ChiTietSP Where deleted = 0 and soLuong > 0", ChiTietSP.class);
-            listChiTietSP = query.getResultList();
+            if (query.getResultList() != null) {
+                listChiTietSP = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
