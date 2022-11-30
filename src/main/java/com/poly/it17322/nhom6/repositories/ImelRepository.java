@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,13 +21,16 @@ import org.hibernate.query.Query;
  */
 public class ImelRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<Imel> selectALLImel() {
         List<Imel> listImel = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel", Imel.class);
-            listImel = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImel = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +39,8 @@ public class ImelRepository {
 
     public Imel SelectImelById(UUID Id) {
         Imel imel = new Imel();
-        try{
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where Id = :Id", Imel.class);
             query.setParameter("Id", Id);
             imel = (Imel) query.getSingleResult();
@@ -46,7 +51,8 @@ public class ImelRepository {
     }
 
     public Boolean InsertImel(Imel imel) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(imel);
@@ -59,16 +65,47 @@ public class ImelRepository {
     }
 
     public Boolean UpdateImel(Imel imel) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             imel.setLastModifiedDate(new Date());
             session.saveOrUpdate(imel);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<Imel> Selectmamel(UUID ctSP) {
+        List<Imel> lstImel = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM Imel WHERE IdChiTietSP = :ctsp and TrangThai = 1", Imel.class);
+            query.setParameter("ctsp", ctSP);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                lstImel = query.getResultList();
+            }
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+        return lstImel;
+    }
+
+    public Imel SelectImelBanByMa(String ma) {
+        Imel imel = new Imel();
+        try {
+            session = HibernatUtil.getSession();
+            javax.persistence.Query query = session.createQuery("FROM Imel where ma = :ma", Imel.class);
+            query.setParameter("ma", ma);
+            imel = (Imel) query.getSingleResult();
+        } catch (NoResultException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imel;
     }
 }

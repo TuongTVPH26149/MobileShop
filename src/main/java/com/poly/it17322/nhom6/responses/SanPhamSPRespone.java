@@ -33,6 +33,7 @@ public class SanPhamSPRespone {
     private int soluong;
     private int loaihang;
     private String mota;
+    private boolean deleted;
 
     public SanPhamSPRespone(ChiTietSP sp) {
         this.id = sp.getId();
@@ -46,9 +47,10 @@ public class SanPhamSPRespone {
         this.soluong = sp.getSoLuong();
         this.loaihang = sp.getLoaiHang();
         this.mota = sp.getMoTa();
+        this.deleted = sp.isDeleted();
     }
     
     public Object[] toDataRow(){
-        return new Object[]{ten,pin,manhinh,cpu,ram,rom,gia,soluong,(loaihang==0)?"Mới":"Cũ"};
+        return new Object[]{ten,pin,manhinh,cpu,ram,rom,gia,soluong,(loaihang==0)?"Mới":"Cũ",false};
     }
 }

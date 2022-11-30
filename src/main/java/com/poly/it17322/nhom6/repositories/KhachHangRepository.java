@@ -20,13 +20,16 @@ import org.hibernate.query.Query;
  */
 public class KhachHangRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<KhachHang> selectALLKhachHang() {
         List<KhachHang> listKhachHang = new ArrayList<>();
-        try{
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang", KhachHang.class);
-            listKhachHang = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listKhachHang = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,8 +38,9 @@ public class KhachHangRepository {
 
     public KhachHang SelectKhachHangById(UUID Id) {
         KhachHang kh = new KhachHang();
-        try{
-            Query query = session.createQuery("FROM KhachHang where Id = :Id", KhachHang.class);
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM KhachHang where id = :Id", KhachHang.class);
             query.setParameter("Id", Id);
             kh = (KhachHang) query.getSingleResult();
         } catch (Exception e) {
@@ -46,7 +50,8 @@ public class KhachHangRepository {
     }
 
     public Boolean InsertKhachHang(KhachHang kh) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(kh);
@@ -59,17 +64,32 @@ public class KhachHangRepository {
     }
 
     public Boolean UpdateKhachHang(KhachHang kh) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             kh.setLastModifiedDate(new Date());
             session.saveOrUpdate(kh);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public KhachHang SelectKHByMa(String ma) {
+        KhachHang kh = new KhachHang();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM KhachHang WHERE Ma = :ma", KhachHang.class);
+            query.setParameter("ma", ma);
+            kh = (KhachHang) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kh;
     }
 
 }

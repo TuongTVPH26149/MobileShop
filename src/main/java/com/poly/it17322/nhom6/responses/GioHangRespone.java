@@ -9,6 +9,7 @@ import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,6 +18,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@NoArgsConstructor
 public class GioHangRespone {
     private UUID id;
     private String tenSanPham;

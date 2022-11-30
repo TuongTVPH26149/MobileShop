@@ -36,7 +36,7 @@ public class KhachHang implements Serializable {
     @Id
     @Column(name = "Id")
     @GeneratedValue
-    private UUID Id;
+    private UUID id;
 
     @Column(name = "Ma", unique = true, length = 20)
     private String ma;

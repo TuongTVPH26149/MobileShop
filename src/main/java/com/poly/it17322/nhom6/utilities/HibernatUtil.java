@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.utilities;
 
 import com.poly.it17322.nhom6.domainmodels.*;
 import java.util.Properties;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -19,6 +20,7 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernatUtil {
 
     private static final SessionFactory FACTORY;
+    private static Session SESSION = null;
 
     static {
         Configuration conf = new Configuration();
@@ -55,11 +57,10 @@ public class HibernatUtil {
 
     }
 
-    public static SessionFactory getFACTORY() {
-        return FACTORY;
-    }
-
-    public static void main(String[] args) {
-        getFACTORY();
+    public static Session getSession() {
+        if (SESSION == null || !SESSION.isConnected()) {
+            SESSION = FACTORY.openSession();
+        }
+        return SESSION;
     }
 }

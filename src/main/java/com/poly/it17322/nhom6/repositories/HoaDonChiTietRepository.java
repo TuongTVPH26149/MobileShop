@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import javax.persistence.Query;
@@ -20,25 +21,31 @@ import javax.persistence.Query;
  */
 public class HoaDonChiTietRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<HoaDonChiTiet> selectALLHoaDonChiTiet() {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM HoaDonChiTiet", HoaDonChiTiet.class);
-            listHoaDonChiTiet = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDonChiTiet = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listHoaDonChiTiet;
     }
 
-    public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID Id) {
+    public List<HoaDonChiTiet> SelectByHoaDonCTID(UUID id) {
         List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
         try {
-            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :Id", HoaDonChiTiet.class);
-            query.setParameter("Id", Id);
-            listHoaDonChiTiet = query.getResultList();
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM HoaDonChiTiet where IdHoaDon = :id", HoaDonChiTiet.class);
+            query.setParameter("id", id);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDonChiTiet = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +55,8 @@ public class HoaDonChiTietRepository {
     public HoaDonChiTiet SelectHoaDonChiTietById(UUID Id) {
         HoaDonChiTiet hdct = new HoaDonChiTiet();
         try {
-            javax.persistence.Query query = session.createQuery("FROM HoaDonChiTiet where Id = :Id", HoaDonChiTiet.class);
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM HoaDonChiTiet where Id = :Id", HoaDonChiTiet.class);
             query.setParameter("Id", Id);
             hdct = (HoaDonChiTiet) query.getSingleResult();
         } catch (Exception e) {
@@ -58,7 +66,8 @@ public class HoaDonChiTietRepository {
     }
 
     public Boolean InsertHoaDonChiTiet(HoaDonChiTiet hdct) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(hdct);
@@ -71,22 +80,25 @@ public class HoaDonChiTietRepository {
     }
 
     public Boolean UpdateHoaDonChiTiet(HoaDonChiTiet hdct) {
+        Transaction tran = null;
         try {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             hdct.setLastModifiedDate(new Date());
             session.saveOrUpdate(hdct);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-    
+
     public Boolean delete(HoaDonChiTiet hdct) {
         Transaction transaction = null;
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             transaction = session.beginTransaction();
             session.delete(hdct);
             transaction.commit();
@@ -95,6 +107,22 @@ public class HoaDonChiTietRepository {
             e.printStackTrace(System.out);
         }
         return false;
+    }
+
+    public List<HoaDonChiTiet> getGH(UUID idhd, UUID idsp) {
+        List<HoaDonChiTiet> hds = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM HoaDonChiTiet WHERE IdHoaDon = :idhd and IdChiTietSP = :idsp", HoaDonChiTiet.class);
+            query.setParameter("idhd", idhd);
+            query.setParameter("idsp", idsp);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                hds = query.getResultList();
+            }
+            return hds;
+        } catch (NoResultException e) {
+            return new ArrayList<>();
+        }
     }
 
 }

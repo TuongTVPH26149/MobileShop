@@ -10,10 +10,8 @@ import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.domainmodels.Imel;
 import com.poly.it17322.nhom6.domainmodels.ImelBan;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
-import com.poly.it17322.nhom6.repositories.HoaDonBanHangRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonChiTietRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonRepository;
-import com.poly.it17322.nhom6.repositories.ImelBanHangRepository;
 import com.poly.it17322.nhom6.repositories.ImelBanRepository;
 import com.poly.it17322.nhom6.repositories.ImelRepository;
 import com.poly.it17322.nhom6.repositories.KhachHangRepository;
@@ -40,10 +38,8 @@ import java.util.stream.Collectors;
  */
 public class BanHangServiceIml implements IBanHangService {
 
-    HoaDonBanHangRepository hdbhrepo = new HoaDonBanHangRepository();
     ChiTietSPRepository ctsprepo = new ChiTietSPRepository();
     HoaDonChiTietRepository hdctrepo = new HoaDonChiTietRepository();
-    ImelBanHangRepository imelbhRepo = new ImelBanHangRepository();
     HoaDonRepository hdrepo = new HoaDonRepository();
     TaiKhoanRepository tkrepo = new TaiKhoanRepository();
     KhachHangRepository khrepo = new KhachHangRepository();
@@ -51,10 +47,44 @@ public class BanHangServiceIml implements IBanHangService {
     ImelRepository imelrepo = new ImelRepository();
 
     @Override
+    public List<HoaDonBanHangRespone> getALLHoaDonBanHang() {
+        List<HoaDonBanHangRespone> lstHd = new ArrayList<>();
+        List<HoaDon> hds = hdrepo.getHD();
+        lstHd = hds.stream().map(HoaDonBanHangRespone::new).collect(Collectors.toList());
+        List<HoaDonBanHangRespone> lstHDBH = new ArrayList<>();
+        for (HoaDonBanHangRespone s : lstHd) {
+            HoaDonBanHangRespone hd = new HoaDonBanHangRespone();
+            try {
+                hd = s;
+            } catch (Exception e) {
+            }
+            lstHDBH.add(hd);
+        }
+        return lstHDBH;
+    }
+
+    @Override
     public List<SanPhamBanHangResponse> getAllSpBh() {
-        List<ChiTietSP> ctsp = ctsprepo.selectALLChiTietSP();
+        List<ChiTietSP> ctsp = ctsprepo.getSP();
         List<SanPhamBanHangResponse> spbh = ctsp.stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
-        return spbh;
+        List<SanPhamBanHangResponse> lstSP = new ArrayList<>();
+        for (SanPhamBanHangResponse s : spbh) {
+            SanPhamBanHangResponse sp = new SanPhamBanHangResponse();
+            try {
+                sp = s;
+            } catch (Exception e) {
+            }
+            lstSP.add(sp);
+        }
+        return lstSP;
+    }
+
+    @Override
+    public List<GioHangRespone> getAllGH(UUID id) {
+        HoaDon hd = hdrepo.SelectHoaDonById(id);
+        List<HoaDonChiTiet> hdcts = hdctrepo.SelectByHoaDonCTID(hd.getId());
+        List<GioHangRespone> gh = hdcts.stream().map(GioHangRespone::new).collect(Collectors.toList());
+        return gh;
     }
 
     @Override
@@ -65,13 +95,15 @@ public class BanHangServiceIml implements IBanHangService {
             String maHD = "HD" + sdf.format(new Date());
             hd.setMa(maHD);
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(idNV));
-            hd.setKhachHang(hdbhrepo.SelectKHByMa("MacDinh"));
-            hd.setTrangThai(1);
+            hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
+            hd.setTrangThai(0);
             hd.setNgayTao(new Date());
             hd.setDiaChi("Tại cửa hàng");
+            hd.setTongTien(new BigDecimal(0));
             hd.setTienMat(new BigDecimal(0));
             hd.setChuyenKhoan(new BigDecimal(0));
             hd.setGiamGia(new BigDecimal(0));
+            hd.setLoaiThanhToan(0);
             hdrepo.InsertHoaDon(hd);
             return true;
         } catch (Exception e) {
@@ -92,8 +124,8 @@ public class BanHangServiceIml implements IBanHangService {
         try {
             List<HoaDonChiTiet> hdcts = hdctrepo.SelectByHoaDonCTID(idHD);
             for (HoaDonChiTiet s : hdcts) {
-                for (ImelBan i : imelbhRepo.selectALLImelBan(s.getId())) {
-                    Imel imel = imelbhRepo.SelectImelBanByMa(i.getMa());
+                for (ImelBan i : imlbrepo.selectALLImelBan(s.getId())) {
+                    Imel imel = imelrepo.SelectImelBanByMa(i.getMa());
                     imel.setTrangThai(1);
                     imelrepo.UpdateImel(imel);
                 }
@@ -117,25 +149,6 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public List<HoaDonBanHangRespone> getAllHdBh() {
-        List<HoaDon> hds = hdrepo.selectALLHoaDon();
-        List<HoaDonBanHangRespone> lstHd = new ArrayList<>();
-        List<HoaDonBanHangRespone> lstHdb = new ArrayList<>();
-        try {
-            lstHd = hds.stream().map(HoaDonBanHangRespone::new).collect(Collectors.toList());
-            for (HoaDonBanHangRespone s : lstHd) {
-                if (s.getTrangThai() == 1 || s.getTrangThai() == 2 || s.getTrangThai() == 3) {
-                    System.out.println("hahah");
-                    lstHdb.add(s);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lstHdb;
-    }
-
-    @Override
     public DonHangRespone getDonHang(UUID id) {
         HoaDon hd = hdrepo.SelectHoaDonById(id);
         DonHangRespone dh = new DonHangRespone(hd);
@@ -143,15 +156,10 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public khachHangBanHangRespone getKHDefault() {
-        return new khachHangBanHangRespone(hdbhrepo.SelectKHByMa("MacDinh"));
-    }
-
-    @Override
     public boolean updateDonHang(DonHangRespone dh) {
         try {
             HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getMaKH()));
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setTongTien(dh.getTongTien());
             hd.setGiamGia(dh.getGiamGia());
@@ -168,15 +176,8 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public List<GioHangRespone> getAllGH(UUID id) {
-        List<HoaDonChiTiet> hdcts = hdctrepo.SelectByHoaDonCTID(id);
-        List<GioHangRespone> gh = hdcts.stream().map(GioHangRespone::new).collect(Collectors.toList());
-        return gh;
-    }
-
-    @Override
     public GioHangRespone getGH(UUID idhd, UUID idsp) {
-        List<HoaDonChiTiet> hdcts = hdbhrepo.getHDCTbyIdHDIdSP(idhd, idsp);
+        List<HoaDonChiTiet> hdcts = hdctrepo.getGH(idhd, idsp);
         List<GioHangRespone> gh = hdcts.stream().map(GioHangRespone::new).collect(Collectors.toList());
         for (GioHangRespone s : gh) {
             if (s.getTrangThai() == 1) {
@@ -184,11 +185,6 @@ public class BanHangServiceIml implements IBanHangService {
             }
         }
         return null;
-    }
-
-    @Override
-    public boolean checkGH(UUID idhd, UUID idsp) {
-        return hdbhrepo.checkHDCT(idhd, idsp);
     }
 
     @Override
@@ -223,31 +219,31 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public boolean updateGHXoa(UUID idHDCT, int sl) {
+    public boolean updateGHXoa(UUID idHDCT) {
         HoaDonChiTiet hdct = hdctrepo.SelectHoaDonChiTietById(idHDCT);
         ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(hdct.getChiTietSP().getId());
-        int soLuong = hdct.getSoLuong();
-        hdct.setSoLuong(soLuong - sl);
         int solg = ctsp.getSoLuong();
-        ctsp.setSoLuong(solg + sl);
+        ctsp.setSoLuong(solg + 1);
+        ctsprepo.UpdateChiTietSP(ctsp);
+        int soLuong = hdct.getSoLuong();
+        hdct.setSoLuong(soLuong - 1);
         soLuong = hdct.getSoLuong();
         if (soLuong <= 0) {
             hdctrepo.delete(hdct);
-        } else {
-            hdctrepo.UpdateHoaDonChiTiet(hdct);
+            return true;
         }
-        return ctsprepo.UpdateChiTietSP(ctsp);
+        return hdctrepo.UpdateHoaDonChiTiet(hdct);
     }
 
     @Override
     public List<ImelBanHangRespone> getImel(UUID id) {
-        List<Imel> imels = imelbhRepo.Selectmamel(id);
+        List<Imel> imels = imelrepo.Selectmamel(id);
         return imels.stream().map(ImelBanHangRespone::new).collect(Collectors.toList());
     }
 
     @Override
     public List<ImelDaBanRespone> getImelBan(UUID idHDCT) {
-        List<ImelBan> imels = imelbhRepo.selectALLImelBan(idHDCT);
+        List<ImelBan> imels = imlbrepo.selectALLImelBan(idHDCT);
         return imels.stream().map(ImelDaBanRespone::new).collect(Collectors.toList());
     }
 
@@ -259,7 +255,7 @@ public class BanHangServiceIml implements IBanHangService {
             imelb.setTrangThai(1);
             imelb.setHoaDonChiTiet(hdctrepo.SelectHoaDonChiTietById(hoaDon));
             if (imlbrepo.InsertImelBan(imelb)) {
-                Imel imel = imelbhRepo.SelectImelBanByMa(maImel);
+                Imel imel = imelrepo.SelectImelBanByMa(maImel);
                 imel.setTrangThai(0);
                 return imelrepo.UpdateImel(imel);
             }
@@ -273,7 +269,7 @@ public class BanHangServiceIml implements IBanHangService {
     public boolean thanhToan(DonHangRespone dh) {
         try {
             HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getMaKH()));
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setMa(dh.getMaHD());
             hd.setNgayThanhToan(new Date());
@@ -292,11 +288,15 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return false;
     }
+    @Override
+    public khachHangBanHangRespone getkh(UUID id) {
+        return new khachHangBanHangRespone(khrepo.SelectKhachHangById(id));
+    }
 
     @Override
     public boolean addSpSanner(String maImel, UUID idHD) {
         try {
-            Imel imel = imelbhRepo.SelectImelBanByMa(maImel);
+            Imel imel = imelrepo.SelectImelBanByMa(maImel);
             if (imel.getId() == null) {
                 return false;
             } else if (imel.getTrangThai() == 0) {
@@ -316,11 +316,20 @@ public class BanHangServiceIml implements IBanHangService {
     @Override
     public boolean deleteImelBan(String ma) {
         ImelBan iml = imlbrepo.SelectImelBanByMa(ma);
-        Imel im = imelbhRepo.SelectImelBanByMa(ma);
+        Imel im = imelrepo.SelectImelBanByMa(ma);
         if (imlbrepo.delete(iml)) {
             im.setTrangThai(1);
         }
         return imelrepo.UpdateImel(im);
     }
+    @Override
+    public boolean updateHD(UUID idhd, int trangThai, String diaChi) {
+        HoaDon hd = hdrepo.SelectHoaDonById(idhd);
+        hd.setTrangThai(trangThai);
+        hd.setDiaChi(diaChi);
+        return hdrepo.UpdateHoaDon(hd);
+    }
+    
+    
 
 }

@@ -16,13 +16,16 @@ import org.hibernate.Transaction;
 
 public class RomRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<Rom> selectALLRom() {
         List<Rom> listRom = new ArrayList<>();
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Rom", Rom.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             listRom = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,7 +34,8 @@ public class RomRepository {
 
     public Rom SelectRomById(UUID Id) {
         Rom rom = new Rom();
-        try  {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Rom where Id = :Id", Rom.class);
             query.setParameter("Id", Id);
             rom = (Rom) query.getSingleResult();
@@ -42,7 +46,8 @@ public class RomRepository {
     }
 
     public Boolean InsertRom(Rom rom) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(rom);
@@ -55,12 +60,14 @@ public class RomRepository {
     }
 
     public Boolean UpdateRom(Rom rom) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             rom.setLastModifiedDate(new Date());
             session.saveOrUpdate(rom);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

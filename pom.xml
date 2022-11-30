@@ -81,15 +81,18 @@
             <version>3.5.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/jfree/jfreechart -->
+        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
+        </dependency>
         <dependency>
             <groupId>jfree</groupId>
-            <artifactId>jfreechart</artifactId>
-            <version>1.0.13</version>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.16</version>
+            <type>jar</type>
         </dependency>
-
-
-        
     </dependencies>
     
 </project>

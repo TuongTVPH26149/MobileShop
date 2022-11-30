@@ -19,13 +19,17 @@ import org.hibernate.Transaction;
  * @author LiamTrieu
  */
 public class BaoHanhRepository {
-    private Session session = HibernatUtil.getFACTORY().openSession();
+
+    private Session session = HibernatUtil.getSession();
 
     public List<BaoHanh> selectALLBaoHanh() {
         List<BaoHanh> listBaoHanh = new ArrayList<>();
-        try{
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM BaoHanh", BaoHanh.class);
-            listBaoHanh = query.getResultList();
+            if (query.getSingleResult() != null) {
+                listBaoHanh = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,11 +37,14 @@ public class BaoHanhRepository {
     }
 
     public BaoHanh SelectBaoHanhById(UUID Id) {
-        BaoHanh baoHanh = new BaoHanh();
-        try{
+        BaoHanh baoHanh = null;
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM BaoHanh where Id = :Id", BaoHanh.class);
             query.setParameter("Id", Id);
-            baoHanh = (BaoHanh) query.getSingleResult();
+            if (query.getSingleResult() != null) {
+                baoHanh = (BaoHanh) query.getSingleResult();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,7 +52,8 @@ public class BaoHanhRepository {
     }
 
     public Boolean InsertBaoHanh(BaoHanh baoHanh) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(baoHanh);
@@ -58,12 +66,14 @@ public class BaoHanhRepository {
     }
 
     public Boolean UpdateBaoHanh(BaoHanh baoHanh) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             baoHanh.setLastModifiedDate(new Date());
             session.saveOrUpdate(baoHanh);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,13 +20,16 @@ import org.hibernate.query.Query;
  */
 public class PinRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<Pin> selectALLPin() {
         List<Pin> listPin = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Pin", Pin.class);
-            listPin = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listPin = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +38,8 @@ public class PinRepository {
 
     public Pin SelectPinById(UUID Id) {
         Pin pin = new Pin();
-        try  {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Pin where Id = :Id", Pin.class);
             query.setParameter("Id", Id);
             pin = (Pin) query.getSingleResult();
@@ -46,7 +50,8 @@ public class PinRepository {
     }
 
     public Boolean InsertPin(Pin pin) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(pin);
@@ -59,12 +64,14 @@ public class PinRepository {
     }
 
     public Boolean UpdatePin(Pin pin) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             pin.setLastModifiedDate(new Date());
             session.saveOrUpdate(pin);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

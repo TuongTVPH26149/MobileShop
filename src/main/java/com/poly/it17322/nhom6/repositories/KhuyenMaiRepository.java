@@ -20,13 +20,17 @@ import org.hibernate.query.Query;
  */
 public class KhuyenMaiRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<KhuyenMai> selectALLKhuyenMai() {
         List<KhuyenMai> listKhuyenMai = new ArrayList<>();
-        try{
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
             listKhuyenMai = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listKhuyenMai = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +39,8 @@ public class KhuyenMaiRepository {
 
     public KhuyenMai SelectKhuyenMaiById(UUID Id) {
         KhuyenMai sanPham = new KhuyenMai();
-        try{
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhuyenMai where Id = :Id", KhuyenMai.class);
             query.setParameter("Id", Id);
             sanPham = (KhuyenMai) query.getSingleResult();
@@ -46,7 +51,8 @@ public class KhuyenMaiRepository {
     }
 
     public Boolean InsertKhuyenMai(KhuyenMai sanPham) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try{
+            session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(sanPham);
@@ -59,18 +65,21 @@ public class KhuyenMaiRepository {
     }
 
     public Boolean UpdateKhuyenMai(KhuyenMai sanPham) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             sanPham.setLastModifiedDate(new Date());
             session.saveOrUpdate(sanPham);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
+
     public static void main(String[] args) {
         List<KhuyenMai> lists = new KhuyenMaiRepository().selectALLKhuyenMai();
         for (KhuyenMai km : lists) {

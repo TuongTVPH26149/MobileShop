@@ -21,13 +21,16 @@ import org.hibernate.Transaction;
  */
 public class ImelBanRepository {
 
-    private Session session = HibernatUtil.getFACTORY().openSession();
+    private Session session = HibernatUtil.getSession();
 
     public List<ImelBan> selectALLImelBan() {
         List<ImelBan> listImelBan = new ArrayList<>();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ImelBan", ImelBan.class);
-            listImelBan = query.getResultList();
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImelBan = query.getResultList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,6 +40,7 @@ public class ImelBanRepository {
     public ImelBan SelectImelBanById(UUID Id) {
         ImelBan imelBan = new ImelBan();
         try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ImelBan where Id = :Id", ImelBan.class);
             query.setParameter("Id", Id);
             imelBan = (ImelBan) query.getSingleResult();
@@ -45,10 +49,11 @@ public class ImelBanRepository {
         }
         return imelBan;
     }
-    
+
     public ImelBan SelectImelBanByMa(String ma) {
         ImelBan imelBan = new ImelBan();
-        try(Session session = HibernatUtil.getFACTORY().openSession();) {
+        try {
+            session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ImelBan where Ma = :ma", ImelBan.class);
             query.setParameter("ma", ma);
             imelBan = (ImelBan) query.getSingleResult();
@@ -59,7 +64,7 @@ public class ImelBanRepository {
     }
 
     public Boolean InsertImelBan(ImelBan imelBan) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try(Session session = HibernatUtil.getSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
             session.save(imelBan);
@@ -72,12 +77,14 @@ public class ImelBanRepository {
     }
 
     public Boolean UpdateImelBan(ImelBan imelBan) {
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
-            Transaction tran = session.getTransaction();
-            tran.begin();
+        Transaction tran = null;
+        try {
+            session = HibernatUtil.getSession();
+            tran = session.beginTransaction();
             imelBan.setLastModifiedDate(new Date());
             session.saveOrUpdate(imelBan);
             tran.commit();
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,7 +94,8 @@ public class ImelBanRepository {
 
     public Boolean delete(ImelBan imelb) {
         Transaction transaction = null;
-        try ( Session session = HibernatUtil.getFACTORY().openSession()) {
+        try {
+            session = HibernatUtil.getSession();
             transaction = session.beginTransaction();
             session.delete(imelb);
             transaction.commit();
@@ -96,5 +104,20 @@ public class ImelBanRepository {
             e.printStackTrace(System.out);
         }
         return false;
+    }
+
+    public List<ImelBan> selectALLImelBan(UUID hdct) {
+        List<ImelBan> listImelBan = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ImelBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 1", ImelBan.class);
+            query.setParameter("hdct", hdct);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImelBan = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listImelBan;
     }
 }

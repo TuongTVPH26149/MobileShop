@@ -19,9 +19,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class DonHangRespone {
+
     private UUID id;
-    private UUID idKH;
     private UUID idNV;
+    private UUID maKH;
     private String tenkhachHang;
     private String maHD;
     private String maNV;
@@ -35,13 +36,20 @@ public class DonHangRespone {
     private int trangThai;
 
     public DonHangRespone(HoaDon h) {
-        this.tenkhachHang = h.getKhachHang().getMa()+"-"+h.getKhachHang().getHoTen();
+        this.id = h.getId();
+        this.maKH = h.getKhachHang().getId();
+        this.idNV = h.getTaiKhoan().getId();
+        this.tenkhachHang = h.getKhachHang().getMa() + "-" + h.getKhachHang().getHoTen();
         this.maHD = h.getMa();
-        this.maNV = h.getTaiKhoan().getMa()+"-"+h.getTaiKhoan().getHoTen();
+        this.maNV = h.getTaiKhoan().getMa() + "-" + h.getTaiKhoan().getHoTen();
+        this.diaChi = h.getDiaChi();
+        this.tongTien = h.getTongTien();
+        this.tienMat = h.getTienMat();
+        this.chuyenKhoan = h.getChuyenKhoan();
         this.giamGia = h.getGiamGia();
         this.hinhThuc = h.getLoaiThanhToan();
-        this.nhanHang = h.getTrangThai()==2?1:(h.getTrangThai()==3?1:2);
+        this.nhanHang = h.getTrangThai() == 1 ? 1 : (h.getTrangThai() == 2 ? 1 : 0);
+        this.trangThai = h.getTrangThai();
     }
-    
-    
+
 }

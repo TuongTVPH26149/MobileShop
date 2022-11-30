@@ -4,14 +4,11 @@
  */
 package com.poly.it17322.nhom6.services;
 
-import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.responses.DonHangRespone;
-import com.poly.it17322.nhom6.responses.GioHangInRespone;
 import com.poly.it17322.nhom6.responses.GioHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
-import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import java.util.List;
@@ -23,24 +20,31 @@ import java.util.UUID;
  */
 public interface IBanHangService {
 
+    List<HoaDonBanHangRespone> getALLHoaDonBanHang();
+
+    boolean updateHD(UUID idhd, int trangThai,String diaChi);
+
+    khachHangBanHangRespone getkh(UUID ma);
+
     List<SanPhamBanHangResponse> getAllSpBh();
 
-    List<HoaDonBanHangRespone> getAllHdBh();
     List<ImelDaBanRespone> getImelBan(UUID idHDCT);
+
     boolean deleteImelBan(String ma);
-    boolean updateGHXoa(UUID idHDCT, int sl);
+
+    boolean updateGHXoa(UUID idHDCT);
 
     List<GioHangRespone> getAllGH(UUID id);
 
     boolean unGH(UUID idHD);
+
     boolean thanhToan(DonHangRespone dh);
 
     List<ImelBanHangRespone> getImel(UUID id);
+
     boolean addSpSanner(String maImel, UUID idHD);
 
     DonHangRespone getDonHang(UUID id);
-
-    khachHangBanHangRespone getKHDefault();
 
     GioHangRespone getGH(UUID idhd, UUID idsp);
 
@@ -51,8 +55,6 @@ public interface IBanHangService {
     boolean createImelBan(String maImel, UUID hoaDon);
 
     boolean updateDonHang(DonHangRespone dh);
-
-    boolean checkGH(UUID idhd, UUID idsp);
 
     boolean huyHoaDon(UUID idHD);
 
