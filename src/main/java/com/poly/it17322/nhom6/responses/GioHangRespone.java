@@ -28,6 +28,7 @@ public class GioHangRespone {
     private int soLuong;
     private BigDecimal giaBan;
     private BigDecimal khuyenMai;
+    private BigDecimal thanhTien;
     private int trangThai;
     
     public GioHangRespone(HoaDonChiTiet hdct) {
@@ -40,9 +41,10 @@ public class GioHangRespone {
         this.giaBan = hdct.getChiTietSP().getGia();
         this.khuyenMai = new BigDecimal(0);
         this.trangThai = hdct.getTrangThai();
+        this.thanhTien = hdct.getThanhTien();
     }
     
     public Object[] toDataRow(){
-        return new Object[]{tenSanPham,manHinh,cpu,pin,giaBan,khuyenMai,soLuong};
+        return new Object[]{tenSanPham,manHinh,cpu,pin,giaBan,khuyenMai,soLuong, thanhTien};
     }
 }

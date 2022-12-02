@@ -35,11 +35,31 @@ public class HoaDonBanHangRespone {
             this.ma = hd.getMa();
             this.ngayTao = hd.getNgayTao();
             this.nguoiTao = hd.getTaiKhoan().getMa();
-            this.khachHang = hd.getKhachHang().getHoTen();
+            try {
+                this.khachHang = hd.getKhachHang().getHoTen();
+            } catch (Exception e) {
+                this.khachHang = "...";
+            }
             this.trangThai = hd.getTrangThai();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String getTrangThai() {
+        switch (trangThai) {
+            case 0:
+                return "Chờ thanh toán";
+            case 1:
+                return "Chờ giao";
+            case 2:
+                return "Đang giao";
+            case 3:
+                return "Đã thanh toán";
+            case 4:
+                return "Đã giao";
+        }
+        return "Đã thanh toán";
     }
 
     public Object[] toDataRow() {
@@ -49,7 +69,7 @@ public class HoaDonBanHangRespone {
             sdf.format(ngayTao),
             nguoiTao,
             khachHang,
-            trangThai == 0 ? "chờ thanh toán" : (trangThai == 1 ? "Chờ giao" : "Đang giao")
+            getTrangThai()
         };
     }
 

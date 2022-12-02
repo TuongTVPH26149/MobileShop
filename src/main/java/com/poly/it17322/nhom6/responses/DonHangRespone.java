@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,24 +23,30 @@ public class DonHangRespone {
 
     private UUID id;
     private UUID idNV;
-    private UUID maKH;
+    private UUID idKH;
     private String tenkhachHang;
     private String maHD;
     private String maNV;
     private String diaChi;
+    private String tenship;
+    private String sdtship;
+    private String sdtKH;
+    private String lyDo;
+    private Date NgayNhanMongMuon;
+    private Date ngayThanhToan;
+    private Date ngayNhan;
     private BigDecimal tongTien;
     private BigDecimal tienMat;
     private BigDecimal chuyenKhoan;
     private BigDecimal giamGia;
+    private BigDecimal phiShip;
     private int hinhThuc;
     private int nhanHang;
     private int trangThai;
 
     public DonHangRespone(HoaDon h) {
         this.id = h.getId();
-        this.maKH = h.getKhachHang().getId();
         this.idNV = h.getTaiKhoan().getId();
-        this.tenkhachHang = h.getKhachHang().getMa() + "-" + h.getKhachHang().getHoTen();
         this.maHD = h.getMa();
         this.maNV = h.getTaiKhoan().getMa() + "-" + h.getTaiKhoan().getHoTen();
         this.diaChi = h.getDiaChi();
@@ -47,9 +54,29 @@ public class DonHangRespone {
         this.tienMat = h.getTienMat();
         this.chuyenKhoan = h.getChuyenKhoan();
         this.giamGia = h.getGiamGia();
+        this.phiShip = h.getTienShip();
         this.hinhThuc = h.getLoaiThanhToan();
-        this.nhanHang = h.getTrangThai() == 1 ? 1 : (h.getTrangThai() == 2 ? 1 : 0);
+        this.nhanHang = h.getTrangThai() == 0 ? 0 : (h.getTrangThai() == 3 ? 0 : 1);
+        try {
+            this.sdtKH = h.getKhachHang().getSdt();
+            this.tenkhachHang = h.getKhachHang().getMa() + "-" + h.getKhachHang().getHoTen();
+            this.idKH = h.getKhachHang().getId();
+        } catch (Exception e) {
+        }
+        this.sdtship = h.getSdtNguoiShip();
+        this.tenship = h.getTenNguoiShip();
         this.trangThai = h.getTrangThai();
+        try {
+            this.ngayNhan = h.getNgayNhanHang();
+        } catch (Exception e) {
+        }
+        if (trangThai == 4 || trangThai == 3) {
+            this.ngayThanhToan = h.getNgayThanhToan();
+        }
+        try {
+            this.NgayNhanMongMuon = h.getNgayNhanMongMuon();
+        } catch (Exception e) {
+        }
     }
 
 }

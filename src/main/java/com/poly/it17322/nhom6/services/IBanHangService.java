@@ -20,9 +20,7 @@ import java.util.UUID;
  */
 public interface IBanHangService {
 
-    List<HoaDonBanHangRespone> getALLHoaDonBanHang();
-
-    boolean updateHD(UUID idhd, int trangThai,String diaChi);
+    List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk);
 
     khachHangBanHangRespone getkh(UUID ma);
 
@@ -38,8 +36,6 @@ public interface IBanHangService {
 
     boolean unGH(UUID idHD);
 
-    boolean thanhToan(DonHangRespone dh);
-
     List<ImelBanHangRespone> getImel(UUID id);
 
     boolean addSpSanner(String maImel, UUID idHD);
@@ -50,13 +46,9 @@ public interface IBanHangService {
 
     boolean updateGH(UUID idhd, UUID idsp, int sl);
 
-    boolean createHoaDon(UUID idNV);
+    boolean createHoaDon(UUID idNV, int trangThai);
 
     boolean createImelBan(String maImel, UUID hoaDon);
 
     boolean updateDonHang(DonHangRespone dh);
-
-    boolean huyHoaDon(UUID idHD);
-
-    boolean setGiohang(UUID idImel, UUID idSP, UUID idHD);
 }

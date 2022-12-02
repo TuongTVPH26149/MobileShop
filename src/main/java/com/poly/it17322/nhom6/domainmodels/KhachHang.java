@@ -47,6 +47,9 @@ public class KhachHang implements Serializable {
 
     @Column(name = "GioiTinh", nullable = true)
     private int gioiTinh;
+    
+    @Column(name = "CapDo", nullable = true)
+    private int capDo;
 
     @Column(name = "Sdt", length = 15, nullable = false)
     private String sdt;

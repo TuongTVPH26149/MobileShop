@@ -29,7 +29,7 @@ public class SanPhamBanHangResponse {
 
     public SanPhamBanHangResponse(ChiTietSP sp) {
         this.id = sp.getId();
-        this.tenSanPham = sp.getSanPham().getTen()+ " " + sp.getMauSac().getTen() + " " + sp.getRam().getTen()+"/"+sp.getRom().getTen()+" "+((sp.getLoaiHang()==0)?"Mới":"Cũ");
+        this.tenSanPham = sp.getSanPham().getTen()+ " " + sp.getMauSac().getTen() + " " + sp.getRam().getTen()+"/"+sp.getRom().getTen()+" "+(sp.getLoaiHang()==0?"Mới":"Cũ");
         this.manHinh = sp.getManHinh().getTen();
         this.cpu = sp.getCpu().getTen();
         this.pin = sp.getPin().getTen();
