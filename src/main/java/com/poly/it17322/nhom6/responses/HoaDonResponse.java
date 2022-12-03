@@ -70,8 +70,8 @@ public class HoaDonResponse {
     }
 
     public Object[] toDataRow() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        
         return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
-            sdf.format(ngayTao), sdf.format(ngayThanhToan) , getloaiThanhToan(), tongTien, getTrangThai()};
+            ngayTao, ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
     }
 }
