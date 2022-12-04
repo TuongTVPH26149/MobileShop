@@ -9,6 +9,7 @@ import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.domainmodels.Imel;
 import com.poly.it17322.nhom6.domainmodels.ImelBan;
+import com.poly.it17322.nhom6.domainmodels.KhachHang;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonChiTietRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonRepository;
@@ -87,8 +88,8 @@ public class BanHangServiceIml implements IBanHangService {
             String maHD = "HD" + sdf.format(new Date());
             if (trangThai == 0) {
                 hd.setDiaChi("Tại cửa hàng");
+                hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
             }
-            hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
             hd.setMa(maHD);
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(idNV));
             hd.setTrangThai(trangThai);
@@ -100,6 +101,35 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setGiamGia(new BigDecimal(0));
             hd.setLoaiThanhToan(0);
             hdrepo.InsertHoaDon(hd);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean clearHoaDon(DonHangRespone dh) {
+        HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
+        try {
+            if (dh.getTrangThai() == 1) {
+                hd.setDiaChi(null);
+                hd.setSdtNguoiShip(null);
+                hd.setTenNguoiShip(null);
+                hd.setNgayNhanMongMuon(null);
+                hd.setTenKH(null);
+                hd.setKhachHang(null);
+            } else {
+                hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
+            }
+            hd.setNgayTao(new Date());
+            hd.setTongTien(new BigDecimal(0));
+            hd.setTienShip(new BigDecimal(0));
+            hd.setTienMat(new BigDecimal(0));
+            hd.setChuyenKhoan(new BigDecimal(0));
+            hd.setGiamGia(new BigDecimal(0));
+            hd.setLoaiThanhToan(0);
+            hdrepo.UpdateHoaDon(hd);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +175,9 @@ public class BanHangServiceIml implements IBanHangService {
             if (dh.getTrangThai() == 5) {
                 hd.setLyDo(dh.getLyDo());
             }
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            if (dh.getIdKH() != null) {
+                hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            }
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setTongTien(dh.getTongTien());
             hd.setGiamGia(dh.getGiamGia());
@@ -163,10 +195,8 @@ public class BanHangServiceIml implements IBanHangService {
                 }
             }
             hd.setTrangThai(dh.getTrangThai());
-            if (dh.getTrangThai() == 2 || dh.getTrangThai() == 1) {
-                if (dh.getTrangThai() != 1) {
-                    hd.setNgayShip(new Date());
-                }
+            if (dh.getTrangThai() == 2) {
+                hd.setNgayShip(new Date());
                 hd.setTienShip(dh.getPhiShip());
                 hd.setSdtNguoiShip(dh.getSdtship());
                 hd.setTenNguoiShip(dh.getTenship());
@@ -205,6 +235,7 @@ public class BanHangServiceIml implements IBanHangService {
                 hdct.setDonGia(ctsp.getGia());
                 hdct.setHoaDon(hd);
                 hdct.setSoLuong(sl);
+                hdct.setKhuyenMai(new BigDecimal(0));
                 hdct.setThanhTien(ctsp.getGia().multiply(new BigDecimal(sl)));
                 hdct.setTenSP(tensp);
                 hdct.setTrangThai(1);
@@ -303,5 +334,32 @@ public class BanHangServiceIml implements IBanHangService {
             im.setTrangThai(1);
         }
         return imelrepo.UpdateImel(im);
+    }
+    
+
+    @Override
+    public void updatRank(UUID id) {
+        BigDecimal tongTien = hdrepo.getTienByKH(id);
+        int rank = 0;
+        while (tongTien.compareTo(new BigDecimal(10000000)) >= 0) {
+            rank++;
+            tongTien = tongTien.subtract(new BigDecimal(10000000));
+        }
+        System.out.println(rank);
+        KhachHang kh = khrepo.SelectKhachHangById(id);
+        if (kh.getCapDo() != rank) {
+            kh.setNgayTutHang(new Date());
+        }
+        kh.setCapDo(rank);
+        if (!kh.getMa().equals("MacDinh")) {
+            khrepo.UpdateKhachHang(kh);
+        }
+    }
+    
+    @Override
+    public void updateKM(UUID idhdct, BigDecimal km){
+        HoaDonChiTiet hdct = hdctrepo.SelectHoaDonChiTietById(idhdct);
+        hdct.setKhuyenMai(km);
+        hdctrepo.UpdateHoaDonChiTiet(hdct);
     }
 }

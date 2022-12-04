@@ -66,7 +66,7 @@ public class khachHangBanHangRespone {
         }
     }
 
-    private int giamGia() {
+    public int getPhanTramGiam() {
         String cap;
         switch (hang) {
             case 0:

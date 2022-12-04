@@ -21,6 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GioHangRespone {
     private UUID id;
+    private UUID idSP;
     private String tenSanPham;
     private String manHinh;
     private String cpu;
@@ -33,18 +34,19 @@ public class GioHangRespone {
     
     public GioHangRespone(HoaDonChiTiet hdct) {
         this.id = hdct.getId();
+        this.idSP = hdct.getChiTietSP().getId();
         this.tenSanPham = hdct.getTenSP();
         this.manHinh = hdct.getChiTietSP().getManHinh().getTen();
         this.cpu = hdct.getChiTietSP().getCpu().getTen();
         this.pin = hdct.getChiTietSP().getPin().getTen();
         this.soLuong = hdct.getSoLuong();
         this.giaBan = hdct.getChiTietSP().getGia();
-        this.khuyenMai = new BigDecimal(0);
+        this.khuyenMai = hdct.getKhuyenMai();
         this.trangThai = hdct.getTrangThai();
-        this.thanhTien = hdct.getThanhTien();
+        this.thanhTien = (giaBan.subtract(khuyenMai)).multiply(new BigDecimal(soLuong));
     }
     
     public Object[] toDataRow(){
-        return new Object[]{tenSanPham,manHinh,cpu,pin,giaBan,khuyenMai,soLuong, thanhTien};
+        return new Object[]{tenSanPham,manHinh,cpu,pin,giaBan,khuyenMai,soLuong, thanhTien, trangThai==1?"":"Hàng trả", false};
     }
 }

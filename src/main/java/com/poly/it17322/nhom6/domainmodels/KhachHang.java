@@ -58,6 +58,10 @@ public class KhachHang implements Serializable {
     @Column(name = "DiaChi", length = 100, nullable = true)
     private String diaChi;
 
+    @Column(name = "NgayTutHang")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayTutHang;
+
     @Column(name = "NgaySinh")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySinh;

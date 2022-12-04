@@ -11,6 +11,7 @@ import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
 import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,12 +22,14 @@ import java.util.UUID;
 public interface IBanHangService {
 
     List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk);
+    void updateKM(UUID idhdct, BigDecimal km);
 
     khachHangBanHangRespone getkh(UUID ma);
 
     List<SanPhamBanHangResponse> getAllSpBh();
 
     List<ImelDaBanRespone> getImelBan(UUID idHDCT);
+    
 
     boolean deleteImelBan(String ma);
 
@@ -48,7 +51,11 @@ public interface IBanHangService {
 
     boolean createHoaDon(UUID idNV, int trangThai);
 
+    boolean clearHoaDon (DonHangRespone dh);
+
     boolean createImelBan(String maImel, UUID hoaDon);
 
     boolean updateDonHang(DonHangRespone dh);
+
+    public void updatRank(UUID id);
 }
