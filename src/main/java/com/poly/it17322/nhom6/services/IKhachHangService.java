@@ -30,5 +30,4 @@ public interface IKhachHangService {
      public List<KhachHangResponse> LocKH(int GioiTinh);
      
       public List<HoaDon> selectallhoadon(UUID IdKH);
-    
 }
