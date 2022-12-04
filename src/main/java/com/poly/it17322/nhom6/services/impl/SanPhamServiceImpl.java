@@ -19,6 +19,7 @@ import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.repositories.SanPhamReposiry;
 import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
 import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImelSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import com.poly.it17322.nhom6.services.ISanPhamSPService;
 import java.text.SimpleDateFormat;
@@ -148,8 +149,8 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
 //        List<SanPham> sanphams = timkiemrepo.timKiem(ten);
 //       return sanphams.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
 //    }
-//       public List<ImelSPRespone> getlistTimKiemImel(String ma) {
-//        List<Imel> imel = timkiemrepo.timKiemImel(ma);
-//       return imel.stream().map(ImelSPRespone::new).collect(Collectors.toList());
-//    }
+       public List<ImelSPRespone> getlistTimKiemImel(String ma) {
+        List<Imel> imel = timkiemrepo.timKiemImel(ma);
+       return imel.stream().map(ImelSPRespone::new).collect(Collectors.toList());
+    }
 }

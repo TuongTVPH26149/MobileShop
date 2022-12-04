@@ -56,20 +56,22 @@ public class HoaDonResponse {
     }
 
     public String getTrangThai() {
-        if (trangThai == 0) {
+        if(trangThai==0){
             return "Chờ thanh toán ";
-        } else if (trangThai == 1) {
-            return "Đã thanh toán";
-        } else if (trangThai == 2) {
+        }else if(trangThai==1){
+            return "Chờ giao";
+        }else if(trangThai==2){
             return "Đang giao";
-        } else {
+        }else if(trangThai==3){
+            return "Đã thanh toán";
+        }else{
             return "Đã giao";
         }
     }
 
     public Object[] toDataRow() {
-
+        
         return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
-            ngayTao, ngayThanhToan, getloaiThanhToan(), tongTien, getTrangThai()};
+            ngayTao, ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
     }
 }

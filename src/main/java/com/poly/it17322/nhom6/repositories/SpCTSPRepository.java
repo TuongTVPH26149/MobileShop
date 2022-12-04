@@ -59,7 +59,7 @@ public class SpCTSPRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where Ma Like :ma", Imel.class);
-            query.setParameter("ma", "%" + ma + "%");
+            query.setParameter("ma", ma + "%");
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             lstimel = query.getResultList();
             }
