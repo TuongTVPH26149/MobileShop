@@ -37,13 +37,12 @@ public class HoaDonChiTietResponse {
         this.IdChiTietSP = hdct.getChiTietSP().getId();
         this.tenSP = hdct.getTenSP();
         this.donGia = hdct.getDonGia();
-        this.giaBan = hdct.getGiaBan();
         this.soLuong = hdct.getSoLuong();
         this.giamGia = hdct.getHoaDon().getGiamGia();
 
     }
 
     public Object[] toDataRow() {
-        return new Object[]{tenSP, soLuong, donGia, giaBan, giamGia, ((new BigDecimal(soLuong).multiply(giaBan)).subtract(giamGia))};
+        return new Object[]{tenSP, soLuong, donGia, giamGia, ((new BigDecimal(soLuong).multiply(donGia)).subtract(giamGia))};
     }
 }
