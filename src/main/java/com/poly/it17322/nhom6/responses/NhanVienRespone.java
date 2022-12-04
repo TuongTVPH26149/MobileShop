@@ -25,6 +25,7 @@ public class NhanVienRespone {
     private String sdt;
     private String matKhau;
     private int chucVu;
+    private int trangThai;
 
     public NhanVienRespone(TaiKhoan taiKhoan) {
         this.id = taiKhoan.getId();
@@ -37,9 +38,10 @@ public class NhanVienRespone {
         this.sdt =  taiKhoan.getSdt();
         this.matKhau = taiKhoan.getMatKhau();
         this.chucVu =  taiKhoan.getChucVu();
+        this.trangThai = taiKhoan.getTrangThai();
     }
     
     public Object[] toDataRow() {
-        return new Object[]{ma, ten, gioiTinh, ngaySinh, diaChi, email, sdt,matKhau, chucVu};
+        return new Object[]{ma, ten, gioiTinh, ngaySinh, diaChi, email, sdt,matKhau, chucVu, trangThai};
     }
 }

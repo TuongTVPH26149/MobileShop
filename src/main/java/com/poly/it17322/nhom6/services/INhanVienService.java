@@ -23,7 +23,10 @@ public interface INhanVienService {
 
     public boolean Update(NhanVienRespone nhanVien);
     
-    public List<TaiKhoan> timKiem(String ten);
+    public List<TaiKhoan> timKiem(String ten, int trangThai);
     
     public List<TaiKhoan> selectTaiKhoan(int trangThai);
+    
+    public boolean Delete(NhanVienRespone nhanVien);
+    
 }
