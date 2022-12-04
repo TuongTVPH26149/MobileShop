@@ -2796,8 +2796,10 @@ public class FrmBanHang extends javax.swing.JPanel {
         dtm.setRowCount(0);
         try {
             lstGH = bhs.getAllGH(lstHoaDon.get(indexHD).getId());
+            if (lstGH.isEmpty()) {
+                return;
+            }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         for (GioHangRespone s : lstGH) {
             dtm.addRow(s.toDataRow());
