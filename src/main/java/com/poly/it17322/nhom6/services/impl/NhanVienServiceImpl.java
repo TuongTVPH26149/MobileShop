@@ -34,6 +34,16 @@ public class NhanVienServiceImpl implements INhanVienService {
     }
 
     @Override
+    public List<TaiKhoan> selectTaiKhoan(int trangThai) {
+        try {
+            List<TaiKhoan> lst = chucNangNhanVienRepository.selectTaiKhoan(trangThai);
+            return lst;
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public TaiKhoan SelectNhanVienById(UUID id) {
         return taiKhoanRepository.SelectTaiKhoanById(id);
     }
@@ -55,7 +65,7 @@ public class NhanVienServiceImpl implements INhanVienService {
 
     @Override
     public boolean Update(NhanVienRespone nhanVien) {
-        TaiKhoan tk = new TaiKhoan();
+        TaiKhoan tk = taiKhoanRepository.SelectTaiKhoanById(nhanVien.getId());
         tk.setMa(nhanVien.getMa());
         tk.setHoTen(nhanVien.getTen());
         tk.setGioiTinh(nhanVien.getGioiTinh());
@@ -68,9 +78,9 @@ public class NhanVienServiceImpl implements INhanVienService {
     }
 
     @Override
-    public List<TaiKhoan> timKiem(String ten) {
+    public List<TaiKhoan> timKiem(String ten, int trangThai) {
         try {
-            List<TaiKhoan> lst = chucNangNhanVienRepository.timKiem(ten);
+            List<TaiKhoan> lst = chucNangNhanVienRepository.timKiem(ten, trangThai);
             return lst;
         } catch (Exception e) {
             return new ArrayList<>();
@@ -78,15 +88,9 @@ public class NhanVienServiceImpl implements INhanVienService {
     }
 
     @Override
-    public List<TaiKhoan> selectTaiKhoan(int trangThai) {
-        try {
-            List<TaiKhoan> lst = chucNangNhanVienRepository.selectTaiKhoan(trangThai);
-            return lst;
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
+    public boolean Delete(NhanVienRespone nhanVien) {
+        TaiKhoan tk = taiKhoanRepository.SelectTaiKhoanById(nhanVien.getId());
+        tk.setTrangThai(nhanVien.getTrangThai());
+        return taiKhoanRepository.UpdateTaiKhoan(tk);
     }
-
-    
-
 }
