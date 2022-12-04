@@ -179,10 +179,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         frmimel = new javax.swing.JFrame();
         jScrollPane9 = new javax.swing.JScrollPane();
         tblimel = new javax.swing.JTable();
-        jPanel35 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel36 = new javax.swing.JPanel();
-        txttimkiemimel = new javax.swing.JTextField();
         jPanel37 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jPanel38 = new javax.swing.JPanel();
@@ -1332,58 +1328,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 "Tên Imel"
             }
         ));
-        jScrollPane9.setViewportView(tblimel);
-
-        jPanel35.setMaximumSize(new java.awt.Dimension(184, 55));
-        jPanel35.setMinimumSize(new java.awt.Dimension(184, 55));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setText("Tìm kiếm");
-
-        jPanel36.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel36.setMaximumSize(new java.awt.Dimension(174, 1));
-        jPanel36.setMinimumSize(new java.awt.Dimension(174, 1));
-
-        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-        jPanel36.setLayout(jPanel36Layout);
-        jPanel36Layout.setHorizontalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel36Layout.setVerticalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
-        );
-
-        txttimkiemimel.setBorder(null);
-        txttimkiemimel.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txttimkiemimelCaretUpdate(evt);
+        tblimel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblimelMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
-        jPanel35.setLayout(jPanel35Layout);
-        jPanel35Layout.setHorizontalGroup(
-            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel35Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addContainerGap())
-                    .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txttimkiemimel)))
-        );
-        jPanel35Layout.setVerticalGroup(
-            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel35Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addGap(3, 3, 3)
-                .addComponent(txttimkiemimel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jScrollPane9.setViewportView(tblimel);
 
         jPanel37.setMaximumSize(new java.awt.Dimension(184, 55));
         jPanel37.setMinimumSize(new java.awt.Dimension(184, 55));
@@ -1462,27 +1412,24 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             .addGroup(frmimelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(frmimelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(frmimelLayout.createSequentialGroup()
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmimelLayout.createSequentialGroup()
                         .addGap(0, 6, Short.MAX_VALUE)
-                        .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnaddimel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(btnupdateimel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(frmimelLayout.createSequentialGroup()
-                        .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnaddbyexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(frmimelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmimelLayout.createSequentialGroup()
+                                .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnaddimel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(btnupdateimel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnaddbyexcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         frmimelLayout.setVerticalGroup(
             frmimelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frmimelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(frmimelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnaddbyexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(btnaddbyexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
@@ -2417,10 +2364,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txttimkiemCaretUpdate
 
-    private void txttimkiemimelCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttimkiemimelCaretUpdate
-//        timKiemImel();
-    }//GEN-LAST:event_txttimkiemimelCaretUpdate
-
     private void btnkhoiphucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkhoiphucActionPerformed
 
         Revert();
@@ -2437,44 +2380,44 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             XSSFRow row = null;
             Cell cell = null;
             row = sheet.createRow(3);
-            cell = row.createCell(0,CellType.STRING);
+            cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("STT");
 
-            cell = row.createCell(1,CellType.STRING);
+            cell = row.createCell(1, CellType.STRING);
             cell.setCellValue("TÊN");
 
-            cell = row.createCell(2,CellType.STRING);
+            cell = row.createCell(2, CellType.STRING);
             cell.setCellValue("PIN");
 
-            cell = row.createCell(3,CellType.STRING);
+            cell = row.createCell(3, CellType.STRING);
             cell.setCellValue("MÀN HÌNH");
 
-            cell = row.createCell(4,CellType.STRING);
+            cell = row.createCell(4, CellType.STRING);
             cell.setCellValue("CPU");
 
-            cell = row.createCell(5,CellType.STRING);
+            cell = row.createCell(5, CellType.STRING);
             cell.setCellValue("RAM");
 
-            cell = row.createCell(6,CellType.STRING);
+            cell = row.createCell(6, CellType.STRING);
             cell.setCellValue("ROM");
 
-            cell = row.createCell(7,CellType.STRING);
+            cell = row.createCell(7, CellType.STRING);
             cell.setCellValue("MÀU");
 
-            cell = row.createCell(8,CellType.STRING);
+            cell = row.createCell(8, CellType.STRING);
             cell.setCellValue("GIÁ");
 
-            cell = row.createCell(9,CellType.STRING);
+            cell = row.createCell(9, CellType.STRING);
             cell.setCellValue("SỐ LƯỢNG");
 
-            cell = row.createCell(10,CellType.STRING);
+            cell = row.createCell(10, CellType.STRING);
             cell.setCellValue("LOẠI HÀNG");
 
             for (int i = 0; i < sp.getlist().size(); i++) {
-                row = sheet.createRow(4+i);
+                row = sheet.createRow(4 + i);
 
                 cell = row.createCell(0, CellType.NUMERIC);
-                cell.setCellValue(i+1);
+                cell.setCellValue(i + 1);
 
                 cell = row.createCell(1, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getTen());
@@ -2506,38 +2449,59 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getLoaihang());
             }
-            File f = new File("G://danhsach.xlsx");
-            FileOutputStream fis = new FileOutputStream(f);
-            wordbook.write(fis);
-            fis.close();
-            JOptionPane.showMessageDialog(this, "Xuất thành công");
+            JFileChooser fc = new JFileChooser();
+            int chon = fc.showSaveDialog(this);
+            if (chon == JFileChooser.APPROVE_OPTION) {
+                String filename = fc.getSelectedFile().getAbsolutePath();
+                FileOutputStream fis = new FileOutputStream(filename);
+                wordbook.write(fis);
+                fis.close();
+                JOptionPane.showMessageDialog(this, "Xuất thành công");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnxuatexcelActionPerformed
 
     private void btnaddbyexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddbyexcelActionPerformed
-//        try {
-//            JFileChooser file = new JFileChooser();
-//            FileInputStream fis = new FileInputStream("file");
-//            XSSFWorkbook wb = new XSSFWorkbook(fis);
-//            XSSFSheet sheet = wb.getSheetAt(0);
-//            FormulaEvaluator formula = wb.getCreationHelper().createFormulaEvaluator();
-//            for (Row row : sheet) {
-//                for (Cell cell : row) {
-//                    if (formula.evaluate(cell).getCellType()!=null) {
-//                        System.out.println(cell.getNumericCellValue());
-//                    }
-//                }
-//            }
-//            fis.read();
-//            wb.close();
-//            fis.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        
+        try {
+            JFileChooser fc = new JFileChooser();
+            int chon = fc.showSaveDialog(this);
+            if (chon == JFileChooser.APPROVE_OPTION) {
+                String filename = fc.getSelectedFile().getAbsolutePath();
+
+                FileInputStream fis = new FileInputStream(filename);
+                XSSFWorkbook wb = new XSSFWorkbook(fis);
+                XSSFSheet sheet = wb.getSheetAt(0);
+                FormulaEvaluator formula = wb.getCreationHelper().createFormulaEvaluator();
+                for (Row row : sheet) {
+                    for (Cell cell : row) {
+                        if (formula.evaluate(cell).getCellType() != null) {
+                            ImelAoSPRespone imelao = new ImelAoSPRespone();
+                            imelao.setMa(String.valueOf(cell.getNumericCellValue()));
+                            txtsoluong.setText(sl + "");
+                            lstimelao.add(imelao);
+                            FilltoTableImelAO();
+                            sl++;
+                            setCboImel();
+                            System.out.println(cell.getNumericCellValue());
+                        }
+                    }
+                }
+                fis.read();
+                wb.close();
+                fis.close();
+                JOptionPane.showMessageDialog(this, "Insert thành công");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_btnaddbyexcelActionPerformed
+
+    private void tblimelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblimelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblimelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2594,7 +2558,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -2646,8 +2609,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
-    private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
@@ -2696,7 +2657,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JTextField txttenrom;
     private javax.swing.JTextField txttensp;
     private javax.swing.JTextField txttimkiem;
-    private javax.swing.JTextField txttimkiemimel;
     private javax.swing.JTextField txttimkiemkhoiphuc;
     // End of variables declaration//GEN-END:variables
 
@@ -3144,17 +3104,16 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }
 
     private void addDataCTSP() {
-        if(cbocpu.getSelectedItem()==null||
-                cboloaihang.getSelectedItem()==null||
-                cbomausac.getSelectedItem()==null||
-                cbopin.getSelectedItem()==null||
-                cboram.getSelectedItem()==null||
-                cborom.getSelectedItem()==null){
+        if (cbocpu.getSelectedItem() == null
+                || cboloaihang.getSelectedItem() == null
+                || cbomausac.getSelectedItem() == null
+                || cbopin.getSelectedItem() == null
+                || cboram.getSelectedItem() == null
+                || cborom.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Các thuộc tính phải được chọn");
             return;
         }
-        
-        
+
         UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
         UUID idrom = lstrom.get(cborom.getSelectedIndex()).getId();
         UUID idram = lstram.get(cboram.getSelectedIndex()).getId();
@@ -3211,6 +3170,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         cbomausac.setSelectedItem(null);
         tblbang.clearSelection();
         tblbang.removeAll();
+        tblimel.removeAll();
         cboimel.removeAllItems();
     }
 
@@ -3256,4 +3216,5 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 //            model.addRow(x.toDataRow());
 //        }
 //    }
+//}
 }
