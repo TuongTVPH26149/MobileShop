@@ -124,5 +124,21 @@ public class HoaDonChiTietRepository {
             return new ArrayList<>();
         }
     }
+    
+    public HoaDonChiTiet getGHTra(UUID idhd, UUID idsp) {
+        HoaDonChiTiet hds = new HoaDonChiTiet();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM HoaDonChiTiet WHERE IdHoaDon = :idhd and IdChiTietSP = :idsp and TrangThai = 0", HoaDonChiTiet.class);
+            query.setParameter("idhd", idhd);
+            query.setParameter("idsp", idsp);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                hds = (HoaDonChiTiet) query.getSingleResult();
+            }
+            return hds;
+        } catch (NoResultException e) {
+            return hds;
+        }
+    }
 
 }

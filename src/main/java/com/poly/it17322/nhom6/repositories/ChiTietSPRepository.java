@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
+import com.poly.it17322.nhom6.domainmodels.KhuyenMai;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,4 +95,22 @@ public class ChiTietSPRepository {
         }
         return listChiTietSP;
     }
+
+    public KhuyenMai SelectKM(UUID Id) {
+        ChiTietSP ctsp = new ChiTietSP();
+        KhuyenMai km = new KhuyenMai();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
+            query.setParameter("Id", Id);
+            ctsp = (ChiTietSP) query.getSingleResult();
+            if (ctsp.getKhuyenMai().getId() != null) {
+                km = ctsp.getKhuyenMai();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return km;
+    }
+
 }

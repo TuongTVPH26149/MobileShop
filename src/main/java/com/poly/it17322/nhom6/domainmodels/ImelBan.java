@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
@@ -49,6 +50,10 @@ public class ImelBan implements Serializable {
 
     @Column(name = "TrangThai")
     private int trangThai;
+    
+    @Nationalized
+    @Column(name = "LyDo", length = 100)
+    private String lyDo;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)

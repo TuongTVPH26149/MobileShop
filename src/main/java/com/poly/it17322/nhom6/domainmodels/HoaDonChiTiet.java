@@ -57,6 +57,9 @@ public class HoaDonChiTiet implements Serializable {
     @Column(name = "DonGia", nullable = true)
     private BigDecimal donGia;
     
+    @Column(name = "Thanhtien", nullable = true)
+    private BigDecimal thanhTien;
+    
     @Column(name = "SoLuong", nullable = false)
     private int soLuong;
     
@@ -65,6 +68,9 @@ public class HoaDonChiTiet implements Serializable {
     
     @Column(name = "GiaBan", nullable = true)
     private BigDecimal giaBan;
+    
+    @Column(name = "KhuyenMai", nullable = true)
+    private BigDecimal khuyenMai;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)

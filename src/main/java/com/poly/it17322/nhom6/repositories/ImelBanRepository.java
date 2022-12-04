@@ -120,4 +120,18 @@ public class ImelBanRepository {
         }
         return listImelBan;
     }
+    public List<ImelBan> selectALLImelTra(UUID hdct) {
+        List<ImelBan> listImelBan = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ImelBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 0", ImelBan.class);
+            query.setParameter("hdct", hdct);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImelBan = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listImelBan;
+    }
 }

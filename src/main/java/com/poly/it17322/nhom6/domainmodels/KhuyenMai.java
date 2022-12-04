@@ -60,6 +60,9 @@ public class KhuyenMai {
 
     @Column(name = "TrangThai")
     private int trangThai;
+    
+    @Column(name = "LoaiKM")
+    private int loaiKM;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
