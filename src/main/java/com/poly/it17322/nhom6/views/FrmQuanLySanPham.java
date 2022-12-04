@@ -3045,6 +3045,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         tblbang.removeAll();
         tblimel.removeAll();
         cboimel.removeAllItems();
+        lstimelao.clear();
     }
 
     private void Deleted() {
