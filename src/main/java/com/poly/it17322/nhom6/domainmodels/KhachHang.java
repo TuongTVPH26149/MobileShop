@@ -47,6 +47,9 @@ public class KhachHang implements Serializable {
 
     @Column(name = "GioiTinh", nullable = true)
     private int gioiTinh;
+    
+    @Column(name = "CapDo", nullable = true)
+    private int capDo;
 
     @Column(name = "Sdt", length = 15, nullable = false)
     private String sdt;
@@ -54,6 +57,10 @@ public class KhachHang implements Serializable {
     @Nationalized
     @Column(name = "DiaChi", length = 100, nullable = true)
     private String diaChi;
+
+    @Column(name = "NgayTutHang")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayTutHang;
 
     @Column(name = "NgaySinh")
     @Temporal(javax.persistence.TemporalType.DATE)

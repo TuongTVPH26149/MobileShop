@@ -15,6 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class KhachHangResponse {
+
     private UUID id;
     private String ma;
     private String hoten;
@@ -22,6 +23,7 @@ public class KhachHangResponse {
     private String sdt;
     private String diachi;
     private Date ngaysinh;
+    private int hang;
 
     public KhachHangResponse(KhachHang khachhang) {
         this.id = khachhang.getId();
@@ -33,5 +35,35 @@ public class KhachHangResponse {
         this.ngaysinh = khachhang.getNgaySinh();
     }
 
-   
+    public String getHang() {
+        String cap;
+        switch (hang) {
+            case 0:
+                return "Đồng I";
+            case 1:
+                return "Đồng II";
+            case 2:
+                return "Đồng III";
+            case 3:
+                return "Bạc I";
+            case 4:
+                return "Bạc II";
+            case 5:
+                return "Bạc III";
+            case 6:
+                return "Vàng I";
+            case 7:
+                return "Vàng II";
+            case 8:
+                return "Vàng III";
+            case 9:
+                return "Bạch kim I";
+            case 10:
+                return "Bạch kim II";
+            case 11:
+                return "Bạch kim III";
+            default:
+                return "Kim cương";
+        }
+    }
 }

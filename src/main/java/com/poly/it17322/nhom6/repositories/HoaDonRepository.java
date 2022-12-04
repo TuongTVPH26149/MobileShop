@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -131,11 +132,36 @@ public class HoaDonRepository {
         return list;
     }
 
-    public List<HoaDon> getHD() {
+    public List<HoaDon> getALLHDTaiQuay(UUID idnv, int dk) {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM HoaDon where trangThai in (0,1,2) order by ma desc", HoaDon.class);
+            Query query;
+            switch (dk) {
+                case 0:
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 0 and trangThai != 5 order by ma desc", HoaDon.class);
+                    query.setParameter("idtk", idnv);
+                    break;
+                case 1:
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 1 order by ma desc", HoaDon.class);
+                    query.setParameter("idtk", idnv);
+                    break;
+                case 2:
+                    query = session.createQuery("FROM HoaDon Where IdTK = :idtk and trangThai = 2 order by ma desc", HoaDon.class);
+                    query.setParameter("idtk", idnv);
+                    break;
+                case 3:
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 3 order by ma desc", HoaDon.class);
+                    query.setParameter("idtk", idnv);
+                    break;
+                case 4:
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 4 order by ma desc", HoaDon.class);
+                    query.setParameter("idtk", idnv);
+                    break;
+                default:
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai != 5 order by ma desc", HoaDon.class);
+                    query.setParameter("idtk", idnv);
+            }
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listHoaDon = query.getResultList();
             }
@@ -159,6 +185,25 @@ public class HoaDonRepository {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public BigDecimal getTienByKH(UUID id) {
+        List<HoaDon> listHoaDon = new ArrayList<>();
+        BigDecimal tongTien = new BigDecimal(0);
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM HoaDon Where IdKH = :id", HoaDon.class);
+            query.setParameter("id", id);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDon = query.getResultList();
+            }
+            for (HoaDon s : listHoaDon) {
+                tongTien = tongTien.add(s.getTongTien());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tongTien;
     }
 
 }

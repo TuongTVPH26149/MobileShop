@@ -66,4 +66,5 @@ public class ChucNangKHRepository extends KhachHangRepository {
         }
         return lstHD;
     }
+
 }

@@ -11,6 +11,7 @@ import com.poly.it17322.nhom6.repositories.KhachHangRepository;
 import com.poly.it17322.nhom6.repositories.ChucNangKHRepository;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import com.poly.it17322.nhom6.responses.RamRespone;
+import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import com.poly.it17322.nhom6.services.IKhachHangService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +33,17 @@ public class KhachHangService implements IKhachHangService {
         try {
             List<KhachHang> khs = KHRepo.selectALLKhachHang();
             return khs.stream().map(KhachHangResponse::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+    
+    @Override
+    public List<khachHangBanHangRespone> getKHBH() {
+        try {
+            List<KhachHang> khs = KHRepo.selectALLKhachHang();
+            return khs.stream().map(khachHangBanHangRespone::new).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

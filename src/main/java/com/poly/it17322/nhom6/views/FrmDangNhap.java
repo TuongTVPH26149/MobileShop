@@ -4,6 +4,7 @@
  */
 package com.poly.it17322.nhom6.views;
 
+import com.github.sarxos.webcam.Webcam;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.services.IDangNhapService;
 import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
@@ -24,6 +25,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
      * Creates new form FrmDangNhap
      */
     public FrmDangNhap() {
+        Webcam.getDefault().close();
         initComponents();
         setLocationRelativeTo(null);
         txtTaiKhoan.setText("admin");

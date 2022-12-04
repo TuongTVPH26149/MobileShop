@@ -63,11 +63,11 @@ public class BaoHanh {
     private Date ngayKhachLay;
     
     @Nationalized
-    @Column(name = "LyDo", unique = true, length = 100)
+    @Column(name = "LyDo", length = 100)
     private String lyDo;
     
     @Nationalized
-    @Column(name = "MoTa", unique = true, length = 100)
+    @Column(name = "MoTa", length = 100)
     private String moTa;
     
     @Column(name = "CreatedDate", insertable = false, updatable = false)

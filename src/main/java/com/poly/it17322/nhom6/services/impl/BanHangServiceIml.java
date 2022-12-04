@@ -9,6 +9,7 @@ import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.domainmodels.Imel;
 import com.poly.it17322.nhom6.domainmodels.ImelBan;
+import com.poly.it17322.nhom6.domainmodels.KhachHang;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonChiTietRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonRepository;
@@ -47,20 +48,12 @@ public class BanHangServiceIml implements IBanHangService {
     ImelRepository imelrepo = new ImelRepository();
 
     @Override
-    public List<HoaDonBanHangRespone> getALLHoaDonBanHang() {
+    public List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk) {
         List<HoaDonBanHangRespone> lstHd = new ArrayList<>();
-        List<HoaDon> hds = hdrepo.getHD();
+        List<HoaDon> hds = hdrepo.getALLHDTaiQuay(idNV, dk);
         lstHd = hds.stream().map(HoaDonBanHangRespone::new).collect(Collectors.toList());
         List<HoaDonBanHangRespone> lstHDBH = new ArrayList<>();
-        for (HoaDonBanHangRespone s : lstHd) {
-            HoaDonBanHangRespone hd = new HoaDonBanHangRespone();
-            try {
-                hd = s;
-            } catch (Exception e) {
-            }
-            lstHDBH.add(hd);
-        }
-        return lstHDBH;
+        return lstHd;
     }
 
     @Override
@@ -88,18 +81,21 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public boolean createHoaDon(UUID idNV) {
+    public boolean createHoaDon(UUID idNV, int trangThai) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         HoaDon hd = new HoaDon();
         try {
             String maHD = "HD" + sdf.format(new Date());
+            if (trangThai == 0) {
+                hd.setDiaChi("Tại cửa hàng");
+                hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
+            }
             hd.setMa(maHD);
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(idNV));
-            hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
-            hd.setTrangThai(0);
+            hd.setTrangThai(trangThai);
             hd.setNgayTao(new Date());
-            hd.setDiaChi("Tại cửa hàng");
             hd.setTongTien(new BigDecimal(0));
+            hd.setTienShip(new BigDecimal(0));
             hd.setTienMat(new BigDecimal(0));
             hd.setChuyenKhoan(new BigDecimal(0));
             hd.setGiamGia(new BigDecimal(0));
@@ -113,10 +109,32 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public boolean huyHoaDon(UUID idHD) {
-        HoaDon hd = hdrepo.SelectHoaDonById(idHD);
-        hd.setTrangThai(0);
-        return hdrepo.UpdateHoaDon(hd);
+    public boolean clearHoaDon(DonHangRespone dh) {
+        HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
+        try {
+            if (dh.getTrangThai() == 1) {
+                hd.setDiaChi(null);
+                hd.setSdtNguoiShip(null);
+                hd.setTenNguoiShip(null);
+                hd.setNgayNhanMongMuon(null);
+                hd.setTenKH(null);
+                hd.setKhachHang(null);
+            } else {
+                hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
+            }
+            hd.setNgayTao(new Date());
+            hd.setTongTien(new BigDecimal(0));
+            hd.setTienShip(new BigDecimal(0));
+            hd.setTienMat(new BigDecimal(0));
+            hd.setChuyenKhoan(new BigDecimal(0));
+            hd.setGiamGia(new BigDecimal(0));
+            hd.setLoaiThanhToan(0);
+            hdrepo.UpdateHoaDon(hd);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -144,11 +162,6 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public boolean setGiohang(UUID idImel, UUID idSP, UUID idHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public DonHangRespone getDonHang(UUID id) {
         HoaDon hd = hdrepo.SelectHoaDonById(id);
         DonHangRespone dh = new DonHangRespone(hd);
@@ -159,15 +172,36 @@ public class BanHangServiceIml implements IBanHangService {
     public boolean updateDonHang(DonHangRespone dh) {
         try {
             HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getMaKH()));
+            if (dh.getTrangThai() == 5) {
+                hd.setLyDo(dh.getLyDo());
+            }
+            if (dh.getIdKH() != null) {
+                hd.setKhachHang(khrepo.SelectKhachHangById(dh.getIdKH()));
+            }
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setTongTien(dh.getTongTien());
             hd.setGiamGia(dh.getGiamGia());
-            hd.setTrangThai(dh.getTrangThai());
             hd.setLoaiThanhToan(dh.getHinhThuc());
             hd.setTienMat(dh.getTienMat());
             hd.setChuyenKhoan(dh.getChuyenKhoan());
+            hd.setTenKH(dh.getTenkhachHang());
+            hd.setDiaChi(dh.getDiaChi());
+            if (dh.getTrangThai() == 3 || dh.getTrangThai() == 4) {
+                hd.setNgayThanhToan(new Date());
+                if (hd.getTrangThai() != 6) {
+                    hd.setNgayNhanHang(new Date());
+                } else {
+                    hd.setNgayNhanHang(dh.getNgayNhan());
+                }
+            }
             hd.setTrangThai(dh.getTrangThai());
+            if (dh.getTrangThai() == 2) {
+                hd.setNgayShip(new Date());
+                hd.setTienShip(dh.getPhiShip());
+                hd.setSdtNguoiShip(dh.getSdtship());
+                hd.setTenNguoiShip(dh.getTenship());
+                hd.setNgayNhanMongMuon(dh.getNgayNhanMongMuon());
+            }
             return hdrepo.UpdateHoaDon(hd);
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,12 +229,14 @@ public class BanHangServiceIml implements IBanHangService {
         ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(idsp);
         try {
             if (gh == null) {
-                String tensp = ctsp.getSanPham().getTen() + " " + ctsp.getMauSac().getTen() + " " + ctsp.getRam().getTen() + "/" + ctsp.getRom().getTen() + " " + (ctsp.getLoaiHang() == 1 ? "mới" : "cũ");
+                String tensp = ctsp.getSanPham().getTen() + " " + ctsp.getMauSac().getTen() + " " + ctsp.getRam().getTen() + "/" + ctsp.getRom().getTen() + " " + (ctsp.getLoaiHang() == 1 ? "Cũ" : "Mới");
                 hdct.setChiTietSP(ctsp);
                 hdct.setCreatedDate(new Date());
                 hdct.setDonGia(ctsp.getGia());
                 hdct.setHoaDon(hd);
                 hdct.setSoLuong(sl);
+                hdct.setKhuyenMai(new BigDecimal(0));
+                hdct.setThanhTien(ctsp.getGia().multiply(new BigDecimal(sl)));
                 hdct.setTenSP(tensp);
                 hdct.setTrangThai(1);
             } else {
@@ -266,29 +302,6 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public boolean thanhToan(DonHangRespone dh) {
-        try {
-            HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
-            hd.setKhachHang(khrepo.SelectKhachHangById(dh.getMaKH()));
-            hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
-            hd.setMa(dh.getMaHD());
-            hd.setNgayThanhToan(new Date());
-            hd.setTienMat(dh.getTienMat());
-            hd.setChuyenKhoan(dh.getChuyenKhoan());
-            hd.setNgayNhan(new Date());
-            hd.setTenKH(dh.getTenkhachHang());
-            hd.setDiaChi(dh.getDiaChi());
-            hd.setTongTien(dh.getTongTien());
-            hd.setTrangThai(4);
-            hd.setLoaiThanhToan(dh.getHinhThuc());
-            hd.setGiamGia(dh.getGiamGia());
-            return hdrepo.UpdateHoaDon(hd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    @Override
     public khachHangBanHangRespone getkh(UUID id) {
         return new khachHangBanHangRespone(khrepo.SelectKhachHangById(id));
     }
@@ -322,14 +335,31 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return imelrepo.UpdateImel(im);
     }
-    @Override
-    public boolean updateHD(UUID idhd, int trangThai, String diaChi) {
-        HoaDon hd = hdrepo.SelectHoaDonById(idhd);
-        hd.setTrangThai(trangThai);
-        hd.setDiaChi(diaChi);
-        return hdrepo.UpdateHoaDon(hd);
-    }
-    
     
 
+    @Override
+    public void updatRank(UUID id) {
+        BigDecimal tongTien = hdrepo.getTienByKH(id);
+        int rank = 0;
+        while (tongTien.compareTo(new BigDecimal(10000000)) >= 0) {
+            rank++;
+            tongTien = tongTien.subtract(new BigDecimal(10000000));
+        }
+        System.out.println(rank);
+        KhachHang kh = khrepo.SelectKhachHangById(id);
+        if (kh.getCapDo() != rank) {
+            kh.setNgayTutHang(new Date());
+        }
+        kh.setCapDo(rank);
+        if (!kh.getMa().equals("MacDinh")) {
+            khrepo.UpdateKhachHang(kh);
+        }
+    }
+    
+    @Override
+    public void updateKM(UUID idhdct, BigDecimal km){
+        HoaDonChiTiet hdct = hdctrepo.SelectHoaDonChiTietById(idhdct);
+        hdct.setKhuyenMai(km);
+        hdctrepo.UpdateHoaDonChiTiet(hdct);
+    }
 }

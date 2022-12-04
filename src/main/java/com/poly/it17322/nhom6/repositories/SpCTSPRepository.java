@@ -59,7 +59,7 @@ public class SpCTSPRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM Imel where Ma Like :ma", Imel.class);
-            query.setParameter("ma", "%" + ma + "%");
+            query.setParameter("ma", ma + "%");
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             lstimel = query.getResultList();
             }
@@ -110,5 +110,23 @@ public class SpCTSPRepository {
             e.printStackTrace();
         }
         return ctsp;
+    }
+    public List<SanPhamSPRespone> TimKiemSP(String input) {
+        List<SanPhamSPRespone> list = new ArrayList<>();
+        try {
+            Session session = HibernatUtil.getSession();
+            String hql = "select new com.poly.it17322.nhom6.responses.SanPhamSPRespone "
+                    + "(a.Id, a.sanPham.ten,a.pin.ten,a.manHinh.ten,a.cpu.ten,a.ram.ten,a.rom.ten,a.gia,a.soLuong,a.loaiHang) from ChiTietSP a where  a.sanPham.ten like CONCAT('%',:input,'%')";
+            Query query = session.createQuery(hql);
+            query.setParameter("input", input);
+            list = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static void main(String[] args) {
+        List<SanPhamSPRespone> lstsp = new SpCTSPRepository().TimKiemSP("aaa");
+        System.out.println(lstsp);
     }
 }
