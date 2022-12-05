@@ -66,9 +66,6 @@ public class HoaDonChiTiet implements Serializable {
     @Column(name = "TrangThai")
     private int trangThai;
     
-    @Column(name = "GiaBan", nullable = true)
-    private BigDecimal giaBan;
-    
     @Column(name = "KhuyenMai", nullable = true)
     private BigDecimal khuyenMai;
 
