@@ -161,6 +161,7 @@ public class HoaDonRepository {
                 default:
                     query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai != 5 order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
+                    break;
             }
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listHoaDon = query.getResultList();

@@ -1712,7 +1712,7 @@ public class FrmBanHang extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(btnClearHD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel28)
+                                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNgayMuonNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel14Layout.createSequentialGroup()
@@ -2825,7 +2825,6 @@ public class FrmBanHang extends javax.swing.JPanel {
             btnClearHD1.setEnabled(false);
             btnClearHD1.setBackground(new Color(102, 102, 102));
         }
-        TabNoiNhan.setEnabled(true);
         btnSelectAllGH.setEnabled(true);
         btnxoagh.setEnabled(true);
         btnXacNhanImel1.setEnabled(true);
@@ -2966,7 +2965,6 @@ public class FrmBanHang extends javax.swing.JPanel {
             }
         }
         if (dh.getTrangThai() == 3 || dh.getTrangThai() == 4) {
-            TabNoiNhan.setEnabled(false);
             txtGiamGiaDacbiet.setEnabled(false);
             cboHinhThuc.setEnabled(false);
             txtTienMat.setEnabled(false);
@@ -2987,6 +2985,10 @@ public class FrmBanHang extends javax.swing.JPanel {
             btnGiao.setEnabled(false);
             btnClearHD.setEnabled(false);
             btnClearHD1.setEnabled(false);
+            btnChonKH1.setEnabled(false);
+            btnChonKH2.setEnabled(false);
+            btnChonKH1.setBackground(new Color(102, 102, 102));
+            btnChonKH2.setBackground(new Color(102, 102, 102));
             btnClearHD.setBackground(new Color(102, 102, 102));
             btnClearHD1.setBackground(new Color(102, 102, 102));
             btnThanhToan.setBackground(new Color(102, 102, 102));

@@ -7,35 +7,63 @@ package com.poly.it17322.nhom6.services.impl;
 import com.poly.it17322.nhom6.domainmodels.KhuyenMai;
 import com.poly.it17322.nhom6.repositories.KhuyenMaiRepository;
 import com.poly.it17322.nhom6.responses.KhuyenMaiResponse;
-import com.poly.it17322.nhom6.services.IKhuyenMaiService;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
  *
- * @author TUYEN
+ * @author LiamTrieu
  */
-public class KhuyenMaiServiceImpl implements IKhuyenMaiService {
+public class KhuyenMaiServiceImpl {
 
-    private KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
+    private KhuyenMaiRepository kmrepo = new KhuyenMaiRepository();
 
-    @Override
-    public List<KhuyenMaiResponse> SelectKhuyenMai() {
-        List<KhuyenMai> khuyenMais = khuyenMaiRepository.selectALLKhuyenMai();
-        return khuyenMais.stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
+    public List<KhuyenMaiResponse> getList(int trangThai) {
+        return kmrepo.selectALLKhuyenMai(trangThai).stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
     }
 
-    @Override
-    public List<KhuyenMaiResponse> getByCodeAndCreateDate(String ma, Date from, Date to) {
-        List<KhuyenMai> khuyenMais = khuyenMaiRepository.getByCodeAndCreateDate(ma, from, to);
-        return khuyenMais.stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
+    public boolean createKM(KhuyenMaiResponse km) {
+        KhuyenMai k = new KhuyenMai();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+            k.setMa("KM" + sdf.format(new Date()));
+            k.setTen(km.getTen());
+            k.setGiaTri(km.getGiaTri());
+            k.setLoaiKM(km.getLoai());
+            k.setNgayBD(km.getNgayBD());
+            k.setNgayKT(km.getNgayKT());
+            k.setTrangThai(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kmrepo.InsertKhuyenMai(k);
     }
-
-    @Override
-    public List<KhuyenMaiResponse> getByCodeAndUpdateDate(String ma, Date from, Date to) {
-        List<KhuyenMai> khuyenMais = khuyenMaiRepository.getByCodeAndUpdateDate(ma, from, to);
-        return khuyenMais.stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
+    
+    public boolean updateKM(KhuyenMaiResponse km) {
+        KhuyenMai k = kmrepo.SelectKhuyenMaiById(km.getId());
+        try {
+            k.setTen(km.getTen());
+            k.setGiaTri(km.getGiaTri());
+            k.setLoaiKM(km.getLoai());
+            k.setNgayBD(km.getNgayBD());
+            k.setNgayKT(km.getNgayKT());
+            k.setTrangThai(km.getTrangThai());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kmrepo.UpdateKhuyenMai(k);
     }
-
+    
+    public boolean updateTTKM(int tt, UUID id) {
+        KhuyenMai k = kmrepo.SelectKhuyenMaiById(id);
+        try {
+            k.setTrangThai(tt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kmrepo.UpdateKhuyenMai(k);
+    }
 }
