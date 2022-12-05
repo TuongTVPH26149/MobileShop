@@ -3222,15 +3222,7 @@ public class FrmBanHang extends javax.swing.JPanel {
                     gh.setDonGia(new BigDecimal(tblGioHang.getValueAt(i, 4).toString()));
                     gh.setKhuyenMai(new BigDecimal(tblGioHang.getValueAt(i, 5).toString()));
                     gh.setSoLuong(Integer.parseInt(tblGioHang.getValueAt(i, 6).toString()));
-                    try {
-                        long donGia = Long.parseLong(gh.getDonGia().toString());
-                        long khuyenMai = Long.parseLong(gh.getKhuyenMai().toString());
-                        long thanhTien = (donGia - khuyenMai) * gh.getSoLuong();
-                        gh.setThanhTien(new BigDecimal(thanhTien));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
+                    gh.setThanhTien(new BigDecimal(Integer.parseInt(tblGioHang.getValueAt(i, 7).toString())));
                     ghin.add(gh);
                 }
                 if (InHoaDon.makePDF(hdin, ghin)) {

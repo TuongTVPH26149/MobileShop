@@ -66,7 +66,7 @@ public class HoaDon implements Serializable {
     private Date ngayShip;
 
     @Column(name = "NgayNhanMongMuon")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIME)
     private Date ngayNhanMongMuon;
 
     @Column(name = "TienShip")
