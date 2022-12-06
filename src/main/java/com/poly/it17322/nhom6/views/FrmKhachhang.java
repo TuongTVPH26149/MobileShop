@@ -434,9 +434,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
         lblrank.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblrank.setForeground(new java.awt.Color(255, 0, 0));
-        lblrank.setText(" Đồng I");
+        lblrank.setText(" Đồng ");
 
-        lblcuoi.setText("10tr");
+        lblcuoi.setText("20tr");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
