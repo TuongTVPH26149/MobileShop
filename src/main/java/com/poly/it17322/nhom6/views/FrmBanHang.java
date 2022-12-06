@@ -2035,7 +2035,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (bhs.createHoaDon(nhanVien.getId(), TabNoiNhan.getSelectedIndex())) {
-                JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công");
                 cboTrangThaiHoaDon.setSelectedIndex(TabNoiNhan.getSelectedIndex());
                 fillTableHoaDon();
                 return;

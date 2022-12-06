@@ -341,11 +341,10 @@ public class BanHangServiceIml implements IBanHangService {
     public void updatRank(UUID id) {
         BigDecimal tongTien = hdrepo.getTienByKH(id);
         int rank = 0;
-        while (tongTien.compareTo(new BigDecimal(10000000)) >= 0) {
+        while (tongTien.compareTo(new BigDecimal(20000000)) >= 0) {
             rank++;
-            tongTien = tongTien.subtract(new BigDecimal(10000000));
+            tongTien = tongTien.subtract(new BigDecimal(20000000));
         }
-        System.out.println(rank);
         KhachHang kh = khrepo.SelectKhachHangById(id);
         if (kh.getCapDo() != rank) {
             kh.setNgayTutHang(new Date());

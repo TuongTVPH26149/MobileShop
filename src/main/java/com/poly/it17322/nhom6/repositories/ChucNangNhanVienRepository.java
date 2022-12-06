@@ -25,7 +25,7 @@ public class ChucNangNhanVienRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM TaiKhoan WHERE HoTen like :ten and TrangThai = :trangThai", TaiKhoan.class);
-            query.setParameter("ten", ten + "%");
+            query.setParameter("ten","%" + ten + "%");
             query.setParameter("trangThai", trangThai);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listTaiKhoan = query.getResultList();
@@ -40,7 +40,7 @@ public class ChucNangNhanVienRepository {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM TaiKhoan WHERE TrangThai = :trangThai", TaiKhoan.class);
+            Query query = session.createQuery("FROM TaiKhoan WHERE TrangThai = :trangThai order by Ma desc", TaiKhoan.class);
             query.setParameter("trangThai", trangThai);
             listTaiKhoan = query.getResultList();
         } catch (Exception e) {

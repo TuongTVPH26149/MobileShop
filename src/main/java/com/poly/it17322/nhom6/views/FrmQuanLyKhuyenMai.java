@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.responses.KhuyenMaiResponse;
+import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.services.impl.KhuyenMaiServiceImpl;
 import com.poly.it17322.nhom6.utilities.ScrollBarCustom;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +29,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
 
     private DefaultTableModel dtm = new DefaultTableModel();
     private List<KhuyenMaiResponse> lstKM = new ArrayList<>();
+    private List<SanPhamBanHangResponse> lstSP = new ArrayList<>();
     private KhuyenMaiServiceImpl kms = new KhuyenMaiServiceImpl();
     private int indexKM = -1;
 
@@ -37,6 +40,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         initComponents();
         designTable();
         filltoTableKM(cboTrangThai.getSelectedIndex());
+        filltoTableSP();
     }
 
     /**
@@ -88,12 +92,11 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 2), "Danh sách mã khuyến mãi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 102, 102))); // NOI18N
 
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp diễn ra", "Đang diễn ra", "Đã kết thúc", "Tất cả" }));
         cboTrangThai.setBackground(new java.awt.Color(0, 102, 102));
+        cboTrangThai.setFocusable(false);
         cboTrangThai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cboTrangThai.setForeground(new java.awt.Color(255, 255, 255));
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang diễn ra", "Sắp diễn ra", "Đã kết thúc", "Tất cả" }));
-        cboTrangThai.setSelectedIndex(3);
-        cboTrangThai.setFocusable(false);
         cboTrangThai.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboTrangThaiItemStateChanged(evt);
@@ -128,9 +131,9 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 102, 102));
         jTextField4.setBorder(null);
         jTextField4.setCaretColor(new java.awt.Color(0, 102, 102));
+        jTextField4.setForeground(new java.awt.Color(0, 102, 102));
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -216,29 +219,29 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboTrangThai, jPanel5});
 
+        jLabel1.setText("Tên khuyến mại:");
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("Tên khuyến mại:");
 
+        jLabel2.setText("Ngày bắt đầu:");
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setText("Ngày bắt đầu:");
 
+        jLabel3.setText("Ngày kết thúc:");
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel3.setText("Ngày kết thúc:");
 
+        jLabel4.setText("Loại Khuyến mại:");
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel4.setText("Loại Khuyến mại:");
 
+        jLabel5.setText("Giá trị: ");
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel5.setText("Giá trị: ");
 
         txtTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtTen.setForeground(new java.awt.Color(0, 102, 102));
         txtTen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        txtTen.setForeground(new java.awt.Color(0, 102, 102));
 
         txtNBD.setBackground(new java.awt.Color(255, 255, 255));
         txtNBD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
@@ -250,48 +253,48 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         txtNKT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtNKT.setForeground(new java.awt.Color(0, 102, 102));
 
-        btnThem.setBackground(new java.awt.Color(0, 102, 102));
-        btnThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setIcon(new ImageIcon("src/main/resource/icon/addspct.png"));
         btnThem.setText("Thêm");
+        btnThem.setBackground(new java.awt.Color(0, 102, 102));
         btnThem.setFocusable(false);
+        btnThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(0, 102, 102));
-        btnSua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setIcon(new ImageIcon("src/main/resource/icon/updatekm.png"));
         btnSua.setText("Sửa");
+        btnSua.setBackground(new java.awt.Color(0, 102, 102));
         btnSua.setFocusable(false);
+        btnSua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
-        btnClear.setBackground(new java.awt.Color(0, 102, 102));
-        btnClear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setIcon(new ImageIcon("src/main/resource/icon/clearkh.png"));
         btnClear.setText("Làm mới");
+        btnClear.setBackground(new java.awt.Color(0, 102, 102));
         btnClear.setFocusable(false);
+        btnClear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
             }
         });
 
-        btnXoa.setBackground(new java.awt.Color(255, 0, 0));
-        btnXoa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setIcon(new ImageIcon("src/main/resource/icon/endkm.png"));
         btnXoa.setText("Kết thúc khuyến mại");
+        btnXoa.setBackground(new java.awt.Color(255, 0, 0));
         btnXoa.setFocusable(false);
+        btnXoa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 2), "Sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -304,15 +307,27 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                 "Tên sản phẩm", ""
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         tblSanPham.setFillsViewportHeight(true);
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblSanPham);
         if (tblSanPham.getColumnModel().getColumnCount() > 0) {
             tblSanPham.getColumnModel().getColumn(1).setMinWidth(25);
@@ -323,9 +338,9 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 102, 102));
         jTextField3.setBorder(null);
         jTextField3.setCaretColor(new java.awt.Color(0, 102, 102));
+        jTextField3.setForeground(new java.awt.Color(0, 102, 102));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -376,11 +391,11 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
+        btnXoaSp.setIcon(new ImageIcon("src/main/resource/icon/removekm.png"));
+        btnXoaSp.setText("Xóa khuyến mại");
         btnXoaSp.setBackground(new java.awt.Color(255, 0, 0));
         btnXoaSp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoaSp.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaSp.setIcon(new ImageIcon("src/main/resource/icon/removekm.png"));
-        btnXoaSp.setText("Xóa khuyến mại");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -414,21 +429,21 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                     .addContainerGap(307, Short.MAX_VALUE)))
         );
 
+        cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phần trăm", "Giá tiền" }));
         cboLoai.setBackground(new java.awt.Color(0, 102, 102));
         cboLoai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cboLoai.setForeground(new java.awt.Color(255, 255, 255));
-        cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phần trăm", "Giá tiền" }));
 
         txtGiaTri.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtGiaTri.setForeground(new java.awt.Color(0, 102, 102));
 
+        jLabel8.setText("Mã khuyến mại:");
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel8.setText("Mã khuyến mại:");
 
+        lblMa.setText("...");
         lblMa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblMa.setForeground(new java.awt.Color(0, 102, 102));
-        lblMa.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -540,10 +555,15 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if (kms.createKM(getData())) {
+        List<UUID> lsidSP = new ArrayList<>();
+        for (int i = 0; i < tblSanPham.getRowCount(); i++) {
+            lsidSP.add(lstSP.get(0).getId());
+        }
+        if (kms.createKM(getData(), lsidSP)) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
         filltoTableKM(cboTrangThai.getSelectedIndex());
+        filltoTableSP();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblKhuyenmaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhuyenmaiMouseClicked
@@ -569,15 +589,25 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        List<UUID> lsidSP = new ArrayList<>();
+        for (int i = 0; i < tblSanPham.getRowCount(); i++) {
+            lsidSP.add(lstSP.get(0).getId());
+        }
         KhuyenMaiResponse km = getData();
         km.setId(lstKM.get(indexKM).getId());
         km.setTrangThai(lstKM.get(indexKM).getTrangThai());
-        if (kms.updateKM(km)) {
+        if (kms.updateKM(km, lsidSP)) {
             JOptionPane.showMessageDialog(this, "Update thành công");
         }
         clearFrom();
         filltoTableKM(cboTrangThai.getSelectedIndex());
+        filltoTableSP();
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+        // TODO add your handling code here:
+        tblSanPham.setValueAt(true, tblSanPham.getSelectedRow(), 1);
+    }//GEN-LAST:event_tblSanPhamMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -637,6 +667,14 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         lstKM = kms.getList(trangThai);
         for (KhuyenMaiResponse s : lstKM) {
             dtm.addRow(s.toDataRow());
+        }
+    }
+    private void filltoTableSP() {
+        dtm = (DefaultTableModel) tblSanPham.getModel();
+        dtm.setRowCount(0);
+        lstSP = kms.getAllSp();
+        for (SanPhamBanHangResponse s : lstSP) {
+            dtm.addRow(new Object[]{s.getTenSanPham(), false});
         }
     }
 

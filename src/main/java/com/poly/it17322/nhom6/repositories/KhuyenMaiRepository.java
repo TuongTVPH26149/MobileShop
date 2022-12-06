@@ -55,6 +55,19 @@ public class KhuyenMaiRepository {
         }
         return sanPham;
     }
+    
+    public KhuyenMai SelectKhuyenMaiById(String ma) {
+        KhuyenMai sanPham = new KhuyenMai();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM KhuyenMai where ma = :ma", KhuyenMai.class);
+            query.setParameter("ma", ma);
+            sanPham = (KhuyenMai) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sanPham;
+    }
 
     public Boolean InsertKhuyenMai(KhuyenMai sanPham) {
         try {
