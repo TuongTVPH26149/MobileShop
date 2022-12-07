@@ -55,7 +55,7 @@ NgayTao Date DEFAULT GETDATE(),
 NgayThanhToan Date DEFAULT NULL,
 NgayNhanHang Date DEFAULT NULL,
 NgayShip Date DEFAULT NULL,
-NgayNhanMongMuon Datetime DEFAULT NULL,
+NgayNhanMongMuon Date DEFAULT NULL,
 TienShip Decimal(20, 0) DEFAULT 0,
 TienMat Decimal(20, 0) DEFAULT 0,
 ChuyenKhoan Decimal(20, 0) DEFAULT 0,
@@ -148,7 +148,7 @@ Ten NVARCHAR(30) NOT NULL,
 NgayBD Datetime NOT NULL,
 NgayKT Datetime NOT NULL,
 GiaTri int DEFAULT 0,
-TrangThai bit DEFAULT 0,
+TrangThai int DEFAULT 0,
 LoaiKM Int DEFAULT 0,
 CreatedDate Date DEFAULT GETDATE(),
 lastModifiedDate Date DEFAULT NULL
@@ -259,8 +259,8 @@ ALTER TABLE BaoHanh ADD FOREIGN KEY(IdImel) REFERENCES Imel(Id)
 ALTER TABLE ImelBan ADD FOREIGN KEY(IDHoaDonChiTiet) REFERENCES HoaDonChiTiet(Id)
 GO
 
-INSERT INTO TaiKhoan(Ma,ChucVu, Email, MatKhau, HinhAnh) values ('NV001',0, 'admin', '21232F297A57A5A743894A0E4A801FC3', 'NV001'),
-('NV002',1, 'nhanvien', '2A2FA4FE2FA737F129EF2D127B861B7E', 'NV002')
+INSERT INTO TaiKhoan(Ma,HoTen,ChucVu, Email, MatKhau, HinhAnh) values ('NV001','Admin',0, 'admin', '21232F297A57A5A743894A0E4A801FC3', 'NV001'),
+('NV002','NhanVien',1, 'nhanvien', '2A2FA4FE2FA737F129EF2D127B861B7E', 'NV002')
 GO
-INSERT INTO KhachHang(Ma, HoTen, Sdt) VALUES('MacDinh',N'Khách mới','0123456789')
+INSERT INTO KhachHang(Ma, HoTen, Sdt) VALUES('MacDinh',N'Khách lẻ','0123456789')
 

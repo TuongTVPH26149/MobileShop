@@ -5,10 +5,15 @@
 package com.poly.it17322.nhom6.views;
 
 import com.github.sarxos.webcam.Webcam;
+import com.poly.it17322.nhom6.responses.KhuyenMaiDateRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
+import com.poly.it17322.nhom6.services.impl.KhuyenMaiServiceImpl;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -20,6 +25,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private int chosser;
     private UserResponse tkreponse;
+    private KhuyenMaiServiceImpl kms = new KhuyenMaiServiceImpl();
 
     /**
      * Creates new form frmMain
@@ -39,6 +45,8 @@ public class FrmMainView extends javax.swing.JFrame {
         if (tk.getChucVu() != 0) {
             pnlNhanVien.setVisible(false);
         }
+        pnlBaoHanh.setVisible(false);
+        jobCheckKM();
     }
 
     /**
@@ -1013,5 +1021,33 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlNhanVien.setBackground(new Color(0, 123, 123));
         pnlKhachHang.setBackground(new Color(0, 123, 123));
         pnlThongKe.setBackground(new Color(0, 123, 123));
+    }
+
+    private void jobCheckKM() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    List<KhuyenMaiDateRespone> lstKM = kms.getListDate();
+                    for (KhuyenMaiDateRespone s : lstKM) {
+                        int resultBD = LocalDateTime.now().compareTo(s.getNgayBD().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        int resultKT = LocalDateTime.now().compareTo(s.getNgayKT().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        if (resultBD < 0) {
+                            kms.updateTTKM(0, s.getId());
+                        } else {
+                            if (resultKT >= 0) {
+                                kms.updateTTKM(2, s.getId());
+                            }else{
+                                kms.updateTTKM(1, s.getId());
+                            }
+                        }
+                    }
+                    try {
+                        Thread.sleep(10000);
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }.start();
     }
 }
