@@ -45,11 +45,11 @@ public class KhuyenMai {
     private String ten;
 
     @Column(name = "NgayBD")
-    @Temporal(javax.persistence.TemporalType.TIME)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date ngayBD;
 
     @Column(name = "NgayKT")
-    @Temporal(javax.persistence.TemporalType.TIME)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date ngayKT;
 
     @Column(name = "GiaTri")

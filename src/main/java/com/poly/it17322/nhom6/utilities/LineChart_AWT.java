@@ -38,12 +38,7 @@ public class LineChart_AWT extends JFrame {
     private DefaultCategoryDataset createDataset(List<BigDecimal> tong, List<String> date) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = date.size()-1; i >= 0; i--) {
-            BigDecimal t;
-            if (tong.get(i).compareTo(new BigDecimal(1000000)) > 0) {
-                t = tong.get(i).divide(new BigDecimal(1000000));
-            }else{
-                t = tong.get(i);
-            }
+            BigDecimal t = tong.get(i);
             dataset.addValue(Integer.parseInt(t.toString()), "Giá trị triệu vnd", date.get(i));
         }
         return dataset;

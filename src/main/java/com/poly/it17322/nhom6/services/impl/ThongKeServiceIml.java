@@ -56,7 +56,7 @@ public class ThongKeServiceIml {
                     + "join Rom E on E.Id = A.IdRom\n"
                     + "join HoaDonChiTiet G on G.IdChiTietSP = A.Id\n"
                     + "join HoaDon H on G.IdHoaDon = H.Id\n"
-                    + "where ngayThanhToan >= :from and ngayThanhToan <= :to and H.TrangThai = 4\n"
+                    + "where ngayThanhToan >= :from and ngayThanhToan <= :to and H.TrangThai in (3,4)\n"
                     + "Group by B.Ten, C.Ten, D.Ten,E.Ten\n"
                     + "order by SUM(G.SoLuong) desc");
             query.setParameter("from", from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());

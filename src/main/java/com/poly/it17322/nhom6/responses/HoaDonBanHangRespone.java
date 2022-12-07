@@ -34,7 +34,11 @@ public class HoaDonBanHangRespone {
             this.id = hd.getId();
             this.ma = hd.getMa();
             this.ngayTao = hd.getNgayTao();
-            this.nguoiTao = hd.getTaiKhoan().getMa();
+            try {
+                this.nguoiTao = hd.getTaiKhoan().getMa()+"-"+hd.getTaiKhoan().getHoTen();
+            } catch (Exception e) {
+                this.nguoiTao = "...";
+            }
             try {
                 this.khachHang = hd.getKhachHang().getHoTen();
             } catch (Exception e) {
