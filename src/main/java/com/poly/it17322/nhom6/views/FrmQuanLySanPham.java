@@ -279,6 +279,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         );
 
         txtmapin.setBorder(null);
+        txtmapin.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -457,6 +458,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         );
 
         txtmamh.setBorder(null);
+        txtmamh.setEnabled(false);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -635,6 +637,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         );
 
         txtmacpu.setBorder(null);
+        txtmacpu.setEnabled(false);
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -815,6 +818,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         );
 
         txtmarom.setBorder(null);
+        txtmarom.setEnabled(false);
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -993,6 +997,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         );
 
         txtmaram.setBorder(null);
+        txtmaram.setEnabled(false);
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -1875,7 +1880,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cboloaihang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
@@ -2008,6 +2013,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         Deleted();
         FilltoTableSanPhamXoa();
+        JOptionPane.showMessageDialog(this, "Xóa thành công");
         clearFormData();
     }//GEN-LAST:event_btndeleteActionPerformed
 
@@ -2505,6 +2511,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblbang;
     private javax.swing.JTable tblbangxoa;
     private javax.swing.JTable tblcpu;
@@ -2733,12 +2740,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void AdDataPin() {
         String ma = txtmapin.getText();
         String ten = txttenpin.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
         }
         PinRespone h = new PinRespone();
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.insertPin(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2750,14 +2756,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         int index = tblbang.getSelectedRow();
         String ma = txtmapin.getText();
         String ten = txttenpin.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return;
         }
         PinRespone h = new PinRespone();
         h.setId(lstpin.get(index).getId());
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.updatePin(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2768,12 +2772,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void AdDataManhinh() {
         String ma = txtmamh.getText();
         String ten = txttenmh.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
         }
         ManHinhRespone h = new ManHinhRespone();
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.insertManHinh(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2785,14 +2788,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         int index = tblmanhinh.getSelectedRow();
         String ma = txtmamh.getText();
         String ten = txttenmh.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return;
         }
         ManHinhRespone h = new ManHinhRespone();
         h.setId(lstmh.get(index).getId());
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.updateManHinh(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2803,12 +2804,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void AdDataCPU() {
         String ma = txtmacpu.getText();
         String ten = txttencpu.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
         }
         CPURespone h = new CPURespone();
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.insertCPU(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2820,14 +2820,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         int index = tblcpu.getSelectedRow();
         String ma = txtmacpu.getText();
         String ten = txttencpu.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return;
         }
         CPURespone h = new CPURespone();
         h.setId(lstcpu.get(index).getId());
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.updateCPU(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2838,12 +2836,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void AdDataRom() {
         String ma = txtmarom.getText();
         String ten = txttenrom.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
         }
         RomRespone h = new RomRespone();
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.insertRom(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2855,14 +2852,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         int index = tblrom.getSelectedRow();
         String ma = txtmarom.getText();
         String ten = txttenrom.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return;
         }
         RomRespone h = new RomRespone();
         h.setId(lstrom.get(index).getId());
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.updateRom(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2873,12 +2868,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void AdDataRam() {
         String ma = txtmaram.getText();
         String ten = txttenram.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
         }
         RamRespone h = new RamRespone();
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.insertRam(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2890,14 +2884,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         int index = tblram.getSelectedRow();
         String ma = txtmaram.getText();
         String ten = txttenram.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return;
         }
         RamRespone h = new RamRespone();
         h.setId(lstram.get(index).getId());
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.updateRam(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2908,12 +2900,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void AdDataMauSac() {
         String ma = txtmams.getText();
         String ten = txttenms.getText();
-        if (ma.length() == 0
-                || ten.length() == 0) {
+        if (ten.length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
         }
         MauSacRespone h = new MauSacRespone();
-        h.setMa(ma);
         h.setTen(ten);
         if (spct.insertMauSac(h)) {
             JOptionPane.showMessageDialog(this, "thành công");
@@ -2982,7 +2973,8 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 || cbomausac.getSelectedItem() == null
                 || cbopin.getSelectedItem() == null
                 || cboram.getSelectedItem() == null
-                || cborom.getSelectedItem() == null) {
+                || cborom.getSelectedItem() == null
+                || cboimel.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Các thuộc tính phải được chọn");
             return;
         }
