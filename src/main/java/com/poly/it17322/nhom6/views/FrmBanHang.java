@@ -40,7 +40,6 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.ImageIcon;
@@ -2138,10 +2137,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (txtNgayMuonNhan.getDate() == null) {
             return;
         }
-        if (txtNgayMuonNhan.getDate().before(new Date())) {
-            JOptionPane.showMessageDialog(this, "Ngày muốn nhận phải sau ngày hiện tại");
-            txtNgayMuonNhan.setDate(null);
-        }
     }//GEN-LAST:event_txtNgayMuonNhanPropertyChange
 
     private void btnGiaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaoActionPerformed
@@ -2796,9 +2791,11 @@ public class FrmBanHang extends javax.swing.JPanel {
         try {
             lstGH = bhs.getAllGH(lstHoaDon.get(indexHD).getId());
             if (lstGH.isEmpty()) {
+                tinhTienThua();
                 return;
             }
         } catch (Exception e) {
+            lstGH.clear();
         }
         for (GioHangRespone s : lstGH) {
             dtm.addRow(s.toDataRow());
@@ -3077,13 +3074,21 @@ public class FrmBanHang extends javax.swing.JPanel {
     private void tinhTienThua() {
         BigDecimal tongTien = new BigDecimal(0);
         BigDecimal giamGia = new BigDecimal(0);
-        for (GioHangRespone s : lstGH) {
-            tongTien = tongTien.add(s.getThanhTien());
+        try {
+            for (GioHangRespone s : lstGH) {
+                tongTien = tongTien.add(s.getThanhTien());
+            }
+        } catch (Exception e) {
         }
-        if (kh.getPhanTramGiam() > 0) {
-            giamGia = (tongTien.multiply(new BigDecimal(kh.getPhanTramGiam() + "")).divide(new BigDecimal(100)));
+        try {
+            if (kh.getPhanTramGiam() > 0) {
+                giamGia = (tongTien.multiply(new BigDecimal(kh.getPhanTramGiam() + "")).divide(new BigDecimal(100)));
+            }
+            tongTien = tongTien.subtract(giamGia);
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
-        tongTien = tongTien.subtract(giamGia);
         BigDecimal phiShip = new BigDecimal(0);
         try {
             phiShip = new BigDecimal(txtphiship.getText());

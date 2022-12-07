@@ -147,7 +147,7 @@ public class HoaDonRepository {
                     query.setParameter("idtk", idnv);
                     break;
                 case 2:
-                    query = session.createQuery("FROM HoaDon Where IdTK = :idtk and trangThai = 2 order by ma desc", HoaDon.class);
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 2 order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
                     break;
                 case 3:
@@ -176,7 +176,7 @@ public class HoaDonRepository {
         List<HoaDon> list = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai = 4", HoaDon.class);
+            Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai in (3,4)", HoaDon.class);
             query.setParameter("from", from);
             query.setParameter("to", to);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {

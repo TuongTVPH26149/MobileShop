@@ -6,7 +6,6 @@ package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import com.poly.it17322.nhom6.domainmodels.KhuyenMai;
-import com.poly.it17322.nhom6.domainmodels.SanPham;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
 import com.poly.it17322.nhom6.repositories.KhuyenMaiRepository;
 import com.poly.it17322.nhom6.responses.KhuyenMaiDateRespone;

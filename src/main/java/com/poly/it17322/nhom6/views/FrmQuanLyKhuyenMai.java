@@ -557,7 +557,9 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         // TODO add your handling code here:
         List<UUID> lsidSP = new ArrayList<>();
         for (int i = 0; i < tblSanPham.getRowCount(); i++) {
-            lsidSP.add(lstSP.get(0).getId());
+            if (Boolean.parseBoolean(tblSanPham.getValueAt(i, 1).toString())) {
+                lsidSP.add(lstSP.get(i).getId());
+            }
         }
         if (kms.createKM(getData(), lsidSP)) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
@@ -591,7 +593,9 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         // TODO add your handling code here:
         List<UUID> lsidSP = new ArrayList<>();
         for (int i = 0; i < tblSanPham.getRowCount(); i++) {
-            lsidSP.add(lstSP.get(0).getId());
+            if (Boolean.parseBoolean(tblSanPham.getValueAt(i, 1).toString())) {
+                lsidSP.add(lstSP.get(i).getId());
+            }
         }
         KhuyenMaiResponse km = getData();
         km.setId(lstKM.get(indexKM).getId());

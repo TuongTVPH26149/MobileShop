@@ -480,7 +480,7 @@ public class FrmThongKe extends javax.swing.JPanel {
 
     private void txtToPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtToPropertyChange
         // TODO add your handling code here:
-        if (txtTo.getDate().compareTo(txtFrom.getDate()) < 0) {
+        if (txtTo.getDate().compareTo(txtFrom.getDate()) <= 0) {
             JOptionPane.showMessageDialog(this, "Ngày sau phải lớn hơn ngày trước");
             txtTo.setDate(null);
             return;
