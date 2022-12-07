@@ -2359,7 +2359,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                     for (Cell cell : row) {
                         if (formula.evaluate(cell).getCellType() != null) {
                             ImelAoSPRespone imelao = new ImelAoSPRespone();
-                            imelao.setMa(String.valueOf(cell.getNumericCellValue()));
+                            imelao.setMa(String.valueOf((int)cell.getNumericCellValue()));
                             txtsoluong.setText(sl + "");
                             lstimelao.add(imelao);
                             FilltoTableImelAO();

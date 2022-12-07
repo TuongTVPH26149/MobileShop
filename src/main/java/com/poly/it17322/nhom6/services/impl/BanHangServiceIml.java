@@ -335,29 +335,28 @@ public class BanHangServiceIml implements IBanHangService {
         }
         return imelrepo.UpdateImel(im);
     }
-    
 
     @Override
     public void updatRank(UUID id) {
+        KhachHang kh = khrepo.SelectKhachHangById(id);
+        if (kh.getMa().equals("MacDinh")) {
+            return;
+        }
         BigDecimal tongTien = hdrepo.getTienByKH(id);
         int rank = 0;
-        while (tongTien.compareTo(new BigDecimal(10000000)) >= 0) {
+        while (tongTien.compareTo(new BigDecimal(20000000)) >= 0) {
             rank++;
-            tongTien = tongTien.subtract(new BigDecimal(10000000));
+            tongTien = tongTien.subtract(new BigDecimal(20000000));
         }
-        System.out.println(rank);
-        KhachHang kh = khrepo.SelectKhachHangById(id);
         if (kh.getCapDo() != rank) {
             kh.setNgayTutHang(new Date());
         }
         kh.setCapDo(rank);
-        if (!kh.getMa().equals("MacDinh")) {
-            khrepo.UpdateKhachHang(kh);
-        }
+        khrepo.UpdateKhachHang(kh);
     }
-    
+
     @Override
-    public void updateKM(UUID idhdct, BigDecimal km){
+    public void updateKM(UUID idhdct, BigDecimal km) {
         HoaDonChiTiet hdct = hdctrepo.SelectHoaDonChiTietById(idhdct);
         hdct.setKhuyenMai(km);
         hdctrepo.UpdateHoaDonChiTiet(hdct);
