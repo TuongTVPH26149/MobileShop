@@ -126,21 +126,13 @@ public class FrmHoaDon extends javax.swing.JPanel {
     
     public void loadTableHDbyMa() {
         dtm.setRowCount(0);
-        Date from = new Date();
+        Date from = null;
         if (jDateChooser1.getCalendar() != null) {
             from = jDateChooser1.getCalendar().getTime();
         }
-        Date to = from;
+        Date to = new Date();
         if (jDateChooser2.getCalendar() != null) {
             to = jDateChooser2.getCalendar().getTime();
-        }
-        if(from.getTime() > to.getTime()){
-            jDateChooser1.setDate(null);
-            jDateChooser2.setDate(null);
-             showDataTable(hoaDonReponses);
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn lại khoảng thời gian");
-           
-            return;
         }
         if (cboNgay.getSelectedIndex() == 0) {
             hoaDonReponses = hoadonService.getByCodeAndCreateDate(txtTim.getText(), from, to);
@@ -289,7 +281,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Tên SP", "Số lượng", "Giá bán", "Giảm giá", "Tổng tiền"
+                "Tên sản phẩm", "Số lượng", "Giá bán", "Giảm giá", "Tổng tiền"
             }
         ));
         jScrollPane2.setViewportView(tblHoaDonChiTiet);

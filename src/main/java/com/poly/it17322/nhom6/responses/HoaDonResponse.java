@@ -50,6 +50,7 @@ public class HoaDonResponse {
             this.tenNV = hd.getTaiKhoan().getHoTen();
             this.diaChi = hd.getKhachHang().getDiaChi();
             this.trangThai = hd.getTrangThai();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
