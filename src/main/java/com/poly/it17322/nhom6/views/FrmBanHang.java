@@ -40,7 +40,6 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.ImageIcon;
@@ -1712,7 +1711,7 @@ public class FrmBanHang extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(btnClearHD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                                .addComponent(jLabel28)
+                                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNgayMuonNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel14Layout.createSequentialGroup()
@@ -2035,7 +2034,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (bhs.createHoaDon(nhanVien.getId(), TabNoiNhan.getSelectedIndex())) {
-                JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công");
                 cboTrangThaiHoaDon.setSelectedIndex(TabNoiNhan.getSelectedIndex());
                 fillTableHoaDon();
                 return;
@@ -2138,10 +2136,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (txtNgayMuonNhan.getDate() == null) {
             return;
-        }
-        if (txtNgayMuonNhan.getDate().before(new Date())) {
-            JOptionPane.showMessageDialog(this, "Ngày muốn nhận phải sau ngày hiện tại");
-            txtNgayMuonNhan.setDate(null);
         }
     }//GEN-LAST:event_txtNgayMuonNhanPropertyChange
 
@@ -2796,8 +2790,12 @@ public class FrmBanHang extends javax.swing.JPanel {
         dtm.setRowCount(0);
         try {
             lstGH = bhs.getAllGH(lstHoaDon.get(indexHD).getId());
+            if (lstGH.isEmpty()) {
+                tinhTienThua();
+                return;
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            lstGH.clear();
         }
         for (GioHangRespone s : lstGH) {
             dtm.addRow(s.toDataRow());
@@ -2823,7 +2821,6 @@ public class FrmBanHang extends javax.swing.JPanel {
             btnClearHD1.setEnabled(false);
             btnClearHD1.setBackground(new Color(102, 102, 102));
         }
-        TabNoiNhan.setEnabled(true);
         btnSelectAllGH.setEnabled(true);
         btnxoagh.setEnabled(true);
         btnXacNhanImel1.setEnabled(true);
@@ -2964,7 +2961,6 @@ public class FrmBanHang extends javax.swing.JPanel {
             }
         }
         if (dh.getTrangThai() == 3 || dh.getTrangThai() == 4) {
-            TabNoiNhan.setEnabled(false);
             txtGiamGiaDacbiet.setEnabled(false);
             cboHinhThuc.setEnabled(false);
             txtTienMat.setEnabled(false);
@@ -2985,6 +2981,10 @@ public class FrmBanHang extends javax.swing.JPanel {
             btnGiao.setEnabled(false);
             btnClearHD.setEnabled(false);
             btnClearHD1.setEnabled(false);
+            btnChonKH1.setEnabled(false);
+            btnChonKH2.setEnabled(false);
+            btnChonKH1.setBackground(new Color(102, 102, 102));
+            btnChonKH2.setBackground(new Color(102, 102, 102));
             btnClearHD.setBackground(new Color(102, 102, 102));
             btnClearHD1.setBackground(new Color(102, 102, 102));
             btnThanhToan.setBackground(new Color(102, 102, 102));
@@ -3074,13 +3074,21 @@ public class FrmBanHang extends javax.swing.JPanel {
     private void tinhTienThua() {
         BigDecimal tongTien = new BigDecimal(0);
         BigDecimal giamGia = new BigDecimal(0);
-        for (GioHangRespone s : lstGH) {
-            tongTien = tongTien.add(s.getThanhTien());
+        try {
+            for (GioHangRespone s : lstGH) {
+                tongTien = tongTien.add(s.getThanhTien());
+            }
+        } catch (Exception e) {
         }
-        if (kh.getPhanTramGiam() > 0) {
-            giamGia = (tongTien.multiply(new BigDecimal(kh.getPhanTramGiam() + "")).divide(new BigDecimal(100)));
+        try {
+            if (kh.getPhanTramGiam() > 0) {
+                giamGia = (tongTien.multiply(new BigDecimal(kh.getPhanTramGiam() + "")).divide(new BigDecimal(100)));
+            }
+            tongTien = tongTien.subtract(giamGia);
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
-        tongTien = tongTien.subtract(giamGia);
         BigDecimal phiShip = new BigDecimal(0);
         try {
             phiShip = new BigDecimal(txtphiship.getText());
@@ -3220,15 +3228,7 @@ public class FrmBanHang extends javax.swing.JPanel {
                     gh.setDonGia(new BigDecimal(tblGioHang.getValueAt(i, 4).toString()));
                     gh.setKhuyenMai(new BigDecimal(tblGioHang.getValueAt(i, 5).toString()));
                     gh.setSoLuong(Integer.parseInt(tblGioHang.getValueAt(i, 6).toString()));
-                    try {
-                        long donGia = Long.parseLong(gh.getDonGia().toString());
-                        long khuyenMai = Long.parseLong(gh.getKhuyenMai().toString());
-                        long thanhTien = (donGia - khuyenMai) * gh.getSoLuong();
-                        gh.setThanhTien(new BigDecimal(thanhTien));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
+                    gh.setThanhTien(new BigDecimal(Integer.parseInt(tblGioHang.getValueAt(i, 7).toString())));
                     ghin.add(gh);
                 }
                 if (InHoaDon.makePDF(hdin, ghin)) {

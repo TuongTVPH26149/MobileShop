@@ -4,7 +4,6 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.responses.HoaDonThongKeRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.responses.top5sprespone;
@@ -14,16 +13,12 @@ import com.poly.it17322.nhom6.utilities.SenderMailUtil;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
@@ -473,6 +468,11 @@ public class FrmThongKe extends javax.swing.JPanel {
 
     private void txtFromPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtFromPropertyChange
         // TODO add your handling code here:
+        if (txtFrom.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(this, "Không được tìm quá trước ngày");
+            txtFrom.setDate(new Date());
+            return;
+        }
         lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
         filltabelhd();
         fillTableTop();
@@ -480,6 +480,11 @@ public class FrmThongKe extends javax.swing.JPanel {
 
     private void txtToPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtToPropertyChange
         // TODO add your handling code here:
+        if (txtTo.getDate().compareTo(txtFrom.getDate()) <= 0) {
+            JOptionPane.showMessageDialog(this, "Ngày sau phải lớn hơn ngày trước");
+            txtTo.setDate(null);
+            return;
+        }
         lsthd = tk.getHDByDate(txtFrom.getDate(), txtTo.getDate());
         filltabelhd();
         fillTableTop();

@@ -9,7 +9,9 @@ import com.poly.it17322.nhom6.repositories.ChucNangNhanVienRepository;
 import com.poly.it17322.nhom6.repositories.TaiKhoanRepository;
 import com.poly.it17322.nhom6.responses.NhanVienRespone;
 import com.poly.it17322.nhom6.services.INhanVienService;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -34,6 +36,16 @@ public class NhanVienServiceImpl implements INhanVienService {
     }
 
     @Override
+    public List<TaiKhoan> selectTaiKhoan(int trangThai) {
+        try {
+            List<TaiKhoan> lst = chucNangNhanVienRepository.selectTaiKhoan(trangThai);
+            return lst;
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public TaiKhoan SelectNhanVienById(UUID id) {
         return taiKhoanRepository.SelectTaiKhoanById(id);
     }
@@ -48,6 +60,7 @@ public class NhanVienServiceImpl implements INhanVienService {
         tk.setDiaChi(nhanVien.getDiaChi());
         tk.setEmail(nhanVien.getEmail());
         tk.setSdt(nhanVien.getSdt());
+        tk.setHinhAnh("NV002");
         tk.setMatKhau(nhanVien.getMatKhau());
         tk.setChucVu(nhanVien.getChucVu());
         return taiKhoanRepository.InsertTaiKhoan(tk);
@@ -55,7 +68,7 @@ public class NhanVienServiceImpl implements INhanVienService {
 
     @Override
     public boolean Update(NhanVienRespone nhanVien) {
-        TaiKhoan tk = new TaiKhoan();
+        TaiKhoan tk = taiKhoanRepository.SelectTaiKhoanById(nhanVien.getId());
         tk.setMa(nhanVien.getMa());
         tk.setHoTen(nhanVien.getTen());
         tk.setGioiTinh(nhanVien.getGioiTinh());
@@ -68,9 +81,9 @@ public class NhanVienServiceImpl implements INhanVienService {
     }
 
     @Override
-    public List<TaiKhoan> timKiem(String ten) {
+    public List<TaiKhoan> timKiem(String ten, int trangThai) {
         try {
-            List<TaiKhoan> lst = chucNangNhanVienRepository.timKiem(ten);
+            List<TaiKhoan> lst = chucNangNhanVienRepository.timKiem(ten, trangThai);
             return lst;
         } catch (Exception e) {
             return new ArrayList<>();
@@ -78,15 +91,14 @@ public class NhanVienServiceImpl implements INhanVienService {
     }
 
     @Override
-    public List<TaiKhoan> selectTaiKhoan(int trangThai) {
-        try {
-            List<TaiKhoan> lst = chucNangNhanVienRepository.selectTaiKhoan(trangThai);
-            return lst;
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
+    public boolean Delete(NhanVienRespone nhanVien) {
+        TaiKhoan tk = taiKhoanRepository.SelectTaiKhoanById(nhanVien.getId());
+        tk.setTrangThai(nhanVien.getTrangThai());
+        return taiKhoanRepository.UpdateTaiKhoan(tk);
     }
-
     
-
+    public String genPass(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        return sdf.format(new Date());
+    }
 }
