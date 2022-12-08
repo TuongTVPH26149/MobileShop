@@ -37,18 +37,22 @@ public class HoaDonResponse {
     }
 
     public HoaDonResponse(HoaDon hd) {
-        this.Id = hd.getId();
-        this.ma = hd.getMa();
-        this.hoTen = hd.getKhachHang().getHoTen();
-        this.sdt = hd.getKhachHang().getSdt();
-        this.tongTien = hd.getTongTien();
-        this.ngayTao = hd.getNgayTao();
-        this.ngayThanhToan = hd.getNgayThanhToan();
-        this.loaiThanhToan = hd.getLoaiThanhToan();
-        this.maNV = hd.getTaiKhoan().getMa();
-        this.tenNV = hd.getTaiKhoan().getHoTen();
-        this.diaChi = hd.getKhachHang().getDiaChi();
-        this.trangThai = hd.getTrangThai();
+        try {
+            this.Id = hd.getId();
+            this.ma = hd.getMa();
+            this.hoTen = hd.getKhachHang().getHoTen();
+            this.sdt = hd.getKhachHang().getSdt();
+            this.tongTien = hd.getTongTien();
+            this.ngayTao = hd.getNgayTao();
+            this.ngayThanhToan = hd.getNgayThanhToan();
+            this.loaiThanhToan = hd.getLoaiThanhToan();
+            this.maNV = hd.getTaiKhoan().getMa();
+            this.tenNV = hd.getTaiKhoan().getHoTen();
+            this.diaChi = hd.getKhachHang().getDiaChi();
+            this.trangThai = hd.getTrangThai();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getloaiThanhToan() {
@@ -56,22 +60,22 @@ public class HoaDonResponse {
     }
 
     public String getTrangThai() {
-        if(trangThai==0){
+        if (trangThai == 0) {
             return "Chờ thanh toán ";
-        }else if(trangThai==1){
+        } else if (trangThai == 1) {
             return "Chờ giao";
-        }else if(trangThai==2){
+        } else if (trangThai == 2) {
             return "Đang giao";
-        }else if(trangThai==3){
+        } else if (trangThai == 3) {
             return "Đã thanh toán";
-        }else{
+        } else {
             return "Đã giao";
         }
     }
 
     public Object[] toDataRow() {
-        
+      
         return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
-            ngayTao, ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
+          ngayTao,ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
     }
 }

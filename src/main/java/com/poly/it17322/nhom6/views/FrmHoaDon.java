@@ -5,10 +5,13 @@
 package com.poly.it17322.nhom6.views;
 import com.poly.it17322.nhom6.responses.HoaDonChiTietResponse;
 import com.poly.it17322.nhom6.responses.HoaDonResponse;
+import com.poly.it17322.nhom6.responses.KhachHangResponse;
 import com.poly.it17322.nhom6.services.IChiTietHoaDonService;
 import com.poly.it17322.nhom6.services.IHoaDonService;
+import com.poly.it17322.nhom6.services.IKhachHangService;
 import com.poly.it17322.nhom6.services.impl.ChiTietHoaDonImpl;
 import com.poly.it17322.nhom6.services.impl.HoaDonServiceImpl;
+import com.poly.it17322.nhom6.services.impl.KhachHangService;
 import java.awt.Color;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
@@ -96,11 +99,11 @@ public class FrmHoaDon extends javax.swing.JPanel {
         }
     }
     private void showDataTable(List<HoaDonResponse> lists) {
-        dtm.setRowCount(0);
+           dtm.setRowCount(0);
         for (HoaDonResponse x : lists) {
             dtm.addRow(x.toDataRow());
         }
-        jLabel3.setText("Tổng hóa đơn:" + lists.size());
+        jLabel3.setText("Tổng hóa đơn:" + lists.size());        
     }
 
     private void showDataTableCTHoaDon(List<HoaDonChiTietResponse> ctHoaDon, DefaultTableModel dtm) {
@@ -120,21 +123,29 @@ public class FrmHoaDon extends javax.swing.JPanel {
         }
       
     }
-
+    
     public void loadTableHDbyMa() {
         dtm.setRowCount(0);
         Date from = new Date();
         if (jDateChooser1.getCalendar() != null) {
             from = jDateChooser1.getCalendar().getTime();
         }
-        Date to = null;
+        Date to = from;
         if (jDateChooser2.getCalendar() != null) {
             to = jDateChooser2.getCalendar().getTime();
+        }
+        if(from.getTime() > to.getTime()){
+            jDateChooser1.setDate(null);
+            jDateChooser2.setDate(null);
+             showDataTable(hoaDonReponses);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn lại khoảng thời gian");
+           
+            return;
         }
         if (cboNgay.getSelectedIndex() == 0) {
             hoaDonReponses = hoadonService.getByCodeAndCreateDate(txtTim.getText(), from, to);
         }
-        if (cboNgay.getSelectedIndex() == 1) {
+        if (cboNgay.getSelectedIndex() == 1) {jDateChooser1.setDate(null);
             hoaDonReponses = hoadonService.getByCodeAndUpdateDate(txtTim.getText(), from, to);
         }
         for (HoaDonResponse x : hoaDonReponses) {
@@ -209,7 +220,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, true, false, false, false, false, true
+                true, false, false, true, false, true, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -272,13 +283,13 @@ public class FrmHoaDon extends javax.swing.JPanel {
         tblHoaDonChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tên SP", "Số lượng", "Đơn giá", "Giá bán", "Giảm giá", "Tổng tiền"
+                "Tên SP", "Số lượng", "Giá bán", "Giảm giá", "Tổng tiền"
             }
         ));
         jScrollPane2.setViewportView(tblHoaDonChiTiet);
@@ -454,6 +465,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
     private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
 
         try {
+        
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("Hóa đơn");
             sheet.setDefaultColumnWidth(16);
@@ -552,9 +564,10 @@ public class FrmHoaDon extends javax.swing.JPanel {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            JOptionPane.showMessageDialog(this, "Xuất hóa đơn thành công");
+            JOptionPane.showMessageDialog(this, "Xuất danh sách hóa đơn thành công");
 
         } catch (Exception e) {
+              JOptionPane.showMessageDialog(this, "Xuất thất bại");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnXuatActionPerformed
