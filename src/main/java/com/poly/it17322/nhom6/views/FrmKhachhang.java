@@ -13,10 +13,11 @@ import java.awt.Font;
 import java.io.FileOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
@@ -72,7 +73,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtsdt = new javax.swing.JTextField();
-        txtngaysinh = new javax.swing.JTextField();
         rdonam = new javax.swing.JRadioButton();
         rdonu = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
@@ -82,6 +82,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         btnthem = new javax.swing.JButton();
         btnsua = new javax.swing.JButton();
         btntimkiem = new javax.swing.JButton();
+        txtngaysinh = new com.toedter.calendar.JDateChooser();
         btnstart = new javax.swing.JButton();
         btnlen = new javax.swing.JButton();
         btnxuong = new javax.swing.JButton();
@@ -111,7 +112,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1080, 720));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(51, 51, 255))); // NOI18N
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -134,8 +135,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
         jLabel6.setText("Ngày sinh:");
 
         txtsdt.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        txtngaysinh.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         rdonam.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rdonam);
@@ -163,7 +162,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtdiachi);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 123, 123))); // NOI18N
 
         btnthem.setBackground(new java.awt.Color(0, 123, 123));
         btnthem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -222,6 +221,13 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        txtngaysinh.setDateFormatString("dd-MM-yyyy");
+        txtngaysinh.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtngaysinhPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -244,9 +250,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(txtngaysinh)
                     .addComponent(txtsdt)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txtngaysinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(74, 74, 74)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -272,11 +278,11 @@ public class FrmKhachhang extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txthoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txthoten)
+                            .addComponent(txtngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -326,7 +332,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 123, 123))); // NOI18N
 
         tblkhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -385,7 +391,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
         cbohang.setBackground(new java.awt.Color(0, 123, 123));
         cbohang.setForeground(new java.awt.Color(255, 255, 255));
-        cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng I", "Đồng II", "Đồng III", "Bạc I", "Bạc II", "Bạc III", "Vàng I", "Vàng II", "Vàng III", "Bạch Kim I", "Bạch Kim II", "Bạch Kim III", "Kim Cương" }));
+        cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng ", "Bạc", "Vàng", "Kim Cương", "ALL" }));
         cbohang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbohangActionPerformed(evt);
@@ -434,7 +440,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
         lblrank.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblrank.setForeground(new java.awt.Color(255, 0, 0));
-        lblrank.setText(" Đồng");
+        lblrank.setText(" Đồng ");
 
         lblcuoi.setText("20tr");
 
@@ -701,7 +707,15 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
     private void cbohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbohangActionPerformed
         index = cbohang.getSelectedIndex();
-        lochang();
+        try {
+            if (cbohang.getSelectedItem().equals("ALL")) {
+                filltiTable();
+                return;
+            }
+            lochang(index);
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_cbohangActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -760,6 +774,18 @@ public class FrmKhachhang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtngaysinhPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtngaysinhPropertyChange
+        // TODO add your handling code here:
+//        if (txtngaysinh.getDate().compareTo(new Date()) > 0) {
+//            JOptionPane.showMessageDialog(this, "Không được tìm quá trước ngày");
+//            txtngaysinh.setDate(new Date());
+//            return;
+//        }
+//        lsthd = tk.getHDByDate(txtngaysinh.getDate(), txtTo.getDate());
+//        filltabelhd();
+//        fillTableTop();
+    }//GEN-LAST:event_txtngaysinhPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnend;
@@ -802,17 +828,17 @@ public class FrmKhachhang extends javax.swing.JPanel {
     private javax.swing.JTextArea txtdiachi;
     private javax.swing.JTextField txthoten;
     private javax.swing.JTextField txtma;
-    private javax.swing.JTextField txtngaysinh;
+    private com.toedter.calendar.JDateChooser txtngaysinh;
     private javax.swing.JTextField txtsdt;
     private javax.swing.JTextField txttimkiem;
     // End of variables declaration//GEN-END:variables
-
+    
+     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private void filltiTable() {
         model = (DefaultTableModel) tblkhachhang.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0);      
         for (KhachHangResponse x : KHSer.getlist()) {
-
-            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh(), x.getHang()});
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), sdf.format(x.getNgaysinh()), x.getHang()});
             listkh.add(x);
         }
 
@@ -823,7 +849,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         model.setRowCount(0);
         listkh = KHSer.timkiem((txttimkiem.getText()));
         for (KhachHangResponse x : listkh) {
-            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh()});
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(),  sdf.format(x.getNgaysinh()), x.getHang()});
         }
 
     }
@@ -833,7 +859,17 @@ public class FrmKhachhang extends javax.swing.JPanel {
         model.setRowCount(0);
         listkh = KHSer.LocKH(cbolocgioitinh.getSelectedIndex());
         for (KhachHangResponse x : listkh) {
-            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh()});
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(),  sdf.format(x.getNgaysinh()), x.getHang()});
+        }
+
+    }
+
+    private void lochang(int index) {
+        model = (DefaultTableModel) tblkhachhang.getModel();
+        model.setRowCount(0);
+        for (KhachHangResponse x : KHSer.loctheohang(cbohang.getSelectedIndex())) {
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), sdf.format(x.getNgaysinh()), x.getHang()});
+
         }
 
     }
@@ -852,7 +888,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         txthoten.setText(tblkhachhang.getValueAt(index, 1).toString());
         txtsdt.setText(tblkhachhang.getValueAt(index, 3).toString());
         txtdiachi.setText(tblkhachhang.getValueAt(index, 4).toString());
-        txtngaysinh.setText(tblkhachhang.getValueAt(index, 5).toString());
+        txtngaysinh.setDateFormatString(tblkhachhang.getValueAt(index, 5).toString());
         if (tblkhachhang.getValueAt(index, 2).equals("Nam")) {
             rdonam.setSelected(true);
         } else {
@@ -863,7 +899,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
     private void Insert() {
         index = tblkhachhang.getSelectedRow();
-        if (txtngaysinh.getText().equals("")) {
+        if (txtngaysinh.getDateFormatString().equals("")) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
         }
@@ -873,7 +909,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
-        Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
+        Date ngaysinh = txtngaysinh.getDate();
         if (ma.length() == 0 || hoten.length() == 0 || sdt.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
@@ -903,7 +939,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
     }
 
     private void Update() {
-        if (txtngaysinh.getText().equals("")) {
+        if (txtngaysinh.getDateFormatString().equals("")) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
         }
@@ -912,7 +948,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
-        Date ngaysinh = Date.valueOf(txtngaysinh.getText().trim());
+        Date ngaysinh = new Date(txtngaysinh.getDateFormatString().trim());
         if (ma.length() == 0 || hoten.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
@@ -947,7 +983,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         txthoten.setText(tblkhachhang.getValueAt(index, 1).toString());
         txtsdt.setText(tblkhachhang.getValueAt(index, 3).toString());
         txtdiachi.setText(tblkhachhang.getValueAt(index, 4).toString());
-        txtngaysinh.setText(tblkhachhang.getValueAt(index, 5).toString());
+        txtngaysinh.setDateFormatString(tblkhachhang.getValueAt(index, 5).toString());
         if (tblkhachhang.getValueAt(index, 2).toString().equals("Nam")) {
             rdonam.setSelected(true);
         } else {
@@ -961,7 +997,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         txtdiachi.setText("");
         txthoten.setText("");
         txtma.setText("");
-        txtngaysinh.setText("");
+        txtngaysinh.setDateFormatString("");
         txtsdt.setText("");
     }
 
@@ -975,7 +1011,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 int tongtien = 0;
                 for (int i = 0; i < tblhoadondamua.getRowCount(); i++) {
                     tong += Integer.parseInt(tblhoadondamua.getValueAt(i, 4).toString());
-                    tongtien = tong/1000;
+                    tongtien = tong / 1000;
                 }
                 lblrank.setText("Đồng");
                 lblcuoi.setText("20tr");
@@ -985,7 +1021,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 if (tong >= prorank.getMaximum()) {
                     lblrank.setText("Bạc");
                     lblcuoi.setText("40tr");
-                    lbltongtien.setText(tong +"/40tr");
+                    lbltongtien.setText(tong + "/40tr");
                     prorank.setMaximum(40000000);
                     prorank.setValue(tong);
 
@@ -1000,10 +1036,10 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 if (tong >= 60000000) {
                     lblrank.setText("Kim Cương");
                     lblcuoi.setText("");
-                    lbltongtien.setText(tong+"");
+                    lbltongtien.setText(tong + "");
                     prorank.setMaximum(400000000);
                     prorank.setValue(tong);
-                }                
+                }
 
                 try {
                     Thread.sleep(1000);
@@ -1013,18 +1049,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
             }
 
         }.start();
-
-    }
-
-    private String hang(int tongtien) {
-        if (tongtien >= 20000000) {
-            return "Thành viên Bạc";
-        } else {
-            return "Thành viên Đồng";
-        }
-    }
-
-    private void lochang() {
 
     }
 }
