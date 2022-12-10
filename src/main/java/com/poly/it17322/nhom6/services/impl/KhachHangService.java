@@ -38,7 +38,7 @@ public class KhachHangService implements IKhachHangService {
             return new ArrayList<>();
         }
     }
-    
+
     @Override
     public List<khachHangBanHangRespone> getKHBH() {
         try {
@@ -96,6 +96,12 @@ public class KhachHangService implements IKhachHangService {
     @Override
     public List<HoaDon> selectallhoadon(UUID IdKH) {
         return TKrepo.selectallhoadon(IdKH);
+    }
+
+    @Override
+    public List<KhachHangResponse> loctheohang(int capdo) {
+        List<KhachHang> lst = TKrepo.loctheohang(capdo);
+        return lst.stream().map(KhachHangResponse::new).collect(Collectors.toList());
     }
 
 }

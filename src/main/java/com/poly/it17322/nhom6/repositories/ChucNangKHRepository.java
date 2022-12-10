@@ -27,7 +27,7 @@ public class ChucNangKHRepository extends KhachHangRepository {
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM KhachHang where Sdt LIKE :sdt", KhachHang.class);
-            query.setParameter("sdt", sdt + "%");
+            query.setParameter("sdt", "%" + sdt + "%");
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 lstKH = query.getResultList();
             }
@@ -41,7 +41,7 @@ public class ChucNangKHRepository extends KhachHangRepository {
         List<KhachHang> lstKH = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM KhachHang where GioiTinh = :gioitinh", KhachHang.class);
+            Query query = session.createQuery("FROM KhachHang where GioiTinh = :gioitinh and Ma != 'MacDinh'", KhachHang.class);
             query.setParameter("gioitinh", gioitinh);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 lstKH = query.getResultList();
@@ -67,4 +67,16 @@ public class ChucNangKHRepository extends KhachHangRepository {
         return lstHD;
     }
 
+    public List<KhachHang> loctheohang(int capdo) {
+        List<KhachHang> lstKH = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("From KhachHang where CapDo = :capdo and Ma != 'MacDinh'", KhachHang.class);
+            query.setParameter("capdo", capdo);
+            lstKH = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lstKH;
+    }
 }

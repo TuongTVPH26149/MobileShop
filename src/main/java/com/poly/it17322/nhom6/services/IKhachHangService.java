@@ -16,7 +16,9 @@ import java.util.UUID;
  *
  * @author ACER
  */
-public interface IKhachHangService {List<khachHangBanHangRespone> getKHBH();
+public interface IKhachHangService {
+
+    List<khachHangBanHangRespone> getKHBH();
 
     public List<KhachHangResponse> getlist();
 
@@ -25,10 +27,12 @@ public interface IKhachHangService {List<khachHangBanHangRespone> getKHBH();
     public boolean Insert(KhachHangResponse khachHang);
 
     public boolean Update(KhachHangResponse khachHang);
-    
+
     public List<KhachHangResponse> timkiem(String sdt);
-    
-     public List<KhachHangResponse> LocKH(int GioiTinh);
-     
-      public List<HoaDon> selectallhoadon(UUID IdKH);
+
+    public List<KhachHangResponse> LocKH(int GioiTinh);
+
+    public List<HoaDon> selectallhoadon(UUID IdKH);
+
+    public List<KhachHangResponse> loctheohang(int capdo);
 }

@@ -24,7 +24,7 @@ public class ChucNangNhanVienRepository {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM TaiKhoan WHERE HoTen like :ten and TrangThai = :trangThai", TaiKhoan.class);
+            Query query = session.createQuery("FROM TaiKhoan WHERE HoTen like :ten and TrangThai = :trangThai order by Ma desc", TaiKhoan.class);
             query.setParameter("ten","%" + ten + "%");
             query.setParameter("trangThai", trangThai);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
