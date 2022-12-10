@@ -61,7 +61,7 @@ public class KhuyenMaiServiceImpl {
         return false;
     }
 
-    public boolean updateKM(KhuyenMaiResponse km, List<UUID> idSP) {
+    public boolean updateKM(KhuyenMaiResponse km, List<Object[]> sp) {
         KhuyenMai k = kmrepo.SelectKhuyenMaiById(km.getId());
         try {
             k.setTen(km.getTen());
@@ -70,14 +70,21 @@ public class KhuyenMaiServiceImpl {
             k.setNgayBD(km.getNgayBD());
             k.setNgayKT(km.getNgayKT());
             k.setTrangThai(km.getTrangThai());
-            if (kmrepo.UpdateKhuyenMai(k) && !idSP.isEmpty()) {
-                for (UUID s : idSP) {
-                    ChiTietSP sp = sprepo.SelectChiTietSPById(s);
-                    sp.setKhuyenMai(k);
-                    sprepo.UpdateChiTietSP(sp);
+            if (kmrepo.UpdateKhuyenMai(k) && !sp.isEmpty()) {
+                KhuyenMai khuyenMai = kmrepo.SelectKhuyenMaiById(k.getMa());
+                for (int i = 0; i < sp.size(); i++) {
+                    if (Boolean.parseBoolean(sp.get(i)[1].toString())) {
+                        ChiTietSP sps = sprepo.SelectChiTietSPById(UUID.fromString(sp.get(i)[0].toString()));
+                        sps.setKhuyenMai(khuyenMai);
+                        sprepo.UpdateChiTietSP(sps);
+                    } else {
+                        ChiTietSP sps = sprepo.SelectChiTietSPById(UUID.fromString(sp.get(i)[0].toString()));
+                        sps.setKhuyenMai(null);
+                        sprepo.UpdateChiTietSP(sps);
+                    }
                 }
+                return true;
             }
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,6 +95,17 @@ public class KhuyenMaiServiceImpl {
         KhuyenMai k = kmrepo.SelectKhuyenMaiById(id);
         try {
             k.setTrangThai(tt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kmrepo.UpdateKhuyenMai(k);
+    }
+
+    public boolean KTKM(UUID id) {
+        KhuyenMai k = kmrepo.SelectKhuyenMaiById(id);
+        try {
+            k.setTrangThai(2);
+            k.setNgayKT(new Date());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,5 +132,9 @@ public class KhuyenMaiServiceImpl {
         KhuyenMai km = kmrepo.SelectKhuyenMaiById(idKM);
         ctsp.setKhuyenMai(km);
         return sprepo.UpdateChiTietSP(ctsp);
+    }
+
+    public List<UUID> SelectIDSPBYKM(UUID idKhuyenmai) {
+        return sprepo.SelectIDSPBYKM(idKhuyenmai);
     }
 }

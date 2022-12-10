@@ -104,13 +104,29 @@ public class ChiTietSPRepository {
             Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
             query.setParameter("Id", Id);
             ctsp = (ChiTietSP) query.getSingleResult();
-            if (ctsp.getKhuyenMai().getId() != null) {
+            if (ctsp.getKhuyenMai().getId() != null && ctsp.getKhuyenMai().getTrangThai() == 1) {
                 km = ctsp.getKhuyenMai();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return km;
+    }
+
+    public List<UUID> SelectIDSPBYKM(UUID idKhuyenmai) {
+        List<UUID> lstid = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP where IdKhuyenMai = :idKhuyenmai", ChiTietSP.class);
+            query.setParameter("idKhuyenmai", idKhuyenmai);
+            for (ChiTietSP s : (List<ChiTietSP>) query.getResultList()) {
+                UUID id = s.getId();
+                lstid.add(id);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lstid;
     }
 
 }

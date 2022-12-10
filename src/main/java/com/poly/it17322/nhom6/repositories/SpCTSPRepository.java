@@ -125,8 +125,4 @@ public class SpCTSPRepository {
         }
         return list;
     }
-    public static void main(String[] args) {
-        List<SanPhamSPRespone> lstsp = new SpCTSPRepository().TimKiemSP("aaa");
-        System.out.println(lstsp);
-    }
 }

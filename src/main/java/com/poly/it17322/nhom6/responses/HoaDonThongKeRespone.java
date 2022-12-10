@@ -22,17 +22,11 @@ import lombok.Setter;
 @Setter
 public class HoaDonThongKeRespone {
 
-    private String ma;
-    private String tenKH;
-    private String tenNv;
     private int sl;
     private BigDecimal tongTien;
     private Date ngayMua;
 
     public HoaDonThongKeRespone(HoaDon h, List<HoaDonChiTiet> lsthdct) {
-        this.ma = h.getMa();
-        this.tenKH = h.getTenKH();
-        this.tenNv = h.getTaiKhoan().getHoTen();
         int soluong = 0;
         for (HoaDonChiTiet s : lsthdct) {
             soluong += s.getSoLuong();
