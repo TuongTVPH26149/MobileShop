@@ -13,7 +13,6 @@ import com.poly.it17322.nhom6.responses.HoaDonThongKeRespone;
 import com.poly.it17322.nhom6.responses.top5sprespone;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,27 +76,49 @@ public class ThongKeServiceIml {
         return lstTop5;
     }
 
-    public BigDecimal getWeekChar(Date to) {
-        List<HoaDon> lst = hd.getHDByDate(to, to);
-        BigDecimal b = new BigDecimal(0);
-        for (HoaDon s : lst) {
-            try {
-                b = b.add(s.getTongTien());
-            } catch (Exception e) {
+    public BigDecimal getChartYear(int year) {
+        Session session = HibernatUtil.getSession();
+        Query query = session.createQuery("from HoaDon where YEAR(NgayThanhToan) = :year", HoaDon.class);
+        query.setParameter("year", year);
+        BigDecimal tien = new BigDecimal(0);
+        try {
+            for (HoaDon s : (List<HoaDon>) query.getResultList()) {
+                tien = tien.add(s.getTongTien());
             }
+        } catch (Exception e) {
         }
-        return b;
+        return tien;
     }
-    
-    public BigDecimal getYearChar(Date now, Date to) {
-        List<HoaDon> lst = hd.getHDByDate(now, to);
-        BigDecimal b = new BigDecimal(0);
-        for (HoaDon s : lst) {
-            try {
-                b = b.add(s.getTongTien());
-            } catch (Exception e) {
+
+    public BigDecimal getChartMonth(int year, int month) {
+        Session session = HibernatUtil.getSession();
+        Query query = session.createQuery("from HoaDon where MONTH(NgayThanhToan) = :month and YEAR(NgayThanhToan) = :year", HoaDon.class);
+        query.setParameter("month", month);
+        query.setParameter("year", year);
+        BigDecimal tien = new BigDecimal(0);
+        try {
+            for (HoaDon s : (List<HoaDon>) query.getResultList()) {
+                tien = tien.add(s.getTongTien());
             }
+        } catch (Exception e) {
         }
-        return b;
+        return tien;
     }
+
+    public BigDecimal getChartDay(int year, int month, int day) {
+        Session session = HibernatUtil.getSession();
+        Query query = session.createQuery("from HoaDon where MONTH(NgayThanhToan) = :month and YEAR(NgayThanhToan) = :year and DAY(NgayThanhToan) = :day", HoaDon.class);
+        query.setParameter("day", day);
+        query.setParameter("month", month);
+        query.setParameter("year", year);
+        BigDecimal tien = new BigDecimal(0);
+        try {
+            for (HoaDon s : (List<HoaDon>) query.getResultList()) {
+                tien = tien.add(s.getTongTien());
+            }
+        } catch (Exception e) {
+        }
+        return tien;
+    }
+
 }

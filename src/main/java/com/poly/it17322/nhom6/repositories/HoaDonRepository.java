@@ -176,7 +176,7 @@ public class HoaDonRepository {
         List<HoaDon> list = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai in (3,4)", HoaDon.class);
+            Query query = session.createQuery("FROM HoaDon where ngayThanhToan >= :from and ngayThanhToan <= :to and TrangThai in (3,4) order by ngayThanhToan", HoaDon.class);
             query.setParameter("from", from);
             query.setParameter("to", to);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
