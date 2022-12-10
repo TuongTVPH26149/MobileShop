@@ -547,7 +547,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
             }
             try {
-                File f = new File("E://hoadon.xlsx");
+                File f = new File("G://hoadon.xlsx");
                 FileOutputStream fos = new FileOutputStream(f);
                 workbook.write(fos);
                 workbook.close();

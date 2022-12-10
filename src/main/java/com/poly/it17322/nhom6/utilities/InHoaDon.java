@@ -36,7 +36,7 @@ public class InHoaDon {
         String date = format.format(new Date());
         try {
 
-            OutputStream file = new FileOutputStream(new File("D:/" + hoaDon.getMahd() + ".pdf"));
+            OutputStream file = new FileOutputStream(new File("G:/" + hoaDon.getMahd() + ".pdf"));
             Document document = new Document();
             PdfWriter.getInstance(document, file);
 
