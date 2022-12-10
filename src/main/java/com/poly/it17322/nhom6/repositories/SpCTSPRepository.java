@@ -116,7 +116,7 @@ public class SpCTSPRepository {
         try {
             Session session = HibernatUtil.getSession();
             String hql = "select new com.poly.it17322.nhom6.responses.SanPhamSPRespone "
-                    + "(a.Id, a.sanPham.ten,a.pin.ten,a.manHinh.ten,a.cpu.ten,a.ram.ten,a.rom.ten,a.gia,a.soLuong,a.loaiHang) from ChiTietSP a where  a.sanPham.ten like CONCAT('%',:input,'%')";
+                    + "(a.Id, a.sanPham.ten,a.pin.ten,a.manHinh.ten,a.cpu.ten,a.ram.ten,a.rom.ten,a.gia,a.soLuong,a.loaiHang) from ChiTietSP a where a.deleted = 0 and  a.sanPham.ten like CONCAT('%',:input,'%')";
             Query query = session.createQuery(hql);
             query.setParameter("input", input);
             list = query.getResultList();
