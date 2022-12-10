@@ -11,12 +11,15 @@ import com.poly.it17322.nhom6.services.impl.KhachHangService;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.FileOutputStream;
+import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -392,6 +395,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         cbohang.setBackground(new java.awt.Color(0, 123, 123));
         cbohang.setForeground(new java.awt.Color(255, 255, 255));
         cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng ", "Bạc", "Vàng", "Kim Cương", "ALL" }));
+        cbohang.setFocusable(false);
         cbohang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbohangActionPerformed(evt);
@@ -414,7 +418,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cbolocgioitinh, javax.swing.GroupLayout.Alignment.LEADING, 0, 112, Short.MAX_VALUE))
+                            .addComponent(cbolocgioitinh, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(55, 55, 55))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -451,7 +455,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(prorank, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addComponent(prorank, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblrank))
@@ -579,7 +583,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnend, btnlen, btnstart, btnxuong});
@@ -603,7 +607,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                         .addComponent(btnstart)
                         .addComponent(btnlen)
                         .addComponent(btnxuong)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnend, btnlen, btnstart, btnxuong});
@@ -888,7 +892,11 @@ public class FrmKhachhang extends javax.swing.JPanel {
         txthoten.setText(tblkhachhang.getValueAt(index, 1).toString());
         txtsdt.setText(tblkhachhang.getValueAt(index, 3).toString());
         txtdiachi.setText(tblkhachhang.getValueAt(index, 4).toString());
-        txtngaysinh.setDateFormatString(tblkhachhang.getValueAt(index, 5).toString());
+        try {
+            txtngaysinh.setDate(sdf.parse(tblkhachhang.getValueAt(index, 5).toString()));
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmKhachhang.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (tblkhachhang.getValueAt(index, 2).equals("Nam")) {
             rdonam.setSelected(true);
         } else {
