@@ -35,6 +35,19 @@ public class KhachHangRepository {
         }
         return listKhachHang;
     }
+    public List<KhachHang> selectKHBH() {
+        List<KhachHang> listKhachHang = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM KhachHang order by ma desc", KhachHang.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listKhachHang = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listKhachHang;
+    }
 
     public KhachHang SelectKhachHangById(UUID Id) {
         KhachHang kh = new KhachHang();

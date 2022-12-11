@@ -24,7 +24,7 @@ Sdt VARCHAR(15) DEFAULT NULL,
 MatKhau VARCHAR(100) NOT NULL,
 ChucVu Int DEFAULT 0,
 HinhAnh Varchar(50),
-TrangThai Int DEFAULT 1,
+TrangThai Int DEFAULT 0,
 CreatedDate Date DEFAULT GETDATE(),
 lastModifiedDate Date DEFAULT NULL
 )

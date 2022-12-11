@@ -22,7 +22,7 @@ public class DangNhapServiceImpl implements IDangNhapService {
     public UserResponse checkTK(String tk, String pass) {
         try {
             UserResponse user = new UserResponse(tkdnRepo.checkTK(tk, pass));
-            if (user.getTrangThai() == 1) {
+            if (user.getTrangThai() == 0) {
                 return user;
             }
         } catch (Exception e) {

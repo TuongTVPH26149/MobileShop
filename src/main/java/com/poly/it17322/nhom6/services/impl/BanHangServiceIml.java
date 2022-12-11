@@ -345,7 +345,9 @@ public class BanHangServiceIml implements IBanHangService {
         BigDecimal tongTien = hdrepo.getTienByKH(id);
         int rank = 0;
         while (tongTien.compareTo(new BigDecimal(20000000)) >= 0) {
-            rank++;
+            if (rank < 3) {
+                rank++;
+            }
             tongTien = tongTien.subtract(new BigDecimal(20000000));
         }
         if (kh.getCapDo() != rank) {
