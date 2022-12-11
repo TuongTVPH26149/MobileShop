@@ -23,7 +23,7 @@ public interface ISanPhamSPService {
 
     public boolean update(SanPhamSPRespone sp,UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin);
     
-//    public List<SanPhamSPRespone> getlistTimKiem(String ten);
+    public List<SanPhamSPRespone> getlistTimKiem(String ten);
 //    
 //    public List<ImelSPRespone> getlistTimKiemImel(String ma);
     
