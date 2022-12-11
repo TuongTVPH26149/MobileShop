@@ -19,6 +19,7 @@ import java.util.UUID;
 public interface IKhachHangService {
 
     List<khachHangBanHangRespone> getKHBH();
+    List<khachHangBanHangRespone> getKHBHsdt(String sdt);
 
     public List<KhachHangResponse> getlist();
 

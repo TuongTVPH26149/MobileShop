@@ -41,9 +41,9 @@ public class SenderMailUtil {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.setFrom(new InternetAddress(mailSender));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toMail, false));
-            msg.setSubject(subject);
+            msg.setSubject(subject,"utf-8");
             msg.setSentDate(new Date());
-            msg.setContent(text, "text/plain; charset=utf-8");
+            msg.setText(text, "utf-8");
             Transport.send(msg);
             return false;
         } catch (Exception e) {

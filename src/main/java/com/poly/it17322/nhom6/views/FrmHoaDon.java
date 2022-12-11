@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.poly.it17322.nhom6.views;
+
 import com.poly.it17322.nhom6.responses.HoaDonChiTietResponse;
 import com.poly.it17322.nhom6.responses.HoaDonResponse;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
@@ -12,7 +13,9 @@ import com.poly.it17322.nhom6.services.IKhachHangService;
 import com.poly.it17322.nhom6.services.impl.ChiTietHoaDonImpl;
 import com.poly.it17322.nhom6.services.impl.HoaDonServiceImpl;
 import com.poly.it17322.nhom6.services.impl.KhachHangService;
+import com.poly.it17322.nhom6.utilities.GenMa;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -41,6 +44,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.jdbc.Work;
+
 /**
  *
  * @author LiamTrieu
@@ -93,17 +97,19 @@ public class FrmHoaDon extends javax.swing.JPanel {
         });
 
     }
+
     public void resetTableCT() {
         if (tblHoaDonChiTiet.getRowCount() > 0) {
             dtmCT.setRowCount(0);
         }
     }
+
     private void showDataTable(List<HoaDonResponse> lists) {
-           dtm.setRowCount(0);
+        dtm.setRowCount(0);
         for (HoaDonResponse x : lists) {
             dtm.addRow(x.toDataRow());
         }
-        jLabel3.setText("Tổng hóa đơn:" + lists.size());        
+        jLabel3.setText("Tổng hóa đơn:" + lists.size());
     }
 
     private void showDataTableCTHoaDon(List<HoaDonChiTietResponse> ctHoaDon, DefaultTableModel dtm) {
@@ -121,9 +127,9 @@ public class FrmHoaDon extends javax.swing.JPanel {
         } else {
             tblHoaDon.setRowSorter(tr);
         }
-      
+
     }
-    
+
     public void loadTableHDbyMa() {
         dtm.setRowCount(0);
         Date from = null;
@@ -137,7 +143,8 @@ public class FrmHoaDon extends javax.swing.JPanel {
         if (cboNgay.getSelectedIndex() == 0) {
             hoaDonReponses = hoadonService.getByCodeAndCreateDate(txtTim.getText(), from, to);
         }
-        if (cboNgay.getSelectedIndex() == 1) {jDateChooser1.setDate(null);
+        if (cboNgay.getSelectedIndex() == 1) {
+            jDateChooser1.setDate(null);
             hoaDonReponses = hoadonService.getByCodeAndUpdateDate(txtTim.getText(), from, to);
         }
         for (HoaDonResponse x : hoaDonReponses) {
@@ -457,7 +464,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
     private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
 
         try {
-        
+
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("Hóa đơn");
             sheet.setDefaultColumnWidth(16);
@@ -547,19 +554,30 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
             }
             try {
-                File f = new File("G://hoadon.xlsx");
-                FileOutputStream fos = new FileOutputStream(f);
+                File file = new File("D:/HD" + new GenMa().getMa() + ".xlsx");
+                FileOutputStream fos = new FileOutputStream(file);
                 workbook.write(fos);
                 workbook.close();
+                JOptionPane.showMessageDialog(this, "Xuất danh sách hóa đơn thành công");
+                try {
+                    if (!Desktop.isDesktopSupported()) {
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if (file.exists()) {
+                        desktop.open(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            JOptionPane.showMessageDialog(this, "Xuất danh sách hóa đơn thành công");
 
         } catch (Exception e) {
-              JOptionPane.showMessageDialog(this, "Xuất thất bại");
+            JOptionPane.showMessageDialog(this, "Xuất thất bại");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnXuatActionPerformed
