@@ -9,9 +9,17 @@ import com.poly.it17322.nhom6.responses.HoaDonThongKeRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.responses.top5sprespone;
 import com.poly.it17322.nhom6.services.impl.ThongKeServiceIml;
+import com.poly.it17322.nhom6.utilities.ScrollBarCustom;
 import com.poly.it17322.nhom6.utilities.SenderMailUtil;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -19,8 +27,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -49,6 +68,7 @@ public class FrmThongKe extends javax.swing.JPanel {
      */
     public FrmThongKe() {
         initComponents();
+        designTable();
         txtFrom.setDate(new Date());
         txtTo.setDate(new Date());
         lsthd = tks.getHDByDate(txtFrom.getDate(), txtTo.getDate());
@@ -98,6 +118,8 @@ public class FrmThongKe extends javax.swing.JPanel {
         paneChart = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         cboNam = new javax.swing.JComboBox<>();
+        cboNam1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -227,9 +249,11 @@ public class FrmThongKe extends javax.swing.JPanel {
         jButton3.setBackground(new java.awt.Color(0, 102, 102));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new ImageIcon("src/main/resource/icon/senmail.png"));
         jButton3.setText("Gửi báo cáo");
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(255, 51, 51), new java.awt.Color(255, 0, 0)));
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setFocusable(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -291,7 +315,7 @@ public class FrmThongKe extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Tên sản phẩm", "Số lượng", "Tổng tiền"
+                "Tên sản phẩm", "Số lượng bán", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -322,14 +346,20 @@ public class FrmThongKe extends javax.swing.JPanel {
         cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         cboNam.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)), "Chọn năm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 102, 102))); // NOI18N
         cboNam.setFocusable(false);
-        cboNam.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboNamItemStateChanged(evt);
+        cboNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNamActionPerformed(evt);
             }
         });
-        cboNam.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cboNamPropertyChange(evt);
+
+        cboNam1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cboNam1.setForeground(new java.awt.Color(0, 102, 102));
+        cboNam1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cboNam1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)), "Chọn tháng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 102, 102))); // NOI18N
+        cboNam1.setFocusable(false);
+        cboNam1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNam1ActionPerformed(evt);
             }
         });
 
@@ -339,7 +369,9 @@ public class FrmThongKe extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cboNam, 0, 121, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboNam, 0, 121, Short.MAX_VALUE)
+                    .addComponent(cboNam1, 0, 121, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -347,6 +379,8 @@ public class FrmThongKe extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(cboNam1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -373,6 +407,17 @@ public class FrmThongKe extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Biểu đồ", test);
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setIcon(new ImageIcon("src/main/resource/icon/xuatexcel.png"));
+        jButton1.setToolTipText("Xuất excel");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 153, 0), new java.awt.Color(0, 255, 0)));
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -389,9 +434,12 @@ public class FrmThongKe extends javax.swing.JPanel {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(15, 15, 15))
         );
 
@@ -407,17 +455,18 @@ public class FrmThongKe extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(21, 21, 21)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel1, jPanel2, jPanel3});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton3});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -448,35 +497,42 @@ public class FrmThongKe extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String email = JOptionPane.showInputDialog("Email cần báo cáo");
-        String noiDung = "báo cáo thống kê từ ngày " + sdf.format(txtFrom.getDate()) + " đến ngày " + sdf.format(txtTo.getDate()) + " \n"
-                + "Tổng tiền: " + lblTongTien.getText() + " VND "
+        String noiDung = "Báo cáo thống kê từ ngày " + sdf.format(txtFrom.getDate()) + " đến ngày " + sdf.format(txtTo.getDate()) + " \n"
+                + "Tổng tiền: " + lblTongTien.getText() + " VND \n"
                 + "Tổng hóa đơn: " + lblTonghd.getText() + "\n"
                 + "Tổng Sản phẩm: " + lblTongsp.getText();
-        if (!new SenderMailUtil().sendMail("Báo cáo thống kê", noiDung, email)) {
-            JOptionPane.showMessageDialog(this, "Gửi báo cáo thành công");
-        } else {
-            JOptionPane.showMessageDialog(this, "Gửi báo cáo thất bại");
-        }
+        senMail(email, noiDung);
+        JOptionPane.showMessageDialog(this, "Gửi báo cáo thành công");
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void cboNamPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboNamPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboNamPropertyChange
-
-    private void cboNamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboNamItemStateChanged
+    private void senMail(String mail, String noiDung) {
+        new Thread() {
+            @Override
+            public void run() {
+                new SenderMailUtil().sendMail("Báo cáo thống kê", noiDung, mail);
+            }
+        }.start();
+    }
+    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
         // TODO add your handling code here:
         lstBD.clear();
+        DefaultComboBoxModel dcmThang = (DefaultComboBoxModel) cboNam1.getModel();
+        dcmThang.removeAllElements();
+        dcmThang.addElement("Tất cả");
+        cboNam1.setSelectedIndex(0);
         if (cboNam.getSelectedIndex() == 0) {
             int year = Integer.parseInt(sdfz.format(new Date()));
+
             for (int i = 2018; i <= year; i++) {
                 BieuDoRespone bd = new BieuDoRespone(i + "", tks.getChartYear(i));
-                System.out.println(year);
                 lstBD.add(bd);
             }
             genChart("Biểu đồ tổng", lstBD, "Năm");
             return;
         }
         int nam = Integer.parseInt(cboNam.getSelectedItem().toString());
+        for (int i = 1; i <= 12; i++) {
+            dcmThang.addElement("Tháng " + i);
+        }
         try {
             for (int thang = 1; thang <= 12; thang++) {
                 BieuDoRespone bd = new BieuDoRespone(thang + "", tks.getChartMonth(nam, thang));
@@ -486,11 +542,163 @@ public class FrmThongKe extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_cboNamItemStateChanged
+    }//GEN-LAST:event_cboNamActionPerformed
 
+    private void cboNam1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNam1ActionPerformed
+        // TODO add your handling code here:
+        if (cboNam.getSelectedIndex() == 0) {
+            return;
+        }
+        lstBD.clear();
+        int nam = Integer.parseInt(cboNam.getSelectedItem().toString());
+        if (cboNam1.getSelectedIndex() == 0) {
+            try {
+                for (int thang = 1; thang <= 12; thang++) {
+                    BieuDoRespone bd = new BieuDoRespone(thang + "", tks.getChartMonth(nam, thang));
+                    lstBD.add(bd);
+                }
+                genChart("Biểu đồ năm " + nam, lstBD, "Tháng");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        int month = cboNam1.getSelectedIndex();
+        try {
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    for (int ngay = 1; ngay <= 31; ngay++) {
+                        BieuDoRespone bd = new BieuDoRespone(ngay + "", tks.getChartDay(nam, month, ngay));
+                        lstBD.add(bd);
+                    }
+                    genChart("Biểu đồ tháng " + month, lstBD, "Ngày");
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    for (int ngay = 1; ngay <= 30; ngay++) {
+                        BieuDoRespone bd = new BieuDoRespone(ngay + "", tks.getChartDay(nam, month, ngay));
+                        lstBD.add(bd);
+                    }
+                    genChart("Biểu đồ tháng " + month, lstBD, "Ngày");
+                    break;
+                case 2:
+                    if (checkNam(nam)) {
+                        for (int ngay = 1; ngay <= 29; ngay++) {
+                            BieuDoRespone bd = new BieuDoRespone(ngay + "", tks.getChartDay(nam, month, ngay));
+                            lstBD.add(bd);
+                        }
+                        genChart("Biểu đồ tháng " + month, lstBD, "Ngày");
+                    } else {
+                        for (int ngay = 1; ngay <= 28; ngay++) {
+                            BieuDoRespone bd = new BieuDoRespone(ngay + "", tks.getChartDay(nam, month, ngay));
+                            lstBD.add(bd);
+                        }
+                        genChart("Biểu đồ tháng " + month, lstBD, "Ngày");
+                    }
+                    break;
+                default:
+                    return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_cboNam1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("Ngày " + sdf.format(txtTo.getDate()) + "->" + sdf.format(txtFrom.getDate()));
+            sheet.setDefaultColumnWidth(16);
+            CellStyle style = workbook.createCellStyle();
+            XSSFFont font = workbook.createFont();
+            font.setBold(true);
+            font.setFontHeight((short) 250);
+            font.setColor(IndexedColors.WHITE.index);
+            style.setFont(font);
+            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            style.setFillForegroundColor(IndexedColors.DARK_BLUE.index);
+
+            int rowNum = 0;
+            Row firstRow = sheet.createRow(rowNum++);
+
+            Cell firstCell1 = firstRow.createCell(0);
+            Cell firstCell2 = firstRow.createCell(1);
+            Cell firstCell3 = firstRow.createCell(2);
+
+            firstCell1.setCellValue("Tên sản phẩm");
+            firstCell1.setCellStyle(style);
+            firstCell2.setCellValue("Số lượng bán");
+            firstCell2.setCellStyle(style);
+            firstCell3.setCellValue("Tổng tiền");
+            firstCell3.setCellStyle(style);
+            for (int i = 0; i < tblTop.getRowCount(); i++) {
+                Row row = sheet.createRow(rowNum++);
+
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(tblTop.getValueAt(i, 0).toString());
+
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(tblTop.getValueAt(i, 1).toString());
+
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(tblTop.getValueAt(i, 2).toString());
+
+            }
+            try {
+                File file = new File("D://ThongKe.xlsx");
+                FileOutputStream fos = new FileOutputStream(file);
+                workbook.write(fos);
+                workbook.close();
+                JOptionPane.showMessageDialog(this, "Xuất danh sách sản phẩm đã bán thành công");
+                try {
+                    if (!Desktop.isDesktopSupported()) {
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if (file.exists()) {
+                        desktop.open(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Xuất thất bại");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private boolean checkNam(int year) {
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                if (year % 400 == 0) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboNam;
+    private javax.swing.JComboBox<String> cboNam1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -560,5 +768,17 @@ public class FrmThongKe extends javax.swing.JPanel {
         paneChart.add(barChartPanel, BorderLayout.CENTER);
         paneChart.validate();
 
+    }
+
+    private void designTable() {
+        tblTop.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+        tblTop.getTableHeader().setBackground(new Color(0, 123, 123));
+        tblTop.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblTop.setRowHeight(30);
+        tblTop.getTableHeader().setPreferredSize(new Dimension(100, 30));
+        jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(255, 255, 255));
+        jScrollPane2.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
     }
 }
