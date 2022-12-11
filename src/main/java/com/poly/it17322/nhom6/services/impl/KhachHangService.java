@@ -46,6 +46,16 @@ public class KhachHangService implements IKhachHangService {
             return new ArrayList<>();
         }
     }
+    @Override
+    public List<khachHangBanHangRespone> getKHBHsdt(String sdt) {
+        try {
+            List<KhachHang> khs = TKrepo.timkiem(sdt);
+            return khs.stream().map(khachHangBanHangRespone::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 
     @Override
     public KhachHang SelectKhachHangById(UUID id) {

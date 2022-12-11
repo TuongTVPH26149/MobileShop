@@ -35,7 +35,6 @@ public class khachHangBanHangRespone {
     }
 
     private String getCap() {
-        String cap;
         switch (hang) {
             case 0:
                 return "Đồng";
@@ -51,7 +50,6 @@ public class khachHangBanHangRespone {
     }
 
     public int getPhanTramGiam() {
-        String cap;
         switch (hang) {
             case 0:
                 return 0;

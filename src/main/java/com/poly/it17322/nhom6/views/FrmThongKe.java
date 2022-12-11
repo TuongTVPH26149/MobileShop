@@ -9,6 +9,7 @@ import com.poly.it17322.nhom6.responses.HoaDonThongKeRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.responses.top5sprespone;
 import com.poly.it17322.nhom6.services.impl.ThongKeServiceIml;
+import com.poly.it17322.nhom6.utilities.GenMa;
 import com.poly.it17322.nhom6.utilities.ScrollBarCustom;
 import com.poly.it17322.nhom6.utilities.SenderMailUtil;
 import java.awt.BorderLayout;
@@ -656,7 +657,7 @@ public class FrmThongKe extends javax.swing.JPanel {
 
             }
             try {
-                File file = new File("D://ThongKe.xlsx");
+                File file = new File("D:/TK" + new GenMa().getMa() + ".xlsx");
                 FileOutputStream fos = new FileOutputStream(file);
                 workbook.write(fos);
                 workbook.close();

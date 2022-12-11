@@ -18,7 +18,9 @@ import com.poly.it17322.nhom6.responses.RomRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import com.poly.it17322.nhom6.services.impl.SanPhamChiTietServiceImpl;
 import com.poly.it17322.nhom6.services.impl.SanPhamServiceImpl;
+import com.poly.it17322.nhom6.utilities.GenMa;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
@@ -2336,14 +2338,21 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getLoaihang());
             }
-            JFileChooser fc = new JFileChooser();
-            int chon = fc.showSaveDialog(this);
-            if (chon == JFileChooser.APPROVE_OPTION) {
-                String filename = fc.getSelectedFile().getAbsolutePath();
-                FileOutputStream fis = new FileOutputStream(filename+".xlsx");
-                wordbook.write(fis);
-                fis.close();
-                JOptionPane.showMessageDialog(this, "Xuất thành công");
+            File file = new File("D:/SP" + new GenMa().getMa() + ".xlsx");
+            FileOutputStream fis = new FileOutputStream(file);
+            wordbook.write(fis);
+            fis.close();
+            JOptionPane.showMessageDialog(this, "Xuất thành công");
+            try {
+                if (!Desktop.isDesktopSupported()) {
+                    return;
+                }
+                Desktop desktop = Desktop.getDesktop();
+                if (file.exists()) {
+                    desktop.open(file);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -2365,7 +2374,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                     for (Cell cell : row) {
                         if (formula.evaluate(cell).getCellType() != null) {
                             ImelAoSPRespone imelao = new ImelAoSPRespone();
-                            imelao.setMa(String.valueOf((int)cell.getNumericCellValue()));
+                            imelao.setMa(String.valueOf((int) cell.getNumericCellValue()));
                             txtsoluong.setText(sl + "");
                             lstimelao.add(imelao);
                             FilltoTableImelAO();

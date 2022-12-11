@@ -408,7 +408,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        btnXoaSp.setIcon(new ImageIcon("src/main/resource/icon/removekm.png"));
+        btnXoaSp.setIcon(new ImageIcon("src/main/resource/icon/selectsp.png"));
         btnXoaSp.setText("Chọn hết");
         btnXoaSp.setBackground(new java.awt.Color(0, 204, 204));
         btnXoaSp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
