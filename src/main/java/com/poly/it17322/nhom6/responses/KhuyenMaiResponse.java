@@ -44,7 +44,7 @@ public class KhuyenMaiResponse {
 
     public Object[] toDataRow() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mmaa");
-        return new Object[]{ma, ten, sdf.format(ngayBD), sdf.format(ngayKT), giaTri+(loai==0?"%":" VND"), trangThai==0?"Sắp diễn ra":trangThai==1?"Đang diễn ra":"Đã kết thúc"};
+        return new Object[]{ma, ten, sdf.format(ngayBD), sdf.format(ngayKT), giaTri+(loai==0?"%":" VND"), trangThai==0?"Sắp diễn ra":trangThai==1?"Đang diễn ra":"Đã kết thúc", false};
     }
 
 }

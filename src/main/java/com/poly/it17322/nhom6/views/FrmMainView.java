@@ -1043,7 +1043,7 @@ public class FrmMainView extends javax.swing.JFrame {
                         }
                     }
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(5000);
                     } catch (Exception e) {
                     }
                 }

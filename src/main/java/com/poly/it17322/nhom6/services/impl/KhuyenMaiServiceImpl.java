@@ -78,9 +78,13 @@ public class KhuyenMaiServiceImpl {
                         sps.setKhuyenMai(khuyenMai);
                         sprepo.UpdateChiTietSP(sps);
                     } else {
-                        ChiTietSP sps = sprepo.SelectChiTietSPById(UUID.fromString(sp.get(i)[0].toString()));
-                        sps.setKhuyenMai(null);
-                        sprepo.UpdateChiTietSP(sps);
+                        for (UUID u : SelectIDSPBYKM(k.getId())) {
+                            if (UUID.fromString(sp.get(i)[0].toString()).equals(u)) {
+                                ChiTietSP sps = sprepo.SelectChiTietSPById(u);
+                                sps.setKhuyenMai(null);
+                                sprepo.UpdateChiTietSP(sps);
+                            }
+                        }
                     }
                 }
                 return true;
