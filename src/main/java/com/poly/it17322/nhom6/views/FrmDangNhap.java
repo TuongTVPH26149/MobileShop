@@ -28,8 +28,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
         Webcam.getDefault().close();
         initComponents();
         setLocationRelativeTo(null);
-        txtTaiKhoan.setText("admin");
-        txtMatKhau.setText("admin");
     }
 
     /**
