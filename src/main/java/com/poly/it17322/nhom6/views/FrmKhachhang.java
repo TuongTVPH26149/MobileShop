@@ -394,7 +394,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
         cbohang.setBackground(new java.awt.Color(0, 123, 123));
         cbohang.setForeground(new java.awt.Color(255, 255, 255));
-        cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng ", "Bạc", "Vàng", "Kim Cương", "ALL" }));
+        cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng ", "Bạc", "Vàng", "Kim cương", "ALL" }));
         cbohang.setFocusable(false);
         cbohang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -583,7 +583,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnend, btnlen, btnstart, btnxuong});
@@ -956,7 +956,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
-        Date ngaysinh = new Date(txtngaysinh.getDateFormatString().trim());
+        Date ngaysinh = txtngaysinh.getDate();
         if (ma.length() == 0 || hoten.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
@@ -1042,7 +1042,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                     prorank.setValue(tong);
                 }
                 if (tong >= 60000000) {
-                    lblrank.setText("Kim Cương");
+                    lblrank.setText("Kim cương");
                     lblcuoi.setText("");
                     lbltongtien.setText(tong + "");
                     prorank.setMaximum(400000000);

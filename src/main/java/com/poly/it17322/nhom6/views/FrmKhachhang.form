@@ -50,7 +50,7 @@
                       <Component id="jPanel3" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="96" max="32767" attributes="0"/>
+              <EmptySpace pref="97" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -712,7 +712,7 @@
                     <StringItem index="0" value="&#x110;&#x1ed3;ng "/>
                     <StringItem index="1" value="B&#x1ea1;c"/>
                     <StringItem index="2" value="V&#xe0;ng"/>
-                    <StringItem index="3" value="Kim C&#x1b0;&#x1a1;ng"/>
+                    <StringItem index="3" value="Kim c&#x1b0;&#x1a1;ng"/>
                     <StringItem index="4" value="ALL"/>
                   </StringArray>
                 </Property>
