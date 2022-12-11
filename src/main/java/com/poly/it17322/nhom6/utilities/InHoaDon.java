@@ -14,7 +14,6 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.FontSelector;
@@ -30,13 +29,13 @@ import com.poly.it17322.nhom6.responses.HoaDonInRespone;
  */
 public class InHoaDon {
 
-    public static boolean makePDF(HoaDonInRespone hoaDon, List<GioHangInRespone> gioHang) {
+    public static boolean makePDF(HoaDonInRespone hoaDon, List<GioHangInRespone> gioHang, File filePDF) {
         String desc;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String date = format.format(new Date());
         try {
 
-            OutputStream file = new FileOutputStream(new File("D:/" + hoaDon.getMahd() + ".pdf"));
+            OutputStream file = new FileOutputStream(filePDF);
             Document document = new Document();
             PdfWriter.getInstance(document, file);
 

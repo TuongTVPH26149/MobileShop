@@ -35,7 +35,6 @@ public class khachHangBanHangRespone {
     }
 
     private String getCap() {
-        String cap;
         switch (hang) {
             case 0:
                 return "Đồng";
@@ -43,13 +42,14 @@ public class khachHangBanHangRespone {
                 return "Bạc";
             case 2:
                 return "Vàng";
-            default:
+            case 3:
                 return "Kim cương";
+            default:
+                return "";
         }
     }
 
     public int getPhanTramGiam() {
-        String cap;
         switch (hang) {
             case 0:
                 return 0;
@@ -57,8 +57,10 @@ public class khachHangBanHangRespone {
                 return 4;
             case 2:
                 return 6;
-            default:
+            case 3:
                 return 8;
+            default:
+                return 0;
         }
     }
 

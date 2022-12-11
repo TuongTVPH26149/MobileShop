@@ -9,9 +9,12 @@ import com.poly.it17322.nhom6.repositories.TaiKhoanRepository;
 import com.poly.it17322.nhom6.responses.NhanVienRespone;
 import com.poly.it17322.nhom6.services.INhanVienService;
 import com.poly.it17322.nhom6.services.impl.NhanVienServiceImpl;
+import com.poly.it17322.nhom6.utilities.GenMa;
 import com.poly.it17322.nhom6.utilities.MD5Util;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.Date;
@@ -1023,15 +1026,22 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getChucVu() == 0 ? "Nhân viên" : "Quản lý");
 
             }
-            JFileChooser fc = new JFileChooser();
-            int chon = fc.showSaveDialog(this);
-            if (chon == JFileChooser.APPROVE_OPTION) {
-                String filename = fc.getSelectedFile().getAbsolutePath();
-                FileOutputStream fis = new FileOutputStream(filename + ".xlsx");
+                File file = new File("D:/NV" + new GenMa().getMa() + ".xlsx");
+                FileOutputStream fis = new FileOutputStream(file);
                 wordbook.write(fis);
                 fis.close();
                 JOptionPane.showMessageDialog(this, "Xuất thành công");
-            }
+                try {
+                    if (!Desktop.isDesktopSupported()) {
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if (file.exists()) {
+                        desktop.open(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }

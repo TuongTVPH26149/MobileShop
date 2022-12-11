@@ -28,9 +28,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -215,6 +215,7 @@
                 <StringItem index="3" value="T&#x1ea5;t c&#x1ea3;"/>
               </StringArray>
             </Property>
+            <Property name="selectedIndex" type="int" value="3"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
@@ -809,7 +810,7 @@
         <Component class="javax.swing.JButton" name="btnXoaSp">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ImageIcon(&quot;src/main/resource/icon/removekm.png&quot;)" type="code"/>
+              <Connection code="new ImageIcon(&quot;src/main/resource/icon/selectsp.png&quot;)" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n h&#x1ebf;t"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
