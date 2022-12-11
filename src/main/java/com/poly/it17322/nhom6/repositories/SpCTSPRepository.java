@@ -39,20 +39,6 @@ public class SpCTSPRepository {
         return lstimel;
     }
 
-    public List<SanPham> timKiem(String ten) {
-        List<SanPham> lstsprp = new ArrayList<>();
-        try {
-            session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM SanPham where Ten Like :ten", SanPham.class);
-            query.setParameter("ten", "%" + ten + "%");
-            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-            lstsprp = query.getResultList();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lstsprp;
-    }
 
     public List<Imel> timKiemImel(String ma) {
         List<Imel> lstimel = new ArrayList<>();
@@ -111,13 +97,12 @@ public class SpCTSPRepository {
         }
         return ctsp;
     }
-    public List<SanPhamSPRespone> TimKiemSP(String input) {
-        List<SanPhamSPRespone> list = new ArrayList<>();
+    public List<ChiTietSP> TimKiemSP(String input) {
+        List<ChiTietSP> list = new ArrayList<>();
         try {
             Session session = HibernatUtil.getSession();
-            String hql = "select new com.poly.it17322.nhom6.responses.SanPhamSPRespone "
-                    + "(a.Id, a.sanPham.ten,a.pin.ten,a.manHinh.ten,a.cpu.ten,a.ram.ten,a.rom.ten,a.gia,a.soLuong,a.loaiHang) from ChiTietSP a where a.deleted = 0 and  a.sanPham.ten like CONCAT('%',:input,'%')";
-            Query query = session.createQuery(hql);
+            String hql = "FROM ChiTietSP a Where a.sanPham.ten LIKE concat('%', :input ,'%')";
+            Query query = session.createQuery(hql,ChiTietSP.class);
             query.setParameter("input", input);
             list = query.getResultList();
         } catch (Exception e) {
@@ -125,4 +110,5 @@ public class SpCTSPRepository {
         }
         return list;
     }
+    
 }

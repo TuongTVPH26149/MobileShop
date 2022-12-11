@@ -65,11 +65,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     List<MauSacRespone> lstms = new ArrayList<>();
     List<ImelAoSPRespone> lstimelao = new ArrayList<>();
     List<ImelSPRespone> lstimel = new ArrayList<>();
-
+    List<SanPhamSPRespone> lstctsp = new ArrayList<>();
+    
     public FrmQuanLySanPham() {
+        lstctsp = sp.getlist();
         initComponents();
         FilltoTableSanPham();
-
         FilltoTableManHinh();
         FilltoTableCPU();
         FilltoTableRom();
@@ -235,10 +236,15 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         jLabel27 = new javax.swing.JLabel();
         cboloaihang = new javax.swing.JComboBox<>();
         btnxuatexcel = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        txttimkiem = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tblbangxoa = new javax.swing.JTable();
         btnkhoiphuc = new javax.swing.JButton();
+        btnchontat = new javax.swing.JButton();
 
         frmpin.setTitle("Pin");
         frmpin.setMinimumSize(new java.awt.Dimension(575, 201));
@@ -1449,6 +1455,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMaximumSize(new java.awt.Dimension(55, 692));
         jPanel2.setMinimumSize(new java.awt.Dimension(55, 692));
         jPanel2.setPreferredSize(new java.awt.Dimension(55, 692));
@@ -1476,6 +1483,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblbang);
 
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setMaximumSize(new java.awt.Dimension(184, 55));
         jPanel9.setMinimumSize(new java.awt.Dimension(184, 55));
 
@@ -1524,6 +1532,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setMaximumSize(new java.awt.Dimension(184, 55));
         jPanel11.setMinimumSize(new java.awt.Dimension(184, 55));
 
@@ -1570,6 +1579,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setMaximumSize(new java.awt.Dimension(184, 55));
         jPanel13.setMinimumSize(new java.awt.Dimension(184, 55));
 
@@ -1592,6 +1602,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         );
 
         txtsoluong.setEditable(false);
+        txtsoluong.setBackground(new java.awt.Color(255, 255, 255));
         txtsoluong.setBorder(null);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -1795,6 +1806,67 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        txttimkiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txttimkiem.setForeground(new java.awt.Color(0, 102, 102));
+        txttimkiem.setBorder(null);
+        txttimkiem.setCaretColor(new java.awt.Color(0, 102, 102));
+        txttimkiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txttimkiemCaretUpdate(evt);
+            }
+        });
+        txttimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttimkiemActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new ImageIcon("src/main/resource/icon/search_banhang.png"));
+        jLabel13.setMaximumSize(new java.awt.Dimension(24, 24));
+        jLabel13.setMinimumSize(new java.awt.Dimension(24, 24));
+        jLabel13.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel5.setPreferredSize(new java.awt.Dimension(0, 1));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1860,12 +1932,17 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane2))))
                 .addGap(70, 70, 70))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(665, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnxuatexcel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(btnxuatexcel, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1882,7 +1959,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(cboloaihang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
@@ -1939,6 +2016,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                                 .addGap(2, 2, 2)
                                 .addComponent(btnmausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(87, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(672, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Sản phẩm", jPanel2);
@@ -1969,6 +2051,16 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
+        btnchontat.setBackground(new java.awt.Color(0, 123, 123));
+        btnchontat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnchontat.setForeground(new java.awt.Color(255, 255, 255));
+        btnchontat.setText("Chọn tất");
+        btnchontat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnchontatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1977,9 +2069,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 1055, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnkhoiphuc, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnchontat, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnkhoiphuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -1988,7 +2082,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnkhoiphuc, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+                .addComponent(btnchontat)
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2020,12 +2116,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpinActionPerformed
-
+        
         frmpin.setVisible(true);
         frmpin.setLocationRelativeTo(null);
         setCboPin();
     }//GEN-LAST:event_btnpinActionPerformed
-
+    
 
     private void btnromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnromActionPerformed
         frmrom.setVisible(true);
@@ -2034,7 +2130,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnromActionPerformed
 
     private void btncpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncpuActionPerformed
-
+        
         frmcpu.setVisible(true);
         frmcpu.setLocationRelativeTo(null);
         setCboCPU();
@@ -2073,7 +2169,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void btnaddpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddpinActionPerformed
         AdDataPin();
         setCboPin();
-
+        
 
     }//GEN-LAST:event_btnaddpinActionPerformed
 
@@ -2254,7 +2350,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnupdateimelActionPerformed
 
     private void btnkhoiphucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkhoiphucActionPerformed
-
+        
         Revert();
     }//GEN-LAST:event_btnkhoiphucActionPerformed
 
@@ -2271,70 +2367,70 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             row = sheet.createRow(3);
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("STT");
-
+            
             cell = row.createCell(1, CellType.STRING);
             cell.setCellValue("TÊN");
-
+            
             cell = row.createCell(2, CellType.STRING);
             cell.setCellValue("PIN");
-
+            
             cell = row.createCell(3, CellType.STRING);
             cell.setCellValue("MÀN HÌNH");
-
+            
             cell = row.createCell(4, CellType.STRING);
             cell.setCellValue("CPU");
-
+            
             cell = row.createCell(5, CellType.STRING);
             cell.setCellValue("RAM");
-
+            
             cell = row.createCell(6, CellType.STRING);
             cell.setCellValue("ROM");
-
+            
             cell = row.createCell(7, CellType.STRING);
             cell.setCellValue("MÀU");
-
+            
             cell = row.createCell(8, CellType.STRING);
             cell.setCellValue("GIÁ");
-
+            
             cell = row.createCell(9, CellType.STRING);
             cell.setCellValue("SỐ LƯỢNG");
-
+            
             cell = row.createCell(10, CellType.STRING);
             cell.setCellValue("LOẠI HÀNG");
-
+            
             for (int i = 0; i < sp.getlist().size(); i++) {
                 row = sheet.createRow(4 + i);
-
+                
                 cell = row.createCell(0, CellType.NUMERIC);
                 cell.setCellValue(i + 1);
-
+                
                 cell = row.createCell(1, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getTen());
-
+                
                 cell = row.createCell(2, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getPin());
-
+                
                 cell = row.createCell(3, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getManhinh());
-
+                
                 cell = row.createCell(4, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getCpu());
-
+                
                 cell = row.createCell(5, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getRam());
-
+                
                 cell = row.createCell(6, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getRom());
-
+                
                 cell = row.createCell(7, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getMau());
-
+                
                 cell = row.createCell(8, CellType.STRING);
                 cell.setCellValue(String.valueOf(sp.getlist().get(i).getGia()));
-
+                
                 cell = row.createCell(9, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getSoluong());
-
+                
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getLoaihang());
             }
@@ -2365,7 +2461,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             int chon = fc.showSaveDialog(this);
             if (chon == JFileChooser.APPROVE_OPTION) {
                 String filename = fc.getSelectedFile().getAbsolutePath();
-
+                
                 FileInputStream fis = new FileInputStream(filename);
                 XSSFWorkbook wb = new XSSFWorkbook(fis);
                 XSSFSheet sheet = wb.getSheetAt(0);
@@ -2399,6 +2495,21 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblimelMouseClicked
 
+    private void btnchontatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchontatActionPerformed
+        for (int i = 0; i < tblbangxoa.getRowCount(); i++) {
+            tblbangxoa.setValueAt(true, i, 10);
+        }
+    }//GEN-LAST:event_btnchontatActionPerformed
+
+    private void txttimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttimkiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttimkiemActionPerformed
+
+    private void txttimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttimkiemCaretUpdate
+       lstctsp = sp.getlistTimKiem(txttimkiem.getText());
+       FilltoTableSanPham();
+    }//GEN-LAST:event_txttimkiemCaretUpdate
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaddbyexcel;
@@ -2409,6 +2520,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnaddpin;
     private javax.swing.JButton btnaddram;
     private javax.swing.JButton btnaddrom;
+    private javax.swing.JButton btnchontat;
     private javax.swing.JButton btnclear;
     private javax.swing.JButton btnclearcpu;
     private javax.swing.JButton btnclearmh;
@@ -2454,6 +2566,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -2505,6 +2618,8 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -2520,7 +2635,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblbang;
     private javax.swing.JTable tblbangxoa;
     private javax.swing.JTable tblcpu;
@@ -2547,24 +2661,27 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JTextField txttenram;
     private javax.swing.JTextField txttenrom;
     private javax.swing.JTextField txttensp;
+    private javax.swing.JTextField txttimkiem;
     // End of variables declaration//GEN-END:variables
 
     private void FilltoTableSanPham() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        for (SanPhamSPRespone x : sp.getlist()) {
+        lstctsp = sp.getlist();
+        for (SanPhamSPRespone x : lstctsp) {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTableSanPhamXoa() {
         model = (DefaultTableModel) tblbangxoa.getModel();
         model.setRowCount(0);
-        for (SanPhamSPRespone x : sp.selectALLChiTietSPXoa()) {
+        lstctsp = sp.selectALLChiTietSPXoa();
+        for (SanPhamSPRespone x : lstctsp) {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTablePin() {
         model = (DefaultTableModel) tblpin.getModel();
         model.setRowCount(0);
@@ -2572,7 +2689,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTableManHinh() {
         model = (DefaultTableModel) tblmanhinh.getModel();
         model.setRowCount(0);
@@ -2580,7 +2697,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTableImelAO() {
         model = (DefaultTableModel) tblimel.getModel();
         model.setRowCount(0);
@@ -2588,7 +2705,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(new Object[]{x.getMa()});
         }
     }
-
+    
     private void FilltoTableMauSac() {
         model = (DefaultTableModel) tblmausac.getModel();
         model.setRowCount(0);
@@ -2596,7 +2713,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTableCPU() {
         model = (DefaultTableModel) tblcpu.getModel();
         model.setRowCount(0);
@@ -2604,7 +2721,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTableRom() {
         model = (DefaultTableModel) tblrom.getModel();
         model.setRowCount(0);
@@ -2612,7 +2729,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void FilltoTableRam() {
         model = (DefaultTableModel) tblram.getModel();
         model.setRowCount(0);
@@ -2620,9 +2737,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-
+    
     private void setCboPin() {
-
+        
         cbo = (DefaultComboBoxModel) cbopin.getModel();
         cbo.removeAllElements();
         lstpin = spct.getlistPin();
@@ -2630,9 +2747,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-
+    
     private void setCboManHinh() {
-
+        
         cbo = (DefaultComboBoxModel) cbomanhinh.getModel();
         cbo.removeAllElements();
         lstmh = spct.getlistManHinh();
@@ -2640,9 +2757,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-
+    
     private void setCboCPU() {
-
+        
         cbo = (DefaultComboBoxModel) cbocpu.getModel();
         cbo.removeAllElements();
         lstcpu = spct.getlistCPU();
@@ -2650,9 +2767,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-
+    
     private void setCboRam() {
-
+        
         cbo = (DefaultComboBoxModel) cboram.getModel();
         cbo.removeAllElements();
         lstram = spct.getlistRam();
@@ -2660,9 +2777,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-
+    
     private void setCboRom() {
-
+        
         cbo = (DefaultComboBoxModel) cborom.getModel();
         cbo.removeAllElements();
         lstrom = spct.getlistRom();
@@ -2670,18 +2787,18 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-
+    
     private void setCboImel() {
-
+        
         cbo = (DefaultComboBoxModel) cboimel.getModel();
         cbo.removeAllElements();
         for (ImelAoSPRespone x : lstimelao) {
             cbo.addElement(x.getMa());
         }
     }
-
+    
     private void setCboMausac() {
-
+        
         cbo = (DefaultComboBoxModel) cbomausac.getModel();
         cbo.removeAllElements();
         lstms = spct.getlistMauSac();
@@ -2689,63 +2806,63 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-
+    
     private void designTable() {
         tblbang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblbang.getTableHeader().setBackground(new Color(0, 123, 123));
         tblbang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblbang.setRowHeight(50);
         tblbang.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblbangxoa.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblbangxoa.getTableHeader().setBackground(new Color(0, 123, 123));
         tblbangxoa.getTableHeader().setForeground(new Color(255, 255, 255));
         tblbangxoa.setRowHeight(50);
         tblbangxoa.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblcpu.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblcpu.getTableHeader().setBackground(new Color(0, 123, 123));
         tblcpu.getTableHeader().setForeground(new Color(255, 255, 255));
         tblcpu.setRowHeight(50);
         tblcpu.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblimel.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblimel.getTableHeader().setBackground(new Color(0, 123, 123));
         tblimel.getTableHeader().setForeground(new Color(255, 255, 255));
         tblimel.setRowHeight(50);
         tblimel.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblmanhinh.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblmanhinh.getTableHeader().setBackground(new Color(0, 123, 123));
         tblmanhinh.getTableHeader().setForeground(new Color(255, 255, 255));
         tblmanhinh.setRowHeight(50);
         tblmanhinh.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblmausac.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblmausac.getTableHeader().setBackground(new Color(0, 123, 123));
         tblmausac.getTableHeader().setForeground(new Color(255, 255, 255));
         tblmausac.setRowHeight(50);
         tblmausac.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblpin.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblpin.getTableHeader().setBackground(new Color(0, 123, 123));
         tblpin.getTableHeader().setForeground(new Color(255, 255, 255));
         tblpin.setRowHeight(50);
         tblpin.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblram.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblram.getTableHeader().setBackground(new Color(0, 123, 123));
         tblram.getTableHeader().setForeground(new Color(255, 255, 255));
         tblram.setRowHeight(50);
         tblram.getTableHeader().setPreferredSize(new Dimension(100, 30));
-
+        
         tblrom.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblrom.getTableHeader().setBackground(new Color(0, 123, 123));
         tblrom.getTableHeader().setForeground(new Color(255, 255, 255));
         tblrom.setRowHeight(50);
         tblrom.getTableHeader().setPreferredSize(new Dimension(100, 30));
     }
-
+    
     private void AdDataPin() {
         String ma = txtmapin.getText();
         String ten = txttenpin.getText();
@@ -2760,7 +2877,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTablePin();
     }
-
+    
     private void UpdateDataPin() {
         int index = tblbang.getSelectedRow();
         String ma = txtmapin.getText();
@@ -2777,7 +2894,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTablePin();
     }
-
+    
     private void AdDataManhinh() {
         String ma = txtmamh.getText();
         String ten = txttenmh.getText();
@@ -2792,7 +2909,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableManHinh();
     }
-
+    
     private void UpdateDataManhinh() {
         int index = tblmanhinh.getSelectedRow();
         String ma = txtmamh.getText();
@@ -2809,7 +2926,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableManHinh();
     }
-
+    
     private void AdDataCPU() {
         String ma = txtmacpu.getText();
         String ten = txttencpu.getText();
@@ -2824,7 +2941,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableCPU();
     }
-
+    
     private void UpdateDataCPU() {
         int index = tblcpu.getSelectedRow();
         String ma = txtmacpu.getText();
@@ -2841,7 +2958,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableCPU();
     }
-
+    
     private void AdDataRom() {
         String ma = txtmarom.getText();
         String ten = txttenrom.getText();
@@ -2856,7 +2973,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableRom();
     }
-
+    
     private void UpdateDataRom() {
         int index = tblrom.getSelectedRow();
         String ma = txtmarom.getText();
@@ -2873,7 +2990,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableRom();
     }
-
+    
     private void AdDataRam() {
         String ma = txtmaram.getText();
         String ten = txttenram.getText();
@@ -2888,7 +3005,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableRam();
     }
-
+    
     private void UpdateDataRam() {
         int index = tblram.getSelectedRow();
         String ma = txtmaram.getText();
@@ -2905,7 +3022,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableRam();
     }
-
+    
     private void AdDataMauSac() {
         String ma = txtmams.getText();
         String ten = txttenms.getText();
@@ -2920,7 +3037,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableMauSac();
     }
-
+    
     private void UpdateDataMauSac() {
         int index = tblmausac.getSelectedRow();
         String ma = txtmams.getText();
@@ -2939,7 +3056,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableRam();
     }
-
+    
     private void showData() {
         int index = tblbang.getSelectedRow();
         String ten = tblbang.getValueAt(index, 0).toString();
@@ -2952,7 +3069,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         String gia = tblbang.getValueAt(index, 7).toString();
         String soluong = tblbang.getValueAt(index, 8).toString();
         String loaihang = tblbang.getValueAt(index, 9).toString();
-
+        
         cbopin.setSelectedItem(pin);
         cbomanhinh.setSelectedItem(manhinh);
         cbocpu.setSelectedItem(cpu);
@@ -2963,7 +3080,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         txtgia.setText(gia);
         txttensp.setText(ten);
         txtsoluong.setText(soluong);
-
+        
         cbo = (DefaultComboBoxModel) cboimel.getModel();
         cbo.removeAllElements();
         for (Imel x : spct.getListImel(sp.getlist().get(index).getId())) {
@@ -2975,7 +3092,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             model.addRow(new Object[]{x.getMa()});
         }
     }
-
+    
     private void addDataCTSP() {
         if (cbocpu.getSelectedItem() == null
                 || cboloaihang.getSelectedItem() == null
@@ -2987,7 +3104,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Các thuộc tính phải được chọn");
             return;
         }
-
+        
         UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
         UUID idrom = lstrom.get(cborom.getSelectedIndex()).getId();
         UUID idram = lstram.get(cboram.getSelectedIndex()).getId();
@@ -3004,10 +3121,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         if (sp.insert(spsp, idcpu, idrom, idram, idms, idmh, idpin, lstimelao)) {
             JOptionPane.showMessageDialog(this, "Thành công");
         }
-
+        
         FilltoTableSanPham();
     }
-
+    
     private void updateDataCTSP() {
         int index = tblbang.getSelectedRow();
         UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
@@ -3030,66 +3147,56 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         }
         FilltoTableSanPham();
     }
-
+    
     private void clearFormData() {
         txttensp.setText("");
         txtgia.setText("");
         txtsoluong.setText("");
         txtmota.setText("");
-        cbocpu.setSelectedItem(null);
-        cbomanhinh.setSelectedItem(null);
-        cborom.setSelectedItem(null);
-        cboram.setSelectedItem(null);
-        cbopin.setSelectedItem(null);
-        cbomausac.setSelectedItem(null);
+        cbocpu.setSelectedIndex(0);
+        cbomanhinh.setSelectedIndex(0);
+        cborom.setSelectedIndex(0);
+        cboram.setSelectedIndex(0);
+        cbopin.setSelectedIndex(0);
+        cbomausac.setSelectedIndex(0);
         tblbang.clearSelection();
-        tblbang.removeAll();
-        tblimel.removeAll();
         cboimel.removeAllItems();
         lstimelao.clear();
+        FilltoTableImelAO();
+        txtmaimel.setText("");
     }
-
+    
     private void Deleted() {
         if (tblbang.getRowCount() > 0) {
             for (int i = 0; i < tblbang.getRowCount(); i++) {
                 System.out.println(i);
                 if (Boolean.parseBoolean(tblbang.getValueAt(i, 10).toString())) {
                     System.out.println(tblbang.getValueAt(i, 10).toString());
-                    sp.deleted(sp.getlist().get(i).getId(), true);
-                    FilltoTableSanPham();
-                    FilltoTableSanPhamXoa();
+                    SanPhamSPRespone sprp = new SanPhamSPRespone();
+                    sprp.setId(sp.getlist().get(i).getId());
+                    sprp.setDeleted(true);
+                    sp.updateXoa(sprp);
                 }
             }
+            FilltoTableSanPham();
+            FilltoTableSanPhamXoa();
         }
     }
-
+    
     private void Revert() {
         if (tblbangxoa.getRowCount() > 0) {
             for (int i = 0; i < tblbangxoa.getRowCount(); i++) {
                 System.out.println(i);
                 if (Boolean.parseBoolean(tblbangxoa.getValueAt(i, 10).toString())) {
                     System.out.println(tblbangxoa.getValueAt(i, 10).toString());
-                    sp.deleted(sp.getlistXoa().get(i).getId(), false);
-                    FilltoTableSanPham();
-                    FilltoTableSanPhamXoa();
+                    SanPhamSPRespone sprp = new SanPhamSPRespone();
+                    sprp.setId(lstctsp.get(i).getId());
+                    sprp.setDeleted(false);
+                    sp.updateXoa(sprp);
                 }
             }
+            FilltoTableSanPham();
+            FilltoTableSanPhamXoa();
         }
     }
-
-//    private void timKiem(){
-//        model = (DefaultTableModel) tblbang.getModel();
-//        model.setRowCount(0);
-//        for (SanPhamSPRespone x : sp.getlistTimKiem(txttimkiem.getText())) {
-//            model.addRow(x.toDataRow());
-//        }
-//    }
-//        private void timKiemImel(){
-//        model = (DefaultTableModel) tblimel.getModel();
-//        model.setRowCount(0);
-//        for (ImelSPRespone x : sp.getlistTimKiemImel(txtmaimel.getText())) {
-//            model.addRow(x.toDataRow());
-//        }
-//    }
-//}
 }

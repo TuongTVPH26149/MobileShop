@@ -127,6 +127,12 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         ctsp.setLoaiHang(spr.getLoaihang());
         return ctsprepo.UpdateChiTietSP(ctsp);
     }
+    public boolean updateXoa(SanPhamSPRespone spr) {
+        ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(spr.getId());
+        SanPham sp = sprepo.SelectSanPhamById(ctsp.getSanPham().getId());
+        ctsp.setDeleted(spr.isDeleted());
+        return ctsprepo.UpdateChiTietSP(ctsp);
+    }
 
     public List<SanPhamSPRespone> selectALLChiTietSPXoa() {
         List<SanPhamSPRespone> lstsp = new ArrayList<>();
@@ -144,11 +150,11 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         ctsp.setDeleted(deleted);
         return ctsprepo.UpdateChiTietSP(ctsp);
     }
-//    @Override
-//    public List<SanPhamSPRespone> getlistTimKiem(String ten) {
-//        List<SanPham> sanphams = timkiemrepo.timKiem(ten);
-//       return sanphams.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
-//    }
+    @Override
+    public List<SanPhamSPRespone> getlistTimKiem(String ten) {
+        List<ChiTietSP> ctsps = timkiemrepo.TimKiemSP(ten);
+       return ctsps.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
+    }
        public List<ImelSPRespone> getlistTimKiemImel(String ma) {
         List<Imel> imel = timkiemrepo.timKiemImel(ma);
        return imel.stream().map(ImelSPRespone::new).collect(Collectors.toList());
