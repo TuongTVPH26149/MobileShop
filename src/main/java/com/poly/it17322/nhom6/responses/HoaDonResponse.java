@@ -51,8 +51,7 @@ public class HoaDonResponse {
             this.diaChi = hd.getKhachHang().getDiaChi();
             this.trangThai = hd.getTrangThai();
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {          
         }
     }
 
@@ -75,8 +74,7 @@ public class HoaDonResponse {
     }
 
     public Object[] toDataRow() {
-      
         return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
-          ngayTao,ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
+         ngayTao,ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
     }
 }
