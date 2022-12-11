@@ -246,8 +246,18 @@ public class FrmHoaDon extends javax.swing.JPanel {
         cboNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày tạo ", "Ngày thanh toán", " " }));
 
         jDateChooser1.setDateFormatString("MMM, d y");
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
 
         jDateChooser2.setDateFormatString("MMM, d y");
+        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser2PropertyChange(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Từ");
@@ -547,7 +557,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
             }
             try {
-                File f = new File("E://hoadon.xlsx");
+                File f = new File("G://hoadon.xlsx");
                 FileOutputStream fos = new FileOutputStream(f);
                 workbook.write(fos);
                 workbook.close();
@@ -567,6 +577,29 @@ public class FrmHoaDon extends javax.swing.JPanel {
     private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimActionPerformed
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        try {
+             if (jDateChooser1.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn lại thời gian bắt đầu");
+            jDateChooser1.setDate(new Date());
+            return;
+        }
+        } catch (Exception e) {
+        }
+       
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
+        try {
+              if (jDateChooser2.getDate().compareTo(jDateChooser1.getDate()) < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn lại thời gian kết thúc");
+            jDateChooser2.setDate(null);
+            return;
+        }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jDateChooser2PropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
