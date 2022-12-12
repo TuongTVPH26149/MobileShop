@@ -9,12 +9,15 @@ import com.poly.it17322.nhom6.repositories.ChucNangNhanVienRepository;
 import com.poly.it17322.nhom6.repositories.TaiKhoanRepository;
 import com.poly.it17322.nhom6.responses.NhanVienRespone;
 import com.poly.it17322.nhom6.services.INhanVienService;
+import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -24,6 +27,7 @@ public class NhanVienServiceImpl implements INhanVienService {
 
     TaiKhoanRepository taiKhoanRepository = new TaiKhoanRepository();
     ChucNangNhanVienRepository chucNangNhanVienRepository = new ChucNangNhanVienRepository();
+    private Session session = HibernatUtil.getSession();
 
     @Override
     public List<NhanVienRespone> getlist() {
@@ -100,5 +104,37 @@ public class NhanVienServiceImpl implements INhanVienService {
     public String genPass(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         return sdf.format(new Date());
+    }
+    
+    public List<TaiKhoan> locGioiTinh(int gioiTinh, int trangThai) {
+        List<TaiKhoan> listTaiKhoan = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM TaiKhoan WHERE GioiTinh = :gioiTinh and TrangThai = :trangThai order by Ma desc", TaiKhoan.class);
+            query.setParameter("gioiTinh",gioiTinh);
+            query.setParameter("trangThai", trangThai);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listTaiKhoan = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listTaiKhoan;
+    }
+    
+    public List<TaiKhoan> locChucVu(int chucVu, int trangThai) {
+        List<TaiKhoan> listTaiKhoan = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM TaiKhoan WHERE ChucVu = :chucVu and TrangThai = :trangThai order by Ma desc", TaiKhoan.class);
+            query.setParameter("chucVu",chucVu);
+            query.setParameter("trangThai", trangThai);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listTaiKhoan = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listTaiKhoan;
     }
 }
