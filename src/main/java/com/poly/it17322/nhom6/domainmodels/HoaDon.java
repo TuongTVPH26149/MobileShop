@@ -52,6 +52,9 @@ public class HoaDon implements Serializable {
 
     @Column(name = "Ma", unique = true, nullable = false, length = 20)
     private String ma;
+    
+    @Column(name = "MaGiaoDich",length = 20)
+    private String maGiaoDich;
 
     @Column(name = "NgayTao")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -60,27 +63,30 @@ public class HoaDon implements Serializable {
     @Column(name = "NgayThanhToan")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThanhToan;
-
+    
+    @Column(name = "NgayNhanHang")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ngayNhanHang;
+    
     @Column(name = "NgayShip")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayShip;
 
     @Column(name = "NgayNhanMongMuon")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIME)
     private Date ngayNhanMongMuon;
 
     @Column(name = "TienShip")
     private BigDecimal tienShip;
+
+    @Column(name = "TienThua")
+    private BigDecimal tienThua;
 
     @Column(name = "TienMat")
     private BigDecimal tienMat;
 
     @Column(name = "ChuyenKhoan")
     private BigDecimal chuyenKhoan;
-
-    @Column(name = "NgayNhanHang")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date ngayNhanHang;
 
     @Nationalized
     @Column(name = "TenKH", length = 50)
@@ -102,6 +108,9 @@ public class HoaDon implements Serializable {
     @Nationalized
     @Column(name = "TenNguoiShip", length = 50)
     private String tenNguoiShip;
+
+    @Column(name = "SdtNguoiNhan", length = 30)
+    private String sdtNguoiNhan;
 
     @Column(name = "LoaiThanhToan")
     private int loaiThanhToan;

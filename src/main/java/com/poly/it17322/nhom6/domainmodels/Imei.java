@@ -27,13 +27,13 @@ import lombok.ToString;
  * @author admin
  */
 @Entity
-@Table(name = "Imel")
+@Table(name = "Imei")
 @Setter
 @Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Imel implements Serializable {
+public class Imei implements Serializable {
 
     @Id
     @Column(name = "Id")

@@ -5,12 +5,12 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.domainmodels.SanPham;
 import com.poly.it17322.nhom6.repositories.CPURepository;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
-import com.poly.it17322.nhom6.repositories.ImelRepository;
+import com.poly.it17322.nhom6.repositories.ImeiRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
 import com.poly.it17322.nhom6.repositories.PinRepository;
@@ -18,8 +18,8 @@ import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.repositories.SanPhamReposiry;
 import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
-import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import com.poly.it17322.nhom6.services.ISanPhamSPService;
 import java.text.SimpleDateFormat;
@@ -43,7 +43,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
     CPURepository cpurepo = new CPURepository();
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
-    ImelRepository imelrepo = new ImelRepository();
+    ImeiRepository imelrepo = new ImeiRepository();
     SpCTSPRepository timkiemrepo = new SpCTSPRepository();
     @Override
     public List<SanPhamSPRespone> getlist() {
@@ -68,7 +68,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
     }
 
     @Override
-    public boolean insert(SanPhamSPRespone sp, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImelAoSPRespone> lstao) {
+    public boolean insert(SanPhamSPRespone sp, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImeiAoSPRespone> lstao) {
         try {
             SanPham s = new SanPham();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
@@ -90,7 +90,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
             ctsp.setMoTa(sp.getMota());
             ctsprepo.InsertChiTietSP(ctsp);
             System.out.println(ctsp.getId());
-            insertImel(lstao, ctsp);
+            insertImei(lstao, ctsp);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,13 +99,13 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
 
     }
 
-    public void insertImel(List<ImelAoSPRespone> ma, ChiTietSP ctsp) {
-        for (ImelAoSPRespone x : ma) {
-            Imel imel = new Imel();
+    public void insertImei(List<ImeiAoSPRespone> ma, ChiTietSP ctsp) {
+        for (ImeiAoSPRespone x : ma) {
+            Imei imel = new Imei();
             imel.setMa(x.getMa());
             imel.setChiTietSP(ctsp);
             imel.setTrangThai(1);
-            imelrepo.InsertImel(imel);
+            imelrepo.InsertImei(imel);
         }
     }
 
@@ -155,8 +155,8 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         List<ChiTietSP> ctsps = timkiemrepo.TimKiemSP(ten);
        return ctsps.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
     }
-       public List<ImelSPRespone> getlistTimKiemImel(String ma) {
-        List<Imel> imel = timkiemrepo.timKiemImel(ma);
-       return imel.stream().map(ImelSPRespone::new).collect(Collectors.toList());
+       public List<ImeiSPRespone> getlistTimKiemImei(String ma) {
+        List<Imei> imel = timkiemrepo.timKiemImei(ma);
+       return imel.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
     }
 }

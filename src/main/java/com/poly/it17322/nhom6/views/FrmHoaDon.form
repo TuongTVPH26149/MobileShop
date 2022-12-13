@@ -499,11 +499,11 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnXuat">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icon/excelsanpham.png"/>
+            </Property>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ImageIcon(&quot;src/main/resource/icon/excelsanpham.png&quot;)" type="code"/>
             </Property>
           </Properties>
           <Events>

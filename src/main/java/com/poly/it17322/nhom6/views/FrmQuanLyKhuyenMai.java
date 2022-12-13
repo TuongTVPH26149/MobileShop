@@ -153,11 +153,11 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search_banhang.png"))); // NOI18N
         jLabel7.setBackground(new java.awt.Color(0, 102, 102));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new ImageIcon("src/main/resource/icon/search_banhang.png"));
         jLabel7.setMaximumSize(new java.awt.Dimension(24, 24));
         jLabel7.setMinimumSize(new java.awt.Dimension(24, 24));
         jLabel7.setPreferredSize(new java.awt.Dimension(24, 24));
@@ -197,7 +197,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        btnXoa.setIcon(new ImageIcon("src/main/resource/icon/endkm.png"));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/endkm.png"))); // NOI18N
         btnXoa.setText("Kết thúc");
         btnXoa.setBackground(new java.awt.Color(255, 0, 0));
         btnXoa.setFocusable(false);
@@ -282,7 +282,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         txtNKT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtNKT.setForeground(new java.awt.Color(0, 102, 102));
 
-        btnThem.setIcon(new ImageIcon("src/main/resource/icon/addspct.png"));
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/addspct.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setBackground(new java.awt.Color(0, 102, 102));
         btnThem.setFocusable(false);
@@ -294,7 +294,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
             }
         });
 
-        btnSua.setIcon(new ImageIcon("src/main/resource/icon/updatekm.png"));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/updatekm.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.setBackground(new java.awt.Color(0, 102, 102));
         btnSua.setFocusable(false);
@@ -306,7 +306,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
             }
         });
 
-        btnClear.setIcon(new ImageIcon("src/main/resource/icon/clearkh.png"));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clearkh.png"))); // NOI18N
         btnClear.setText("Làm mới");
         btnClear.setBackground(new java.awt.Color(0, 102, 102));
         btnClear.setFocusable(false);
@@ -408,7 +408,7 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        btnXoaSp.setIcon(new ImageIcon("src/main/resource/icon/selectsp.png"));
+        btnXoaSp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/selectsp.png"))); // NOI18N
         btnXoaSp.setText("Chọn hết");
         btnXoaSp.setBackground(new java.awt.Color(0, 204, 204));
         btnXoaSp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -724,8 +724,8 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
         }
         if (indexKM != -1) {
             for (int i = 0; i < lstSP.size(); i++) {
-                for (UUID s : kms.SelectIDSPBYKM(lstKM.get(indexKM).getId())) {
-                    if (lstSP.get(i).getId().equals(s)) {
+                for (SanPhamBanHangResponse s : kms.SelectIDSPBYKM(lstKM.get(indexKM).getId())) {
+                    if (lstSP.get(i).getId().equals(s.getId())) {
                         tblSanPham.setValueAt(true, i, 1);
                     }
                 }

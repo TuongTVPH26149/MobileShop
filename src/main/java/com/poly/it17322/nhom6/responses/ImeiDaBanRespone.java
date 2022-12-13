@@ -4,33 +4,31 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.ImeiBan;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
- * @author admin
+ * @author LiamTrieu
  */
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-@ToString
-public class ImelSPRespone {
+public class ImeiDaBanRespone {
+
     private UUID id;
     private String ma;
-    private int trangthai;
+    private String lyDo;
+    
 
-    public ImelSPRespone(Imel imel) {
+    public ImeiDaBanRespone(ImeiBan imel) {
         this.id = imel.getId();
         this.ma = imel.getMa();
-        this.trangthai = imel.getTrangThai();
-    }
-    
-    public Object[] toDataRow(){
-        return new Object[]{ma};
+        if (imel.getLyDo() != null) {
+            this.lyDo = imel.getLyDo();
+        }
     }
 }

@@ -132,39 +132,34 @@ public class HoaDonRepository {
         return list;
     }
 
-    public List<HoaDon> getALLHDTaiQuay(UUID idnv, int dk) {
+    public List<HoaDon> getALLHDTaiQuay(UUID idnv, int dk, boolean cv) {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
             Query query;
-            switch (dk) {
-                case 0:
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 0 and trangThai != 5 order by ma desc", HoaDon.class);
+            if (cv) {
+                if (dk != 5) {
+                    query = session.createQuery("FROM HoaDon where trangThai = :dk and trangThai != 5 order by ma desc", HoaDon.class);
+                    query.setParameter("dk", dk);
+                    if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                        listHoaDon = query.getResultList();
+                    }
+                } else {
+                    query = session.createQuery("FROM HoaDon where trangThai != 5 order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
-                    break;
-                case 1:
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 1 order by ma desc", HoaDon.class);
+                }
+            } else {
+                if (dk != 5) {
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = :dk and trangThai != 5 order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
-                    break;
-                case 2:
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 2 order by ma desc", HoaDon.class);
-                    query.setParameter("idtk", idnv);
-                    break;
-                case 3:
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 3 order by ma desc", HoaDon.class);
-                    query.setParameter("idtk", idnv);
-                    break;
-                case 4:
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = 4 order by ma desc", HoaDon.class);
-                    query.setParameter("idtk", idnv);
-                    break;
-                default:
+                    query.setParameter("dk", dk);
+                    if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                        listHoaDon = query.getResultList();
+                    }
+                } else {
                     query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai != 5 order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
-                    break;
-            }
-            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                listHoaDon = query.getResultList();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

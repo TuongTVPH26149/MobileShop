@@ -48,7 +48,7 @@ public class BaoHanh {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdImel", referencedColumnName = "id")
-    private Imel imel;
+    private Imei imel;
 
     @Column(name = "NgayBaoHanh")
     @Temporal(javax.persistence.TemporalType.DATE)

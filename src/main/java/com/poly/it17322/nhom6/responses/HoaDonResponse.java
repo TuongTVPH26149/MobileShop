@@ -40,23 +40,28 @@ public class HoaDonResponse {
         try {
             this.Id = hd.getId();
             this.ma = hd.getMa();
-            this.hoTen = hd.getKhachHang().getHoTen();
-            this.sdt = hd.getKhachHang().getSdt();
+            try {
+                this.hoTen = hd.getKhachHang().getHoTen();
+                this.sdt = hd.getKhachHang().getSdt();
+            } catch (Exception e) {
+                this.hoTen = "";
+                this.sdt = "";
+            }
             this.tongTien = hd.getTongTien();
             this.ngayTao = hd.getNgayTao();
             this.ngayThanhToan = hd.getNgayThanhToan();
             this.loaiThanhToan = hd.getLoaiThanhToan();
             this.maNV = hd.getTaiKhoan().getMa();
             this.tenNV = hd.getTaiKhoan().getHoTen();
-            this.diaChi = hd.getKhachHang().getDiaChi();
+            this.diaChi = hd.getDiaChi();
             this.trangThai = hd.getTrangThai();
-            
-        } catch (Exception e) {          
+
+        } catch (Exception e) {
         }
     }
 
     public String getloaiThanhToan() {
-        return loaiThanhToan == 0 ? "Tiền mặt" : "Chuyển khoản";
+        return loaiThanhToan == 0 ? "Tiền mặt" : loaiThanhToan == 1 ? "Chuyển khoản" : "Kết hợp";
     }
 
     public String getTrangThai() {
@@ -75,6 +80,6 @@ public class HoaDonResponse {
 
     public Object[] toDataRow() {
         return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
-         ngayTao,ngayThanhToan , getloaiThanhToan(), tongTien, getTrangThai()};
+            ngayTao, ngayThanhToan, getloaiThanhToan(), tongTien, getTrangThai()};
     }
 }

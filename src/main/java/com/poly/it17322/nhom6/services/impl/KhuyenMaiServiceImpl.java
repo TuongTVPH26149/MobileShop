@@ -78,9 +78,9 @@ public class KhuyenMaiServiceImpl {
                         sps.setKhuyenMai(khuyenMai);
                         sprepo.UpdateChiTietSP(sps);
                     } else {
-                        for (UUID u : SelectIDSPBYKM(k.getId())) {
-                            if (UUID.fromString(sp.get(i)[0].toString()).equals(u)) {
-                                ChiTietSP sps = sprepo.SelectChiTietSPById(u);
+                        for (SanPhamBanHangResponse u : SelectIDSPBYKM(k.getId())) {
+                            if (UUID.fromString(sp.get(i)[0].toString()).equals(u.getId())) {
+                                ChiTietSP sps = sprepo.SelectChiTietSPById(u.getId());
                                 sps.setKhuyenMai(null);
                                 sprepo.UpdateChiTietSP(sps);
                             }
@@ -138,7 +138,7 @@ public class KhuyenMaiServiceImpl {
         return sprepo.UpdateChiTietSP(ctsp);
     }
 
-    public List<UUID> SelectIDSPBYKM(UUID idKhuyenmai) {
-        return sprepo.SelectIDSPBYKM(idKhuyenmai);
+    public List<SanPhamBanHangResponse> SelectIDSPBYKM(UUID idKhuyenmai) {
+        return sprepo.SelectIDSPBYKM(idKhuyenmai).stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
     }
 }

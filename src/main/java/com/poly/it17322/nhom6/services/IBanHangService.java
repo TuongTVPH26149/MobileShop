@@ -7,8 +7,8 @@ package com.poly.it17322.nhom6.services;
 import com.poly.it17322.nhom6.responses.DonHangRespone;
 import com.poly.it17322.nhom6.responses.GioHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
-import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
-import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
+import com.poly.it17322.nhom6.responses.ImeiBanHangRespone;
+import com.poly.it17322.nhom6.responses.ImeiDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import java.math.BigDecimal;
@@ -21,17 +21,18 @@ import java.util.UUID;
  */
 public interface IBanHangService {
 
-    List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk);
+    List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk, boolean cv);
+    
     void updateKM(UUID idhdct, BigDecimal km);
 
     khachHangBanHangRespone getkh(UUID ma);
 
     List<SanPhamBanHangResponse> getAllSpBh();
 
-    List<ImelDaBanRespone> getImelBan(UUID idHDCT);
+    List<ImeiDaBanRespone> getImeiBan(UUID idHDCT);
     
 
-    boolean deleteImelBan(String ma);
+    boolean deleteImeiBan(String ma);
 
     boolean updateGHXoa(UUID idHDCT);
 
@@ -39,9 +40,9 @@ public interface IBanHangService {
 
     boolean unGH(UUID idHD);
 
-    List<ImelBanHangRespone> getImel(UUID id);
+    List<ImeiBanHangRespone> getImei(UUID id);
 
-    boolean addSpSanner(String maImel, UUID idHD);
+    boolean addSpSanner(String maImei, UUID idHD);
 
     DonHangRespone getDonHang(UUID id);
 
@@ -53,9 +54,10 @@ public interface IBanHangService {
 
     boolean clearHoaDon (DonHangRespone dh);
 
-    boolean createImelBan(String maImel, UUID hoaDon);
+    boolean createImeiBan(String maImei, UUID hoaDon);
 
     boolean updateDonHang(DonHangRespone dh);
 
     public void updatRank(UUID id);
+    public List<SanPhamBanHangResponse> getListSearch(String ten);
 }

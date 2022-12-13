@@ -89,10 +89,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
         btnsua = new javax.swing.JButton();
         btntimkiem = new javax.swing.JButton();
         txtngaysinh = new com.toedter.calendar.JDateChooser();
-        btnstart = new javax.swing.JButton();
-        btnlen = new javax.swing.JButton();
-        btnxuong = new javax.swing.JButton();
-        btnend = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblkhachhang = new javax.swing.JTable();
@@ -173,7 +169,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         btnthem.setBackground(new java.awt.Color(0, 123, 123));
         btnthem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnthem.setForeground(new java.awt.Color(255, 255, 255));
-        btnthem.setIcon(new ImageIcon("src/main/resource/icon/addkh.png"));
+        btnthem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/addkh.png"))); // NOI18N
         btnthem.setText("Insert");
         btnthem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +180,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         btnsua.setBackground(new java.awt.Color(0, 123, 123));
         btnsua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnsua.setForeground(new java.awt.Color(255, 255, 255));
-        btnsua.setIcon(new ImageIcon("src/main/resource/icon/updatekh.png"));
+        btnsua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/updatekh.png"))); // NOI18N
         btnsua.setText("Update");
         btnsua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +191,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         btntimkiem.setBackground(new java.awt.Color(0, 123, 123));
         btntimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btntimkiem.setForeground(new java.awt.Color(255, 255, 255));
-        btntimkiem.setIcon(new ImageIcon("src/main/resource/icon/clearkh.png"));
+        btntimkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clearkh.png"))); // NOI18N
         btntimkiem.setText("Clear");
         btntimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,39 +299,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(56, 56, 56))
         );
-
-        btnstart.setBackground(new java.awt.Color(0, 123, 123));
-        btnstart.setIcon(new ImageIcon("src/main/resource/icon/startkh.png"));
-        btnstart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnstartActionPerformed(evt);
-            }
-        });
-
-        btnlen.setBackground(new java.awt.Color(0, 123, 123));
-        btnlen.setIcon(new ImageIcon("src/main/resource/icon/upkh.png"));
-        btnlen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnlenActionPerformed(evt);
-            }
-        });
-
-        btnxuong.setBackground(new java.awt.Color(0, 123, 123));
-        btnxuong.setIcon(new ImageIcon("src/main/resource/icon/downkh.png"));
-        btnxuong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnxuongActionPerformed(evt);
-            }
-        });
-
-        btnend.setBackground(new java.awt.Color(0, 123, 123));
-        btnend.setForeground(new java.awt.Color(255, 255, 255));
-        btnend.setIcon(new ImageIcon("src/main/resource/icon/endkh.png"));
-        btnend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnendActionPerformed(evt);
-            }
-        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
@@ -480,7 +443,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         );
 
         jButton1.setBackground(new java.awt.Color(0, 123, 123));
-        jButton1.setIcon(new ImageIcon("src/main/resource/icon/excelsanpham.png"));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excelsanpham.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -573,14 +536,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnstart, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnlen)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnxuong)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnend))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -588,9 +543,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnend, btnlen, btnstart, btnxuong});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -603,28 +555,13 @@ public class FrmKhachhang extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnend, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnstart)
-                        .addComponent(btnlen)
-                        .addComponent(btnxuong)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnend, btnlen, btnstart, btnxuong});
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void rdonuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdonuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdonuActionPerformed
-
-    private void btnendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnendActionPerformed
-        index = listkh.size() - 1;
-        writeForm();
-    }//GEN-LAST:event_btnendActionPerformed
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         try {
@@ -653,21 +590,6 @@ public class FrmKhachhang extends javax.swing.JPanel {
         clearForm();
         tblkhachhang.clearSelection();
     }//GEN-LAST:event_btntimkiemActionPerformed
-
-    private void btnxuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxuongActionPerformed
-        index++;
-        writeForm();
-    }//GEN-LAST:event_btnxuongActionPerformed
-
-    private void btnlenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlenActionPerformed
-        index--;
-        writeForm();
-    }//GEN-LAST:event_btnlenActionPerformed
-
-    private void btnstartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstartActionPerformed
-        index = 0;
-        writeForm();
-    }//GEN-LAST:event_btnstartActionPerformed
 
     private void tblkhachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblkhachhangMouseClicked
         index = tblkhachhang.getSelectedRow();
@@ -767,21 +689,26 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 cell = row.createCell(7, CellType.STRING);
                 cell.setCellValue(KHSer.getlist().get(i).getHang());
             }
-            File file = new File("D:/" + new GenMa().getMa() + ".xlsx");
-            FileOutputStream fos = new FileOutputStream(file);
-            xssfworkbook.write(fos);
-            fos.close();
-            JOptionPane.showMessageDialog(this, "xuất file thành công");
-            try {
-                if (!Desktop.isDesktopSupported()) {
-                    return;
+            File file = new File("KH" + new GenMa().getMa() + ".xlsx");
+            JFileChooser jfc = new JFileChooser();
+            jfc.setSelectedFile(file);
+            if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                file = new File(jfc.getSelectedFile().toString() + ".xlsx");
+                FileOutputStream fos = new FileOutputStream(file);
+                xssfworkbook.write(fos);
+                fos.close();
+                JOptionPane.showMessageDialog(this, "xuất file thành công");
+                try {
+                    if (!Desktop.isDesktopSupported()) {
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if (file.exists()) {
+                        desktop.open(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Desktop desktop = Desktop.getDesktop();
-                if (file.exists()) {
-                    desktop.open(file);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -802,13 +729,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnend;
-    private javax.swing.JButton btnlen;
-    private javax.swing.JButton btnstart;
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btntimkiem;
-    private javax.swing.JButton btnxuong;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbohang;
     private javax.swing.JComboBox<String> cbolocgioitinh;

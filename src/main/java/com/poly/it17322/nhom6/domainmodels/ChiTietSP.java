@@ -77,9 +77,6 @@ public class ChiTietSP implements Serializable {
     @Column(name = "MoTa")
     private String moTa;
 
-    @Column(name = "HinhAnh", length = 100)
-    private String hinhAnh;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdKhuyenMai", referencedColumnName = "id")
     private KhuyenMai khuyenMai;

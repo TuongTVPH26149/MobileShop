@@ -5,9 +5,9 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.domainmodels.SanPham;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ public class SpCTSPRepository {
 
     private Session session = HibernatUtil.getSession();
 
-    public List<Imel> SelectCBOImelById(UUID Idctsp) {
-        List<Imel> lstimel = new ArrayList<>();
+    public List<Imei> SelectCBOImeiById(UUID Idctsp) {
+        List<Imei> lstimel = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM Imel where IdChiTietSP = :Idctsp", Imel.class);
+            Query query = session.createQuery("FROM Imei where IdChiTietSP = :Idctsp", Imei.class);
             query.setParameter("Idctsp", Idctsp);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             }
@@ -40,11 +40,11 @@ public class SpCTSPRepository {
     }
 
 
-    public List<Imel> timKiemImel(String ma) {
-        List<Imel> lstimel = new ArrayList<>();
+    public List<Imei> timKiemImei(String ma) {
+        List<Imei> lstimel = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM Imel where Ma Like :ma", Imel.class);
+            Query query = session.createQuery("FROM Imei where Ma Like :ma", Imei.class);
             query.setParameter("ma", ma + "%");
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
             lstimel = query.getResultList();
@@ -102,6 +102,25 @@ public class SpCTSPRepository {
         try {
             Session session = HibernatUtil.getSession();
             String hql = "FROM ChiTietSP a Where a.sanPham.ten LIKE concat('%', :input ,'%')";
+            Query query = session.createQuery(hql,ChiTietSP.class);
+            query.setParameter("input", input);
+            list = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public List<ChiTietSP> TimKiemSPBH(String input) {
+        List<ChiTietSP> list = new ArrayList<>();
+        try {
+            Session session = HibernatUtil.getSession();
+            String hql = "FROM ChiTietSP a Where "
+                    + "(a.sanPham.ten LIKE concat('%', :input ,'%') "
+                    + "or a.ram.ten LIKE concat('%', :input ,'%') "
+                    + "or a.rom.ten LIKE concat('%', :input ,'%') "
+                    + "or a.mauSac.ten LIKE concat('%', :input ,'%')) "
+                    + "and a.soLuong > 0";
             Query query = session.createQuery(hql,ChiTietSP.class);
             query.setParameter("input", input);
             list = query.getResultList();
