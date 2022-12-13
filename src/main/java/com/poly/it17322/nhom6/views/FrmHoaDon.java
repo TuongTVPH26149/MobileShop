@@ -6,13 +6,8 @@ package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.responses.HoaDonChiTietResponse;
 import com.poly.it17322.nhom6.responses.HoaDonResponse;
-import com.poly.it17322.nhom6.responses.KhachHangResponse;
-import com.poly.it17322.nhom6.services.IChiTietHoaDonService;
 import com.poly.it17322.nhom6.services.IHoaDonService;
-import com.poly.it17322.nhom6.services.IKhachHangService;
-import com.poly.it17322.nhom6.services.impl.ChiTietHoaDonImpl;
 import com.poly.it17322.nhom6.services.impl.HoaDonServiceImpl;
-import com.poly.it17322.nhom6.services.impl.KhachHangService;
 import com.poly.it17322.nhom6.utilities.GenMa;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -23,16 +18,12 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
@@ -43,7 +34,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hibernate.jdbc.Work;
 
 /**
  *
@@ -328,7 +318,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
         );
 
         btnXuat.setBackground(new java.awt.Color(0, 0, 153));
-        btnXuat.setIcon(new ImageIcon("src/main/resource/icon/excelsanpham.png"));
+        btnXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excelsanpham.png"))); // NOI18N
         btnXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXuatActionPerformed(evt);
@@ -564,21 +554,26 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
             }
             try {
-                File file = new File("D:/HD" + new GenMa().getMa() + ".xlsx");
-                FileOutputStream fos = new FileOutputStream(file);
-                workbook.write(fos);
-                workbook.close();
-                JOptionPane.showMessageDialog(this, "Xuất danh sách hóa đơn thành công");
-                try {
-                    if (!Desktop.isDesktopSupported()) {
-                        return;
+                File file = new File("HD" + new GenMa().getMa() + ".xlsx");
+                JFileChooser jfc = new JFileChooser();
+                jfc.setSelectedFile(file);
+                if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    file = new File(jfc.getSelectedFile().toString() + ".xlsx");
+                    FileOutputStream fos = new FileOutputStream(file);
+                    workbook.write(fos);
+                    workbook.close();
+                    JOptionPane.showMessageDialog(this, "Xuất danh sách hóa đơn thành công");
+                    try {
+                        if (!Desktop.isDesktopSupported()) {
+                            return;
+                        }
+                        Desktop desktop = Desktop.getDesktop();
+                        if (file.exists()) {
+                            desktop.open(file);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    Desktop desktop = Desktop.getDesktop();
-                    if (file.exists()) {
-                        desktop.open(file);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -598,23 +593,23 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
         try {
-             if (jDateChooser1.getDate().compareTo(new Date()) > 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn lại thời gian bắt đầu");
-            jDateChooser1.setDate(new Date());
-            return;
-        }
+            if (jDateChooser1.getDate().compareTo(new Date()) > 0) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn lại thời gian bắt đầu");
+                jDateChooser1.setDate(new Date());
+                return;
+            }
         } catch (Exception e) {
         }
-       
+
     }//GEN-LAST:event_jDateChooser1PropertyChange
 
     private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
         try {
-              if (jDateChooser2.getDate().compareTo(jDateChooser1.getDate()) < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn lại thời gian kết thúc");
-            jDateChooser2.setDate(null);
-            return;
-        }
+            if (jDateChooser2.getDate().compareTo(jDateChooser1.getDate()) < 0) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn lại thời gian kết thúc");
+                jDateChooser2.setDate(null);
+                return;
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jDateChooser2PropertyChange

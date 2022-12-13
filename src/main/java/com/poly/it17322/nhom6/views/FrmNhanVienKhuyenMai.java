@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -137,14 +135,11 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search_banhang.png"))); // NOI18N
         jLabel7.setBackground(new java.awt.Color(0, 102, 102));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new ImageIcon("src/main/resource/icon/search_banhang.png"));
-        jLabel7.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel7.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel7.setPreferredSize(new java.awt.Dimension(24, 24));
 
         jPanel6.setBackground(new java.awt.Color(0, 102, 102));
         jPanel6.setPreferredSize(new java.awt.Dimension(0, 1));
@@ -167,14 +162,14 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel7))
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,7 +248,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         txtNKT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtNKT.setForeground(new java.awt.Color(0, 102, 102));
 
-        btnClear.setIcon(new ImageIcon("src/main/resource/icon/clearkh.png"));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clearkh.png"))); // NOI18N
         btnClear.setText("Làm mới");
         btnClear.setBackground(new java.awt.Color(0, 102, 102));
         btnClear.setFocusable(false);
@@ -273,19 +268,12 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên sản phẩm", ""
+                "Tên sản phẩm"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -293,11 +281,6 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         });
         tblSanPham.setFillsViewportHeight(true);
         jScrollPane2.setViewportView(tblSanPham);
-        if (tblSanPham.getColumnModel().getColumnCount() > 0) {
-            tblSanPham.getColumnModel().getColumn(1).setMinWidth(25);
-            tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(25);
-            tblSanPham.getColumnModel().getColumn(1).setMaxWidth(25);
-        }
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -311,14 +294,11 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search_banhang.png"))); // NOI18N
         jLabel6.setBackground(new java.awt.Color(0, 102, 102));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new ImageIcon("src/main/resource/icon/search_banhang.png"));
-        jLabel6.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel6.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel6.setPreferredSize(new java.awt.Dimension(24, 24));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
         jPanel4.setPreferredSize(new java.awt.Dimension(0, 1));
@@ -341,14 +321,14 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel6))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -585,8 +565,8 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         }
         if (indexKM != -1) {
             for (int i = 0; i < lstSP.size(); i++) {
-                for (UUID s : kms.SelectIDSPBYKM(lstKM.get(indexKM).getId())) {
-                    if (lstSP.get(i).getId().equals(s)) {
+                for (SanPhamBanHangResponse s : kms.SelectIDSPBYKM(lstKM.get(indexKM).getId())) {
+                    if (lstSP.get(i).getId().equals(s.getId())) {
                         tblSanPham.setValueAt(true, i, 1);
                     }
                 }

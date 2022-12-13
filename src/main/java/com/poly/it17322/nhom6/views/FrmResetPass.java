@@ -62,7 +62,7 @@ public class FrmResetPass extends javax.swing.JFrame {
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExit.setIcon(new ImageIcon("src/main/resource/icon/close.png"));
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         lblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblExit.setMaximumSize(new java.awt.Dimension(30, 30));
         lblExit.setMinimumSize(new java.awt.Dimension(30, 30));
@@ -76,7 +76,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         lblTitile.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         lblTitile.setForeground(new java.awt.Color(255, 255, 255));
         lblTitile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitile.setText("Reset Password");
+        lblTitile.setText("Đổi mật khẩu");
         lblTitile.setMaximumSize(new java.awt.Dimension(330, 30));
         lblTitile.setMinimumSize(new java.awt.Dimension(330, 30));
         lblTitile.setPreferredSize(new java.awt.Dimension(330, 30));
@@ -97,10 +97,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(340, 30));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new ImageIcon("src/main/resource/icon/password.png"));
-        jLabel3.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel3.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel3.setPreferredSize(new java.awt.Dimension(24, 24));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/password.png"))); // NOI18N
 
         jPanel5.setMaximumSize(new java.awt.Dimension(304, 1));
         jPanel5.setMinimumSize(new java.awt.Dimension(304, 1));
@@ -119,6 +116,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         txtpass.setBackground(new java.awt.Color(0, 102, 102));
         txtpass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtpass.setForeground(new java.awt.Color(255, 255, 255));
+        txtpass.setToolTipText("Mật khẩu mới");
         txtpass.setBorder(null);
         txtpass.setCaretColor(new java.awt.Color(255, 255, 255));
         txtpass.setMaximumSize(new java.awt.Dimension(303, 20));
@@ -131,7 +129,7 @@ public class FrmResetPass extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,7 +151,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(51, 51, 51));
-        btnLogin.setText("Submit");
+        btnLogin.setText("Xong");
         btnLogin.setBorder(null);
         btnLogin.setBorderPainted(false);
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -171,10 +169,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         jPanel6.setMinimumSize(new java.awt.Dimension(340, 30));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new ImageIcon("src/main/resource/icon/pass2.png"));
-        jLabel4.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel4.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel4.setPreferredSize(new java.awt.Dimension(24, 24));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pass2.png"))); // NOI18N
 
         jPanel7.setMaximumSize(new java.awt.Dimension(304, 1));
         jPanel7.setMinimumSize(new java.awt.Dimension(304, 1));
@@ -193,6 +188,7 @@ public class FrmResetPass extends javax.swing.JFrame {
         txtpass2.setBackground(new java.awt.Color(0, 102, 102));
         txtpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtpass2.setForeground(new java.awt.Color(255, 255, 255));
+        txtpass2.setToolTipText("Nhập lại mật khẩu");
         txtpass2.setBorder(null);
         txtpass2.setCaretColor(new java.awt.Color(255, 255, 255));
         txtpass2.setMaximumSize(new java.awt.Dimension(303, 20));
@@ -205,7 +201,7 @@ public class FrmResetPass extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

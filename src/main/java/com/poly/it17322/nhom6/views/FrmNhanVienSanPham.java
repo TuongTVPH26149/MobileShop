@@ -4,10 +4,10 @@
  */
 package com.poly.it17322.nhom6.views;
 
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.ManHinhRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
 import com.poly.it17322.nhom6.responses.PinRespone;
@@ -34,6 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -54,10 +55,10 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
     List<RamRespone> lstram = new ArrayList<>();
     List<RomRespone> lstrom = new ArrayList<>();
     List<MauSacRespone> lstms = new ArrayList<>();
-    List<ImelAoSPRespone> lstimelao = new ArrayList<>();
-    List<ImelSPRespone> lstimel = new ArrayList<>();
+    List<ImeiAoSPRespone> lstimelao = new ArrayList<>();
+    List<ImeiSPRespone> lstimel = new ArrayList<>();
     List<SanPhamSPRespone> lstctsp = new ArrayList<>();
-    
+
     public FrmNhanVienSanPham() {
         initComponents();
         lstctsp = sp.getlist();
@@ -302,7 +303,7 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
         btnclear.setBackground(new java.awt.Color(0, 123, 123));
         btnclear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnclear.setForeground(new java.awt.Color(255, 255, 255));
-        btnclear.setIcon(new ImageIcon("src/main/resource/icon/clearspct.png"));
+        btnclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clearspct.png"))); // NOI18N
         btnclear.setText("Clear");
         btnclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,8 +371,8 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             }
         });
 
-        btnxuatexcel.setBackground(new java.awt.Color(51, 255, 0));
-        btnxuatexcel.setIcon(new ImageIcon("src/main/resource/icon/excelsanpham.png"));
+        btnxuatexcel.setBackground(new java.awt.Color(0, 102, 102));
+        btnxuatexcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excelsanpham.png"))); // NOI18N
         btnxuatexcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnxuatexcelActionPerformed(evt);
@@ -399,7 +400,7 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 102));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new ImageIcon("src/main/resource/icon/search_banhang.png"));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search_banhang.png"))); // NOI18N
         jLabel13.setMaximumSize(new java.awt.Dimension(24, 24));
         jLabel13.setMinimumSize(new java.awt.Dimension(24, 24));
         jLabel13.setPreferredSize(new java.awt.Dimension(24, 24));
@@ -547,20 +548,19 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
                         .addComponent(btnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cboram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cborom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(cborom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbomausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(109, Short.MAX_VALUE))))
+                        .addComponent(cbomausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(109, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -690,21 +690,26 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getLoaihang());
             }
-            File file = new File("D:/SP" + new GenMa().getMa() + ".xlsx");
-            FileOutputStream fis = new FileOutputStream(file);
-            wordbook.write(fis);
-            fis.close();
-            JOptionPane.showMessageDialog(this, "Xuất thành công");
-            try {
-                if (!Desktop.isDesktopSupported()) {
-                    return;
+            File file = new File("SP" + new GenMa().getMa() + ".xlsx");
+            JFileChooser jfc = new JFileChooser();
+            jfc.setSelectedFile(file);
+            if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                file = new File(jfc.getSelectedFile().toString() + ".xlsx");
+                FileOutputStream fis = new FileOutputStream(file);
+                wordbook.write(fis);
+                fis.close();
+                JOptionPane.showMessageDialog(this, "Xuất thành công");
+                try {
+                    if (!Desktop.isDesktopSupported()) {
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if (file.exists()) {
+                        desktop.open(file);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Desktop desktop = Desktop.getDesktop();
-                if (file.exists()) {
-                    desktop.open(file);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -772,9 +777,9 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             model.addRow(x.toDataRow());
         }
     }
-    
+
     private void setCboPin() {
-        
+
         cbo = (DefaultComboBoxModel) cbopin.getModel();
         cbo.removeAllElements();
         lstpin = spct.getlistPin();
@@ -782,9 +787,9 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-    
+
     private void setCboManHinh() {
-        
+
         cbo = (DefaultComboBoxModel) cbomanhinh.getModel();
         cbo.removeAllElements();
         lstmh = spct.getlistManHinh();
@@ -792,9 +797,9 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-    
+
     private void setCboCPU() {
-        
+
         cbo = (DefaultComboBoxModel) cbocpu.getModel();
         cbo.removeAllElements();
         lstcpu = spct.getlistCPU();
@@ -802,9 +807,9 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-    
+
     private void setCboRam() {
-        
+
         cbo = (DefaultComboBoxModel) cboram.getModel();
         cbo.removeAllElements();
         lstram = spct.getlistRam();
@@ -812,9 +817,9 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-    
+
     private void setCboRom() {
-        
+
         cbo = (DefaultComboBoxModel) cborom.getModel();
         cbo.removeAllElements();
         lstrom = spct.getlistRom();
@@ -822,18 +827,18 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-    
-    private void setCboImel() {
-        
+
+    private void setCboImei() {
+
         cbo = (DefaultComboBoxModel) cboimel.getModel();
         cbo.removeAllElements();
-        for (ImelAoSPRespone x : lstimelao) {
+        for (ImeiAoSPRespone x : lstimelao) {
             cbo.addElement(x.getMa());
         }
     }
-    
+
     private void setCboMausac() {
-        
+
         cbo = (DefaultComboBoxModel) cbomausac.getModel();
         cbo.removeAllElements();
         lstms = spct.getlistMauSac();
@@ -841,7 +846,7 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
             cbo.addElement(x.getTen());
         }
     }
-    
+
     private void designTable() {
         tblbang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         tblbang.getTableHeader().setBackground(new Color(0, 123, 123));
@@ -849,7 +854,8 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
         tblbang.setRowHeight(50);
         tblbang.getTableHeader().setPreferredSize(new Dimension(100, 30));
     }
-     private void showData() {
+
+    private void showData() {
         int index = tblbang.getSelectedRow();
         String ten = tblbang.getValueAt(index, 0).toString();
         String pin = tblbang.getValueAt(index, 1).toString();
@@ -861,7 +867,7 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
         String gia = tblbang.getValueAt(index, 7).toString();
         String soluong = tblbang.getValueAt(index, 8).toString();
         String loaihang = tblbang.getValueAt(index, 9).toString();
-        
+
         cbopin.setSelectedItem(pin);
         cbomanhinh.setSelectedItem(manhinh);
         cbocpu.setSelectedItem(cpu);
@@ -872,14 +878,15 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
         txtgia.setText(gia);
         txttensp.setText(ten);
         txtsoluong.setText(soluong);
-        
+
         cbo = (DefaultComboBoxModel) cboimel.getModel();
         cbo.removeAllElements();
-        for (Imel x : spct.getListImel(sp.getlist().get(index).getId())) {
+        for (Imei x : spct.getListImei(sp.getlist().get(index).getId())) {
             cbo.addElement(x.getMa());
         }
-     }
-     private void clearFormData() {
+    }
+
+    private void clearFormData() {
         txttensp.setText("");
         txtgia.setText("");
         txtsoluong.setText("");
@@ -893,5 +900,5 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
         tblbang.clearSelection();
         cboimel.removeAllItems();
         lstimelao.clear();
-     }
+    }
 }

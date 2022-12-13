@@ -1,4 +1,4 @@
-package com.raven.avatar;
+package com.poly.it17322.nhom6.utilities;
 
 import java.awt.AlphaComposite;
 import java.awt.Composite;

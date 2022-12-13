@@ -113,16 +113,13 @@ public class ChiTietSPRepository {
         return km;
     }
 
-    public List<UUID> SelectIDSPBYKM(UUID idKhuyenmai) {
-        List<UUID> lstid = new ArrayList<>();
+    public List<ChiTietSP> SelectIDSPBYKM(UUID idKhuyenmai) {
+        List<ChiTietSP> lstid = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
             Query query = session.createQuery("FROM ChiTietSP where IdKhuyenMai = :idKhuyenmai", ChiTietSP.class);
             query.setParameter("idKhuyenmai", idKhuyenmai);
-            for (ChiTietSP s : (List<ChiTietSP>) query.getResultList()) {
-                UUID id = s.getId();
-                lstid.add(id);
-            }
+            lstid = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
