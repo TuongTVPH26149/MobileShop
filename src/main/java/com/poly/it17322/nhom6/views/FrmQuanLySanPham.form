@@ -1803,7 +1803,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnaddimel" min="-2" pref="62" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  <Component id="btnupdateimel" min="-2" pref="62" max="-2" attributes="0"/>
+                                  <Component id="btndeleteimei" min="-2" pref="62" max="-2" attributes="0"/>
                               </Group>
                               <Component id="btnaddbyexcel" alignment="1" min="-2" pref="62" max="-2" attributes="0"/>
                           </Group>
@@ -1824,7 +1824,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel37" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="btnaddimel" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="btnupdateimel" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="btndeleteimei" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -1842,8 +1842,9 @@
             <Component class="javax.swing.JTable" name="tblimei">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="1" rowCount="0">
+                  <Table columnCount="2" rowCount="0">
                     <Column editable="true" title="T&#xea;n Imel" type="java.lang.Object"/>
+                    <Column editable="true" title="X&#xf3;a" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
               </Properties>
@@ -1948,7 +1949,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnaddimelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnupdateimel">
+        <Component class="javax.swing.JButton" name="btndeleteimei">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7b" green="7b" red="0" type="rgb"/>
@@ -1958,7 +1959,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnupdateimelActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btndeleteimeiActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnaddbyexcel">
@@ -2154,7 +2155,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="11" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="cboloaihang" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -2225,7 +2226,7 @@
                               <Component id="btnclear" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace pref="70" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">

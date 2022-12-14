@@ -110,7 +110,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
     }
 
     @Override
-    public boolean update(SanPhamSPRespone spr, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin) {
+    public boolean update(SanPhamSPRespone spr, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImeiAoSPRespone> lstao) {
         ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(spr.getId());
         SanPham sp = sprepo.SelectSanPhamById(ctsp.getSanPham().getId());
         sp.setTen(spr.getTen());
@@ -125,7 +125,9 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         ctsp.setLoaiHang(spr.getLoaihang());
         ctsp.setMoTa(spr.getMota());
         ctsp.setLoaiHang(spr.getLoaihang());
-        return ctsprepo.UpdateChiTietSP(ctsp);
+        ctsprepo.UpdateChiTietSP(ctsp);
+        insertImei(lstao, ctsp);
+        return true;
     }
     public boolean updateXoa(SanPhamSPRespone spr) {
         ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(spr.getId());
@@ -155,8 +157,14 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         List<ChiTietSP> ctsps = timkiemrepo.TimKiemSP(ten);
        return ctsps.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
     }
-       public List<ImeiSPRespone> getlistTimKiemImei(String ma) {
-        List<Imei> imel = timkiemrepo.timKiemImei(ma);
-       return imel.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    public boolean deleteImei(ImeiSPRespone imei){
+        try {
+            Imei im = imelrepo.SelectImeiById(imei.getId());
+            return timkiemrepo.deleteImei(im);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
+       
 }
