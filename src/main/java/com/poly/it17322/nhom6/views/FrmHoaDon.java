@@ -554,7 +554,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
             }
             try {
-                File file = new File("HD" + new GenMa().getMa() + ".xlsx");
+                File file = new File("HD" + new GenMa().getMa());
                 JFileChooser jfc = new JFileChooser();
                 jfc.setSelectedFile(file);
                 if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {

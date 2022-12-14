@@ -689,7 +689,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                 cell = row.createCell(7, CellType.STRING);
                 cell.setCellValue(KHSer.getlist().get(i).getHang());
             }
-            File file = new File("KH" + new GenMa().getMa() + ".xlsx");
+            File file = new File("KH" + new GenMa().getMa());
             JFileChooser jfc = new JFileChooser();
             jfc.setSelectedFile(file);
             if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {

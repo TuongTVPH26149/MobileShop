@@ -27,12 +27,12 @@ public class KhuyenMaiServiceImpl {
     private KhuyenMaiRepository kmrepo = new KhuyenMaiRepository();
     private ChiTietSPRepository sprepo = new ChiTietSPRepository();
 
-    public List<KhuyenMaiResponse> getList(int trangThai) {
-        return kmrepo.selectALLKhuyenMai(trangThai).stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
+    public List<KhuyenMaiResponse> getList(int trangThai, String text) {
+        return kmrepo.selectALLKhuyenMai(trangThai, text).stream().map(KhuyenMaiResponse::new).collect(Collectors.toList());
     }
 
     public List<KhuyenMaiDateRespone> getListDate() {
-        return kmrepo.selectALLKhuyenMai(3).stream().map(KhuyenMaiDateRespone::new).collect(Collectors.toList());
+        return kmrepo.selectALLKhuyenMai(3, "").stream().map(KhuyenMaiDateRespone::new).collect(Collectors.toList());
     }
 
     public boolean createKM(KhuyenMaiResponse km, List<UUID> idSP) {
@@ -61,7 +61,7 @@ public class KhuyenMaiServiceImpl {
         return false;
     }
 
-    public boolean updateKM(KhuyenMaiResponse km, List<Object[]> sp) {
+    public boolean updateKM(KhuyenMaiResponse km, List<UUID> spbo, List<UUID> spthem) {
         KhuyenMai k = kmrepo.SelectKhuyenMaiById(km.getId());
         try {
             k.setTen(km.getTen());
@@ -69,23 +69,16 @@ public class KhuyenMaiServiceImpl {
             k.setLoaiKM(km.getLoai());
             k.setNgayBD(km.getNgayBD());
             k.setNgayKT(km.getNgayKT());
-            k.setTrangThai(km.getTrangThai());
-            if (kmrepo.UpdateKhuyenMai(k) && !sp.isEmpty()) {
-                KhuyenMai khuyenMai = kmrepo.SelectKhuyenMaiById(k.getMa());
-                for (int i = 0; i < sp.size(); i++) {
-                    if (Boolean.parseBoolean(sp.get(i)[1].toString())) {
-                        ChiTietSP sps = sprepo.SelectChiTietSPById(UUID.fromString(sp.get(i)[0].toString()));
-                        sps.setKhuyenMai(khuyenMai);
-                        sprepo.UpdateChiTietSP(sps);
-                    } else {
-                        for (SanPhamBanHangResponse u : SelectIDSPBYKM(k.getId())) {
-                            if (UUID.fromString(sp.get(i)[0].toString()).equals(u.getId())) {
-                                ChiTietSP sps = sprepo.SelectChiTietSPById(u.getId());
-                                sps.setKhuyenMai(null);
-                                sprepo.UpdateChiTietSP(sps);
-                            }
-                        }
-                    }
+            if (kmrepo.UpdateKhuyenMai(k)) {
+                for (UUID u : spbo) {
+                    ChiTietSP ctsp = sprepo.SelectChiTietSPById(u);
+                    ctsp.setKhuyenMai(null);
+                    sprepo.UpdateChiTietSP(ctsp);
+                }
+                for (UUID u2 : spthem) {
+                    ChiTietSP ctsp = sprepo.SelectChiTietSPById(u2);
+                    ctsp.setKhuyenMai(k);
+                    sprepo.UpdateChiTietSP(ctsp);
                 }
                 return true;
             }
@@ -116,17 +109,21 @@ public class KhuyenMaiServiceImpl {
         return kmrepo.UpdateKhuyenMai(k);
     }
 
-    public List<SanPhamBanHangResponse> getAllSp() {
-        List<ChiTietSP> ctsp = sprepo.getSP();
-        List<SanPhamBanHangResponse> spbh = ctsp.stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
+    public List<SanPhamBanHangResponse> getAllSp(int dk, String text) {
+        List<ChiTietSP> ctsp = sprepo.getSP(text);
         List<SanPhamBanHangResponse> lstSP = new ArrayList<>();
-        for (SanPhamBanHangResponse s : spbh) {
-            SanPhamBanHangResponse sp = new SanPhamBanHangResponse();
-            try {
-                sp = s;
-            } catch (Exception e) {
+        for (ChiTietSP s : ctsp) {
+            if (dk == 0) {
+                lstSP.add(new SanPhamBanHangResponse(s));
+            }else if(dk == 1){
+                if (s.getKhuyenMai() == null) {
+                    lstSP.add(new SanPhamBanHangResponse(s));
+                }
+            }else{
+                if (s.getKhuyenMai() != null) {
+                    lstSP.add(new SanPhamBanHangResponse(s));
+                }
             }
-            lstSP.add(sp);
         }
         return lstSP;
     }
@@ -138,7 +135,7 @@ public class KhuyenMaiServiceImpl {
         return sprepo.UpdateChiTietSP(ctsp);
     }
 
-    public List<SanPhamBanHangResponse> SelectIDSPBYKM(UUID idKhuyenmai) {
-        return sprepo.SelectIDSPBYKM(idKhuyenmai).stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
+    public List<SanPhamBanHangResponse> SelectIDSPBYKM(UUID idKhuyenmai, String text) {
+        return sprepo.SelectIDSPBYKM(idKhuyenmai, text).stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
     }
 }

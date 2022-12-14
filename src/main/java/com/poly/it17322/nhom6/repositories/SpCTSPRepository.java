@@ -110,24 +110,4 @@ public class SpCTSPRepository {
         }
         return list;
     }
-    
-    public List<ChiTietSP> TimKiemSPBH(String input) {
-        List<ChiTietSP> list = new ArrayList<>();
-        try {
-            Session session = HibernatUtil.getSession();
-            String hql = "FROM ChiTietSP a Where "
-                    + "(a.sanPham.ten LIKE concat('%', :input ,'%') "
-                    + "or a.ram.ten LIKE concat('%', :input ,'%') "
-                    + "or a.rom.ten LIKE concat('%', :input ,'%') "
-                    + "or a.mauSac.ten LIKE concat('%', :input ,'%')) "
-                    + "and a.soLuong > 0";
-            Query query = session.createQuery(hql,ChiTietSP.class);
-            query.setParameter("input", input);
-            list = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-    
 }

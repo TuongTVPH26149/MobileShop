@@ -1151,7 +1151,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getTrangThai() == 0 ? "Đang làm" : "Đã nghỉ");
 
             }
-            File file = new File("NV" + new GenMa().getMa() + ".xlsx");
+            File file = new File("NV" + new GenMa().getMa());
             JFileChooser jfc = new JFileChooser();
             jfc.setSelectedFile(file);
             if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {

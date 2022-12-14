@@ -254,6 +254,9 @@
                   <Dimension value="[303, 20]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtpassKeyPressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -394,6 +397,9 @@
                   <Dimension value="[303, 20]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtpass2KeyPressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

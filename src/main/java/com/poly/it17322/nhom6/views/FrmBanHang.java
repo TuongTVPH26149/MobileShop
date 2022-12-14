@@ -3359,7 +3359,7 @@ public class FrmBanHang extends javax.swing.JPanel {
     private void fillTableSP() {
         dtm = (DefaultTableModel) tblSanPham.getModel();
         dtm.setRowCount(0);
-        lstSP = bhs.getListSearch(txtSearchSP.getText());
+        lstSP = bhs.getAllSpBh(txtSearchSP.getText());
         for (SanPhamBanHangResponse s : lstSP) {
             dtm.addRow(s.toDataRow());
         }
