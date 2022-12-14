@@ -7,6 +7,7 @@ package com.poly.it17322.nhom6.views;
 import com.poly.it17322.nhom6.services.IDangNhapService;
 import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
 import com.poly.it17322.nhom6.utilities.MD5Util;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -122,6 +123,11 @@ public class FrmResetPass extends javax.swing.JFrame {
         txtpass.setMaximumSize(new java.awt.Dimension(303, 20));
         txtpass.setMinimumSize(new java.awt.Dimension(303, 20));
         txtpass.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpassKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -194,6 +200,11 @@ public class FrmResetPass extends javax.swing.JFrame {
         txtpass2.setMaximumSize(new java.awt.Dimension(303, 20));
         txtpass2.setMinimumSize(new java.awt.Dimension(303, 20));
         txtpass2.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtpass2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpass2KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -320,6 +331,20 @@ public class FrmResetPass extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_lblTitileMousePressed
+
+    private void txtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtpass2.requestFocus();
+        }
+    }//GEN-LAST:event_txtpassKeyPressed
+
+    private void txtpass2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpass2KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnLogin.doClick();
+        }
+    }//GEN-LAST:event_txtpass2KeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

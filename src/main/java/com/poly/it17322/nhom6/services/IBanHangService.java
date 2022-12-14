@@ -27,7 +27,7 @@ public interface IBanHangService {
 
     khachHangBanHangRespone getkh(UUID ma);
 
-    List<SanPhamBanHangResponse> getAllSpBh();
+    List<SanPhamBanHangResponse> getAllSpBh(String text);
 
     List<ImeiDaBanRespone> getImeiBan(UUID idHDCT);
     
@@ -59,5 +59,4 @@ public interface IBanHangService {
     boolean updateDonHang(DonHangRespone dh);
 
     public void updatRank(UUID id);
-    public List<SanPhamBanHangResponse> getListSearch(String ten);
 }

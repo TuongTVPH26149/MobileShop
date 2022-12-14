@@ -26,6 +26,7 @@ public class SanPhamBanHangResponse {
     private String pin;
     private int soLuong;
     private BigDecimal giaBan;
+    private String khuyenMai;
 
     public SanPhamBanHangResponse(ChiTietSP sp) {
         this.id = sp.getId();
@@ -35,6 +36,11 @@ public class SanPhamBanHangResponse {
         this.pin = sp.getPin().getTen();
         this.soLuong = sp.getSoLuong();
         this.giaBan = sp.getGia();
+        try {
+            this.khuyenMai = sp.getKhuyenMai().getTen();
+        } catch (Exception e) {
+            this.khuyenMai = "";
+        }
     }
     
     public Object[] toDataRow(){
