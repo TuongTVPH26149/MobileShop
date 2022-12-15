@@ -94,7 +94,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         model.setRowCount(0);
         lstTaiKhoan = new ArrayList<>();
         for (TaiKhoan x : nhanVienServiceImpl.selectTaiKhoan(0)) {
-            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên"});
+            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
             lstTaiKhoan.add(x);
         }
     }
@@ -104,7 +104,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         model.setRowCount(0);
         lstTaiKhoan2 = new ArrayList<>();
         for (TaiKhoan x : nhanVienServiceImpl.selectTaiKhoan(1)) {
-            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên"});
+            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
             lstTaiKhoan2.add(x);
         }
     }
