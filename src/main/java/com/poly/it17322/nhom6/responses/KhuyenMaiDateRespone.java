@@ -19,13 +19,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class KhuyenMaiDateRespone {
+
     private UUID id;
     private Date ngayBD;
     private Date ngayKT;
 
     public KhuyenMaiDateRespone(KhuyenMai km) {
-        this.id = km.getId();
-        this.ngayBD = km.getNgayBD();
-        this.ngayKT = km.getNgayKT();
+        try {
+            this.id = km.getId();
+            this.ngayBD = km.getNgayBD();
+            this.ngayKT = km.getNgayKT();
+        } catch (Exception e) {
+        }
     }
 }

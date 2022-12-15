@@ -2661,6 +2661,7 @@ public class FrmBanHang extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
+        String maGD = "";
         if (indexHD < 0) {
             JOptionPane.showMessageDialog(this, "Chưa chọn hóa đơn");
             return;
@@ -2679,6 +2680,14 @@ public class FrmBanHang extends javax.swing.JPanel {
         dh.setChuyenKhoan(new BigDecimal(txtChuyenKhoan.getText()));
         dh.setGiamGia(new BigDecimal(txtGiamGiaDacbiet.getText()));
         dh.setHinhThuc(cboHinhThuc.getSelectedIndex());
+        if (dh.getChuyenKhoan().compareTo(new BigDecimal(0)) > 0) {
+            maGD = JOptionPane.showInputDialog("Mời nhập mã giao dịch");
+            if (maGD == null || maGD.trim().equals("")) {
+                JOptionPane.showMessageDialog(this, "Mã giao dịch không được trống");
+                return;
+            }
+            dh.setMaGiaoDich(maGD);
+        }
         dh.setTrangThai(3);
         thanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed

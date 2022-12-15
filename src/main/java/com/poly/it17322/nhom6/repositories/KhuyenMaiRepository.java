@@ -36,9 +36,8 @@ public class KhuyenMaiRepository {
                 query.setParameter("text", text);
             }
             listKhuyenMai = query.getResultList();
-            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                listKhuyenMai = query.getResultList();
-            }
+        } catch (NullPointerException e) {
+            return new ArrayList<>();
         } catch (Exception e) {
             e.printStackTrace();
         }
