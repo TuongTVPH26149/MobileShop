@@ -23,6 +23,7 @@ public class khachHangBanHangRespone {
     private String ma;
     private String ten;
     private String sdt;
+    private String rank;
     private int hang;
     private int phanTramGiam;
 
@@ -46,6 +47,21 @@ public class khachHangBanHangRespone {
                 return "Kim cương";
             default:
                 return "";
+        }
+    }
+
+    public String getrank() {
+        switch (hang) {
+            case 0:
+                return "rank0.png";
+            case 1:
+                return "rank1.png";
+            case 2:
+                return "rank2.png";
+            case 3:
+                return "rank3.png";
+            default:
+                return "searchcustomer.png";
         }
     }
 

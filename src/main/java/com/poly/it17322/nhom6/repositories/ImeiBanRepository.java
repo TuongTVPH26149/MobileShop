@@ -106,12 +106,14 @@ public class ImeiBanRepository {
         return false;
     }
 
-    public List<ImeiBan> selectALLImeiBan(UUID hdct) {
+    public List<ImeiBan> selectALLImeiBan(UUID hdct, String text) {
         List<ImeiBan> listImeiBan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ImeiBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 1", ImeiBan.class);
+            Query query = session.createQuery("FROM ImeiBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 1 "
+                    + "and ma LIKE concat('%', :text ,'%')", ImeiBan.class);
             query.setParameter("hdct", hdct);
+            query.setParameter("text", text);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listImeiBan = query.getResultList();
             }

@@ -132,34 +132,38 @@ public class HoaDonRepository {
         return list;
     }
 
-    public List<HoaDon> getALLHDTaiQuay(UUID idnv, int dk, boolean cv) {
+    public List<HoaDon> getALLHDTaiQuay(UUID idnv, int dk, boolean cv, String text) {
         List<HoaDon> listHoaDon = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
             Query query;
             if (cv) {
                 if (dk != 5) {
-                    query = session.createQuery("FROM HoaDon where trangThai = :dk and trangThai != 5 order by ma desc", HoaDon.class);
+                    query = session.createQuery("FROM HoaDon where trangThai = :dk and trangThai != 5 and "
+                            + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("dk", dk);
-                    if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                        listHoaDon = query.getResultList();
-                    }
+                    query.setParameter("text", text);
                 } else {
-                    query = session.createQuery("FROM HoaDon where trangThai != 5 order by ma desc", HoaDon.class);
-                    query.setParameter("idtk", idnv);
+                    query = session.createQuery("FROM HoaDon where trangThai != 5 and "
+                            + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
+                    query.setParameter("text", text);
                 }
             } else {
                 if (dk != 5) {
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = :dk and trangThai != 5 order by ma desc", HoaDon.class);
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = :dk and trangThai != 5 and "
+                            + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
                     query.setParameter("dk", dk);
-                    if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                        listHoaDon = query.getResultList();
-                    }
+                    query.setParameter("text", text);
                 } else {
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai != 5 order by ma desc", HoaDon.class);
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai != 5 and "
+                            + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
+                    query.setParameter("text", text);
                 }
+            }
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listHoaDon = query.getResultList();
             }
         } catch (Exception e) {
             e.printStackTrace();

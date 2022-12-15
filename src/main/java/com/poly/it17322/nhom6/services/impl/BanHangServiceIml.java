@@ -16,7 +16,6 @@ import com.poly.it17322.nhom6.repositories.HoaDonRepository;
 import com.poly.it17322.nhom6.repositories.ImeiBanRepository;
 import com.poly.it17322.nhom6.repositories.ImeiRepository;
 import com.poly.it17322.nhom6.repositories.KhachHangRepository;
-import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
 import com.poly.it17322.nhom6.repositories.TaiKhoanRepository;
 import com.poly.it17322.nhom6.responses.DonHangRespone;
 import com.poly.it17322.nhom6.responses.GioHangRespone;
@@ -49,9 +48,9 @@ public class BanHangServiceIml implements IBanHangService {
     ImeiRepository imelrepo = new ImeiRepository();
 
     @Override
-    public List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk, boolean cv) {
+    public List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk, boolean cv, String text) {
         List<HoaDonBanHangRespone> lstHd = new ArrayList<>();
-        List<HoaDon> hds = hdrepo.getALLHDTaiQuay(idNV, dk, cv);
+        List<HoaDon> hds = hdrepo.getALLHDTaiQuay(idNV, dk, cv, text);
         lstHd = hds.stream().map(HoaDonBanHangRespone::new).collect(Collectors.toList());
         List<HoaDonBanHangRespone> lstHDBH = new ArrayList<>();
         return lstHd;
@@ -88,8 +87,11 @@ public class BanHangServiceIml implements IBanHangService {
         try {
             String maHD = "HD" + sdf.format(new Date());
             if (trangThai == 0) {
+                KhachHang kh = khrepo.SelectKHByMa("MacDinh");
                 hd.setDiaChi("Tại cửa hàng");
-                hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
+                hd.setKhachHang(kh);
+                hd.setTenKH(kh.getHoTen());
+                hd.setSdtNguoiNhan(kh.getSdt());
             }
             hd.setMa(maHD);
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(idNV));
@@ -113,15 +115,15 @@ public class BanHangServiceIml implements IBanHangService {
     public boolean clearHoaDon(DonHangRespone dh) {
         HoaDon hd = hdrepo.SelectHoaDonById(dh.getId());
         try {
-            if (dh.getTrangThai() == 1) {
-                hd.setDiaChi(null);
-                hd.setSdtNguoiShip(null);
-                hd.setTenNguoiShip(null);
-                hd.setNgayNhanMongMuon(null);
-                hd.setTenKH(null);
-                hd.setKhachHang(null);
-            } else {
+            hd.setDiaChi(null);
+            hd.setSdtNguoiShip(null);
+            hd.setTenNguoiShip(null);
+            hd.setNgayNhanMongMuon(null);
+            hd.setTenKH(null);
+            if (dh.getTrangThai() == 0) {
                 hd.setKhachHang(khrepo.SelectKHByMa("MacDinh"));
+            } else {
+                hd.setKhachHang(null);
             }
             hd.setNgayTao(new Date());
             hd.setTongTien(new BigDecimal(0));
@@ -143,7 +145,7 @@ public class BanHangServiceIml implements IBanHangService {
         try {
             List<HoaDonChiTiet> hdcts = hdctrepo.SelectByHoaDonCTID(idHD);
             for (HoaDonChiTiet s : hdcts) {
-                for (ImeiBan i : imlbrepo.selectALLImeiBan(s.getId())) {
+                for (ImeiBan i : imlbrepo.selectALLImeiBan(s.getId(), "")) {
                     Imei imel = imelrepo.SelectImeiBanByMa(i.getMa());
                     imel.setTrangThai(1);
                     imelrepo.UpdateImei(imel);
@@ -187,6 +189,8 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setChuyenKhoan(dh.getChuyenKhoan());
             hd.setTenKH(dh.getTenkhachHang());
             hd.setDiaChi(dh.getDiaChi());
+            hd.setTenKH(dh.getTenkhachHang());
+            hd.setSdtNguoiNhan(dh.getSdtKH());
             if (dh.getTrangThai() == 3 || dh.getTrangThai() == 4) {
                 hd.setNgayThanhToan(new Date());
                 if (hd.getTrangThai() != 6) {
@@ -273,14 +277,14 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public List<ImeiBanHangRespone> getImei(UUID id) {
-        List<Imei> imels = imelrepo.Selectmamel(id);
+    public List<ImeiBanHangRespone> getImei(UUID id, String text) {
+        List<Imei> imels = imelrepo.Selectmamel(id, text);
         return imels.stream().map(ImeiBanHangRespone::new).collect(Collectors.toList());
     }
 
     @Override
-    public List<ImeiDaBanRespone> getImeiBan(UUID idHDCT) {
-        List<ImeiBan> imels = imlbrepo.selectALLImeiBan(idHDCT);
+    public List<ImeiDaBanRespone> getImeiBan(UUID idHDCT, String text) {
+        List<ImeiBan> imels = imlbrepo.selectALLImeiBan(idHDCT, text);
         return imels.stream().map(ImeiDaBanRespone::new).collect(Collectors.toList());
     }
 

@@ -119,7 +119,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getBillHeaderCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 11);
         font.setColor(BaseColor.GRAY);
@@ -132,7 +132,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getBillRowCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.BLACK);
@@ -147,7 +147,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getBillFooterCell(String text) throws Exception{
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.BLACK);
@@ -162,7 +162,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getValidityCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.GRAY);
@@ -174,7 +174,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getAccountsCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         fs.addFont(font);
@@ -187,7 +187,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getAccountsCellR(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         fs.addFont(font);
@@ -202,7 +202,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getdescCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.GRAY);
@@ -217,7 +217,7 @@ public class InHoaDon {
     public static PdfPTable tieuDe() throws Exception {
         PdfPTable tieuDe = new PdfPTable(1);
         tieuDe.setWidthPercentage(100);
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/tieude.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/tieude.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs1 = new FontSelector();
         FontSelector fs2 = new FontSelector();
         Font font1 = new Font(bf, 30);
@@ -245,7 +245,7 @@ public class InHoaDon {
         PdfPTable tieuDe = new PdfPTable(3);
         tieuDe.setWidthPercentage(100);
         tieuDe.setWidths(new float[]{5, 4, 3});
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/tieude.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/tieude.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs1 = new FontSelector();
         FontSelector fs2 = new FontSelector();
         Font font1 = new Font(bf, 11);

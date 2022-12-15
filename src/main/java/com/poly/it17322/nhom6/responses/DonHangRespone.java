@@ -58,9 +58,9 @@ public class DonHangRespone {
         this.hinhThuc = h.getLoaiThanhToan();
         this.nhanHang = h.getTrangThai() == 0 ? 0 : (h.getTrangThai() == 3 ? 0 : 1);
         try {
-            this.sdtKH = h.getKhachHang().getSdt();
-            this.tenkhachHang = h.getKhachHang().getMa() + "-" + h.getKhachHang().getHoTen();
             this.idKH = h.getKhachHang().getId();
+            this.sdtKH = h.getSdtNguoiNhan();
+            this.tenkhachHang = h.getTenKH();
         } catch (Exception e) {
         }
         this.sdtship = h.getSdtNguoiShip();

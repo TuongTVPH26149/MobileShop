@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public interface IBanHangService {
 
-    List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk, boolean cv);
+    List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk, boolean cv, String text);
     
     void updateKM(UUID idhdct, BigDecimal km);
 
@@ -29,7 +29,7 @@ public interface IBanHangService {
 
     List<SanPhamBanHangResponse> getAllSpBh(String text);
 
-    List<ImeiDaBanRespone> getImeiBan(UUID idHDCT);
+    List<ImeiDaBanRespone> getImeiBan(UUID idHDCT, String text);
     
 
     boolean deleteImeiBan(String ma);
@@ -40,7 +40,7 @@ public interface IBanHangService {
 
     boolean unGH(UUID idHD);
 
-    List<ImeiBanHangRespone> getImei(UUID id);
+    List<ImeiBanHangRespone> getImei(UUID id, String text);
 
     boolean addSpSanner(String maImei, UUID idHD);
 
