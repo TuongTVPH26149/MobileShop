@@ -1403,7 +1403,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         });
 
         btndeleteimei.setBackground(new java.awt.Color(0, 123, 123));
-        btndeleteimei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/updatespct.png"))); // NOI18N
+        btndeleteimei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/removekm.png"))); // NOI18N
         btndeleteimei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndeleteimeiActionPerformed(evt);
@@ -2152,7 +2152,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnmausacActionPerformed
 
     private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
+        btninsert.setEnabled(true);
         clearFormData();
+        sl = 1;
     }//GEN-LAST:event_btnclearActionPerformed
 
     private void cboimelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboimelActionPerformed
@@ -2311,7 +2313,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_cboloaihangActionPerformed
 
     private void tblbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblbangMouseClicked
+        btninsert.setEnabled(false);
         showData();
+        sl = 1;
     }//GEN-LAST:event_tblbangMouseClicked
 
     private void btninsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertActionPerformed
@@ -2326,10 +2330,15 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
             return;
         }
-        if (maimel.length() > 20) {
-            JOptionPane.showMessageDialog(this, "Imei không quá 20 số");
-            return;
+        if(lstimelao.size()>0){
+        for (ImeiAoSPRespone x : lstimelao) {
+            if(x.getMa().equals(txtmaimei.getText())){
+                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+                return;
+            }
         }
+        }
+        
         int imel = 0;
         try {
             imel = Integer.parseInt(maimel);
@@ -2337,11 +2346,12 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Imei phải lớn hơn 0");
                 return;
             }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Imei phải là số");
+            if (maimel.length() > 15) {
+            JOptionPane.showMessageDialog(this, "Imei không quá 15 số");
             return;
         }
+
+        
         if (sosp == -1) {
             ImeiAoSPRespone imelao = new ImeiAoSPRespone();
             imelao.setMa(maimel);
@@ -2360,6 +2370,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             sl++;
             setCboImei();
         }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Imei phải là số");
+            return;
+        }
     }//GEN-LAST:event_btnaddimelActionPerformed
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
@@ -2372,14 +2386,13 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         if (row == -1) {
             if (tblimei.getRowCount() > 0) {
                 for (int i = 0; i < tblimei.getRowCount(); i++) {
-                    System.out.println(i);
-                    System.out.println(tblimei.getValueAt(i, 1).toString());
                     if (Boolean.parseBoolean(tblimei.getValueAt(i, 1).toString())) {
                         lstimelao.remove(i);
                     }
                 }
                 FilltoTableImeiAO();
                 setCboImei();
+                sl--;
             }
         }
 
@@ -2714,7 +2727,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void FilltoTableSanPham() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
-        lstctsp = sp.getlist();
         for (SanPhamSPRespone x : lstctsp) {
             model.addRow(x.toDataRow());
         }
@@ -3177,7 +3189,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             if (sp.insert(spsp, idcpu, idrom, idram, idms, idmh, idpin, lstimelao)) {
                 JOptionPane.showMessageDialog(this, "Thành công");
             }
-
+            lstctsp = sp.getlist();
             FilltoTableSanPham();
             clearFormData();
         } catch (Exception e) {
@@ -3215,6 +3227,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             if (sp.update(spsp, idcpu, idrom, idram, idms, idmh, idpin, lstimelao)) {
                 JOptionPane.showMessageDialog(this, "Thành công");
             }
+            lstctsp = sp.getlist();
             FilltoTableSanPham();
             clearFormData();
 
@@ -3245,9 +3258,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void Deleted() {
         if (tblbang.getRowCount() > 0) {
             for (int i = 0; i < tblbang.getRowCount(); i++) {
-                System.out.println(i);
                 if (Boolean.parseBoolean(tblbang.getValueAt(i, 10).toString())) {
-                    System.out.println(tblbang.getValueAt(i, 10).toString());
                     SanPhamSPRespone sprp = new SanPhamSPRespone();
                     sprp.setId(sp.getlist().get(i).getId());
                     sprp.setDeleted(true);
@@ -3262,9 +3273,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void Revert() {
         if (tblbangxoa.getRowCount() > 0) {
             for (int i = 0; i < tblbangxoa.getRowCount(); i++) {
-                System.out.println(i);
                 if (Boolean.parseBoolean(tblbangxoa.getValueAt(i, 10).toString())) {
-                    System.out.println(tblbangxoa.getValueAt(i, 10).toString());
                     SanPhamSPRespone sprp = new SanPhamSPRespone();
                     sprp.setId(lstctsp.get(i).getId());
                     sprp.setDeleted(false);

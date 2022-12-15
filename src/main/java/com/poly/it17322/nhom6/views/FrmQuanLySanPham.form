@@ -1955,7 +1955,7 @@
               <Color blue="7b" green="7b" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/updatespct.png"/>
+              <Image iconType="3" name="/icon/removekm.png"/>
             </Property>
           </Properties>
           <Events>
