@@ -3340,6 +3340,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 }
             }
             FilltoTableSanPham();
+            jTabbedPane1.setSelectedIndex(1);
             FilltoTableSanPhamXoa();
         }
     }
@@ -3354,8 +3355,9 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                     sp.updateXoa(sprp);
                 }
             }
-            FilltoTableSanPham();
             FilltoTableSanPhamXoa();
+            jTabbedPane1.setSelectedIndex(0);
+            FilltoTableSanPham();
         }
     }
 }
