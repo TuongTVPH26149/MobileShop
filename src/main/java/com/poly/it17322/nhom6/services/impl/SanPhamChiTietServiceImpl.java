@@ -47,6 +47,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     PinRepository pinrepo = new PinRepository();
     SpCTSPRepository imelrepo = new SpCTSPRepository();
     ImeiRepository imrepo = new ImeiRepository();
+    SpCTSPRepository spct = new SpCTSPRepository();
 
     @Override
     public List<RomRespone> getlistRom() {
@@ -196,4 +197,13 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         im.setMa(imel.getMa());
         return imrepo.UpdateImei(im);
     }
+    public List<ImeiSPRespone> getlistImel() {
+        List<Imei> imei = imrepo.selectALLImei();
+        return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+    public List<ImeiSPRespone> getlistImelbyMa(String ma) {
+        List<Imei> imei = spct.SelectImeiByMa(ma);
+        return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+    
 }
