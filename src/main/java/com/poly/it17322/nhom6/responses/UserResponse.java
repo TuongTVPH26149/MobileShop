@@ -23,6 +23,7 @@ public class UserResponse {
     private String hoTen;
     private String matKhau;
     private String hinhAnh;
+    private String mail;
     private int chucVu;
     private int trangThai;
 
@@ -30,6 +31,7 @@ public class UserResponse {
         this.id = tk.getId();
         this.ma = tk.getMa();
         this.hoTen = tk.getHoTen();
+        this.mail = tk.getEmail();
         this.matKhau = tk.getMatKhau();
         this.hinhAnh = tk.getHinhAnh();
         this.chucVu = tk.getChucVu();

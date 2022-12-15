@@ -109,22 +109,22 @@ public class HoaDonChiTietRepository {
         return false;
     }
 
-    public List<HoaDonChiTiet> getGH(UUID idhd, UUID idsp) {
-        List<HoaDonChiTiet> hds = new ArrayList<>();
+    public HoaDonChiTiet getGH(UUID idhd, UUID idsp) {
+        HoaDonChiTiet hds = new HoaDonChiTiet();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM HoaDonChiTiet WHERE IdHoaDon = :idhd and IdChiTietSP = :idsp", HoaDonChiTiet.class);
+            Query query = session.createQuery("FROM HoaDonChiTiet WHERE IdHoaDon = :idhd and IdChiTietSP = :idsp and TrangThai = 1", HoaDonChiTiet.class);
             query.setParameter("idhd", idhd);
             query.setParameter("idsp", idsp);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                hds = query.getResultList();
+                hds = (HoaDonChiTiet) query.getSingleResult();
             }
             return hds;
         } catch (NoResultException e) {
-            return new ArrayList<>();
+            return hds;
         }
     }
-    
+
     public HoaDonChiTiet getGHTra(UUID idhd, UUID idsp) {
         HoaDonChiTiet hds = new HoaDonChiTiet();
         try {

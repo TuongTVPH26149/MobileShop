@@ -80,12 +80,13 @@ public class ImeiRepository {
         return false;
     }
 
-    public List<Imei> Selectmamel(UUID ctSP) {
+    public List<Imei> Selectmamel(UUID ctSP, String text) {
         List<Imei> lstImei = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM Imei WHERE IdChiTietSP = :ctsp and TrangThai = 1", Imei.class);
+            Query query = session.createQuery("FROM Imei WHERE IdChiTietSP = :ctsp and TrangThai = 1 and ma LIKE concat('%', :text ,'%')", Imei.class);
             query.setParameter("ctsp", ctSP);
+            query.setParameter("text", text);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 lstImei = query.getResultList();
             }
@@ -108,4 +109,19 @@ public class ImeiRepository {
         }
         return imel;
     }
+    
+     public Boolean delete(Imei imel) {
+        Transaction transaction = null;
+        try {
+            session = HibernatUtil.getSession();
+            transaction = session.beginTransaction();
+            session.delete(imel);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
+    
 }

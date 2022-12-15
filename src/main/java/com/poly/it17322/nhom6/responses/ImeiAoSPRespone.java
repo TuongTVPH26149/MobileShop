@@ -24,5 +24,7 @@ public class ImeiAoSPRespone {
         this.ma = ma;
     }
     
-    
+    public Object[] toDaTaRow(){
+        return new Object[]{ma,false};
+    }
 }

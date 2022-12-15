@@ -32,6 +32,7 @@ public class DonHangRespone {
     private String sdtship;
     private String sdtKH;
     private String lyDo;
+    private String maGiaoDich;
     private Date NgayNhanMongMuon;
     private Date ngayThanhToan;
     private Date ngayNhan;
@@ -40,8 +41,10 @@ public class DonHangRespone {
     private BigDecimal chuyenKhoan;
     private BigDecimal giamGia;
     private BigDecimal phiShip;
+    private BigDecimal tienThua;
     private int hinhThuc;
     private int nhanHang;
+    private int soLanShip;
     private int trangThai;
 
     public DonHangRespone(HoaDon h) {
@@ -55,12 +58,14 @@ public class DonHangRespone {
         this.chuyenKhoan = h.getChuyenKhoan();
         this.giamGia = h.getGiamGia();
         this.phiShip = h.getTienShip();
+        this.soLanShip = h.getSoLanShip();
+        this.tienThua = h.getTienThua();
         this.hinhThuc = h.getLoaiThanhToan();
         this.nhanHang = h.getTrangThai() == 0 ? 0 : (h.getTrangThai() == 3 ? 0 : 1);
         try {
-            this.sdtKH = h.getKhachHang().getSdt();
-            this.tenkhachHang = h.getKhachHang().getMa() + "-" + h.getKhachHang().getHoTen();
             this.idKH = h.getKhachHang().getId();
+            this.sdtKH = h.getSdtNguoiNhan();
+            this.tenkhachHang = h.getTenKH();
         } catch (Exception e) {
         }
         this.sdtship = h.getSdtNguoiShip();

@@ -7,7 +7,9 @@ package com.poly.it17322.nhom6.views;
 import com.github.sarxos.webcam.Webcam;
 import com.poly.it17322.nhom6.responses.KhuyenMaiDateRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
+import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
 import com.poly.it17322.nhom6.services.impl.KhuyenMaiServiceImpl;
+import com.poly.it17322.nhom6.utilities.MD5Util;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
@@ -26,6 +28,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private int chosser;
     private UserResponse tkreponse;
     private KhuyenMaiServiceImpl kms = new KhuyenMaiServiceImpl();
+    private DangNhapServiceImpl dangNhapService = new DangNhapServiceImpl();
 
     /**
      * Creates new form frmMain
@@ -58,6 +61,17 @@ public class FrmMainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DoiMK = new javax.swing.JFrame();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtnhaplai = new javax.swing.JPasswordField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtpassmoi = new javax.swing.JPasswordField();
+        txtpasscu = new javax.swing.JPasswordField();
+        lbltentk = new javax.swing.JLabel();
+        btnDoi = new javax.swing.JButton();
         paneListService = new javax.swing.JPanel();
         pnlBanHang = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -90,6 +104,113 @@ public class FrmMainView extends javax.swing.JFrame {
         lblMini = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         pnlView = new javax.swing.JPanel();
+
+        DoiMK.setTitle("Đổi mật khẩu");
+        DoiMK.setBackground(new java.awt.Color(255, 255, 255));
+        DoiMK.setMaximumSize(new java.awt.Dimension(275, 290));
+        DoiMK.setMinimumSize(new java.awt.Dimension(275, 290));
+        DoiMK.setPreferredSize(new java.awt.Dimension(275, 290));
+        DoiMK.setSize(new java.awt.Dimension(275, 290));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Đổi mật khẩu");
+        jLabel17.setMaximumSize(new java.awt.Dimension(240, 40));
+        jLabel17.setMinimumSize(new java.awt.Dimension(240, 40));
+        jLabel17.setPreferredSize(new java.awt.Dimension(240, 40));
+
+        jLabel18.setText("Tên NV:");
+
+        txtnhaplai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnhaplaiActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Mật khẩu cũ:");
+
+        jLabel21.setText("Mật khẩu mới:");
+
+        jLabel22.setText("Nhập lại:");
+
+        txtpassmoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpassmoiActionPerformed(evt);
+            }
+        });
+
+        txtpasscu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpasscuActionPerformed(evt);
+            }
+        });
+
+        lbltentk.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnDoi.setText("Đổi mật khẩu");
+        btnDoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout DoiMKLayout = new javax.swing.GroupLayout(DoiMK.getContentPane());
+        DoiMK.getContentPane().setLayout(DoiMKLayout);
+        DoiMKLayout.setHorizontalGroup(
+            DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DoiMKLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtpassmoi))
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtnhaplai))
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbltentk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtpasscu))
+                    .addComponent(btnDoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        DoiMKLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel18, jLabel20, jLabel21, jLabel22});
+
+        DoiMKLayout.setVerticalGroup(
+            DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DoiMKLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(lbltentk, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtpasscu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtpassmoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(txtnhaplai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDoi)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        DoiMKLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lbltentk, txtnhaplai, txtpasscu, txtpassmoi});
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý cửa hàng điện thoại");
@@ -522,6 +643,12 @@ public class FrmMainView extends javax.swing.JFrame {
             }
         });
 
+        avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                avatarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout paneListServiceLayout = new javax.swing.GroupLayout(paneListService);
         paneListService.setLayout(paneListServiceLayout);
         paneListServiceLayout.setHorizontalGroup(
@@ -821,35 +948,6 @@ public class FrmMainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pnlNhanVienMouseClicked
 
-    private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
-        // TODO add your handling code here:
-        if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(0, 123, 123));
-    }//GEN-LAST:event_pnlBaoHanhMouseExited
-
-    private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
-        // TODO add your handling code here:
-        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
-        });
-        if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(0, 180, 180));
-    }//GEN-LAST:event_pnlBaoHanhMouseEntered
-
-    private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
-        // TODO add your handling code here:
-        try {
-            Webcam.getDefault().close();
-            clearChosserListService();
-            chosser = 5;
-            pnlBaoHanh.setBackground(new Color(0, 153, 153));
-            pnlView.removeAll();
-            pnlView.add(new FrmBaoHanh());
-            pnlView.setLayout(new FlowLayout());
-            this.pack();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_pnlBaoHanhMouseClicked
-
     private void pnlKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseExited
         // TODO add your handling code here:
         if (chosser != 4)
@@ -974,9 +1072,92 @@ public class FrmMainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblDangXuatMouseClicked
 
+    private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
+        // TODO add your handling code here:
+        if (chosser != 5)
+            pnlBaoHanh.setBackground(new Color(0, 123, 123));
+    }//GEN-LAST:event_pnlBaoHanhMouseExited
+
+    private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
+        // TODO add your handling code here:
+        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
+        if (chosser != 5)
+            pnlBaoHanh.setBackground(new Color(0, 180, 180));
+    }//GEN-LAST:event_pnlBaoHanhMouseEntered
+
+    private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
+        // TODO add your handling code here:
+        try {
+            Webcam.getDefault().close();
+            clearChosserListService();
+            chosser = 5;
+            pnlBaoHanh.setBackground(new Color(0, 153, 153));
+            pnlView.removeAll();
+            pnlView.add(new FrmBaoHanh());
+            pnlView.setLayout(new FlowLayout());
+            this.pack();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pnlBaoHanhMouseClicked
+
+    private void txtnhaplaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnhaplaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnhaplaiActionPerformed
+
+    private void txtpassmoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpassmoiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpassmoiActionPerformed
+
+    private void txtpasscuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasscuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpasscuActionPerformed
+
+    private void avatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_avatarMouseClicked
+        // TODO add your handling code here:
+        DoiMK.setVisible(true);
+        DoiMK.setLocationRelativeTo(null);
+        lbltentk.setText(tkreponse.getHoTen());
+        txtnhaplai.setText("");
+        txtpasscu.setText("");
+        txtpassmoi.setText("");
+    }//GEN-LAST:event_avatarMouseClicked
+
+    private void btnDoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (MD5Util.md5EnCode(String.valueOf(txtpasscu.getPassword())).equalsIgnoreCase(tkreponse.getMatKhau())) {
+                if (String.valueOf(txtpassmoi.getPassword()).trim().length() < 8) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu trên 8 ký tự");
+                } else {
+                    if (String.valueOf(txtpassmoi.getPassword()).equals(String.valueOf(txtnhaplai.getPassword()))) {
+                        try {
+                            String password = MD5Util.md5EnCode(String.valueOf(txtpassmoi.getPassword()).trim());
+                            if (dangNhapService.resetPass(password, tkreponse.getMail())) {
+                                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+                                DoiMK.setVisible(false);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại");
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(this, "Hệ thống đang bận");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "2 Mật khẩu không trùng khớp");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnDoiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame DoiMK;
     private com.poly.it17322.nhom6.utilities.ImageAvatar avatar;
+    private javax.swing.JButton btnDoi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -985,8 +1166,13 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -997,6 +1183,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblDangXuat;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMini;
+    private javax.swing.JLabel lbltentk;
     private javax.swing.JPanel paneListService;
     private javax.swing.JPanel pnlBanHang;
     private javax.swing.JPanel pnlBaoHanh;
@@ -1008,6 +1195,9 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlThongKe;
     private javax.swing.JPanel pnlTiltle;
     private javax.swing.JPanel pnlView;
+    private javax.swing.JPasswordField txtnhaplai;
+    private javax.swing.JPasswordField txtpasscu;
+    private javax.swing.JPasswordField txtpassmoi;
     // End of variables declaration//GEN-END:variables
 
     private void clearChosserListService() {
@@ -1035,7 +1225,7 @@ public class FrmMainView extends javax.swing.JFrame {
                         } else {
                             if (resultKT >= 0) {
                                 kms.updateTTKM(2, s.getId());
-                            }else{
+                            } else {
                                 kms.updateTTKM(1, s.getId());
                             }
                         }

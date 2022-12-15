@@ -28,9 +28,11 @@ public class HoaDonResponse {
     private Date ngayTao;
     private Date ngayThanhToan;
     private int loaiThanhToan;
+    private int soLanShip;
     private String maNV;
     private String tenNV;
     private String diaChi;
+    private String lyDo;
     private int trangThai;
 
     public HoaDonResponse() {
@@ -40,12 +42,18 @@ public class HoaDonResponse {
         try {
             this.Id = hd.getId();
             this.ma = hd.getMa();
+            this.soLanShip = hd.getSoLanShip();
             try {
                 this.hoTen = hd.getKhachHang().getHoTen();
                 this.sdt = hd.getKhachHang().getSdt();
             } catch (Exception e) {
                 this.hoTen = "";
                 this.sdt = "";
+            }
+            try {
+                this.lyDo = hd.getLyDo();
+            } catch (Exception e) {
+                this.lyDo = "";
             }
             this.tongTien = hd.getTongTien();
             this.ngayTao = hd.getNgayTao();
@@ -68,9 +76,9 @@ public class HoaDonResponse {
         if (trangThai == 0) {
             return "Chờ thanh toán ";
         } else if (trangThai == 1) {
-            return "Chờ giao";
+            return "Chờ giao" + (soLanShip==0?"":soLanShip);
         } else if (trangThai == 2) {
-            return "Đang giao";
+            return "Đang giao" + (soLanShip==0?"":soLanShip);
         } else if (trangThai == 3) {
             return "Đã thanh toán";
         } else {
@@ -80,6 +88,6 @@ public class HoaDonResponse {
 
     public Object[] toDataRow() {
         return new Object[]{ma, hoTen, sdt, diaChi, maNV, tenNV,
-            ngayTao, ngayThanhToan, getloaiThanhToan(), tongTien, getTrangThai()};
+            ngayTao, ngayThanhToan, getloaiThanhToan(), tongTien, getTrangThai(), lyDo};
     }
 }

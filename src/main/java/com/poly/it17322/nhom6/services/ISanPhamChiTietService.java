@@ -57,7 +57,7 @@ public interface ISanPhamChiTietService {
 
     public boolean updateCPU(CPURespone cpu);
 
-    public List<Imei> getListImei(UUID Idctsp);
+    public List<ImeiSPRespone> getListImei(UUID Idctsp);
     
     
 
