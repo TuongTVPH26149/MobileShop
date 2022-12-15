@@ -1897,19 +1897,15 @@ public class FrmBanHang extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtGiamGiaDacbiet1)
-                                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMaNhanVien1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMaHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(2, 2, 2))
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMaNhanVien1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMaHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel20)
@@ -2342,7 +2338,13 @@ public class FrmBanHang extends javax.swing.JPanel {
             dh.setHinhThuc(cboHinhThuc1.getSelectedIndex());
             dh.setChuyenKhoan(new BigDecimal(txtChuyenKhoan1.getText()));
             dh.setTienMat(new BigDecimal(txtTienMat1.getText()));
-            dh.setNgayNhanMongMuon(Date.from(txtngaymuonnhan.getDateTimePermissive().atZone(ZoneId.systemDefault()).toInstant()));
+            try {
+                dh.setNgayNhanMongMuon(Date.from(txtngaymuonnhan.getDateTimePermissive().atZone(ZoneId.systemDefault()).toInstant()));
+            } catch (NullPointerException ex) {
+                dh.setNgayNhanMongMuon(null);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ngày mong muốn không hợp lệ");
+            }
             try {
                 dh.setTongTien(new BigDecimal(df.parse(lblTongtien1.getText()).toString()));
             } catch (ParseException ex) {
@@ -2412,7 +2414,7 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (txtsdtkh.equals("") || lblsdtship.equals("") || txtDiaChi.getText().trim().equals("")) {
             btnGiao.setEnabled(false);
             btnGiao.setBackground(new Color(102, 102, 102));
-        } else {
+        } else if (dh.getTrangThai() != 2) {
             btnGiao.setEnabled(true);
             btnGiao.setBackground(new Color(255, 204, 0));
         }
@@ -2423,7 +2425,7 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (txtsdtkh.equals("") || lblsdtship.equals("") || txtDiaChi.getText().trim().equals("")) {
             btnGiao.setEnabled(false);
             btnGiao.setBackground(new Color(102, 102, 102));
-        } else {
+        } else if (dh.getTrangThai() != 2) {
             btnGiao.setEnabled(true);
             btnGiao.setBackground(new Color(255, 204, 0));
         }
@@ -2800,7 +2802,14 @@ public class FrmBanHang extends javax.swing.JPanel {
         int gioitinh = cboNu.isSelected() ? 1 : 0;
         String sdt = txtSdtKH.getText().trim();
         String diachi = txtDiaChiKH.getText().trim();
-        Date ngaysinh = txtNgaySinhKH.getDate();
+        Date ngaysinh;
+        try {
+            sdf.format(txtNgaySinhKH.getDate());
+            ngaysinh = txtNgaySinhKH.getDate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng");
+            return;
+        }
         if (ma.length() == 0 || hoten.length() == 0 || sdt.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
@@ -3177,22 +3186,25 @@ public class FrmBanHang extends javax.swing.JPanel {
     }
 
     private void fillTableHoaDon() {
-        dtm = (DefaultTableModel) tblHoaDon.getModel();
-        dtm.setRowCount(0);
-        lstHoaDon = bhs.getALLHoaDonBanHang(nhanVien.getId(), cboTrangThaiHoaDon.getSelectedIndex(), nhanVien.getChucVu() == 0, txtSearchHD.getText());
-        if (lstHoaDon.isEmpty()) {
+        try {
+            dtm = (DefaultTableModel) tblHoaDon.getModel();
+            dtm.setRowCount(0);
+            lstHoaDon = bhs.getALLHoaDonBanHang(nhanVien.getId(), cboTrangThaiHoaDon.getSelectedIndex(), nhanVien.getChucVu() == 0, txtSearchHD.getText());
+            if (lstHoaDon.isEmpty()) {
+                fillTableGH();
+                indexHD = -1;
+                return;
+            }
+            for (HoaDonBanHangRespone s : lstHoaDon) {
+                dtm.addRow(s.toDataRow());
+            }
+            indexHD = 0;
+            tblHoaDon.setRowSelectionInterval(indexHD, indexHD);
+            dh = bhs.getDonHang(lstHoaDon.get(indexHD).getId());
+            showdetailDH(dh);
             fillTableGH();
-            indexHD = -1;
-            return;
+        } catch (Exception e) {
         }
-        for (HoaDonBanHangRespone s : lstHoaDon) {
-            dtm.addRow(s.toDataRow());
-        }
-        indexHD = 0;
-        tblHoaDon.setRowSelectionInterval(indexHD, indexHD);
-        dh = bhs.getDonHang(lstHoaDon.get(indexHD).getId());
-        showdetailDH(dh);
-        fillTableGH();
     }
 
     private void fillTableGH() {
@@ -3380,7 +3392,9 @@ public class FrmBanHang extends javax.swing.JPanel {
             btnChonKH2.setEnabled(false);
             btnChonKH2.setBackground(new Color(102, 102, 102));
 
-            txtngaymuonnhan.setDateTimePermissive(LocalDateTime.ofInstant(dh.getNgayNhanMongMuon().toInstant(), ZoneId.systemDefault()));
+            if (dh.getNgayNhanMongMuon() != null) {
+                txtngaymuonnhan.setDateTimePermissive(LocalDateTime.ofInstant(dh.getNgayNhanMongMuon().toInstant(), ZoneId.systemDefault()));
+            }
             if (lblTienThieu1.getText().equals("0")) {
                 cboHinhThuc1.setEnabled(false);
                 txtChuyenKhoan1.setEnabled(false);
@@ -3488,12 +3502,14 @@ public class FrmBanHang extends javax.swing.JPanel {
         int count = 0;
         for (UUID i : lstImeiChon) {
             if (bhs.HoanImeiBan(i, idhd, lstGH.get(indexGH))) {
-                if (bhs.updateGHXoa(idhdct)) {
-                    count++;
-                }
+                count++;
             }
         }
-        JOptionPane.showMessageDialog(null, "Đã trả " + count + " sản phẩm khỏi giỏ hàng");
+        if (lstGH.get(indexGH).getTrangThai() == 1) {
+            JOptionPane.showMessageDialog(null, "Đã trả " + count + " sản phẩm khỏi giỏ hàng");
+        } else {
+            JOptionPane.showMessageDialog(null, "Đã mua lại " + count + " sản phẩm");
+        }
         fillTableSP();
         return;
     }
@@ -3503,7 +3519,9 @@ public class FrmBanHang extends javax.swing.JPanel {
         BigDecimal giamGia = new BigDecimal(0);
         try {
             for (GioHangRespone s : lstGH) {
-                tongTien = tongTien.add(s.getThanhTien());
+                if (s.getTrangThai() == 1) {
+                    tongTien = tongTien.add(s.getThanhTien());
+                }
             }
         } catch (Exception e) {
         }

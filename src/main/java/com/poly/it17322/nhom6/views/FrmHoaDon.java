@@ -6,7 +6,10 @@ package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.responses.HoaDonChiTietResponse;
 import com.poly.it17322.nhom6.responses.HoaDonResponse;
+import com.poly.it17322.nhom6.responses.ImeiDaBanRespone;
+import com.poly.it17322.nhom6.services.IBanHangService;
 import com.poly.it17322.nhom6.services.IHoaDonService;
+import com.poly.it17322.nhom6.services.impl.BanHangServiceIml;
 import com.poly.it17322.nhom6.services.impl.HoaDonServiceImpl;
 import com.poly.it17322.nhom6.utilities.GenMa;
 import java.awt.Color;
@@ -24,6 +27,7 @@ import javax.swing.table.TableRowSorter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
@@ -45,6 +49,9 @@ public class FrmHoaDon extends javax.swing.JPanel {
     private DefaultTableModel dtm;
     private DefaultTableModel dtmCT;
     private List<HoaDonResponse> hoaDonReponses;
+    private List<HoaDonChiTietResponse> ctHoaDon = new ArrayList<>();
+    private IBanHangService bhs = new BanHangServiceIml();
+
 
     public FrmHoaDon() {
         initComponents();
@@ -152,6 +159,11 @@ public class FrmHoaDon extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        Imei = new javax.swing.JFrame();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblImeiBan = new javax.swing.JTable();
+        txtSearchImeiBan = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtTim = new javax.swing.JTextField();
@@ -173,6 +185,60 @@ public class FrmHoaDon extends javax.swing.JPanel {
         tblHoaDonChiTiet = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         btnXuat = new javax.swing.JButton();
+
+        Imei.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        Imei.setTitle("Imei đã mua");
+        Imei.setMinimumSize(new java.awt.Dimension(400, 300));
+        Imei.setResizable(false);
+        Imei.setSize(new java.awt.Dimension(400, 300));
+
+        tblImeiBan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã imel"
+            }
+        ));
+        jScrollPane6.setViewportView(tblImeiBan);
+
+        txtSearchImeiBan.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSearchImeiBanCaretUpdate(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addComponent(txtSearchImeiBan))
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(txtSearchImeiBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout ImeiLayout = new javax.swing.GroupLayout(Imei.getContentPane());
+        Imei.getContentPane().setLayout(ImeiLayout);
+        ImeiLayout.setHorizontalGroup(
+            ImeiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ImeiLayout.setVerticalGroup(
+            ImeiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1080, 720));
@@ -198,18 +264,18 @@ public class FrmHoaDon extends javax.swing.JPanel {
         tblHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã HĐ", "Khách hàng", "SĐT KH", "Địa chỉ", "Mã NV", "Tên NV", "Ngày tạo", "Ngày thanh toán", "Loại thanh toán", "Tổng tiền", "Trạng thái"
+                "Mã HĐ", "Khách hàng", "SĐT KH", "Địa chỉ", "Mã NV", "Tên NV", "Ngày tạo", "Ngày thanh toán", "Loại thanh toán", "Tổng tiền", "Trạng thái", "Lý do"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, false, true, false, false, false, false, true
+                true, false, false, true, false, true, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -279,18 +345,23 @@ public class FrmHoaDon extends javax.swing.JPanel {
             }
         });
 
-        tblHoaDonChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên sản phẩm", "Số lượng", "Giá bán", "Giảm giá", "Tổng tiền"
+                "Tên sản phẩm", "Số lượng", "Giá bán", "Giảm giá", "Tổng tiền", "Trạng thái"
             }
         ));
+        tblHoaDonChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblHoaDonChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonChiTietMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblHoaDonChiTiet);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -330,7 +401,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1066, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 15, Short.MAX_VALUE)
@@ -430,7 +501,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
         int row = tblHoaDon.getSelectedRow();
         HoaDonResponse hoaDon = hoaDonReponses.get(row);
         UUID IdHoaDon = hoaDon.getId();
-        List<HoaDonChiTietResponse> ctHoaDon = hoadonService.SelectByHoaDonCTID(IdHoaDon);
+        ctHoaDon = hoadonService.SelectByHoaDonCTID(IdHoaDon);
         DefaultTableModel dtmCTHoaDon = (DefaultTableModel) tblHoaDonChiTiet.getModel();
         dtmCTHoaDon.setRowCount(0);
         showDataTableCTHoaDon(ctHoaDon, dtmCTHoaDon);
@@ -614,8 +685,29 @@ public class FrmHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jDateChooser2PropertyChange
 
+    private void txtSearchImeiBanCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchImeiBanCaretUpdate
+        // TODO add your handling code here:
+        dtm = (DefaultTableModel) tblImeiBan.getModel();
+        dtm.setRowCount(0);
+        for (ImeiDaBanRespone s : bhs.getImeiBan(ctHoaDon.get(tblHoaDonChiTiet.getSelectedRow()).getId(), txtSearchImeiBan.getText())) {
+            dtm.addRow(new Object[]{s.getMa(), false});
+        }
+    }//GEN-LAST:event_txtSearchImeiBanCaretUpdate
+
+    private void tblHoaDonChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChiTietMouseClicked
+        // TODO add your handling code here:
+        Imei.setVisible(true);
+        Imei.setLocationRelativeTo(null);
+        dtm = (DefaultTableModel) tblImeiBan.getModel();
+        dtm.setRowCount(0);
+        for (ImeiDaBanRespone s : bhs.getImeiBan(ctHoaDon.get(tblHoaDonChiTiet.getSelectedRow()).getId(), txtSearchImeiBan.getText())) {
+            dtm.addRow(new Object[]{s.getMa(), false});
+        }
+    }//GEN-LAST:event_tblHoaDonChiTietMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame Imei;
     private javax.swing.JButton btnXuat;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboNgay;
@@ -632,11 +724,15 @@ public class FrmHoaDon extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblHoaDonChiTiet;
+    private javax.swing.JTable tblImeiBan;
+    private javax.swing.JTextField txtSearchImeiBan;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }
