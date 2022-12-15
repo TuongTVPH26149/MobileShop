@@ -62,7 +62,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExit.setIcon(new ImageIcon("src/main/resource/icon/close.png"));
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         lblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblExit.setMaximumSize(new java.awt.Dimension(30, 30));
         lblExit.setMinimumSize(new java.awt.Dimension(30, 30));
@@ -81,10 +81,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
         jPanel2.setMinimumSize(new java.awt.Dimension(340, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new ImageIcon("src/main/resource/icon/account.png"));
-        jLabel1.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel1.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel1.setPreferredSize(new java.awt.Dimension(24, 24));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account.png"))); // NOI18N
 
         jPanel3.setMaximumSize(new java.awt.Dimension(304, 1));
         jPanel3.setMinimumSize(new java.awt.Dimension(304, 1));
@@ -103,6 +100,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
         txtTaiKhoan.setBackground(new java.awt.Color(0, 102, 102));
         txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        txtTaiKhoan.setToolTipText("Email tài khoản");
         txtTaiKhoan.setBorder(null);
         txtTaiKhoan.setCaretColor(new java.awt.Color(255, 255, 255));
         txtTaiKhoan.setMaximumSize(new java.awt.Dimension(303, 20));
@@ -115,7 +113,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +127,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -140,7 +138,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
         lblTitile.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         lblTitile.setForeground(new java.awt.Color(255, 255, 255));
         lblTitile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitile.setText("Forgot password");
+        lblTitile.setText("Quên mật khẩu");
         lblTitile.setMaximumSize(new java.awt.Dimension(300, 30));
         lblTitile.setMinimumSize(new java.awt.Dimension(300, 30));
         lblTitile.setPreferredSize(new java.awt.Dimension(300, 30));
@@ -158,7 +156,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
         btnSend.setBackground(new java.awt.Color(255, 255, 255));
         btnSend.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSend.setForeground(new java.awt.Color(51, 51, 51));
-        btnSend.setText("Send");
+        btnSend.setText("Gửi");
         btnSend.setBorder(null);
         btnSend.setBorderPainted(false);
         btnSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -176,7 +174,7 @@ public class FrmQuenMatKhau extends javax.swing.JFrame {
             }
         });
 
-        lblLogin.setIcon(new ImageIcon("src/main/resource/icon/undo.png"));
+        lblLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/undo.png"))); // NOI18N
         lblLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLogin.setMaximumSize(new java.awt.Dimension(30, 30));
         lblLogin.setMinimumSize(new java.awt.Dimension(30, 30));

@@ -82,18 +82,23 @@ public class ChiTietSPRepository {
         return false;
     }
 
-    public List<ChiTietSP> getSP() {
-        List<ChiTietSP> listChiTietSP = new ArrayList<>();
+    public List<ChiTietSP> getSP(String search) {
+        List<ChiTietSP> list = new ArrayList<>();
         try {
-            session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ChiTietSP Where deleted = 0 and soLuong > 0", ChiTietSP.class);
-            if (query.getResultList() != null) {
-                listChiTietSP = query.getResultList();
-            }
+            Session session = HibernatUtil.getSession();
+            String hql = "FROM ChiTietSP a Where "
+                    + "(a.sanPham.ten LIKE concat('%', :input ,'%') "
+                    + "or a.ram.ten LIKE concat('%', :input ,'%') "
+                    + "or a.rom.ten LIKE concat('%', :input ,'%') "
+                    + "or a.mauSac.ten LIKE concat('%', :input ,'%')) "
+                    + "and a.soLuong > 0";
+            Query query = session.createQuery(hql,ChiTietSP.class);
+            query.setParameter("input", search);
+            list = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listChiTietSP;
+        return list;
     }
 
     public KhuyenMai SelectKM(UUID Id) {
@@ -113,16 +118,18 @@ public class ChiTietSPRepository {
         return km;
     }
 
-    public List<UUID> SelectIDSPBYKM(UUID idKhuyenmai) {
-        List<UUID> lstid = new ArrayList<>();
+    public List<ChiTietSP> SelectIDSPBYKM(UUID idKhuyenmai, String text) {
+        List<ChiTietSP> lstid = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ChiTietSP where IdKhuyenMai = :idKhuyenmai", ChiTietSP.class);
+            Query query = session.createQuery("FROM ChiTietSP a where IdKhuyenMai = :idKhuyenmai and"
+                    + " (a.sanPham.ten LIKE concat('%', :input ,'%') "
+                    + "or a.ram.ten LIKE concat('%', :input ,'%') "
+                    + "or a.rom.ten LIKE concat('%', :input ,'%') "
+                    + "or a.mauSac.ten LIKE concat('%', :input ,'%')) ", ChiTietSP.class);
             query.setParameter("idKhuyenmai", idKhuyenmai);
-            for (ChiTietSP s : (List<ChiTietSP>) query.getResultList()) {
-                UUID id = s.getId();
-                lstid.add(id);
-            }
+            query.setParameter("input", text);
+            lstid = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }

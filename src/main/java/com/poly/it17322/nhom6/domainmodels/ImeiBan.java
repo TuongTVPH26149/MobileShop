@@ -28,13 +28,13 @@ import org.hibernate.annotations.Nationalized;
  * @author admin
  */
 @Entity
-@Table(name = "ImelBan")
+@Table(name = "ImeiBan")
 @Setter
 @Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImelBan implements Serializable {
+public class ImeiBan implements Serializable {
 
     @Id
     @Column(name = "Id")

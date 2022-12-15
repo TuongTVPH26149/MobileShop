@@ -5,14 +5,14 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.CPU;
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import com.poly.it17322.nhom6.domainmodels.Pin;
 import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
-import com.poly.it17322.nhom6.repositories.ImelRepository;
+import com.poly.it17322.nhom6.repositories.ImeiRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
 import com.poly.it17322.nhom6.repositories.PinRepository;
@@ -20,7 +20,7 @@ import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.ManHinhRespone;
 import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
@@ -46,7 +46,8 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
     SpCTSPRepository imelrepo = new SpCTSPRepository();
-    ImelRepository imrepo = new ImelRepository();
+    ImeiRepository imrepo = new ImeiRepository();
+    SpCTSPRepository spct = new SpCTSPRepository();
 
     @Override
     public List<RomRespone> getlistRom() {
@@ -187,13 +188,22 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     }
 
     @Override
-    public List<Imel> getListImel(UUID Idctsp) {
-        return imelrepo.SelectCBOImelById(Idctsp);
+    public List<Imei> getListImei(UUID Idctsp) {
+        return imelrepo.SelectCBOImeiById(Idctsp);
     }
 
-    public boolean updateImel(ImelSPRespone imel) {
-        Imel im = imrepo.SelectImelById(imel.getId());
+    public boolean updateImei(ImeiSPRespone imel) {
+        Imei im = imrepo.SelectImeiById(imel.getId());
         im.setMa(imel.getMa());
-        return imrepo.UpdateImel(im);
+        return imrepo.UpdateImei(im);
     }
+    public List<ImeiSPRespone> getlistImel() {
+        List<Imei> imei = imrepo.selectALLImei();
+        return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+    public List<ImeiSPRespone> getlistImelbyMa(String ma) {
+        List<Imei> imei = spct.SelectImeiByMa(ma);
+        return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+    
 }

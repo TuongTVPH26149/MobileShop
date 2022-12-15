@@ -22,16 +22,18 @@ public class KhuyenMaiRepository {
 
     private Session session = HibernatUtil.getSession();
 
-    public List<KhuyenMai> selectALLKhuyenMai(int trangThai) {
+    public List<KhuyenMai> selectALLKhuyenMai(int trangThai, String text) {
         List<KhuyenMai> listKhuyenMai = new ArrayList<>();
         try {
             Query query;
             session = HibernatUtil.getSession();
             if (trangThai == 3) {
-                query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
+                query = session.createQuery("FROM KhuyenMai Where ten like concat('%', :text ,'%') or ma like concat('%', :text ,'%')order by ma", KhuyenMai.class);
+                query.setParameter("text", text);
             } else {
-                query = session.createQuery("FROM KhuyenMai where trangThai = :trangThai", KhuyenMai.class);
+                query = session.createQuery("FROM KhuyenMai where trangThai = :trangThai and ten like concat('%', :text ,'%') order by ma", KhuyenMai.class);
                 query.setParameter("trangThai", trangThai);
+                query.setParameter("text", text);
             }
             listKhuyenMai = query.getResultList();
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
@@ -55,7 +57,7 @@ public class KhuyenMaiRepository {
         }
         return sanPham;
     }
-    
+
     public KhuyenMai SelectKhuyenMaiById(String ma) {
         KhuyenMai sanPham = new KhuyenMai();
         try {

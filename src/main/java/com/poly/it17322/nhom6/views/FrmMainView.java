@@ -40,7 +40,7 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlView.removeAll();
         pnlView.add(new FrmBanHang(tkreponse));
         pnlView.setLayout(new FlowLayout());
-        avatar.setIcon(new ImageIcon("src/main/resource/avatar/" + tk.getHinhAnh() + ".png"));
+        avatar.setIcon(new ImageIcon("src/main/resources/avatar/" + tk.getHinhAnh() + ".png"));
         this.pack();
         if (tk.getChucVu() != 0) {
             pnlNhanVien.setVisible(false);
@@ -83,8 +83,8 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlThongKe = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        avatar = new com.raven.avatar.ImageAvatar();
         lblDangXuat = new javax.swing.JLabel();
+        avatar = new com.poly.it17322.nhom6.utilities.ImageAvatar();
         pnlTiltle = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
         lblMini = new javax.swing.JLabel();
@@ -120,7 +120,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setIcon(new ImageIcon("src/main/resource/icon/shopping.png"));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel1.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -171,7 +171,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setIcon(new ImageIcon("src/main/resource/icon/product.png"));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product.png"))); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel3.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel3.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -222,7 +222,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setIcon(new ImageIcon("src/main/resource/icon/bill.png"));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
         jLabel5.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel5.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel5.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -273,7 +273,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setIcon(new ImageIcon("src/main/resource/icon/sale.png"));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale.png"))); // NOI18N
         jLabel7.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel7.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel7.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -324,7 +324,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setIcon(new ImageIcon("src/main/resource/icon/baohanh.png"));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/baohanh.png"))); // NOI18N
         jLabel9.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel9.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel9.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -375,7 +375,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setIcon(new ImageIcon("src/main/resource/icon/nhanvien.png"));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanvien.png"))); // NOI18N
         jLabel11.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel11.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel11.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -426,7 +426,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new ImageIcon("src/main/resource/icon/khachhang.png"));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account.png"))); // NOI18N
         jLabel13.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel13.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel13.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -477,7 +477,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel15.setIcon(new ImageIcon("src/main/resource/icon/shopping.png"));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongke.png"))); // NOI18N
         jLabel15.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel15.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel15.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -513,8 +513,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
         lblDangXuat.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
-        lblDangXuat.setIcon(new ImageIcon("src/main/resource/icon/logout.png")
-        );
+        lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         lblDangXuat.setText("Đăng xuất");
         lblDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -529,7 +528,6 @@ public class FrmMainView extends javax.swing.JFrame {
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
                 .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(avatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -544,20 +542,20 @@ public class FrmMainView extends javax.swing.JFrame {
                             .addComponent(pnlBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(paneListServiceLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(lblDangXuat)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(avatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(lblDangXuat)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneListServiceLayout.setVerticalGroup(
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
+                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(pnlBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -573,7 +571,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addComponent(pnlKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(lblDangXuat)
                 .addGap(5, 5, 5))
         );
@@ -595,7 +593,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExit.setIcon(new ImageIcon("src/main/resource/icon/close.png"));
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         lblExit.setMaximumSize(new java.awt.Dimension(30, 30));
         lblExit.setMinimumSize(new java.awt.Dimension(30, 30));
         lblExit.setPreferredSize(new java.awt.Dimension(30, 30));
@@ -610,7 +608,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
         lblMini.setForeground(new java.awt.Color(255, 255, 255));
         lblMini.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMini.setIcon(new ImageIcon("src/main/resource/icon/mimus.png"));
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/mimus.png"))); // NOI18N
         lblMini.setMaximumSize(new java.awt.Dimension(30, 30));
         lblMini.setMinimumSize(new java.awt.Dimension(30, 30));
         lblMini.setPreferredSize(new java.awt.Dimension(30, 30));
@@ -978,7 +976,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.avatar.ImageAvatar avatar;
+    private com.poly.it17322.nhom6.utilities.ImageAvatar avatar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

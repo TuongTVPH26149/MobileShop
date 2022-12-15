@@ -4,25 +4,23 @@
  */
 package com.poly.it17322.nhom6.responses;
 
+import com.poly.it17322.nhom6.domainmodels.Imei;
+import java.util.UUID;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
- * @author admin
+ * @author LiamTrieu
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString
-public class ImelAoSPRespone {
+public class ImeiBanHangRespone {
+    private UUID id;
     private String ma;
 
-    public ImelAoSPRespone(String ma) {
-        this.ma = ma;
+    public ImeiBanHangRespone(Imei imel) {
+        this.id = imel.getId();
+        this.ma = imel.getMa();
     }
-    
-    
 }
