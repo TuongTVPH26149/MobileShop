@@ -2607,7 +2607,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 while (iterator.hasNext()) {
                     Row currentRow = iterator.next();
                     ImeiAoSPRespone imei = new ImeiAoSPRespone();
-                    imei.setMa((currentRow.getCell(0)).toString());
+                    imei.setMa((long)(currentRow.getCell(0)).getNumericCellValue()+"");
                     txtsoluong.setText(sl + "");
                     lstimelao.add(imei);
                     sl++;
