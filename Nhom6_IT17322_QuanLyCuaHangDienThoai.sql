@@ -265,5 +265,5 @@ INSERT INTO TaiKhoan(Ma,HoTen,GioiTinh,NgaySinh,DiaChi,ChucVu,Email,Sdt, MatKhau
 values ('NV001','Admin',0,'2000-01-01','Ha Noi',0,'admin@gmail.com','0987654321','21232F297A57A5A743894A0E4A801FC3', 'NV001'),
 ('NV002','NhanVien',1,'2000-01-01','Ha Noi',1,'nhanvien@gmail.com','0123456789','2A2FA4FE2FA737F129EF2D127B861B7E', 'NV002')
 GO
-INSERT INTO KhachHang(Ma, HoTen, Sdt) VALUES('MacDinh',N'Khách lẻ','0')
+INSERT INTO KhachHang(Ma, HoTen, Sdt,CapDo) VALUES('MacDinh',N'Khách lẻ','0', 4)
 
