@@ -139,13 +139,6 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 return;
             }
 
-            for (NhanVienRespone x : nhanVienServiceImpl.getlist()) {
-                if (txtSDT.getText().trim().equalsIgnoreCase(x.getSdt())) {
-                    JOptionPane.showMessageDialog(this, "SDT này đã tồn tại");
-                    return;
-                }
-            }
-
             String chkMail = "\\w+@\\w+\\.\\w+";
             if (!txtEmail.getText().trim().matches(chkMail)) {
                 JOptionPane.showMessageDialog(this, "Email không đúng định dạng");
@@ -258,7 +251,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 if (nhanVienServiceImpl.Update(nvrp)) {
                     JOptionPane.showMessageDialog(this, "Sửa thành công");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Sửa thất b");
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
 
                 }
                 clear();
@@ -372,48 +365,6 @@ public class FrmNhanVien extends javax.swing.JPanel {
         }
     }
 
-    private void sendMultiMail(ArrayList lst) {
-        for (int i = 0; i <= lst.size(); i++) {
-            try {
-                Properties p = new Properties();
-                p.put("mail.smtp.auth", "true");
-                p.put("mail.smtp.starttls.enable", "true");
-                p.put("mail.smtp.host", "smtp.gmail.com");
-                p.put("mail.smtp.port", 587);
-
-                String accountName = "tuannaph26113@fpt.edu.vn";
-                String accountPass = "tuan123asg";
-
-                Session s = Session.getInstance(p,
-                        new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(accountName, accountPass);
-                    }
-                });
-
-                String from = accountName;
-                String to = lst.get(i).toString();
-                String subject = "Mat khau dang nhap MobiKing";
-                String body = "Dear bạn! Mat khau dang nhap phan mem MobiKing cua ban la 12345";
-
-                Message msg = new MimeMessage(s);
-                msg.setFrom(new InternetAddress(from));
-                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-
-                MimeBodyPart contenPart = new MimeBodyPart();
-                contenPart.setContent(body, "text/html; charset=utf-8");
-
-                msg.setSubject(subject);
-                msg.setText(body);
-
-                Transport.send(msg);
-
-            } catch (Exception e) {
-//                e.printStackTrace();
-            }
-        }
-    }
-
     private static Object getCellValue(Cell cell) {
         try {
             switch (cell.getCellType()) {
@@ -453,7 +404,15 @@ public class FrmNhanVien extends javax.swing.JPanel {
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
                 NhanVienRespone nvr = new NhanVienRespone();
-                nvr.setMa("NV00" + (nhanVienServiceImpl.getlist().size() + 1));
+                String ma;
+                if (nhanVienServiceImpl.getlist().size() < 9) {
+                    ma = "NV00" + (nhanVienServiceImpl.getlist().size() + 1);
+                } else if (nhanVienServiceImpl.getlist().size() < 99) {
+                    ma = "NV0" + (nhanVienServiceImpl.getlist().size() + 1);
+                } else {
+                    ma = "NV" + (nhanVienServiceImpl.getlist().size() + 1);
+                }
+                nvr.setMa(ma);
                 nvr.setTen(String.valueOf(getCellValue(currentRow.getCell(0))).trim());
                 nvr.setGioiTinh(String.valueOf(getCellValue(currentRow.getCell(1))).trim().equals("Nam") ? 0 : 1);
                 nvr.setNgaySinh(currentRow.getCell(2).getDateCellValue());
@@ -499,6 +458,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         txtTimKiemNghi = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblNVNghi = new javax.swing.JTable();
+        btnReset = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
@@ -666,18 +626,26 @@ public class FrmNhanVien extends javax.swing.JPanel {
 
         tblNVNghi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Họ tên", "Giới tính", "Ngày sinh", "Địa chỉ", "SĐT", "Email", "Chức vụ"
+                "Mã", "Họ tên", "Giới tính", "Ngày sinh", "Địa chỉ", "SĐT", "Email", "Chức vụ", ""
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tblNVNghi.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblNVNghi.setRowHeight(30);
         tblNVNghi.setShowVerticalLines(false);
@@ -688,6 +656,15 @@ public class FrmNhanVien extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblNVNghi);
 
+        btnReset.setBackground(new java.awt.Color(0, 123, 123));
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/reset.png"))); // NOI18N
+        btnReset.setPreferredSize(new java.awt.Dimension(95, 23));
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -696,11 +673,13 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(txtTimKiemNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 339, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
+                        .addComponent(jLabel9)
+                        .addGap(0, 584, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtTimKiemNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -708,9 +687,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addGap(10, 10, 10)
-                .addComponent(txtTimKiemNghi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiemNghi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
@@ -1051,9 +1032,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             if (tblNhanVien.getRowCount() > 0) {
+                boolean getLam;
                 for (int i = 0; i < tblNhanVien.getRowCount(); i++) {
-                    boolean bl = Boolean.parseBoolean(tblNhanVien.getValueAt(i, 8).toString());
-                    if (bl) {
+                    System.out.println(tblNhanVien.getValueAt(i, 8));
+                    getLam = Boolean.parseBoolean(tblNhanVien.getValueAt(i, 8).toString());
+                    if (getLam) {
                         NhanVienRespone nvrp = new NhanVienRespone();
                         nvrp.setId(lstTaiKhoan.get(i).getId());
                         nvrp.setTrangThai(1);
@@ -1303,12 +1286,38 @@ public class FrmNhanVien extends javax.swing.JPanel {
         //        fillTableTop();
     }//GEN-LAST:event_txtngaysinhPropertyChange
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        try {
+            if (tblNVNghi.getRowCount() > 0) {
+                boolean getNghi;
+                for (int i = 0; i < tblNVNghi.getRowCount(); i++) {
+                    getNghi = Boolean.parseBoolean(tblNVNghi.getValueAt(i, 8).toString());
+                    if (getNghi) {
+                        NhanVienRespone nvrp = new NhanVienRespone();
+                        nvrp.setId(lstTaiKhoan2.get(i).getId());
+                        nvrp.setTrangThai(0);
+                        nhanVienServiceImpl.Delete(nvrp);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không còn nhân viên trong danh sách nghỉ");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        clear();
+        loadTable();
+        loadTable2();
+    }//GEN-LAST:event_btnResetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBoAll;
     private javax.swing.JButton btnChonAll;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXuat;
