@@ -318,7 +318,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         for (TaiKhoan x : nhanVienServiceImpl.timKiem(txtTimKiemDangLam.getText(), 0)) {
-            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
         }
     }
 
@@ -326,7 +326,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblNVNghi.getModel();
         model.setRowCount(0);
         for (TaiKhoan x : nhanVienServiceImpl.timKiem(txtTimKiemNghi.getText(), 1)) {
-            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+            model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
         }
     }
 
@@ -504,6 +504,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1080, 720));
 
         pnNhanVien.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        pnNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnNhanVienMouseClicked(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -697,12 +702,12 @@ public class FrmNhanVien extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addGap(9, 9, 9)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiemNghi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
 
@@ -1207,13 +1212,13 @@ public class FrmNhanVien extends javax.swing.JPanel {
                     DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locGioiTinh(0, 0)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 } else {
                     DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locGioiTinh(1, 0)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 }
             } else {
@@ -1223,13 +1228,13 @@ public class FrmNhanVien extends javax.swing.JPanel {
                     DefaultTableModel model = (DefaultTableModel) tblNVNghi.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locGioiTinh(0, 1)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 } else {
                     DefaultTableModel model = (DefaultTableModel) tblNVNghi.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locGioiTinh(1, 1)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 }
             }
@@ -1247,13 +1252,13 @@ public class FrmNhanVien extends javax.swing.JPanel {
                     DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locChucVu(0, 0)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 } else {
                     DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locChucVu(1, 0)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 }
             } else {
@@ -1263,13 +1268,13 @@ public class FrmNhanVien extends javax.swing.JPanel {
                     DefaultTableModel model = (DefaultTableModel) tblNVNghi.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locChucVu(0, 1)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 } else {
                     DefaultTableModel model = (DefaultTableModel) tblNVNghi.getModel();
                     model.setRowCount(0);
                     for (TaiKhoan x : nhanVienServiceImpl.locChucVu(1, 1)) {
-                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", x.getNgaySinh(), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
+                        model.addRow(new Object[]{x.getMa(), x.getHoTen(), x.getGioiTinh() == 0 ? "Nam" : "Nữ", new SimpleDateFormat("dd-MM-yyyy").format(x.getNgaySinh()), x.getDiaChi(), x.getSdt(), x.getEmail(), x.getChucVu() == 0 ? "Quản lý" : "Nhân viên", false});
                     }
                 }
             }
@@ -1318,6 +1323,14 @@ public class FrmNhanVien extends javax.swing.JPanel {
         loadTable();
         loadTable2();
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void pnNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnNhanVienMouseClicked
+        if (pnNhanVien.getSelectedIndex()==0||pnNhanVien.getSelectedIndex()==1) {
+                clear();
+                cboChucVu.setSelectedItem(0);
+                cboGioiTinh.setSelectedItem(0);
+            }
+    }//GEN-LAST:event_pnNhanVienMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
