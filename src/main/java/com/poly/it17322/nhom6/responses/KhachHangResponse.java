@@ -44,8 +44,10 @@ public class KhachHangResponse {
                 return "Bạc";
             case 2:
                 return "Vàng";
-            default:
+            case 3:
                 return "Kim cương";
+            default:
+                return "";
         }
     }
 }

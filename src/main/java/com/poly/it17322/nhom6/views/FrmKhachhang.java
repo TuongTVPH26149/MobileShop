@@ -118,7 +118,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1080, 720));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(51, 51, 255))); // NOI18N
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -168,7 +168,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtdiachi);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 123, 123))); // NOI18N
 
         btnthem.setBackground(new java.awt.Color(0, 123, 123));
         btnthem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -338,7 +338,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 123, 123))); // NOI18N
 
         tblkhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1028,10 +1028,8 @@ public class FrmKhachhang extends javax.swing.JPanel {
             public void run() {
 
                 int tong = 0;
-                int tongtien = 0;
                 for (int i = 0; i < tblhoadondamua.getRowCount(); i++) {
                     tong += Integer.parseInt(tblhoadondamua.getValueAt(i, 4).toString());
-                    tongtien = tong / 1000;
                 }
                 lblrank.setText("Đồng");
                 lblcuoi.setText("20tr");
