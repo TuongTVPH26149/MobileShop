@@ -21,7 +21,7 @@ public interface ISanPhamSPService {
 
     public boolean insert(SanPhamSPRespone sp,UUID idcpu,UUID idrom,UUID idram,UUID idms,UUID idmh,UUID idpin,List<ImeiAoSPRespone> lstao);
 
-    public boolean update(SanPhamSPRespone sp,UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin);
+    public boolean update(SanPhamSPRespone spr, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImeiAoSPRespone> lstao);
     
     public List<SanPhamSPRespone> getlistTimKiem(String ten);
 //    

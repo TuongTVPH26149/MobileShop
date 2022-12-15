@@ -187,7 +187,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         jPanel38 = new javax.swing.JPanel();
         txtmaimei = new javax.swing.JTextField();
         btnaddimel = new javax.swing.JButton();
-        btnupdateimel = new javax.swing.JButton();
+        btndeleteimei = new javax.swing.JButton();
         btnaddbyexcel = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -1330,9 +1330,17 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên Imel"
+                "Tên Imel", "Xóa"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tblimei.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblimeiMouseClicked(evt);
@@ -1394,11 +1402,11 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
-        btnupdateimel.setBackground(new java.awt.Color(0, 123, 123));
-        btnupdateimel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/updatespct.png"))); // NOI18N
-        btnupdateimel.addActionListener(new java.awt.event.ActionListener() {
+        btndeleteimei.setBackground(new java.awt.Color(0, 123, 123));
+        btndeleteimei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/updatespct.png"))); // NOI18N
+        btndeleteimei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnupdateimelActionPerformed(evt);
+                btndeleteimeiActionPerformed(evt);
             }
         });
 
@@ -1426,7 +1434,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnaddimel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2)
-                                .addComponent(btnupdateimel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btndeleteimei, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnaddbyexcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -1441,7 +1449,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 .addGroup(frmimeiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel37, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnaddimel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnupdateimel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btndeleteimei, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1959,7 +1967,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cboloaihang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
@@ -2013,7 +2021,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -2308,46 +2316,75 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
     private void btninsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertActionPerformed
         addDataCTSP();
-        clearFormData();
+        sl = 1;
     }//GEN-LAST:event_btninsertActionPerformed
     int sl = 1;
     private void btnaddimelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddimelActionPerformed
+        int sosp = tblbang.getSelectedRow();
         String maimel = txtmaimei.getText();
-        ImeiAoSPRespone imelao = new ImeiAoSPRespone();
-        imelao.setMa(maimel);
-        txtsoluong.setText(sl + "");
-        lstimelao.add(imelao);
-        FilltoTableImeiAO();
-        sl++;
-        setCboImei();
+        if (spct.getlistImelbyMa(txtmaimei.getText()).size() > 0) {
+            JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+            return;
+        }
+        if (maimel.length() > 20) {
+            JOptionPane.showMessageDialog(this, "Imei không quá 20 số");
+            return;
+        }
+        int imel = 0;
+        try {
+            imel = Integer.parseInt(maimel);
+            if (0 > imel) {
+                JOptionPane.showMessageDialog(this, "Imei phải lớn hơn 0");
+                return;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Imei phải là số");
+            return;
+        }
+        if (sosp == -1) {
+            ImeiAoSPRespone imelao = new ImeiAoSPRespone();
+            imelao.setMa(maimel);
+            txtsoluong.setText(sl + "");
+            lstimelao.add(imelao);
+            FilltoTableImeiAO();
+            sl++;
+            setCboImei();
+        }
+        if (sosp >= 0) {
+            ImeiAoSPRespone imelao = new ImeiAoSPRespone();
+            imelao.setMa(maimel);
+            txtsoluong.setText(String.valueOf(sl + spct.getListImei(sp.getlist().get(sosp).getId()).size()));
+            lstimelao.add(imelao);
+            FilltoTableImeiAO();
+            sl++;
+            setCboImei();
+        }
     }//GEN-LAST:event_btnaddimelActionPerformed
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         updateDataCTSP();
-        clearFormData();
+        sl = 1;
     }//GEN-LAST:event_btnupdateActionPerformed
 
-    private void btnupdateimelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateimelActionPerformed
-        int index = tblimei.getSelectedRow();
-        String ma = txtmaimei.getText();
-        if (ma.length() == 0
-                || ma.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Không được để trống");
-            return;
-        }
-        ImeiSPRespone i = new ImeiSPRespone();
-        i.setId(lstimel.get(index).getId());
-        i.setMa(ma);
-        if (spct.updateImei(i)) {
-            JOptionPane.showMessageDialog(this, "thành công");
-        }
+    private void btndeleteimeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteimeiActionPerformed
         int row = tblbang.getSelectedRow();
-        model = (DefaultTableModel) tblimei.getModel();
-        model.setRowCount(0);
-        for (Imei x : spct.getListImei(sp.getlist().get(row).getId())) {
-            model.addRow(new Object[]{x.getMa()});
+        if (row == -1) {
+            if (tblimei.getRowCount() > 0) {
+                for (int i = 0; i < tblimei.getRowCount(); i++) {
+                    System.out.println(i);
+                    System.out.println(tblimei.getValueAt(i, 1).toString());
+                    if (Boolean.parseBoolean(tblimei.getValueAt(i, 1).toString())) {
+                        lstimelao.remove(i);
+                    }
+                }
+                FilltoTableImeiAO();
+                setCboImei();
+            }
         }
-    }//GEN-LAST:event_btnupdateimelActionPerformed
+
+
+    }//GEN-LAST:event_btndeleteimeiActionPerformed
 
     private void btnkhoiphucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkhoiphucActionPerformed
 
@@ -2474,6 +2511,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 for (Row row : sheet) {
                     for (Cell cell : row) {
                         if (formula.evaluate(cell).getCellType() != null) {
+                            if (spct.getlistImelbyMa(String.valueOf((int) cell.getNumericCellValue())).size() > 0) {
+                                JOptionPane.showMessageDialog(this, "Mã " + String.valueOf((int) cell.getNumericCellValue()) + " tồn tại");
+                                return;
+                            }
                             ImeiAoSPRespone imelao = new ImeiAoSPRespone();
                             imelao.setMa(String.valueOf((int) cell.getNumericCellValue()));
                             txtsoluong.setText(sl + "");
@@ -2482,6 +2523,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                             sl++;
                             setCboImei();
                             System.out.println(cell.getNumericCellValue());
+
                         }
                     }
                 }
@@ -2535,6 +2577,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnclearrom;
     private javax.swing.JButton btncpu;
     private javax.swing.JButton btndelete;
+    private javax.swing.JButton btndeleteimei;
     private javax.swing.JButton btnimel;
     private javax.swing.JButton btninsert;
     private javax.swing.JButton btnkhoiphuc;
@@ -2545,7 +2588,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnrom;
     private javax.swing.JButton btnupdate;
     private javax.swing.JButton btnupdatecpu;
-    private javax.swing.JButton btnupdateimel;
     private javax.swing.JButton btnupdatemh;
     private javax.swing.JButton btnupdatems;
     private javax.swing.JButton btnupdatepin;
@@ -3109,48 +3151,77 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Các thuộc tính phải được chọn");
             return;
         }
+        String giatien = txtgia.getText().trim();
+        double tien = 0;
+        try {
+            tien = Double.parseDouble(giatien);
+            if (0 > tien) {
+                JOptionPane.showMessageDialog(this, "Giá phải lớn hơn 0");
+                return;
+            }
 
-        UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
-        UUID idrom = lstrom.get(cborom.getSelectedIndex()).getId();
-        UUID idram = lstram.get(cboram.getSelectedIndex()).getId();
-        UUID idms = lstms.get(cbomausac.getSelectedIndex()).getId();
-        UUID idpin = lstpin.get(cbopin.getSelectedIndex()).getId();
-        UUID idmh = lstmh.get(cbomanhinh.getSelectedIndex()).getId();
-        BigDecimal gia = BigDecimal.valueOf(Double.parseDouble(txtgia.getText()));
-        int soluong = Integer.parseInt(txtsoluong.getText());
-        SanPhamSPRespone spsp = new SanPhamSPRespone();
-        spsp.setTen(txttensp.getText());
-        spsp.setGia(gia);
-        spsp.setSoluong(soluong);
-        ImeiSPRespone imelsp = new ImeiSPRespone();
-        if (sp.insert(spsp, idcpu, idrom, idram, idms, idmh, idpin, lstimelao)) {
-            JOptionPane.showMessageDialog(this, "Thành công");
+            UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
+            UUID idrom = lstrom.get(cborom.getSelectedIndex()).getId();
+            UUID idram = lstram.get(cboram.getSelectedIndex()).getId();
+            UUID idms = lstms.get(cbomausac.getSelectedIndex()).getId();
+            UUID idpin = lstpin.get(cbopin.getSelectedIndex()).getId();
+            UUID idmh = lstmh.get(cbomanhinh.getSelectedIndex()).getId();
+            BigDecimal gia = BigDecimal.valueOf(Double.parseDouble(txtgia.getText()));
+            int soluong = Integer.parseInt(txtsoluong.getText());
+            SanPhamSPRespone spsp = new SanPhamSPRespone();
+            spsp.setTen(txttensp.getText());
+            spsp.setGia(gia);
+            spsp.setSoluong(soluong);
+            spsp.setLoaihang(cboloaihang.getSelectedItem().equals("Mới") ? 0 : 1);
+            ImeiSPRespone imelsp = new ImeiSPRespone();
+            if (sp.insert(spsp, idcpu, idrom, idram, idms, idmh, idpin, lstimelao)) {
+                JOptionPane.showMessageDialog(this, "Thành công");
+            }
+
+            FilltoTableSanPham();
+            clearFormData();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Giá phải là số");
+            return;
         }
-
-        FilltoTableSanPham();
     }
 
     private void updateDataCTSP() {
         int index = tblbang.getSelectedRow();
-        UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
-        UUID idrom = lstrom.get(cborom.getSelectedIndex()).getId();
-        UUID idram = lstram.get(cboram.getSelectedIndex()).getId();
-        UUID idms = lstms.get(cbomausac.getSelectedIndex()).getId();
-        UUID idpin = lstpin.get(cbopin.getSelectedIndex()).getId();
-        UUID idmh = lstmh.get(cbomanhinh.getSelectedIndex()).getId();
-        BigDecimal gia = BigDecimal.valueOf(Double.parseDouble(txtgia.getText()));
-        int soluong = Integer.parseInt(txtsoluong.getText());
-        SanPhamSPRespone spsp = new SanPhamSPRespone();
-        spsp.setId(sp.getlist().get(index).getId());
-        spsp.setTen(txttensp.getText());
-        spsp.setGia(gia);
-        spsp.setSoluong(soluong);
-        spsp.setLoaihang((cboloaihang.getSelectedItem().equals("Mới") ? 0 : 1));
-        ImeiSPRespone imelsp = new ImeiSPRespone();
-        if (sp.update(spsp, idcpu, idrom, idram, idms, idmh, idpin)) {
-            JOptionPane.showMessageDialog(this, "Thành công");
+        String giatien = txtgia.getText().trim();
+        double tien = 0;
+        try {
+            tien = Double.parseDouble(giatien);
+            if (0 > tien) {
+                JOptionPane.showMessageDialog(this, "Giá phải lớn hơn 0");
+                return;
+            }
+            UUID idcpu = lstcpu.get(cbocpu.getSelectedIndex()).getId();
+            UUID idrom = lstrom.get(cborom.getSelectedIndex()).getId();
+            UUID idram = lstram.get(cboram.getSelectedIndex()).getId();
+            UUID idms = lstms.get(cbomausac.getSelectedIndex()).getId();
+            UUID idpin = lstpin.get(cbopin.getSelectedIndex()).getId();
+            UUID idmh = lstmh.get(cbomanhinh.getSelectedIndex()).getId();
+
+            BigDecimal gia = BigDecimal.valueOf(Double.parseDouble(txtgia.getText()));
+            int soluong = Integer.parseInt(txtsoluong.getText());
+            SanPhamSPRespone spsp = new SanPhamSPRespone();
+            spsp.setId(sp.getlist().get(index).getId());
+            spsp.setTen(txttensp.getText());
+            spsp.setGia(gia);
+            spsp.setSoluong(soluong);
+            spsp.setLoaihang((cboloaihang.getSelectedItem().equals("Mới") ? 0 : 1));
+            ImeiSPRespone imelsp = new ImeiSPRespone();
+            if (sp.update(spsp, idcpu, idrom, idram, idms, idmh, idpin, lstimelao)) {
+                JOptionPane.showMessageDialog(this, "Thành công");
+            }
+            FilltoTableSanPham();
+            clearFormData();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Giá phải là số");
+            return;
         }
-        FilltoTableSanPham();
     }
 
     private void clearFormData() {
