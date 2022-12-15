@@ -114,7 +114,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1080, 720));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(51, 51, 255))); // NOI18N
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -164,7 +164,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtdiachi);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 123, 123))); // NOI18N
 
         btnthem.setBackground(new java.awt.Color(0, 123, 123));
         btnthem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -301,7 +301,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 123, 123))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 123, 123))); // NOI18N
 
         tblkhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -360,7 +360,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
 
         cbohang.setBackground(new java.awt.Color(0, 123, 123));
         cbohang.setForeground(new java.awt.Color(255, 255, 255));
-        cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng ", "Bạc", "Vàng", "Kim Cương", "ALL" }));
+        cbohang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng ", "Bạc", "Vàng", "Kim cương", "ALL" }));
         cbohang.setFocusable(false);
         cbohang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -541,7 +541,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,10 +623,10 @@ public class FrmKhachhang extends javax.swing.JPanel {
         try {
             if (txttimkiem.getText().trim().equals("")) {
                 filltiTable();
-                return;
             }
             timkiem();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_txttimkiemCaretUpdate
 
@@ -788,7 +788,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         model.setRowCount(0);
         listkh = KHSer.timkiem((txttimkiem.getText()));
         for (KhachHangResponse x : listkh) {
-            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), sdf.format(x.getNgaysinh()), x.getHang()});
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh(), x.getHang()});
         }
 
     }
@@ -862,6 +862,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
         if (kt == false) {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng");
             return;
+        }else if(txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))){
+            JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
+            return;
         }
         KhachHangResponse kh = new KhachHangResponse();
         kh.setMa(ma);
@@ -891,7 +894,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         int gioitinh = rdonu.isSelected() ? 1 : 0;
         String sdt = txtsdt.getText().trim();
         String diachi = txtdiachi.getText().trim();
-        Date ngaysinh = new Date(txtngaysinh.getDateFormatString().trim());
+        Date ngaysinh = txtngaysinh.getDate();
         if (ma.length() == 0 || hoten.length() == 0 || diachi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Khong duoc de trong");
             return;
@@ -900,6 +903,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
         boolean kt = txtsdt.getText().trim().matches(chkDinhDangSdt);
         if (kt == false) {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng");
+            return;
+        }else if(txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))){
+            JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
             return;
         }
         KhachHangResponse kh = new KhachHangResponse();
@@ -951,10 +957,8 @@ public class FrmKhachhang extends javax.swing.JPanel {
             public void run() {
 
                 int tong = 0;
-                int tongtien = 0;
                 for (int i = 0; i < tblhoadondamua.getRowCount(); i++) {
                     tong += Integer.parseInt(tblhoadondamua.getValueAt(i, 4).toString());
-                    tongtien = tong / 1000;
                 }
                 lblrank.setText("Đồng");
                 lblcuoi.setText("20tr");
@@ -977,7 +981,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
                     prorank.setValue(tong);
                 }
                 if (tong >= 60000000) {
-                    lblrank.setText("Kim Cương");
+                    lblrank.setText("Kim cương");
                     lblcuoi.setText("");
                     lbltongtien.setText(tong + "");
                     prorank.setMaximum(400000000);
