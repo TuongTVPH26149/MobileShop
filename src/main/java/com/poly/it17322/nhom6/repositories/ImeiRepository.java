@@ -109,4 +109,19 @@ public class ImeiRepository {
         }
         return imel;
     }
+    
+     public Boolean delete(Imei imel) {
+        Transaction transaction = null;
+        try {
+            session = HibernatUtil.getSession();
+            transaction = session.beginTransaction();
+            session.delete(imel);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
+    
 }

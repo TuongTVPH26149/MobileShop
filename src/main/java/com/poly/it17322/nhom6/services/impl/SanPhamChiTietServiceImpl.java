@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.CPU;
+import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import com.poly.it17322.nhom6.domainmodels.Pin;
@@ -12,6 +13,7 @@ import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
+import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
 import com.poly.it17322.nhom6.repositories.ImeiRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
@@ -47,7 +49,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     PinRepository pinrepo = new PinRepository();
     SpCTSPRepository imelrepo = new SpCTSPRepository();
     ImeiRepository imrepo = new ImeiRepository();
-    SpCTSPRepository spct = new SpCTSPRepository();
+    ChiTietSPRepository spct = new ChiTietSPRepository();
 
     @Override
     public List<RomRespone> getlistRom() {
@@ -188,8 +190,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     }
 
     @Override
-    public List<Imei> getListImei(UUID Idctsp) {
-        return imelrepo.SelectCBOImeiById(Idctsp);
+    public List<ImeiSPRespone> getListImei(UUID Idctsp) {
+        List<Imei> imeis = imelrepo.SelectCBOImeiById(Idctsp);
+        return imeis.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
     }
 
     public boolean updateImei(ImeiSPRespone imel) {
@@ -202,8 +205,16 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
     }
     public List<ImeiSPRespone> getlistImelbyMa(String ma) {
-        List<Imei> imei = spct.SelectImeiByMa(ma);
+        List<Imei> imei = imelrepo.SelectImeiByMa(ma);
         return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+    
+    public void deleteImei(String ma, UUID ctsp){
+        Imei i = imrepo.SelectImeiBanByMa(ma);
+        ChiTietSP sp = spct.SelectChiTietSPById(ctsp);
+        sp.setSoLuong(sp.getSoLuong()-1);
+        imrepo.delete(i);
+        spct.UpdateChiTietSP(sp);
     }
     
 }

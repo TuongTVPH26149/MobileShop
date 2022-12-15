@@ -26,7 +26,7 @@ public class ChucNangKHRepository extends KhachHangRepository {
         List<KhachHang> lstKH = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM KhachHang where Sdt LIKE :sdt", KhachHang.class);
+            Query query = session.createQuery("FROM KhachHang where Sdt LIKE :sdt and Ma != 'MacDinh'", KhachHang.class);
             query.setParameter("sdt", "%" + sdt + "%");
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 lstKH = query.getResultList();
