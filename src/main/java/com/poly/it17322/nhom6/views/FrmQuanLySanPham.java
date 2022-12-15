@@ -13,6 +13,7 @@ import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.ManHinhRespone;
 import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
+import com.poly.it17322.nhom6.responses.NhanVienRespone;
 import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.responses.RomRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
@@ -28,6 +29,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
@@ -37,9 +39,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -2121,8 +2126,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         Deleted();
         FilltoTableSanPhamXoa();
+        FilltoTableSanPham();
         JOptionPane.showMessageDialog(this, "Xóa thành công");
         clearFormData();
+
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void btnpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpinActionPerformed
@@ -2154,7 +2161,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnmausacActionPerformed
 
     private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
-        btninsert.setEnabled(true);
         clearFormData();
         sl = 1;
     }//GEN-LAST:event_btnclearActionPerformed
@@ -2473,6 +2479,8 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
     private void btnkhoiphucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkhoiphucActionPerformed
         Revert();
+        FilltoTableSanPhamXoa();
+        FilltoTableSanPham();
         JOptionPane.showMessageDialog(this, "Khôi phục thành công");
     }//GEN-LAST:event_btnkhoiphucActionPerformed
 
@@ -2590,37 +2598,31 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 String filename = fc.getSelectedFile().getAbsolutePath();
 
                 FileInputStream fis = new FileInputStream(filename);
-                XSSFWorkbook wb = new XSSFWorkbook(fis);
-                XSSFSheet sheet = wb.getSheetAt(0);
-                FormulaEvaluator formula = wb.getCreationHelper().createFormulaEvaluator();
-                for (Row row : sheet) {
-                    for (Cell cell : row) {
-                        if (formula.evaluate(cell).getCellType() != null) {
-                            if (spct.getlistImelbyMa(String.valueOf((int) cell.getNumericCellValue())).size() > 0) {
-                                JOptionPane.showMessageDialog(this, "Mã " + String.valueOf((int) cell.getNumericCellValue()) + " tồn tại");
-                                return;
-                            }
-                            ImeiAoSPRespone imelao = new ImeiAoSPRespone();
-                            imelao.setMa(String.valueOf((int) cell.getNumericCellValue()));
-                            txtsoluong.setText(sl + "");
-                            lstimelao.add(imelao);
-                            FilltoTableImeiAO();
-                            sl++;
-                            setCboImei();
-                            System.out.println(cell.getNumericCellValue());
+                Workbook workbook = new XSSFWorkbook(fis);
+                Sheet datatypeSheet = workbook.getSheetAt(0);
+                DataFormatter fmt = new DataFormatter();
+                Iterator<Row> iterator = datatypeSheet.iterator();
+                Row firstRow = iterator.next();
+                Cell firstCell = firstRow.getCell(0);
+                while (iterator.hasNext()) {
+                    Row currentRow = iterator.next();
+                    ImeiAoSPRespone imei = new ImeiAoSPRespone();
+                    imei.setMa((currentRow.getCell(0)).toString());
+                    txtsoluong.setText(sl + "");
+                    lstimelao.add(imei);
+                    sl++;
+                    setCboImei();
 
-                        }
-                    }
                 }
-                fis.read();
-                wb.close();
-                fis.close();
+
+                workbook.close();
+                FilltoTableImeiAO();
                 JOptionPane.showMessageDialog(this, "Insert thành công");
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
 
+        }
     }//GEN-LAST:event_btnaddbyexcelActionPerformed
 
     private void tblimeiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblimeiMouseClicked
@@ -2639,7 +2641,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
 
     private void txttimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttimkiemCaretUpdate
         lstctsp = sp.getlistTimKiem(txttimkiem.getText());
-        FilltoTableSanPham();
+        FilltoTableTimKiem();
     }//GEN-LAST:event_txttimkiemCaretUpdate
 
 
@@ -2797,6 +2799,15 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void FilltoTableSanPham() {
+        model = (DefaultTableModel) tblbang.getModel();
+        model.setRowCount(0);
+        lstctsp = sp.getlist();
+        for (SanPhamSPRespone x : lstctsp) {
+            model.addRow(x.toDataRow());
+        }
+    }
+
+    private void FilltoTableTimKiem() {
         model = (DefaultTableModel) tblbang.getModel();
         model.setRowCount(0);
         for (SanPhamSPRespone x : lstctsp) {
@@ -3235,6 +3246,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Các thuộc tính phải được chọn");
             return;
         }
+        if(txttensp.getText().equals("") || txtgia.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
+        }
         String giatien = txtgia.getText().trim();
         double tien = 0;
         try {
@@ -3274,6 +3289,10 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         int index = tblbang.getSelectedRow();
         String giatien = txtgia.getText().trim();
         double tien = 0;
+        if(txttensp.getText().equals("") || txtgia.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return;
+        }
         try {
             tien = Double.parseDouble(giatien);
             if (0 > tien) {
@@ -3327,25 +3346,27 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
         txtmaimei.setText("");
         btnupdate.setEnabled(false);
         btndelete.setEnabled(false);
+        btninsert.setEnabled(true);
     }
 
     private void Deleted() {
+        lstctsp = sp.getlist();
         if (tblbang.getRowCount() > 0) {
             for (int i = 0; i < tblbang.getRowCount(); i++) {
                 if (Boolean.parseBoolean(tblbang.getValueAt(i, 10).toString())) {
                     SanPhamSPRespone sprp = new SanPhamSPRespone();
-                    sprp.setId(sp.getlist().get(i).getId());
+                    sprp.setId(lstctsp.get(i).getId());
                     sprp.setDeleted(true);
                     sp.updateXoa(sprp);
                 }
             }
             FilltoTableSanPham();
-            jTabbedPane1.setSelectedIndex(1);
             FilltoTableSanPhamXoa();
         }
     }
 
     private void Revert() {
+        lstctsp = sp.selectALLChiTietSPXoa();
         if (tblbangxoa.getRowCount() > 0) {
             for (int i = 0; i < tblbangxoa.getRowCount(); i++) {
                 if (Boolean.parseBoolean(tblbangxoa.getValueAt(i, 10).toString())) {
@@ -3356,7 +3377,6 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 }
             }
             FilltoTableSanPhamXoa();
-            jTabbedPane1.setSelectedIndex(0);
             FilltoTableSanPham();
         }
     }
