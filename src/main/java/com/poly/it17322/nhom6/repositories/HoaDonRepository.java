@@ -138,25 +138,25 @@ public class HoaDonRepository {
             session = HibernatUtil.getSession();
             Query query;
             if (cv) {
-                if (dk != 5) {
+                if (dk != 3) {
                     query = session.createQuery("FROM HoaDon where trangThai = :dk and trangThai != 5 and "
                             + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("dk", dk);
                     query.setParameter("text", text);
                 } else {
-                    query = session.createQuery("FROM HoaDon where trangThai != 5 and "
+                    query = session.createQuery("FROM HoaDon where trangThai not in (3,4,5) and "
                             + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("text", text);
                 }
             } else {
-                if (dk != 5) {
+                if (dk != 3) {
                     query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai = :dk and trangThai != 5 and "
                             + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
                     query.setParameter("dk", dk);
                     query.setParameter("text", text);
                 } else {
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai != 5 and "
+                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai not in (3,4,5) and "
                             + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
                     query.setParameter("text", text);

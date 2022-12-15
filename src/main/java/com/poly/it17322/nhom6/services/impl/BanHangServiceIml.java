@@ -99,6 +99,7 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setNgayTao(new Date());
             hd.setTongTien(new BigDecimal(0));
             hd.setTienShip(new BigDecimal(0));
+            hd.setTienThua(new BigDecimal(0));
             hd.setTienMat(new BigDecimal(0));
             hd.setChuyenKhoan(new BigDecimal(0));
             hd.setGiamGia(new BigDecimal(0));
@@ -149,6 +150,7 @@ public class BanHangServiceIml implements IBanHangService {
                     Imei imel = imelrepo.SelectImeiBanByMa(i.getMa());
                     imel.setTrangThai(1);
                     imelrepo.UpdateImei(imel);
+                    imlbrepo.delete(i);
                 }
                 UUID idSP = s.getChiTietSP().getId();
                 int sl = s.getSoLuong();
@@ -183,6 +185,7 @@ public class BanHangServiceIml implements IBanHangService {
             }
             hd.setTaiKhoan(tkrepo.SelectTaiKhoanById(dh.getIdNV()));
             hd.setTongTien(dh.getTongTien());
+            hd.setTienThua(dh.getTienThua());
             hd.setGiamGia(dh.getGiamGia());
             hd.setLoaiThanhToan(dh.getHinhThuc());
             hd.setTienMat(dh.getTienMat());
@@ -191,6 +194,7 @@ public class BanHangServiceIml implements IBanHangService {
             hd.setDiaChi(dh.getDiaChi());
             hd.setTenKH(dh.getTenkhachHang());
             hd.setSdtNguoiNhan(dh.getSdtKH());
+            hd.setSoLanShip(dh.getSoLanShip());
             if (dh.getTrangThai() == 3 || dh.getTrangThai() == 4) {
                 hd.setNgayThanhToan(new Date());
                 if (hd.getTrangThai() != 6) {
@@ -216,14 +220,11 @@ public class BanHangServiceIml implements IBanHangService {
 
     @Override
     public GioHangRespone getGH(UUID idhd, UUID idsp) {
-        List<HoaDonChiTiet> hdcts = hdctrepo.getGH(idhd, idsp);
-        List<GioHangRespone> gh = hdcts.stream().map(GioHangRespone::new).collect(Collectors.toList());
-        for (GioHangRespone s : gh) {
-            if (s.getTrangThai() == 1) {
-                return s;
-            }
+        HoaDonChiTiet hdcts = hdctrepo.getGH(idhd, idsp);
+        if (hdcts.getId() == null) {
+            return null;
         }
-        return null;
+        return new GioHangRespone(hdcts);
     }
 
     @Override
@@ -332,13 +333,49 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public boolean deleteImeiBan(String ma) {
-        ImeiBan iml = imlbrepo.SelectImeiBanByMa(ma);
-        Imei im = imelrepo.SelectImeiBanByMa(ma);
+    public boolean deleteImeiBan(UUID idImeiBan) {
+        ImeiBan iml = imlbrepo.SelectImeiBanById(idImeiBan);
+        Imei im = imelrepo.SelectImeiBanByMa(iml.getMa());
         if (imlbrepo.delete(iml)) {
             im.setTrangThai(1);
         }
         return imelrepo.UpdateImei(im);
+    }
+
+    @Override
+    public boolean HoanImeiBan(UUID idImeiBan, UUID hd, GioHangRespone gh) {
+        ImeiBan iml = imlbrepo.SelectImeiBanById(idImeiBan);
+        Imei im = imelrepo.SelectImeiBanByMa(iml.getMa());
+        HoaDonChiTiet hdct = new HoaDonChiTiet();
+        try {
+            if (gh.getTrangThai() == 1) {
+                hdct = hdctrepo.getGHTra(hd, gh.getIdSP());
+                im.setTrangThai(1);
+                hdct.setTrangThai(0);
+            } else {
+                hdct = hdctrepo.getGH(hd, gh.getIdSP());
+                im.setTrangThai(0);
+                hdct.setTrangThai(1);
+            }
+            hdct.setHoaDon(hdrepo.SelectHoaDonById(hd));
+            hdct.setChiTietSP(ctsprepo.SelectChiTietSPById(gh.getIdSP()));
+            hdct.setTenSP(gh.getTenSanPham());
+            hdct.setDonGia(gh.getGiaBan());
+            hdct.setKhuyenMai(gh.getKhuyenMai());
+        } catch (Exception e) {
+            return false;
+        }
+        if (hdct.getId() == null) {
+            hdct.setSoLuong(1);
+            hdct.setThanhTien((hdct.getDonGia().subtract(hdct.getKhuyenMai())).multiply(new BigDecimal(hdct.getSoLuong())));
+            hdctrepo.InsertHoaDonChiTiet(hdct);
+        } else {
+            hdct.setSoLuong(hdct.getSoLuong() + 1);
+            hdct.setThanhTien((hdct.getDonGia().subtract(hdct.getKhuyenMai())).multiply(new BigDecimal(hdct.getSoLuong())));
+            hdctrepo.UpdateHoaDonChiTiet(hdct);
+        }
+        iml.setHoaDonChiTiet(hdct);;
+        return imelrepo.UpdateImei(im) && imlbrepo.UpdateImeiBan(iml);
     }
 
     @Override

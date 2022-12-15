@@ -28,12 +28,14 @@ public class HoaDonBanHangRespone {
     private String nguoiTao;
     private String khachHang;
     private int trangThai;
+    private int soLanShip;
 
     public HoaDonBanHangRespone(HoaDon hd) {
         try {
             this.id = hd.getId();
             this.ma = hd.getMa();
             this.ngayTao = hd.getNgayTao();
+            this.soLanShip = hd.getSoLanShip();
             try {
                 this.nguoiTao = hd.getTaiKhoan().getMa()+"-"+hd.getTaiKhoan().getHoTen();
             } catch (Exception e) {
@@ -55,9 +57,9 @@ public class HoaDonBanHangRespone {
             case 0:
                 return "Chờ thanh toán";
             case 1:
-                return "Chờ giao";
+                return "Chờ giao " + (soLanShip==0?"":soLanShip);
             case 2:
-                return "Đang giao";
+                return "Đang giao " + (soLanShip==0?"":soLanShip);
             case 3:
                 return "Đã thanh toán";
             case 4:

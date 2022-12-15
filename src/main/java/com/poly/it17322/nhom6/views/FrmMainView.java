@@ -821,35 +821,6 @@ public class FrmMainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pnlNhanVienMouseClicked
 
-    private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
-        // TODO add your handling code here:
-        if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(0, 123, 123));
-    }//GEN-LAST:event_pnlBaoHanhMouseExited
-
-    private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
-        // TODO add your handling code here:
-        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
-        });
-        if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(0, 180, 180));
-    }//GEN-LAST:event_pnlBaoHanhMouseEntered
-
-    private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
-        // TODO add your handling code here:
-        try {
-            Webcam.getDefault().close();
-            clearChosserListService();
-            chosser = 5;
-            pnlBaoHanh.setBackground(new Color(0, 153, 153));
-            pnlView.removeAll();
-            pnlView.add(new FrmBaoHanh());
-            pnlView.setLayout(new FlowLayout());
-            this.pack();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_pnlBaoHanhMouseClicked
-
     private void pnlKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseExited
         // TODO add your handling code here:
         if (chosser != 4)
@@ -973,6 +944,35 @@ public class FrmMainView extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_lblDangXuatMouseClicked
+
+    private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
+        // TODO add your handling code here:
+        if (chosser != 5)
+        pnlBaoHanh.setBackground(new Color(0, 123, 123));
+    }//GEN-LAST:event_pnlBaoHanhMouseExited
+
+    private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
+        // TODO add your handling code here:
+        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
+        if (chosser != 5)
+        pnlBaoHanh.setBackground(new Color(0, 180, 180));
+    }//GEN-LAST:event_pnlBaoHanhMouseEntered
+
+    private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
+        // TODO add your handling code here:
+        try {
+            Webcam.getDefault().close();
+            clearChosserListService();
+            chosser = 5;
+            pnlBaoHanh.setBackground(new Color(0, 153, 153));
+            pnlView.removeAll();
+            pnlView.add(new FrmBaoHanh());
+            pnlView.setLayout(new FlowLayout());
+            this.pack();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pnlBaoHanhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

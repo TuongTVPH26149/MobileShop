@@ -32,7 +32,8 @@ public interface IBanHangService {
     List<ImeiDaBanRespone> getImeiBan(UUID idHDCT, String text);
     
 
-    boolean deleteImeiBan(String ma);
+    boolean deleteImeiBan(UUID idImeiBan);
+    boolean HoanImeiBan(UUID idImeiBan, UUID hd, GioHangRespone gh);
 
     boolean updateGHXoa(UUID idHDCT);
 

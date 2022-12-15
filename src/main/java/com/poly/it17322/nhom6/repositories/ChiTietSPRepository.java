@@ -113,7 +113,6 @@ public class ChiTietSPRepository {
                 km = ctsp.getKhuyenMai();
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return km;
     }

@@ -6,6 +6,7 @@ package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class SanPhamBanHangResponse {
     }
     
     public Object[] toDataRow(){
-        return new Object[]{this.tenSanPham,this.manHinh,this.cpu,this.pin,this.soLuong,this.giaBan};
+        DecimalFormat df = new DecimalFormat("#,### vnđ");
+        return new Object[]{this.tenSanPham,this.manHinh,this.cpu,this.pin,this.soLuong,df.format(this.giaBan)};
     }
 }
