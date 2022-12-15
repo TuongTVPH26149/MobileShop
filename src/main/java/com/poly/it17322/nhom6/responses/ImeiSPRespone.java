@@ -31,6 +31,6 @@ public class ImeiSPRespone {
     }
     
     public Object[] toDataRow(){
-        return new Object[]{ma};
+        return new Object[]{ma,false};
     }
 }

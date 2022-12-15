@@ -881,7 +881,7 @@ public class FrmNhanVienSanPham extends javax.swing.JPanel {
 
         cbo = (DefaultComboBoxModel) cboimel.getModel();
         cbo.removeAllElements();
-        for (Imei x : spct.getListImei(sp.getlist().get(index).getId())) {
+        for (ImeiSPRespone x : spct.getListImei(sp.getlist().get(index).getId())) {
             cbo.addElement(x.getMa());
         }
     }
