@@ -180,7 +180,12 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 nvrp.setChucVu(chucVu);
                 nvrp.setMatKhau(MD5Util.md5EnCode(matKhau));
                 nhanVienServiceImpl.Insert(nvrp);
-                sendMail(email);
+                new Thread() {
+                    @Override
+                    public void run() {
+                        sendMail(email);
+                    }
+                }.start();
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 clear();
                 loadTable();
@@ -422,7 +427,12 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 nvr.setMatKhau("12345");
                 nvr.setChucVu(String.valueOf(getCellValue(currentRow.getCell(6))).trim().equals("Nhân viên") ? 1 : 0);
                 nhanVienServiceImpl.Insert(nvr);
-                sendMail(nvr.getEmail());
+                new Thread() {
+                    @Override
+                    public void run() {
+                        sendMail(nvr.getEmail());
+                    }
+                }.start();
             }
             JOptionPane.showMessageDialog(null, "Import file excel thành công");
             workbook.close();
@@ -1129,7 +1139,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getChucVu() == 0 ? "Quản lý" : "Nhân viên");
 
                 cell = row.createCell(9, CellType.STRING);
-                cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getTrangThai() == 0 ? "Quản lý" : "Nhân viên");
+                cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getTrangThai() == 0 ? "Đang làm" : "Đã nghỉ");
 
             }
             File file = new File("NV" + new GenMa().getMa());

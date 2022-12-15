@@ -3170,7 +3170,7 @@ public class FrmBanHang extends javax.swing.JPanel {
                     }
                     if (result != null) {
                         try {
-                            if (indexHD != -1) {
+                            if (indexHD != -1 && (dh.getTrangThai() == 0 || dh.getTrangThai() == 1) && dh.getSoLanShip() == 0) {
                                 if (bhs.addSpSanner(result.getText(), lstHoaDon.get(indexHD).getId())) {
                                     fillTableGH();
                                     fillTableSP();
@@ -3246,6 +3246,9 @@ public class FrmBanHang extends javax.swing.JPanel {
             kh = new khachHangBanHangRespone();
         }
         if (dh.getNhanHang() == 1) {
+            if (dh.getSoLanShip() != 0) {
+                btnXacNhanImei.setEnabled(false);
+            }
             cboHinhThuc.setSelectedIndex(0);
             txtTienMat.setEnabled(false);
             txtChuyenKhoan.setEnabled(false);
