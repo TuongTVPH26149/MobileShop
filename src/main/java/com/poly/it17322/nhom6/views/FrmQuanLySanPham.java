@@ -2471,7 +2471,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
                 cell = row.createCell(10, CellType.STRING);
                 cell.setCellValue(sp.getlist().get(i).getLoaihang());
             }
-            File file = new File("SP" + new GenMa().getMa() + ".xlsx");
+            File file = new File("SP" + new GenMa().getMa());
             JFileChooser jfc = new JFileChooser();
             jfc.setSelectedFile(file);
             if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {

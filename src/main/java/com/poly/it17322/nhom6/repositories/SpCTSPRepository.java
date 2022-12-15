@@ -141,7 +141,6 @@ public class SpCTSPRepository {
         }
         return list;
     }
-
     public List<ChiTietSP> TimKiemSPBH(String input) {
         List<ChiTietSP> list = new ArrayList<>();
         try {
@@ -160,5 +159,4 @@ public class SpCTSPRepository {
         }
         return list;
     }
-
 }

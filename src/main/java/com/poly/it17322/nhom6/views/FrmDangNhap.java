@@ -10,6 +10,7 @@ import com.poly.it17322.nhom6.services.IDangNhapService;
 import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
 import com.poly.it17322.nhom6.utilities.MD5Util;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +28,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         Webcam.getDefault().close();
         initComponents();
         setLocationRelativeTo(null);
+        txtTaiKhoan.requestFocus();
     }
 
     /**
@@ -118,6 +120,11 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 txtTaiKhoanActionPerformed(evt);
             }
         });
+        txtTaiKhoan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTaiKhoanKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,6 +203,11 @@ public class FrmDangNhap extends javax.swing.JFrame {
         txtMatKhau.setMaximumSize(new java.awt.Dimension(303, 20));
         txtMatKhau.setMinimumSize(new java.awt.Dimension(303, 20));
         txtMatKhau.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatKhauKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -372,6 +384,20 @@ public class FrmDangNhap extends javax.swing.JFrame {
     private void txtTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTaiKhoanMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTaiKhoanMouseClicked
+
+    private void txtTaiKhoanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTaiKhoanKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtMatKhau.requestFocus();
+        }
+    }//GEN-LAST:event_txtTaiKhoanKeyPressed
+
+    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnLogin.doClick();
+        }
+    }//GEN-LAST:event_txtMatKhauKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

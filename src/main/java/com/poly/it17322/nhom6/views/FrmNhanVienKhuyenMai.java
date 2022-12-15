@@ -16,7 +16,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,7 +37,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         initComponents();
         designTable();
         filltoTableKM(cboTrangThai.getSelectedIndex());
-        filltoTableSP();
+        filltoTableSPKM();
     }
 
     /**
@@ -71,7 +70,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
+        txtSeacrhSP = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         cboLoai = new javax.swing.JComboBox<>();
@@ -284,13 +283,13 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField3.setBorder(null);
-        jTextField3.setCaretColor(new java.awt.Color(0, 102, 102));
-        jTextField3.setForeground(new java.awt.Color(0, 102, 102));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtSeacrhSP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtSeacrhSP.setBorder(null);
+        txtSeacrhSP.setCaretColor(new java.awt.Color(0, 102, 102));
+        txtSeacrhSP.setForeground(new java.awt.Color(0, 102, 102));
+        txtSeacrhSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtSeacrhSPActionPerformed(evt);
             }
         });
 
@@ -319,7 +318,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSeacrhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel6))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
@@ -329,7 +328,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSeacrhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -465,9 +464,9 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtSeacrhSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrhSPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtSeacrhSPActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
@@ -486,7 +485,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
         txtNKT.setDateTimePermissive(LocalDateTime.ofInstant(lstKM.get(indexKM).getNgayKT().toInstant(), ZoneId.systemDefault()));
         cboLoai.setSelectedIndex(lstKM.get(indexKM).getLoai());
         txtGiaTri.setText(lstKM.get(indexKM).getGiaTri() + "");
-        filltoTableSP();
+        filltoTableSPKM();
     }//GEN-LAST:event_tblKhuyenmaiMouseClicked
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -520,7 +519,6 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblMa;
     private javax.swing.JTable tblKhuyenmai;
@@ -528,6 +526,7 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTextField txtGiaTri;
     private com.github.lgooddatepicker.components.DateTimePicker txtNBD;
     private com.github.lgooddatepicker.components.DateTimePicker txtNKT;
+    private javax.swing.JTextField txtSeacrhSP;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 
@@ -550,27 +549,17 @@ public class FrmNhanVienKhuyenMai extends javax.swing.JPanel {
     private void filltoTableKM(int trangThai) {
         dtm = (DefaultTableModel) tblKhuyenmai.getModel();
         dtm.setRowCount(0);
-        lstKM = kms.getList(trangThai);
+        lstKM = kms.getList(trangThai, txtSeacrhSP.getText());
         for (KhuyenMaiResponse s : lstKM) {
             dtm.addRow(s.toDataRow());
         }
     }
 
-    private void filltoTableSP() {
+    private void filltoTableSPKM() {
         dtm = (DefaultTableModel) tblSanPham.getModel();
         dtm.setRowCount(0);
-        lstSP = kms.getAllSp();
         for (SanPhamBanHangResponse s : lstSP) {
-            dtm.addRow(new Object[]{s.getTenSanPham(), false});
-        }
-        if (indexKM != -1) {
-            for (int i = 0; i < lstSP.size(); i++) {
-                for (SanPhamBanHangResponse s : kms.SelectIDSPBYKM(lstKM.get(indexKM).getId())) {
-                    if (lstSP.get(i).getId().equals(s.getId())) {
-                        tblSanPham.setValueAt(true, i, 1);
-                    }
-                }
-            }
+            dtm.addRow(new Object[]{s.getTenSanPham(), true});
         }
     }
 

@@ -58,8 +58,8 @@ public class BanHangServiceIml implements IBanHangService {
     }
 
     @Override
-    public List<SanPhamBanHangResponse> getAllSpBh() {
-        List<ChiTietSP> ctsp = ctsprepo.getSP();
+    public List<SanPhamBanHangResponse> getAllSpBh(String text) {
+        List<ChiTietSP> ctsp = ctsprepo.getSP(text);
         List<SanPhamBanHangResponse> spbh = ctsp.stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
         List<SanPhamBanHangResponse> lstSP = new ArrayList<>();
         for (SanPhamBanHangResponse s : spbh) {
@@ -363,11 +363,5 @@ public class BanHangServiceIml implements IBanHangService {
         HoaDonChiTiet hdct = hdctrepo.SelectHoaDonChiTietById(idhdct);
         hdct.setKhuyenMai(km);
         hdctrepo.UpdateHoaDonChiTiet(hdct);
-    }
-
-    @Override
-    public List<SanPhamBanHangResponse> getListSearch(String ten) {
-        List<ChiTietSP> ctsps = new SpCTSPRepository().TimKiemSPBH(ten);
-        return ctsps.stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
     }
 }
