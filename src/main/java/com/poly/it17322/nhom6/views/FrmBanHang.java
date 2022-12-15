@@ -3671,17 +3671,15 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (bhs.updateDonHang(dh)) {
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             bhs.updatRank(kh.getId());
-            fillTableHoaDon();
-            fillTableGH();
             if (JOptionPane.showConfirmDialog(this, "Bạn muốn in hóa đơn không") == JOptionPane.YES_OPTION) {
                 HoaDonInRespone hdin = new HoaDonInRespone();
                 hdin.setMahd(dh.getMaHD());
                 hdin.setNhanVien(nhanVien.getMa() + "-" + nhanVien.getHoTen());
-                hdin.setKhachhang(kh.getTen());
-                hdin.setSdtKH(kh.getSdt());
+                hdin.setKhachhang(dh.getTenkhachHang());
+                hdin.setSdtKH(dh.getSdtKH());
                 hdin.setDiaChi(dh.getDiaChi());
                 hdin.setTongTien(df.format(dh.getTongTien()) + " vnđ");
-                hdin.setGiamGia(df.format(dh.getGiamGia()) + "vnđ");
+                hdin.setGiamGia(df.format(dh.getGiamGia()) + " vnđ");
                 hdin.setPhiShip(df.format(dh.getPhiShip()) + " vnđ");
                 hdin.setTongTienTam(df.format(dh.getTongTien().add(dh.getGiamGia())) + " vnđ");
                 hdin.setHinhThucThanhToan(dh.getHinhThuc() == 0 ? "Tiền mặt" : (dh.getHinhThuc() == 1 ? "Chuyển khoản" : "Cả tiền mặt cả chuyển khoản"));
@@ -3689,6 +3687,7 @@ public class FrmBanHang extends javax.swing.JPanel {
                 for (int i = 0; i < tblGioHang.getRowCount(); i++) {
                     GioHangInRespone gh = new GioHangInRespone();
                     gh.setTenSP(tblGioHang.getValueAt(i, 0).toString());
+                    System.out.println(gh.getTenSP());
                     gh.setDonGia(tblGioHang.getValueAt(i, 4).toString());
                     gh.setKhuyenMai(tblGioHang.getValueAt(i, 5).toString());
                     gh.setSoLuong(tblGioHang.getValueAt(i, 6).toString());
@@ -3717,6 +3716,8 @@ public class FrmBanHang extends javax.swing.JPanel {
                 }
 
             }
+            fillTableHoaDon();
+            fillTableGH();
         } else {
             JOptionPane.showMessageDialog(this, "Thanh toán thất bại");
         }

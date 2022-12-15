@@ -53,10 +53,10 @@ public class InHoaDon {
             for (int i = 0; i < gioHang.size(); i++) {
                 billTable.addCell(getBillRowCell((i + 1) + ""));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getTenSP()));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getDonGia() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getKhuyenMai() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getSoLuong() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien() + ""));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getDonGia()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getKhuyenMai()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getSoLuong()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien()));
             }
             for (int j = 0; j < gioHang.size() + 10 - gioHang.size(); j++) {
                 billTable.addCell(getBillRowCell(" "));
