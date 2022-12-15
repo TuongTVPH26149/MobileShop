@@ -347,18 +347,24 @@ public class BanHangServiceIml implements IBanHangService {
         ImeiBan iml = imlbrepo.SelectImeiBanById(idImeiBan);
         Imei im = imelrepo.SelectImeiBanByMa(iml.getMa());
         HoaDonChiTiet hdct = new HoaDonChiTiet();
+        HoaDonChiTiet hdct2 = new HoaDonChiTiet();
+        ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(gh.getIdSP());
         try {
             if (gh.getTrangThai() == 1) {
                 hdct = hdctrepo.getGHTra(hd, gh.getIdSP());
+                hdct2 = hdctrepo.getGH(hd, gh.getIdSP());
                 im.setTrangThai(1);
                 hdct.setTrangThai(0);
+                ctsp.setSoLuong(ctsp.getSoLuong() + 1);
             } else {
                 hdct = hdctrepo.getGH(hd, gh.getIdSP());
+                hdct2 = hdctrepo.getGHTra(hd, gh.getIdSP());
                 im.setTrangThai(0);
                 hdct.setTrangThai(1);
+                ctsp.setSoLuong(ctsp.getSoLuong() - 1);
             }
             hdct.setHoaDon(hdrepo.SelectHoaDonById(hd));
-            hdct.setChiTietSP(ctsprepo.SelectChiTietSPById(gh.getIdSP()));
+            hdct.setChiTietSP(ctsp);
             hdct.setTenSP(gh.getTenSanPham());
             hdct.setDonGia(gh.getGiaBan());
             hdct.setKhuyenMai(gh.getKhuyenMai());
@@ -374,8 +380,14 @@ public class BanHangServiceIml implements IBanHangService {
             hdct.setThanhTien((hdct.getDonGia().subtract(hdct.getKhuyenMai())).multiply(new BigDecimal(hdct.getSoLuong())));
             hdctrepo.UpdateHoaDonChiTiet(hdct);
         }
-        iml.setHoaDonChiTiet(hdct);;
-        return imelrepo.UpdateImei(im) && imlbrepo.UpdateImeiBan(iml);
+        hdct2.setSoLuong(hdct2.getSoLuong() - 1);
+        iml.setHoaDonChiTiet(hdct);
+        boolean check = imelrepo.UpdateImei(im) && imlbrepo.UpdateImeiBan(iml) && ctsprepo.UpdateChiTietSP(ctsp);
+        if (hdct2.getSoLuong() <= 0) {
+            return hdctrepo.delete(hdct2);
+        } else {
+            return hdctrepo.UpdateHoaDonChiTiet(hdct2);
+        }
     }
 
     @Override
