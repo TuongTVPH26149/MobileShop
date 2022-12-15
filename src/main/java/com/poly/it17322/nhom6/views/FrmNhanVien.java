@@ -1139,7 +1139,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
                 cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getChucVu() == 0 ? "Quản lý" : "Nhân viên");
 
                 cell = row.createCell(9, CellType.STRING);
-                cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getTrangThai() == 0 ? "Quản lý" : "Nhân viên");
+                cell.setCellValue(nhanVienServiceImpl.getlist().get(i).getTrangThai() == 0 ? "Đang làm" : "Đã nghỉ");
 
             }
             File file = new File("NV" + new GenMa().getMa());
