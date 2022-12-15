@@ -7,6 +7,7 @@ package com.poly.it17322.nhom6.responses;
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
 import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,7 @@ public class GioHangRespone {
     }
     
     public Object[] toDataRow(){
-        return new Object[]{tenSanPham,manHinh,cpu,pin,giaBan,khuyenMai,soLuong, thanhTien, trangThai==1?"":"Hàng trả", false};
+        DecimalFormat df = new DecimalFormat("#,### vnđ");
+        return new Object[]{tenSanPham,manHinh,cpu,pin,df.format(giaBan),khuyenMai,soLuong, df.format(thanhTien), trangThai==1?"":"Hàng trả", false};
     }
 }
