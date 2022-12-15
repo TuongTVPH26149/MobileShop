@@ -623,10 +623,10 @@ public class FrmKhachhang extends javax.swing.JPanel {
         try {
             if (txttimkiem.getText().trim().equals("")) {
                 filltiTable();
-                return;
             }
             timkiem();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_txttimkiemCaretUpdate
 
@@ -788,7 +788,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         model.setRowCount(0);
         listkh = KHSer.timkiem((txttimkiem.getText()));
         for (KhachHangResponse x : listkh) {
-            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), sdf.format(x.getNgaysinh()), x.getHang()});
+            model.addRow(new Object[]{x.getMa(), x.getHoten(), x.getGioitinh() == 0 ? "Nam" : "Nữ", x.getSdt(), x.getDiachi(), x.getNgaysinh(), x.getHang()});
         }
 
     }
@@ -862,6 +862,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
         if (kt == false) {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng");
             return;
+        }else if(txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))){
+            JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
+            return;
         }
         KhachHangResponse kh = new KhachHangResponse();
         kh.setMa(ma);
@@ -900,6 +903,9 @@ public class FrmKhachhang extends javax.swing.JPanel {
         boolean kt = txtsdt.getText().trim().matches(chkDinhDangSdt);
         if (kt == false) {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng");
+            return;
+        }else if(txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))){
+            JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
             return;
         }
         KhachHangResponse kh = new KhachHangResponse();
