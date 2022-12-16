@@ -39,9 +39,9 @@ public class InHoaDon {
             Document document = new Document();
             PdfWriter.getInstance(document, file);
 
-            PdfPTable billTable = new PdfPTable(6);
+            PdfPTable billTable = new PdfPTable(7);
             billTable.setWidthPercentage(100);
-            billTable.setWidths(new float[]{1, 3, 2, 2, 2, 2});
+            billTable.setWidths(new float[]{1, 3, 2, 2, 2, 2,2});
             billTable.setSpacingBefore(30.0f);
             billTable.addCell(getBillHeaderCell("STT"));
             billTable.addCell(getBillHeaderCell("Tên sản phẩm"));
@@ -49,6 +49,7 @@ public class InHoaDon {
             billTable.addCell(getBillHeaderCell("Khuyến mại"));
             billTable.addCell(getBillHeaderCell("Số lượng"));
             billTable.addCell(getBillHeaderCell("Thành tiền"));
+            billTable.addCell(getBillHeaderCell("Tình trạng"));
 
             for (int i = 0; i < gioHang.size(); i++) {
                 billTable.addCell(getBillRowCell((i + 1) + ""));
@@ -57,6 +58,7 @@ public class InHoaDon {
                 billTable.addCell(getBillRowCell(gioHang.get(i).getKhuyenMai()));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getSoLuong()));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getTinhTrang()));
             }
             for (int j = 0; j < gioHang.size() + 10 - gioHang.size(); j++) {
                 billTable.addCell(getBillRowCell(" "));

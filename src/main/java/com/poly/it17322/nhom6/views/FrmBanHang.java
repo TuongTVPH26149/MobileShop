@@ -2163,7 +2163,11 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (dh.getTrangThai() == 2) {
             HoanImei();
         } else {
-            xoaImei();
+            if (dh.getSoLanShip() > 0) {
+                HoanImei();
+            } else {
+                xoaImei();
+            }
         }
         fillTableGH();
         ImeiXoa.dispose();
@@ -3257,6 +3261,12 @@ public class FrmBanHang extends javax.swing.JPanel {
         if (dh.getNhanHang() == 1) {
             if (dh.getSoLanShip() != 0) {
                 btnXacNhanImei.setEnabled(false);
+                btnSelectAllGH.setEnabled(false);
+                btnxoagh.setEnabled(false);
+            } else {
+                btnXacNhanImei.setEnabled(true);
+                btnSelectAllGH.setEnabled(true);
+                btnxoagh.setEnabled(true);
             }
             cboHinhThuc.setSelectedIndex(0);
             txtTienMat.setEnabled(false);
@@ -3696,10 +3706,10 @@ public class FrmBanHang extends javax.swing.JPanel {
                 for (int i = 0; i < tblGioHang.getRowCount(); i++) {
                     GioHangInRespone gh = new GioHangInRespone();
                     gh.setTenSP(tblGioHang.getValueAt(i, 0).toString());
-                    System.out.println(gh.getTenSP());
                     gh.setDonGia(tblGioHang.getValueAt(i, 4).toString());
                     gh.setKhuyenMai(tblGioHang.getValueAt(i, 5).toString());
                     gh.setSoLuong(tblGioHang.getValueAt(i, 6).toString());
+                    gh.setTinhTrang(tblGioHang.getValueAt(i, 8).toString());
                     gh.setThanhTien(tblGioHang.getValueAt(i, 7).toString());
                     ghin.add(gh);
                 }

@@ -23,4 +23,5 @@ public class GioHangInRespone {
     private String khuyenMai;
     private String soLuong;
     private String thanhTien;
+    private String tinhTrang;
 }

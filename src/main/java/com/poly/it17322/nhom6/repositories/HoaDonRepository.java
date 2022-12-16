@@ -156,7 +156,7 @@ public class HoaDonRepository {
                     query.setParameter("dk", dk);
                     query.setParameter("text", text);
                 } else {
-                    query = session.createQuery("FROM HoaDon where IdTK = :idtk and trangThai not in (3,4,5) and "
+                    query = session.createQuery("FROM HoaDon where (IdTK = :idtk or trangThai in (1,2)) and trangThai not in (3,4,5) and "
                             + "ma LIKE concat('%', :text ,'%') order by ma desc", HoaDon.class);
                     query.setParameter("idtk", idnv);
                     query.setParameter("text", text);
