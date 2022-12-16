@@ -758,12 +758,12 @@ public class FrmThongKe extends javax.swing.JPanel {
                 cout++;
                 d = tks.addDays(d, 1);
             }
-            if (cout <= 15) {
+            if (cout <= 60) {
                 lstBD = tks.getChartKhoang(txtFrom.getDate(), txtTo.getDate());
                 String title = "Thống kê từ " + sdf.format(txtFrom.getDate()) + " đến " + sdf.format(txtTo.getDate());
                 genChart(title, lstBD, "Ngày");
             } else {
-                JOptionPane.showMessageDialog(this, "chỉ lọc được trong khoảng 15 ngày");
+                JOptionPane.showMessageDialog(this, "chỉ lọc được trong khoảng 60 ngày");
             }
         } catch (Exception e) {
         }
@@ -856,7 +856,6 @@ public class FrmThongKe extends javax.swing.JPanel {
         paneChart.removeAll();
         paneChart.add(barChartPanel, BorderLayout.CENTER);
         paneChart.validate();
-
     }
 
     private void designTable() {
