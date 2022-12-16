@@ -297,7 +297,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
 
         cboThanhToan.setBackground(new java.awt.Color(0, 153, 153));
         cboThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cboThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Tiền mặt", "Chuyển khoản", " " }));
+        cboThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Tiền mặt", "Chuyể", "Chuyển khoản", "Kết hợp" }));
         cboThanhToan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboThanhToanItemStateChanged(evt);
@@ -401,7 +401,7 @@ public class FrmHoaDon extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1066, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 15, Short.MAX_VALUE)
