@@ -43,7 +43,7 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlView.removeAll();
         pnlView.add(new FrmBanHang(tkreponse));
         pnlView.setLayout(new FlowLayout());
-        avatar.setIcon(new ImageIcon("src/main/resources/avatar/" + tk.getHinhAnh() + ".png"));
+        avatar.setIcon(new ImageIcon(getClass().getResource("/avatar/" + tk.getHinhAnh() + ".png")));
         this.pack();
         if (tk.getChucVu() != 0) {
             pnlNhanVien.setVisible(false);
