@@ -1101,6 +1101,10 @@ public class FrmQuanLyKhuyenMai extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Không được quá 100%");
                     return false;
                 }
+                if (Integer.parseInt(txtGiaTri.getText()) <= 0) {
+                    JOptionPane.showMessageDialog(this, "Phải lớn hơn 0");
+                    return false;
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Giá trị không hợp lệ");
                 return false;

@@ -58,16 +58,13 @@ public class BanHangServiceIml implements IBanHangService {
 
     @Override
     public List<SanPhamBanHangResponse> getAllSpBh(String text) {
-        List<ChiTietSP> ctsp = ctsprepo.getSP(text);
+        List<ChiTietSP> ctsp = ctsprepo.getSP();
         List<SanPhamBanHangResponse> spbh = ctsp.stream().map(SanPhamBanHangResponse::new).collect(Collectors.toList());
         List<SanPhamBanHangResponse> lstSP = new ArrayList<>();
         for (SanPhamBanHangResponse s : spbh) {
-            SanPhamBanHangResponse sp = new SanPhamBanHangResponse();
-            try {
-                sp = s;
-            } catch (Exception e) {
+            if (s.getTenSanPham().contains(text)) {
+                lstSP.add(s);
             }
-            lstSP.add(sp);
         }
         return lstSP;
     }

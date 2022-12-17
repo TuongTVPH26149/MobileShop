@@ -110,22 +110,25 @@ public class KhuyenMaiServiceImpl {
     }
 
     public List<SanPhamBanHangResponse> getAllSp(int dk, String text) {
-        List<ChiTietSP> ctsp = sprepo.getSP(text);
-        List<SanPhamBanHangResponse> lstSP = new ArrayList<>();
-        for (ChiTietSP s : ctsp) {
-            if (dk == 0) {
-                lstSP.add(new SanPhamBanHangResponse(s));
-            }else if(dk == 1){
-                if (s.getKhuyenMai() == null) {
-                    lstSP.add(new SanPhamBanHangResponse(s));
+        List<SanPhamBanHangResponse> lstSP = new BanHangServiceIml().getAllSpBh(text);
+        List<SanPhamBanHangResponse> lstSPs = new ArrayList<>();
+        for (SanPhamBanHangResponse s : lstSP) {
+            switch (dk) {
+                case 0 ->
+                    lstSPs.add(s);
+                case 1 -> {
+                    if ("".equals(s.getKhuyenMai())) {
+                        lstSPs.add(s);
+                    }
                 }
-            }else{
-                if (s.getKhuyenMai() != null) {
-                    lstSP.add(new SanPhamBanHangResponse(s));
+                default -> {
+                    if (!"".equals(s.getKhuyenMai())) {
+                        lstSPs.add(s);
+                    }
                 }
             }
         }
-        return lstSP;
+        return lstSPs;
     }
 
     public boolean updateCTSP(UUID idsp, UUID idKM) {

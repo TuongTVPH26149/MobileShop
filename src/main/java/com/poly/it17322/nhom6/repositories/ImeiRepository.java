@@ -100,12 +100,11 @@ public class ImeiRepository {
         Imei imel = new Imei();
         try {
             session = HibernatUtil.getSession();
-            javax.persistence.Query query = session.createQuery("FROM Imei where ma = :ma", Imei.class);
+            Query query = session.createQuery("FROM Imei where ma = :ma", Imei.class);
             query.setParameter("ma", ma);
             imel = (Imei) query.getSingleResult();
         } catch (NoResultException e) {
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return imel;
     }
