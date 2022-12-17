@@ -4,9 +4,10 @@
  */
 package com.poly.it17322.nhom6.responses;
 
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.ImeiBan;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -15,12 +16,19 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ImelBanHangRespone {
+@NoArgsConstructor
+public class ImeiDaBanRespone {
+
     private UUID id;
     private String ma;
+    private String lyDo;
+    
 
-    public ImelBanHangRespone(Imel imel) {
+    public ImeiDaBanRespone(ImeiBan imel) {
         this.id = imel.getId();
         this.ma = imel.getMa();
+        if (imel.getLyDo() != null) {
+            this.lyDo = imel.getLyDo();
+        }
     }
 }

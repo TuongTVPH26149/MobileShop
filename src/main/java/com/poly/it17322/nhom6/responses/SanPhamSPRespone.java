@@ -29,6 +29,7 @@ public class SanPhamSPRespone {
     private String cpu;
     private String ram;
     private String rom;
+    private String mau;
     private BigDecimal gia;
     private int soluong;
     private int loaihang;
@@ -43,6 +44,7 @@ public class SanPhamSPRespone {
         this.cpu = sp.getCpu().getTen();
         this.ram = sp.getRam().getTen();
         this.rom = sp.getRom().getTen();
+        this.mau = sp.getMauSac().getTen();
         this.gia = sp.getGia();
         this.soluong = sp.getSoLuong();
         this.loaihang = sp.getLoaiHang();
@@ -51,6 +53,6 @@ public class SanPhamSPRespone {
     }
     
     public Object[] toDataRow(){
-        return new Object[]{ten,pin,manhinh,cpu,ram,rom,gia,soluong,(loaihang==0)?"Mới":"Cũ",false};
+        return new Object[]{ten,pin,manhinh,cpu,ram,rom,mau,gia,soluong,(loaihang==0)?"Mới":"Cũ",false};
     }
 }

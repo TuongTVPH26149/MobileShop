@@ -17,12 +17,14 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ImelAoSPRespone {
+public class ImeiAoSPRespone {
     private String ma;
 
-    public ImelAoSPRespone(String ma) {
+    public ImeiAoSPRespone(String ma) {
         this.ma = ma;
     }
     
-    
+    public Object[] toDaTaRow(){
+        return new Object[]{ma,false};
+    }
 }

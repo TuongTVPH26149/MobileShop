@@ -23,9 +23,9 @@ public class HoaDonInRespone {
     private String khachhang;
     private String sdtKH;
     private String diaChi;
-    private BigDecimal tongTienTam;
-    private BigDecimal giamGia;
-    private BigDecimal phiShip;
-    private BigDecimal tongTien;
+    private String tongTienTam;
+    private String giamGia;
+    private String phiShip;
+    private String tongTien;
     private String hinhThucThanhToan;
 }

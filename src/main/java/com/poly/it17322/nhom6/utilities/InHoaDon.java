@@ -14,7 +14,6 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.FontSelector;
@@ -30,19 +29,19 @@ import com.poly.it17322.nhom6.responses.HoaDonInRespone;
  */
 public class InHoaDon {
 
-    public static boolean makePDF(HoaDonInRespone hoaDon, List<GioHangInRespone> gioHang) {
+    public static boolean makePDF(HoaDonInRespone hoaDon, List<GioHangInRespone> gioHang, File filePDF) {
         String desc;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String date = format.format(new Date());
         try {
 
-            OutputStream file = new FileOutputStream(new File("D:/" + hoaDon.getMahd() + ".pdf"));
+            OutputStream file = new FileOutputStream(filePDF);
             Document document = new Document();
             PdfWriter.getInstance(document, file);
 
-            PdfPTable billTable = new PdfPTable(6);
+            PdfPTable billTable = new PdfPTable(7);
             billTable.setWidthPercentage(100);
-            billTable.setWidths(new float[]{1, 3, 2, 2, 2, 2});
+            billTable.setWidths(new float[]{1, 3, 2, 2, 2, 2,2});
             billTable.setSpacingBefore(30.0f);
             billTable.addCell(getBillHeaderCell("STT"));
             billTable.addCell(getBillHeaderCell("Tên sản phẩm"));
@@ -50,17 +49,20 @@ public class InHoaDon {
             billTable.addCell(getBillHeaderCell("Khuyến mại"));
             billTable.addCell(getBillHeaderCell("Số lượng"));
             billTable.addCell(getBillHeaderCell("Thành tiền"));
+            billTable.addCell(getBillHeaderCell("Tình trạng"));
 
             for (int i = 0; i < gioHang.size(); i++) {
                 billTable.addCell(getBillRowCell((i + 1) + ""));
                 billTable.addCell(getBillRowCell(gioHang.get(i).getTenSP()));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getDonGia() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getKhuyenMai() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getSoLuong() + ""));
-                billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien() + ""));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getDonGia()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getKhuyenMai()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getSoLuong()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getThanhTien()));
+                billTable.addCell(getBillRowCell(gioHang.get(i).getTinhTrang()));
             }
             for (int j = 0; j < gioHang.size() + 10 - gioHang.size(); j++) {
                 billTable.addCell(getBillRowCell(" "));
+                billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
@@ -91,7 +93,7 @@ public class InHoaDon {
             accounts.addCell(getAccountsCell("Tổng tiền thanh toán"));
             accounts.addCell(getAccountsCellR(hoaDon.getTongTien() + ""));
             PdfPCell summaryR = new PdfPCell(accounts);
-            summaryR.setColspan(4);
+            summaryR.setColspan(5);
             billTable.addCell(summaryR);
 
             PdfPTable describer = new PdfPTable(1);
@@ -120,7 +122,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getBillHeaderCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 11);
         font.setColor(BaseColor.GRAY);
@@ -133,7 +135,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getBillRowCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.BLACK);
@@ -148,7 +150,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getBillFooterCell(String text) throws Exception{
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.BLACK);
@@ -163,7 +165,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getValidityCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.GRAY);
@@ -175,7 +177,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getAccountsCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         fs.addFont(font);
@@ -188,7 +190,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getAccountsCellR(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         fs.addFont(font);
@@ -203,7 +205,7 @@ public class InHoaDon {
     }
 
     public static PdfPCell getdescCell(String text) throws Exception {
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/Helvetica.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs = new FontSelector();
         Font font = new Font(bf, 10);
         font.setColor(BaseColor.GRAY);
@@ -218,7 +220,7 @@ public class InHoaDon {
     public static PdfPTable tieuDe() throws Exception {
         PdfPTable tieuDe = new PdfPTable(1);
         tieuDe.setWidthPercentage(100);
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/tieude.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/tieude.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs1 = new FontSelector();
         FontSelector fs2 = new FontSelector();
         Font font1 = new Font(bf, 30);
@@ -246,7 +248,7 @@ public class InHoaDon {
         PdfPTable tieuDe = new PdfPTable(3);
         tieuDe.setWidthPercentage(100);
         tieuDe.setWidths(new float[]{5, 4, 3});
-        BaseFont bf = BaseFont.createFont("src/main/resource/font/tieude.ttf", BaseFont.IDENTITY_H, true);
+        BaseFont bf = BaseFont.createFont("src/main/resources/font/tieude.ttf", BaseFont.IDENTITY_H, true);
         FontSelector fs1 = new FontSelector();
         FontSelector fs2 = new FontSelector();
         Font font1 = new Font(bf, 11);

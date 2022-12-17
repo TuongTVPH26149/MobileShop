@@ -5,8 +5,8 @@
 package com.poly.it17322.nhom6.services;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
-import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import java.util.List;
 import java.util.UUID;
@@ -19,13 +19,13 @@ public interface ISanPhamSPService {
 
     public List<SanPhamSPRespone> getlist();
 
-    public boolean insert(SanPhamSPRespone sp,UUID idcpu,UUID idrom,UUID idram,UUID idms,UUID idmh,UUID idpin,List<ImelAoSPRespone> lstao);
+    public boolean insert(SanPhamSPRespone sp,UUID idcpu,UUID idrom,UUID idram,UUID idms,UUID idmh,UUID idpin,List<ImeiAoSPRespone> lstao);
 
-    public boolean update(SanPhamSPRespone sp,UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin);
+    public boolean update(SanPhamSPRespone spr, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImeiAoSPRespone> lstao);
     
-//    public List<SanPhamSPRespone> getlistTimKiem(String ten);
+    public List<SanPhamSPRespone> getlistTimKiem(String ten);
 //    
-//    public List<ImelSPRespone> getlistTimKiemImel(String ma);
+//    public List<ImeiSPRespone> getlistTimKiemImei(String ma);
     
     public List<SanPhamSPRespone> selectALLChiTietSPXoa();
 }

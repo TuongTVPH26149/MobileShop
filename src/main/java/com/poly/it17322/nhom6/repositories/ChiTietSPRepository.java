@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
+import com.poly.it17322.nhom6.domainmodels.KhuyenMai;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,16 +83,50 @@ public class ChiTietSPRepository {
     }
 
     public List<ChiTietSP> getSP() {
-        List<ChiTietSP> listChiTietSP = new ArrayList<>();
+        List<ChiTietSP> list = new ArrayList<>();
         try {
-            session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ChiTietSP Where deleted = 0 and soLuong > 0", ChiTietSP.class);
-            if (query.getResultList() != null) {
-                listChiTietSP = query.getResultList();
-            }
+            Session session = HibernatUtil.getSession();
+            String hql = "FROM ChiTietSP a Where a.soLuong > 0";
+            Query query = session.createQuery(hql,ChiTietSP.class);
+            list = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listChiTietSP;
+        return list;
     }
+
+    public KhuyenMai SelectKM(UUID Id) {
+        ChiTietSP ctsp = new ChiTietSP();
+        KhuyenMai km = new KhuyenMai();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP where Id = :Id", ChiTietSP.class);
+            query.setParameter("Id", Id);
+            ctsp = (ChiTietSP) query.getSingleResult();
+            if (ctsp.getKhuyenMai().getId() != null && ctsp.getKhuyenMai().getTrangThai() == 1) {
+                km = ctsp.getKhuyenMai();
+            }
+        } catch (Exception e) {
+        }
+        return km;
+    }
+
+    public List<ChiTietSP> SelectIDSPBYKM(UUID idKhuyenmai, String text) {
+        List<ChiTietSP> lstid = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ChiTietSP a where IdKhuyenMai = :idKhuyenmai and"
+                    + " (a.sanPham.ten LIKE concat('%', :input ,'%') "
+                    + "or a.ram.ten LIKE concat('%', :input ,'%') "
+                    + "or a.rom.ten LIKE concat('%', :input ,'%') "
+                    + "or a.mauSac.ten LIKE concat('%', :input ,'%')) ", ChiTietSP.class);
+            query.setParameter("idKhuyenmai", idKhuyenmai);
+            query.setParameter("input", text);
+            lstid = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lstid;
+    }
+
 }

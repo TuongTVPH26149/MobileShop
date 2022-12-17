@@ -19,8 +19,9 @@ import lombok.Setter;
 public class GioHangInRespone {
 
     private String tenSP;
-    private BigDecimal donGia;
-    private BigDecimal khuyenMai;
-    private int soLuong;
-    private BigDecimal thanhTien;
+    private String donGia;
+    private String khuyenMai;
+    private String soLuong;
+    private String thanhTien;
+    private String tinhTrang;
 }

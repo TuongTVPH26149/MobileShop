@@ -5,14 +5,16 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.CPU;
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.domainmodels.ManHinh;
 import com.poly.it17322.nhom6.domainmodels.Pin;
 import com.poly.it17322.nhom6.domainmodels.MauSac;
 import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.repositories.CPURepository;
-import com.poly.it17322.nhom6.repositories.ImelRepository;
+import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
+import com.poly.it17322.nhom6.repositories.ImeiRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
 import com.poly.it17322.nhom6.repositories.PinRepository;
@@ -20,13 +22,15 @@ import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.ManHinhRespone;
 import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
 import com.poly.it17322.nhom6.responses.RamRespone;
 import com.poly.it17322.nhom6.responses.RomRespone;
 import com.poly.it17322.nhom6.services.ISanPhamChiTietService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -44,7 +48,8 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
     SpCTSPRepository imelrepo = new SpCTSPRepository();
-    ImelRepository imrepo = new ImelRepository();
+    ImeiRepository imrepo = new ImeiRepository();
+    ChiTietSPRepository spct = new ChiTietSPRepository();
 
     @Override
     public List<RomRespone> getlistRom() {
@@ -55,7 +60,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean insertRom(RomRespone rom) {
         Rom r = new Rom();
-        r.setMa(rom.getMa());
+        int so = (romrepo.selectALLRom().size() + 1);
+        String maRom = "RO" + so;
+        r.setMa(maRom);
         r.setTen(rom.getTen());
         return romrepo.InsertRom(r);
     }
@@ -63,7 +70,6 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean updateRom(RomRespone rom) {
         Rom r = romrepo.SelectRomById(rom.getId());
-        r.setMa(rom.getMa());
         r.setTen(rom.getTen());
         return romrepo.UpdateRom(r);
     }
@@ -77,7 +83,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean insertRam(RamRespone ram) {
         Ram r = new Ram();
-        r.setMa(ram.getMa());
+        int so = (ramrepo.selectALLRam().size() + 1);
+        String maRam = "RA" + so;
+        r.setMa(maRam);
         r.setTen(ram.getTen());
         return ramrepo.InsertRam(r);
     }
@@ -85,7 +93,6 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean updateRam(RamRespone ram) {
         Ram r = ramrepo.SelectRamById(ram.getId());
-        r.setMa(ram.getMa());
         r.setTen(ram.getTen());
         return ramrepo.UpdateRam(r);
     }
@@ -99,7 +106,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean insertMauSac(MauSacRespone ms) {
         MauSac m = new MauSac();
-        m.setMa(ms.getMa());
+        int so = (mausacrepo.selectALLMauSac().size() + 1);
+        String maMS = "MS" + so;
+        m.setMa(maMS);
         m.setTen(ms.getTen());
         return mausacrepo.InsertMauSac(m);
     }
@@ -107,7 +116,6 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean updateMauSac(MauSacRespone ms) {
         MauSac m = mausacrepo.SelectMauSacById(ms.getId());
-        m.setMa(ms.getMa());
         m.setTen(ms.getTen());
         return mausacrepo.UpdateMauSac(m);
     }
@@ -121,7 +129,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean insertCPU(CPURespone cpu) {
         CPU c = new CPU();
-        c.setMa(cpu.getMa());
+        int so = (cpurepo.selectALLCPU().size() + 1);
+        String maCPU = "CPU" + so;
+        c.setMa(maCPU);
         c.setTen(cpu.getTen());
         return cpurepo.InsertCPU(c);
     }
@@ -129,7 +139,6 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean updateCPU(CPURespone cpu) {
         CPU c = cpurepo.SelectCPUById(cpu.getId());
-        c.setMa(cpu.getMa());
         c.setTen(cpu.getTen());
         return cpurepo.UpdateCPU(c);
     }
@@ -143,7 +152,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean insertManHinh(ManHinhRespone manhinh) {
         ManHinh m = new ManHinh();
-        m.setMa(manhinh.getMa());
+        int so = (mhrepo.SelectAllManHinh().size() + 1);
+        String maMH = "MH" + so;
+        m.setMa(maMH);
         m.setTen(manhinh.getTen());
         return mhrepo.InsertManHinh(m);
     }
@@ -151,7 +162,6 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean updateManHinh(ManHinhRespone manhinh) {
         ManHinh m = mhrepo.SelectManHinhById(manhinh.getId());
-        m.setMa(manhinh.getMa());
         m.setTen(manhinh.getTen());
         return mhrepo.UpdateManHinh(m);
     }
@@ -165,7 +175,9 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean insertPin(PinRespone pin) {
         Pin p = new Pin();
-        p.setMa(pin.getMa());
+        int so = (pinrepo.selectALLPin().size() + 1);
+        String maPin = "PI" + so;
+        p.setMa(maPin);
         p.setTen(pin.getTen());
         return pinrepo.InsertPin(p);
     }
@@ -173,19 +185,36 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Override
     public boolean updatePin(PinRespone pin) {
         Pin p = pinrepo.SelectPinById(pin.getId());
-        p.setMa(pin.getMa());
         p.setTen(pin.getTen());
         return pinrepo.UpdatePin(p);
     }
 
     @Override
-    public List<Imel> getListImel(UUID Idctsp) {       
-        return imelrepo.SelectCBOImelById(Idctsp);
+    public List<ImeiSPRespone> getListImei(UUID Idctsp) {
+        List<Imei> imeis = imelrepo.SelectCBOImeiById(Idctsp);
+        return imeis.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+
+    public boolean updateImei(ImeiSPRespone imel) {
+        Imei im = imrepo.SelectImeiById(imel.getId());
+        im.setMa(imel.getMa());
+        return imrepo.UpdateImei(im);
+    }
+    public List<ImeiSPRespone> getlistImel() {
+        List<Imei> imei = imrepo.selectALLImei();
+        return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
+    }
+    public List<ImeiSPRespone> getlistImelbyMa(String ma) {
+        List<Imei> imei = imelrepo.SelectImeiByMa(ma);
+        return imei.stream().map(ImeiSPRespone::new).collect(Collectors.toList());
     }
     
-    public boolean updateImel(ImelSPRespone imel){
-        Imel im = imrepo.SelectImelById(imel.getId());
-        im.setMa(imel.getMa());
-        return imrepo.UpdateImel(im);
+    public void deleteImei(String ma, UUID ctsp){
+        Imei i = imrepo.SelectImeiBanByMa(ma);
+        ChiTietSP sp = spct.SelectChiTietSPById(ctsp);
+        sp.setSoLuong(sp.getSoLuong()-1);
+        imrepo.delete(i);
+        spct.UpdateChiTietSP(sp);
     }
+    
 }

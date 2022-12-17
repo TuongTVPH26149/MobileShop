@@ -5,10 +5,17 @@
 package com.poly.it17322.nhom6.views;
 
 import com.github.sarxos.webcam.Webcam;
+import com.poly.it17322.nhom6.responses.KhuyenMaiDateRespone;
 import com.poly.it17322.nhom6.responses.UserResponse;
+import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
+import com.poly.it17322.nhom6.services.impl.KhuyenMaiServiceImpl;
+import com.poly.it17322.nhom6.utilities.MD5Util;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -20,6 +27,8 @@ public class FrmMainView extends javax.swing.JFrame {
 
     private int chosser;
     private UserResponse tkreponse;
+    private KhuyenMaiServiceImpl kms = new KhuyenMaiServiceImpl();
+    private DangNhapServiceImpl dangNhapService = new DangNhapServiceImpl();
 
     /**
      * Creates new form frmMain
@@ -34,11 +43,13 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlView.removeAll();
         pnlView.add(new FrmBanHang(tkreponse));
         pnlView.setLayout(new FlowLayout());
-        avatar.setIcon(new ImageIcon("src/main/resource/avatar/" + tk.getHinhAnh() + ".png"));
+        avatar.setIcon(new ImageIcon(getClass().getResource("/avatar/" + tk.getHinhAnh() + ".png")));
         this.pack();
         if (tk.getChucVu() != 0) {
             pnlNhanVien.setVisible(false);
         }
+        pnlBaoHanh.setVisible(false);
+        jobCheckKM();
     }
 
     /**
@@ -50,6 +61,17 @@ public class FrmMainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DoiMK = new javax.swing.JFrame();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtnhaplai = new javax.swing.JPasswordField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtpassmoi = new javax.swing.JPasswordField();
+        txtpasscu = new javax.swing.JPasswordField();
+        lbltentk = new javax.swing.JLabel();
+        btnDoi = new javax.swing.JButton();
         paneListService = new javax.swing.JPanel();
         pnlBanHang = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -75,13 +97,120 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlThongKe = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        avatar = new com.raven.avatar.ImageAvatar();
         lblDangXuat = new javax.swing.JLabel();
+        avatar = new com.poly.it17322.nhom6.utilities.ImageAvatar();
         pnlTiltle = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
         lblMini = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         pnlView = new javax.swing.JPanel();
+
+        DoiMK.setTitle("Đổi mật khẩu");
+        DoiMK.setBackground(new java.awt.Color(255, 255, 255));
+        DoiMK.setMaximumSize(new java.awt.Dimension(275, 290));
+        DoiMK.setMinimumSize(new java.awt.Dimension(275, 290));
+        DoiMK.setPreferredSize(new java.awt.Dimension(275, 290));
+        DoiMK.setSize(new java.awt.Dimension(275, 290));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Đổi mật khẩu");
+        jLabel17.setMaximumSize(new java.awt.Dimension(240, 40));
+        jLabel17.setMinimumSize(new java.awt.Dimension(240, 40));
+        jLabel17.setPreferredSize(new java.awt.Dimension(240, 40));
+
+        jLabel18.setText("Tên NV:");
+
+        txtnhaplai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnhaplaiActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Mật khẩu cũ:");
+
+        jLabel21.setText("Mật khẩu mới:");
+
+        jLabel22.setText("Nhập lại:");
+
+        txtpassmoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpassmoiActionPerformed(evt);
+            }
+        });
+
+        txtpasscu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpasscuActionPerformed(evt);
+            }
+        });
+
+        lbltentk.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        btnDoi.setText("Đổi mật khẩu");
+        btnDoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout DoiMKLayout = new javax.swing.GroupLayout(DoiMK.getContentPane());
+        DoiMK.getContentPane().setLayout(DoiMKLayout);
+        DoiMKLayout.setHorizontalGroup(
+            DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DoiMKLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtpassmoi))
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtnhaplai))
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbltentk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(DoiMKLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtpasscu))
+                    .addComponent(btnDoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        DoiMKLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel18, jLabel20, jLabel21, jLabel22});
+
+        DoiMKLayout.setVerticalGroup(
+            DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DoiMKLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(lbltentk, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtpasscu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtpassmoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DoiMKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(txtnhaplai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDoi)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        DoiMKLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lbltentk, txtnhaplai, txtpasscu, txtpassmoi});
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phần mềm quản lý cửa hàng điện thoại");
@@ -112,7 +241,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setIcon(new ImageIcon("src/main/resource/icon/shopping.png"));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel1.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -163,7 +292,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setIcon(new ImageIcon("src/main/resource/icon/product.png"));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product.png"))); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel3.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel3.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -214,7 +343,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setIcon(new ImageIcon("src/main/resource/icon/bill.png"));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
         jLabel5.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel5.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel5.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -265,7 +394,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setIcon(new ImageIcon("src/main/resource/icon/sale.png"));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sale.png"))); // NOI18N
         jLabel7.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel7.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel7.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -316,7 +445,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setIcon(new ImageIcon("src/main/resource/icon/baohanh.png"));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/baohanh.png"))); // NOI18N
         jLabel9.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel9.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel9.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -367,7 +496,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setIcon(new ImageIcon("src/main/resource/icon/nhanvien.png"));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/nhanvien.png"))); // NOI18N
         jLabel11.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel11.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel11.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -418,7 +547,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setIcon(new ImageIcon("src/main/resource/icon/khachhang.png"));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account.png"))); // NOI18N
         jLabel13.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel13.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel13.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -469,7 +598,7 @@ public class FrmMainView extends javax.swing.JFrame {
         });
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel15.setIcon(new ImageIcon("src/main/resource/icon/shopping.png"));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/thongke.png"))); // NOI18N
         jLabel15.setMaximumSize(new java.awt.Dimension(30, 50));
         jLabel15.setMinimumSize(new java.awt.Dimension(30, 50));
         jLabel15.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -505,13 +634,18 @@ public class FrmMainView extends javax.swing.JFrame {
 
         lblDangXuat.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
-        lblDangXuat.setIcon(new ImageIcon("src/main/resource/icon/logout.png")
-        );
+        lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         lblDangXuat.setText("Đăng xuất");
         lblDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDangXuatMouseClicked(evt);
+            }
+        });
+
+        avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                avatarMouseClicked(evt);
             }
         });
 
@@ -521,7 +655,6 @@ public class FrmMainView extends javax.swing.JFrame {
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
                 .addGroup(paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(avatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlBanHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -536,20 +669,20 @@ public class FrmMainView extends javax.swing.JFrame {
                             .addComponent(pnlBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(paneListServiceLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(lblDangXuat)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(avatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(lblDangXuat)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneListServiceLayout.setVerticalGroup(
             paneListServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneListServiceLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
+                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(pnlBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -565,7 +698,7 @@ public class FrmMainView extends javax.swing.JFrame {
                 .addComponent(pnlKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(lblDangXuat)
                 .addGap(5, 5, 5))
         );
@@ -587,7 +720,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExit.setIcon(new ImageIcon("src/main/resource/icon/close.png"));
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         lblExit.setMaximumSize(new java.awt.Dimension(30, 30));
         lblExit.setMinimumSize(new java.awt.Dimension(30, 30));
         lblExit.setPreferredSize(new java.awt.Dimension(30, 30));
@@ -602,7 +735,7 @@ public class FrmMainView extends javax.swing.JFrame {
 
         lblMini.setForeground(new java.awt.Color(255, 255, 255));
         lblMini.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMini.setIcon(new ImageIcon("src/main/resource/icon/mimus.png"));
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/mimus.png"))); // NOI18N
         lblMini.setMaximumSize(new java.awt.Dimension(30, 30));
         lblMini.setMinimumSize(new java.awt.Dimension(30, 30));
         lblMini.setPreferredSize(new java.awt.Dimension(30, 30));
@@ -815,35 +948,6 @@ public class FrmMainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pnlNhanVienMouseClicked
 
-    private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
-        // TODO add your handling code here:
-        if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(0, 123, 123));
-    }//GEN-LAST:event_pnlBaoHanhMouseExited
-
-    private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
-        // TODO add your handling code here:
-        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
-        });
-        if (chosser != 5)
-            pnlBaoHanh.setBackground(new Color(0, 180, 180));
-    }//GEN-LAST:event_pnlBaoHanhMouseEntered
-
-    private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
-        // TODO add your handling code here:
-        try {
-            Webcam.getDefault().close();
-            clearChosserListService();
-            chosser = 5;
-            pnlBaoHanh.setBackground(new Color(0, 153, 153));
-            pnlView.removeAll();
-            pnlView.add(new FrmBaoHanh());
-            pnlView.setLayout(new FlowLayout());
-            this.pack();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_pnlBaoHanhMouseClicked
-
     private void pnlKhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseExited
         // TODO add your handling code here:
         if (chosser != 4)
@@ -968,9 +1072,92 @@ public class FrmMainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblDangXuatMouseClicked
 
+    private void pnlBaoHanhMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseExited
+        // TODO add your handling code here:
+        if (chosser != 5)
+            pnlBaoHanh.setBackground(new Color(0, 123, 123));
+    }//GEN-LAST:event_pnlBaoHanhMouseExited
+
+    private void pnlBaoHanhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseEntered
+        // TODO add your handling code here:
+        pnlBaoHanh.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
+        if (chosser != 5)
+            pnlBaoHanh.setBackground(new Color(0, 180, 180));
+    }//GEN-LAST:event_pnlBaoHanhMouseEntered
+
+    private void pnlBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBaoHanhMouseClicked
+        // TODO add your handling code here:
+        try {
+            Webcam.getDefault().close();
+            clearChosserListService();
+            chosser = 5;
+            pnlBaoHanh.setBackground(new Color(0, 153, 153));
+            pnlView.removeAll();
+            pnlView.add(new FrmBaoHanh());
+            pnlView.setLayout(new FlowLayout());
+            this.pack();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pnlBaoHanhMouseClicked
+
+    private void txtnhaplaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnhaplaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnhaplaiActionPerformed
+
+    private void txtpassmoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpassmoiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpassmoiActionPerformed
+
+    private void txtpasscuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasscuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpasscuActionPerformed
+
+    private void avatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_avatarMouseClicked
+        // TODO add your handling code here:
+        DoiMK.setVisible(true);
+        DoiMK.setLocationRelativeTo(null);
+        lbltentk.setText(tkreponse.getHoTen());
+        txtnhaplai.setText("");
+        txtpasscu.setText("");
+        txtpassmoi.setText("");
+    }//GEN-LAST:event_avatarMouseClicked
+
+    private void btnDoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (MD5Util.md5EnCode(String.valueOf(txtpasscu.getPassword())).equalsIgnoreCase(tkreponse.getMatKhau())) {
+                if (String.valueOf(txtpassmoi.getPassword()).trim().length() < 8) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu trên 8 ký tự");
+                } else {
+                    if (String.valueOf(txtpassmoi.getPassword()).equals(String.valueOf(txtnhaplai.getPassword()))) {
+                        try {
+                            String password = MD5Util.md5EnCode(String.valueOf(txtpassmoi.getPassword()).trim());
+                            if (dangNhapService.resetPass(password, tkreponse.getMail())) {
+                                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
+                                DoiMK.setVisible(false);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại");
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(this, "Hệ thống đang bận");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "2 Mật khẩu không trùng khớp");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnDoiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.avatar.ImageAvatar avatar;
+    private javax.swing.JFrame DoiMK;
+    private com.poly.it17322.nhom6.utilities.ImageAvatar avatar;
+    private javax.swing.JButton btnDoi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -979,8 +1166,13 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -991,6 +1183,7 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblDangXuat;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMini;
+    private javax.swing.JLabel lbltentk;
     private javax.swing.JPanel paneListService;
     private javax.swing.JPanel pnlBanHang;
     private javax.swing.JPanel pnlBaoHanh;
@@ -1002,6 +1195,9 @@ public class FrmMainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlThongKe;
     private javax.swing.JPanel pnlTiltle;
     private javax.swing.JPanel pnlView;
+    private javax.swing.JPasswordField txtnhaplai;
+    private javax.swing.JPasswordField txtpasscu;
+    private javax.swing.JPasswordField txtpassmoi;
     // End of variables declaration//GEN-END:variables
 
     private void clearChosserListService() {
@@ -1013,5 +1209,33 @@ public class FrmMainView extends javax.swing.JFrame {
         pnlNhanVien.setBackground(new Color(0, 123, 123));
         pnlKhachHang.setBackground(new Color(0, 123, 123));
         pnlThongKe.setBackground(new Color(0, 123, 123));
+    }
+
+    private void jobCheckKM() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    List<KhuyenMaiDateRespone> lstKM = kms.getListDate();
+                    for (KhuyenMaiDateRespone s : lstKM) {
+                        int resultBD = LocalDateTime.now().compareTo(s.getNgayBD().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        int resultKT = LocalDateTime.now().compareTo(s.getNgayKT().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                        if (resultBD < 0) {
+                            kms.updateTTKM(0, s.getId());
+                        } else {
+                            if (resultKT >= 0) {
+                                kms.updateTTKM(2, s.getId());
+                            } else {
+                                kms.updateTTKM(1, s.getId());
+                            }
+                        }
+                    }
+                    try {
+                        Thread.sleep(5000);
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }.start();
     }
 }

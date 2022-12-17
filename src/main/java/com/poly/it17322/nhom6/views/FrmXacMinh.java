@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.views;
 
 import com.poly.it17322.nhom6.utilities.SenderMailUtil;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -102,6 +103,7 @@ public class FrmXacMinh extends javax.swing.JFrame {
         txtCode.setBackground(new java.awt.Color(0, 102, 102));
         txtCode.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCode.setForeground(new java.awt.Color(255, 255, 255));
+        txtCode.setToolTipText("Mã xác minh");
         txtCode.setBorder(null);
         txtCode.setCaretColor(new java.awt.Color(255, 255, 255));
         txtCode.setMaximumSize(new java.awt.Dimension(260, 20));
@@ -145,7 +147,7 @@ public class FrmXacMinh extends javax.swing.JFrame {
         lblTitile.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         lblTitile.setForeground(new java.awt.Color(255, 255, 255));
         lblTitile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitile.setText("Verification ");
+        lblTitile.setText("Xác minh mã");
         lblTitile.setMaximumSize(new java.awt.Dimension(300, 30));
         lblTitile.setMinimumSize(new java.awt.Dimension(300, 30));
         lblTitile.setPreferredSize(new java.awt.Dimension(300, 30));
@@ -163,7 +165,7 @@ public class FrmXacMinh extends javax.swing.JFrame {
         btnSubmit.setBackground(new java.awt.Color(255, 255, 255));
         btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(51, 51, 51));
-        btnSubmit.setText("Submit");
+        btnSubmit.setText("Xong");
         btnSubmit.setBorder(null);
         btnSubmit.setBorderPainted(false);
         btnSubmit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -196,6 +198,7 @@ public class FrmXacMinh extends javax.swing.JFrame {
         btnUndoCode.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnUndoCode.setForeground(new java.awt.Color(51, 51, 51));
         btnUndoCode.setIcon(new ImageIcon("src/main/resource/icon/refresh.png"));
+        btnUndoCode.setToolTipText("Gửi lại mã");
         btnUndoCode.setBorder(null);
         btnUndoCode.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUndoCode.setMaximumSize(new java.awt.Dimension(30, 30));

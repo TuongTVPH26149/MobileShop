@@ -25,6 +25,7 @@ public class KhuyenMaiResponse {
     private Date ngayBD;
     private Date ngayKT;
     private int giaTri;
+    private int loai;
     private int trangThai;
 
     public KhuyenMaiResponse() {
@@ -37,11 +38,13 @@ public class KhuyenMaiResponse {
         this.ngayBD = km.getNgayBD();
         this.ngayKT = km.getNgayKT();
         this.giaTri = km.getGiaTri();
+        this.loai = km.getLoaiKM();
         this.trangThai = km.getTrangThai();
     }
 
     public Object[] toDataRow() {
-        return new Object[]{id, ma, ten, ngayBD, ngayKT, giaTri, trangThai};
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mmaa");
+        return new Object[]{ma, ten, sdf.format(ngayBD), sdf.format(ngayKT), giaTri+(loai==0?"%":" VND"), trangThai==0?"Sắp diễn ra":trangThai==1?"Đang diễn ra":"Đã kết thúc", false};
     }
 
 }

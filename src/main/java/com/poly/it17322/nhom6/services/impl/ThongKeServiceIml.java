@@ -9,13 +9,15 @@ import com.poly.it17322.nhom6.domainmodels.HoaDonChiTiet;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonChiTietRepository;
 import com.poly.it17322.nhom6.repositories.HoaDonRepository;
+import com.poly.it17322.nhom6.responses.BieuDoRespone;
 import com.poly.it17322.nhom6.responses.HoaDonThongKeRespone;
 import com.poly.it17322.nhom6.responses.top5sprespone;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
@@ -56,7 +58,7 @@ public class ThongKeServiceIml {
                     + "join Rom E on E.Id = A.IdRom\n"
                     + "join HoaDonChiTiet G on G.IdChiTietSP = A.Id\n"
                     + "join HoaDon H on G.IdHoaDon = H.Id\n"
-                    + "where ngayThanhToan >= :from and ngayThanhToan <= :to and H.TrangThai = 4\n"
+                    + "where ngayThanhToan >= :from and ngayThanhToan <= :to and H.TrangThai in (3,4)\n"
                     + "Group by B.Ten, C.Ten, D.Ten,E.Ten\n"
                     + "order by SUM(G.SoLuong) desc");
             query.setParameter("from", from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -77,27 +79,71 @@ public class ThongKeServiceIml {
         return lstTop5;
     }
 
-    public BigDecimal getWeekChar(Date to) {
-        List<HoaDon> lst = hd.getHDByDate(to, to);
-        BigDecimal b = new BigDecimal(0);
-        for (HoaDon s : lst) {
-            try {
-                b = b.add(s.getTongTien());
-            } catch (Exception e) {
+    public BigDecimal getChartYear(int year) {
+        Session session = HibernatUtil.getSession();
+        Query query = session.createQuery("from HoaDon where YEAR(NgayThanhToan) = :year and TrangThai in (3,4)", HoaDon.class);
+        query.setParameter("year", year);
+        BigDecimal tien = new BigDecimal(0);
+        try {
+            for (HoaDon s : (List<HoaDon>) query.getResultList()) {
+                tien = tien.add(s.getTongTien());
             }
+        } catch (Exception e) {
         }
-        return b;
+        return tien;
     }
-    
-    public BigDecimal getYearChar(Date now, Date to) {
-        List<HoaDon> lst = hd.getHDByDate(now, to);
-        BigDecimal b = new BigDecimal(0);
-        for (HoaDon s : lst) {
-            try {
-                b = b.add(s.getTongTien());
-            } catch (Exception e) {
+
+    public BigDecimal getChartMonth(int year, int month) {
+        Session session = HibernatUtil.getSession();
+        Query query = session.createQuery("from HoaDon where MONTH(NgayThanhToan) = :month and YEAR(NgayThanhToan) = :year and TrangThai in (3,4)", HoaDon.class);
+        query.setParameter("month", month);
+        query.setParameter("year", year);
+        BigDecimal tien = new BigDecimal(0);
+        try {
+            for (HoaDon s : (List<HoaDon>) query.getResultList()) {
+                tien = tien.add(s.getTongTien());
             }
+        } catch (Exception e) {
         }
-        return b;
+        return tien;
     }
+
+    public BigDecimal getChartDay(int year, int month, int day) {
+        Session session = HibernatUtil.getSession();
+        Query query = session.createQuery("from HoaDon where MONTH(NgayThanhToan) = :month and YEAR(NgayThanhToan) = :year and DAY(NgayThanhToan) = :day and TrangThai in (3,4)", HoaDon.class);
+        query.setParameter("day", day);
+        query.setParameter("month", month);
+        query.setParameter("year", year);
+        BigDecimal tien = new BigDecimal(0);
+        try {
+            for (HoaDon s : (List<HoaDon>) query.getResultList()) {
+                tien = tien.add(s.getTongTien());
+            }
+        } catch (Exception e) {
+        }
+        return tien;
+    }
+
+    public Date addDays(Date date, int days) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        return cal.getTime();
+    }
+
+    public List<BieuDoRespone> getChartKhoang(Date from, Date to) {
+        List<BieuDoRespone> lstBieuDo = new ArrayList<>();
+        Date d = from;
+        while (d.compareTo(to) <= 0) {
+            List<HoaDon> list = hd.getHDByDate(d, d);
+            BigDecimal tongTien = new BigDecimal(0);
+            for (HoaDon s : list) {
+                tongTien = tongTien.add(s.getTongTien());
+            }
+            lstBieuDo.add(new BieuDoRespone(new SimpleDateFormat("dd-MM-yyyy").format(d), tongTien));
+            d = addDays(d, 1);
+        }
+        return lstBieuDo;
+    }
+
 }

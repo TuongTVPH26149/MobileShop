@@ -4,12 +4,13 @@
  */
 package com.poly.it17322.nhom6.views;
 
+import com.github.sarxos.webcam.Webcam;
 import com.poly.it17322.nhom6.responses.UserResponse;
 import com.poly.it17322.nhom6.services.IDangNhapService;
 import com.poly.it17322.nhom6.services.impl.DangNhapServiceImpl;
 import com.poly.it17322.nhom6.utilities.MD5Util;
 import java.awt.Color;
-import javax.swing.ImageIcon;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,10 +25,10 @@ public class FrmDangNhap extends javax.swing.JFrame {
      * Creates new form FrmDangNhap
      */
     public FrmDangNhap() {
+        Webcam.getDefault().close();
         initComponents();
         setLocationRelativeTo(null);
-        txtTaiKhoan.setText("admin");
-        txtMatKhau.setText("admin");
+        txtTaiKhoan.requestFocus();
     }
 
     /**
@@ -65,7 +66,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
 
         lblExit.setForeground(new java.awt.Color(255, 255, 255));
         lblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExit.setIcon(new ImageIcon("src/main/resource/icon/close.png"));
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         lblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblExit.setMaximumSize(new java.awt.Dimension(30, 30));
         lblExit.setMinimumSize(new java.awt.Dimension(30, 30));
@@ -82,10 +83,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(340, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new ImageIcon("src/main/resource/icon/account.png"));
-        jLabel1.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel1.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel1.setPreferredSize(new java.awt.Dimension(24, 24));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account.png"))); // NOI18N
 
         jPanel3.setMaximumSize(new java.awt.Dimension(304, 1));
         jPanel3.setMinimumSize(new java.awt.Dimension(304, 1));
@@ -105,11 +103,28 @@ public class FrmDangNhap extends javax.swing.JFrame {
         txtTaiKhoan.setBackground(new java.awt.Color(0, 102, 102));
         txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        txtTaiKhoan.setToolTipText("Email tài khoản");
         txtTaiKhoan.setBorder(null);
         txtTaiKhoan.setCaretColor(new java.awt.Color(255, 255, 255));
         txtTaiKhoan.setMaximumSize(new java.awt.Dimension(303, 20));
         txtTaiKhoan.setMinimumSize(new java.awt.Dimension(303, 20));
+        txtTaiKhoan.setOpaque(false);
         txtTaiKhoan.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTaiKhoanMouseClicked(evt);
+            }
+        });
+        txtTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTaiKhoanActionPerformed(evt);
+            }
+        });
+        txtTaiKhoan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTaiKhoanKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,7 +132,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,7 +146,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -142,7 +157,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         lblTitile.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         lblTitile.setForeground(new java.awt.Color(255, 255, 255));
         lblTitile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitile.setText("Login");
+        lblTitile.setText("Đăng nhập");
         lblTitile.setMaximumSize(new java.awt.Dimension(330, 30));
         lblTitile.setMinimumSize(new java.awt.Dimension(330, 30));
         lblTitile.setPreferredSize(new java.awt.Dimension(330, 30));
@@ -163,10 +178,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(340, 30));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new ImageIcon("src/main/resource/icon/password.png"));
-        jLabel3.setMaximumSize(new java.awt.Dimension(24, 24));
-        jLabel3.setMinimumSize(new java.awt.Dimension(24, 24));
-        jLabel3.setPreferredSize(new java.awt.Dimension(24, 24));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/password.png"))); // NOI18N
 
         jPanel5.setMaximumSize(new java.awt.Dimension(304, 1));
         jPanel5.setMinimumSize(new java.awt.Dimension(304, 1));
@@ -185,11 +197,17 @@ public class FrmDangNhap extends javax.swing.JFrame {
         txtMatKhau.setBackground(new java.awt.Color(0, 102, 102));
         txtMatKhau.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        txtMatKhau.setToolTipText("Mật khẩu");
         txtMatKhau.setBorder(null);
         txtMatKhau.setCaretColor(new java.awt.Color(255, 255, 255));
         txtMatKhau.setMaximumSize(new java.awt.Dimension(303, 20));
         txtMatKhau.setMinimumSize(new java.awt.Dimension(303, 20));
         txtMatKhau.setPreferredSize(new java.awt.Dimension(303, 20));
+        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatKhauKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -197,7 +215,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,10 +237,11 @@ public class FrmDangNhap extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(51, 51, 51));
-        btnLogin.setText("Login");
+        btnLogin.setText("Đăng nhập");
         btnLogin.setBorder(null);
         btnLogin.setBorderPainted(false);
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.setFocusable(false);
         btnLogin.setMaximumSize(new java.awt.Dimension(70, 25));
         btnLogin.setMinimumSize(new java.awt.Dimension(70, 25));
         btnLogin.setPreferredSize(new java.awt.Dimension(70, 25));
@@ -234,7 +253,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
 
         lblQuenMatKhau.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblQuenMatKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lblQuenMatKhau.setText("Forgot password ?");
+        lblQuenMatKhau.setText("Quên mật khẩu?");
         lblQuenMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblQuenMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -324,7 +343,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 return;
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -359,37 +377,28 @@ public class FrmDangNhap extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_lblTitileMousePressed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTaiKhoanActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmDangNhap().setVisible(true);
-            }
-        });
-    }
+    private void txtTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTaiKhoanMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTaiKhoanMouseClicked
+
+    private void txtTaiKhoanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTaiKhoanKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtMatKhau.requestFocus();
+        }
+    }//GEN-LAST:event_txtTaiKhoanKeyPressed
+
+    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnLogin.doClick();
+        }
+    }//GEN-LAST:event_txtMatKhauKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

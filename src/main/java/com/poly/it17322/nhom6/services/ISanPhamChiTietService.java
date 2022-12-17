@@ -4,9 +4,9 @@
  */
 package com.poly.it17322.nhom6.services;
 
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.responses.CPURespone;
-import com.poly.it17322.nhom6.responses.ImelSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.ManHinhRespone;
 import com.poly.it17322.nhom6.responses.PinRespone;
 import com.poly.it17322.nhom6.responses.MauSacRespone;
@@ -57,7 +57,7 @@ public interface ISanPhamChiTietService {
 
     public boolean updateCPU(CPURespone cpu);
 
-    public List<Imel> getListImel(UUID Idctsp);
+    public List<ImeiSPRespone> getListImei(UUID Idctsp);
     
     
 

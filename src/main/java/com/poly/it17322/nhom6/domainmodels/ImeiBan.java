@@ -21,19 +21,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Nationalized;
 
 /**
  *
  * @author admin
  */
 @Entity
-@Table(name = "ImelBan")
+@Table(name = "ImeiBan")
 @Setter
 @Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImelBan implements Serializable {
+public class ImeiBan implements Serializable {
 
     @Id
     @Column(name = "Id")
@@ -49,6 +50,10 @@ public class ImelBan implements Serializable {
 
     @Column(name = "TrangThai")
     private int trangThai;
+    
+    @Nationalized
+    @Column(name = "LyDo", length = 100)
+    private String lyDo;
 
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.DATE)

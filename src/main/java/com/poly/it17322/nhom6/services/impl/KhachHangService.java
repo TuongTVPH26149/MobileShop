@@ -6,14 +6,12 @@ package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
 import com.poly.it17322.nhom6.domainmodels.KhachHang;
-import com.poly.it17322.nhom6.domainmodels.Ram;
 import com.poly.it17322.nhom6.repositories.KhachHangRepository;
 import com.poly.it17322.nhom6.repositories.ChucNangKHRepository;
 import com.poly.it17322.nhom6.responses.KhachHangResponse;
-import com.poly.it17322.nhom6.responses.RamRespone;
+import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
 import com.poly.it17322.nhom6.services.IKhachHangService;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,6 +30,27 @@ public class KhachHangService implements IKhachHangService {
         try {
             List<KhachHang> khs = KHRepo.selectALLKhachHang();
             return khs.stream().map(KhachHangResponse::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<khachHangBanHangRespone> getKHBH() {
+        try {
+            List<KhachHang> khs = KHRepo.selectKHBH();
+            return khs.stream().map(khachHangBanHangRespone::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+    @Override
+    public List<khachHangBanHangRespone> getKHBHsdt(String sdt) {
+        try {
+            List<KhachHang> khs = TKrepo.timkiem(sdt);
+            return khs.stream().map(khachHangBanHangRespone::new).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -84,6 +103,12 @@ public class KhachHangService implements IKhachHangService {
     @Override
     public List<HoaDon> selectallhoadon(UUID IdKH) {
         return TKrepo.selectallhoadon(IdKH);
+    }
+
+    @Override
+    public List<KhachHangResponse> loctheohang(int capdo) {
+        List<KhachHang> lst = TKrepo.loctheohang(capdo);
+        return lst.stream().map(KhachHangResponse::new).collect(Collectors.toList());
     }
 
 }

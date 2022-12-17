@@ -22,15 +22,22 @@ public class KhuyenMaiRepository {
 
     private Session session = HibernatUtil.getSession();
 
-    public List<KhuyenMai> selectALLKhuyenMai() {
+    public List<KhuyenMai> selectALLKhuyenMai(int trangThai, String text) {
         List<KhuyenMai> listKhuyenMai = new ArrayList<>();
         try {
+            Query query;
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM KhuyenMai", KhuyenMai.class);
-            listKhuyenMai = query.getResultList();
-            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                listKhuyenMai = query.getResultList();
+            if (trangThai == 3) {
+                query = session.createQuery("FROM KhuyenMai Where ten like concat('%', :text ,'%') or ma like concat('%', :text ,'%')order by ma", KhuyenMai.class);
+                query.setParameter("text", text);
+            } else {
+                query = session.createQuery("FROM KhuyenMai where trangThai = :trangThai and ten like concat('%', :text ,'%') order by ma", KhuyenMai.class);
+                query.setParameter("trangThai", trangThai);
+                query.setParameter("text", text);
             }
+            listKhuyenMai = query.getResultList();
+        } catch (NullPointerException e) {
+            return new ArrayList<>();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,8 +57,21 @@ public class KhuyenMaiRepository {
         return sanPham;
     }
 
+    public KhuyenMai SelectKhuyenMaiById(String ma) {
+        KhuyenMai sanPham = new KhuyenMai();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM KhuyenMai where ma = :ma", KhuyenMai.class);
+            query.setParameter("ma", ma);
+            sanPham = (KhuyenMai) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sanPham;
+    }
+
     public Boolean InsertKhuyenMai(KhuyenMai sanPham) {
-        try{
+        try {
             session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
             tran.begin();
@@ -78,13 +98,6 @@ public class KhuyenMaiRepository {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        List<KhuyenMai> lists = new KhuyenMaiRepository().selectALLKhuyenMai();
-        for (KhuyenMai km : lists) {
-            System.out.println(km.toString());
-        }
     }
 
     public List<KhuyenMai> getByCodeAndCreateDate(String ma, Date from, Date to) {

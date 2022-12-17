@@ -7,10 +7,11 @@ package com.poly.it17322.nhom6.services;
 import com.poly.it17322.nhom6.responses.DonHangRespone;
 import com.poly.it17322.nhom6.responses.GioHangRespone;
 import com.poly.it17322.nhom6.responses.HoaDonBanHangRespone;
-import com.poly.it17322.nhom6.responses.ImelBanHangRespone;
-import com.poly.it17322.nhom6.responses.ImelDaBanRespone;
+import com.poly.it17322.nhom6.responses.ImeiBanHangRespone;
+import com.poly.it17322.nhom6.responses.ImeiDaBanRespone;
 import com.poly.it17322.nhom6.responses.SanPhamBanHangResponse;
 import com.poly.it17322.nhom6.responses.khachHangBanHangRespone;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,17 +21,19 @@ import java.util.UUID;
  */
 public interface IBanHangService {
 
-    List<HoaDonBanHangRespone> getALLHoaDonBanHang();
-
-    boolean updateHD(UUID idhd, int trangThai,String diaChi);
+    List<HoaDonBanHangRespone> getALLHoaDonBanHang(UUID idNV, int dk, boolean cv, String text);
+    
+    void updateKM(UUID idhdct, BigDecimal km);
 
     khachHangBanHangRespone getkh(UUID ma);
 
-    List<SanPhamBanHangResponse> getAllSpBh();
+    List<SanPhamBanHangResponse> getAllSpBh(String text);
 
-    List<ImelDaBanRespone> getImelBan(UUID idHDCT);
+    List<ImeiDaBanRespone> getImeiBan(UUID idHDCT, String text);
+    
 
-    boolean deleteImelBan(String ma);
+    boolean deleteImeiBan(UUID idImeiBan);
+    boolean HoanImeiBan(UUID idImeiBan, UUID hd, GioHangRespone gh);
 
     boolean updateGHXoa(UUID idHDCT);
 
@@ -38,11 +41,9 @@ public interface IBanHangService {
 
     boolean unGH(UUID idHD);
 
-    boolean thanhToan(DonHangRespone dh);
+    List<ImeiBanHangRespone> getImei(UUID id, String text);
 
-    List<ImelBanHangRespone> getImel(UUID id);
-
-    boolean addSpSanner(String maImel, UUID idHD);
+    boolean addSpSanner(String maImei, UUID idHD);
 
     DonHangRespone getDonHang(UUID id);
 
@@ -50,13 +51,13 @@ public interface IBanHangService {
 
     boolean updateGH(UUID idhd, UUID idsp, int sl);
 
-    boolean createHoaDon(UUID idNV);
+    boolean createHoaDon(UUID idNV, int trangThai);
 
-    boolean createImelBan(String maImel, UUID hoaDon);
+    boolean clearHoaDon (DonHangRespone dh);
+
+    boolean createImeiBan(String maImei, UUID hoaDon);
 
     boolean updateDonHang(DonHangRespone dh);
 
-    boolean huyHoaDon(UUID idHD);
-
-    boolean setGiohang(UUID idImel, UUID idSP, UUID idHD);
+    public void updatRank(UUID id);
 }

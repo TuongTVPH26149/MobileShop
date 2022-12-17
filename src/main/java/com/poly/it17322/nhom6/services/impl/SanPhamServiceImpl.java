@@ -5,12 +5,12 @@
 package com.poly.it17322.nhom6.services.impl;
 
 import com.poly.it17322.nhom6.domainmodels.ChiTietSP;
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.domainmodels.Rom;
 import com.poly.it17322.nhom6.domainmodels.SanPham;
 import com.poly.it17322.nhom6.repositories.CPURepository;
 import com.poly.it17322.nhom6.repositories.ChiTietSPRepository;
-import com.poly.it17322.nhom6.repositories.ImelRepository;
+import com.poly.it17322.nhom6.repositories.ImeiRepository;
 import com.poly.it17322.nhom6.repositories.ManHinhRepository;
 import com.poly.it17322.nhom6.repositories.MauSacRepository;
 import com.poly.it17322.nhom6.repositories.PinRepository;
@@ -18,7 +18,8 @@ import com.poly.it17322.nhom6.repositories.RamRepositry;
 import com.poly.it17322.nhom6.repositories.RomRepository;
 import com.poly.it17322.nhom6.repositories.SanPhamReposiry;
 import com.poly.it17322.nhom6.repositories.SpCTSPRepository;
-import com.poly.it17322.nhom6.responses.ImelAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiAoSPRespone;
+import com.poly.it17322.nhom6.responses.ImeiSPRespone;
 import com.poly.it17322.nhom6.responses.SanPhamSPRespone;
 import com.poly.it17322.nhom6.services.ISanPhamSPService;
 import java.text.SimpleDateFormat;
@@ -42,7 +43,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
     CPURepository cpurepo = new CPURepository();
     ManHinhRepository mhrepo = new ManHinhRepository();
     PinRepository pinrepo = new PinRepository();
-    ImelRepository imelrepo = new ImelRepository();
+    ImeiRepository imelrepo = new ImeiRepository();
     SpCTSPRepository timkiemrepo = new SpCTSPRepository();
     @Override
     public List<SanPhamSPRespone> getlist() {
@@ -67,7 +68,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
     }
 
     @Override
-    public boolean insert(SanPhamSPRespone sp, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImelAoSPRespone> lstao) {
+    public boolean insert(SanPhamSPRespone sp, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImeiAoSPRespone> lstao) {
         try {
             SanPham s = new SanPham();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
@@ -89,7 +90,7 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
             ctsp.setMoTa(sp.getMota());
             ctsprepo.InsertChiTietSP(ctsp);
             System.out.println(ctsp.getId());
-            insertImel(lstao, ctsp);
+            insertImei(lstao, ctsp);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,18 +99,18 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
 
     }
 
-    public void insertImel(List<ImelAoSPRespone> ma, ChiTietSP ctsp) {
-        for (ImelAoSPRespone x : ma) {
-            Imel imel = new Imel();
+    public void insertImei(List<ImeiAoSPRespone> ma, ChiTietSP ctsp) {
+        for (ImeiAoSPRespone x : ma) {
+            Imei imel = new Imei();
             imel.setMa(x.getMa());
             imel.setChiTietSP(ctsp);
             imel.setTrangThai(1);
-            imelrepo.InsertImel(imel);
+            imelrepo.InsertImei(imel);
         }
     }
 
     @Override
-    public boolean update(SanPhamSPRespone spr, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin) {
+    public boolean update(SanPhamSPRespone spr, UUID idcpu, UUID idrom, UUID idram, UUID idms, UUID idmh, UUID idpin, List<ImeiAoSPRespone> lstao) {
         ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(spr.getId());
         SanPham sp = sprepo.SelectSanPhamById(ctsp.getSanPham().getId());
         sp.setTen(spr.getTen());
@@ -124,6 +125,14 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         ctsp.setLoaiHang(spr.getLoaihang());
         ctsp.setMoTa(spr.getMota());
         ctsp.setLoaiHang(spr.getLoaihang());
+        ctsprepo.UpdateChiTietSP(ctsp);
+        insertImei(lstao, ctsp);
+        return true;
+    }
+    public boolean updateXoa(SanPhamSPRespone spr) {
+        ChiTietSP ctsp = ctsprepo.SelectChiTietSPById(spr.getId());
+        SanPham sp = sprepo.SelectSanPhamById(ctsp.getSanPham().getId());
+        ctsp.setDeleted(spr.isDeleted());
         return ctsprepo.UpdateChiTietSP(ctsp);
     }
 
@@ -143,13 +152,19 @@ public class SanPhamServiceImpl implements ISanPhamSPService {
         ctsp.setDeleted(deleted);
         return ctsprepo.UpdateChiTietSP(ctsp);
     }
-//    @Override
-//    public List<SanPhamSPRespone> getlistTimKiem(String ten) {
-//        List<SanPham> sanphams = timkiemrepo.timKiem(ten);
-//       return sanphams.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
-//    }
-//       public List<ImelSPRespone> getlistTimKiemImel(String ma) {
-//        List<Imel> imel = timkiemrepo.timKiemImel(ma);
-//       return imel.stream().map(ImelSPRespone::new).collect(Collectors.toList());
-//    }
+    @Override
+    public List<SanPhamSPRespone> getlistTimKiem(String ten) {
+        List<ChiTietSP> ctsps = timkiemrepo.TimKiemSP(ten);
+       return ctsps.stream().map(SanPhamSPRespone::new).collect(Collectors.toList());
+    }
+    public boolean deleteImei(ImeiSPRespone imei){
+        try {
+            Imei im = imelrepo.SelectImeiById(imei.getId());
+            return timkiemrepo.deleteImei(im);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+       
 }

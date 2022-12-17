@@ -5,6 +5,7 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
+import com.poly.it17322.nhom6.responses.NhanVienRespone;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,13 @@ public class ChucNangNhanVienRepository {
 
     private Session session = HibernatUtil.getSession();
     
-    public List<TaiKhoan> timKiem(String ten) {
+    public List<TaiKhoan> timKiem(String ten, int trangThai) {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM TaiKhoan WHERE HoTen like :ten", TaiKhoan.class);
-            query.setParameter("ten", ten + "%");
+            Query query = session.createQuery("FROM TaiKhoan WHERE HoTen like :ten and TrangThai = :trangThai order by Ma desc", TaiKhoan.class);
+            query.setParameter("ten","%" + ten + "%");
+            query.setParameter("trangThai", trangThai);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listTaiKhoan = query.getResultList();
             }
@@ -38,7 +40,7 @@ public class ChucNangNhanVienRepository {
         List<TaiKhoan> listTaiKhoan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM TaiKhoan WHERE TrangThai = :trangThai", TaiKhoan.class);
+            Query query = session.createQuery("FROM TaiKhoan WHERE TrangThai = :trangThai order by Ma desc", TaiKhoan.class);
             query.setParameter("trangThai", trangThai);
             listTaiKhoan = query.getResultList();
         } catch (Exception e) {

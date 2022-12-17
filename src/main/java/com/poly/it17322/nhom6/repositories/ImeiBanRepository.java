@@ -5,7 +5,7 @@
 package com.poly.it17322.nhom6.repositories;
 
 import com.poly.it17322.nhom6.domainmodels.HoaDon;
-import com.poly.it17322.nhom6.domainmodels.ImelBan;
+import com.poly.it17322.nhom6.domainmodels.ImeiBan;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,51 +19,51 @@ import org.hibernate.Transaction;
  *
  * @author LiamTrieu
  */
-public class ImelBanRepository {
+public class ImeiBanRepository {
 
     private Session session = HibernatUtil.getSession();
 
-    public List<ImelBan> selectALLImelBan() {
-        List<ImelBan> listImelBan = new ArrayList<>();
+    public List<ImeiBan> selectALLImeiBan() {
+        List<ImeiBan> listImeiBan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ImelBan", ImelBan.class);
+            Query query = session.createQuery("FROM ImeiBan", ImeiBan.class);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                listImelBan = query.getResultList();
+                listImeiBan = query.getResultList();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listImelBan;
+        return listImeiBan;
     }
 
-    public ImelBan SelectImelBanById(UUID Id) {
-        ImelBan imelBan = new ImelBan();
+    public ImeiBan SelectImeiBanById(UUID Id) {
+        ImeiBan imelBan = new ImeiBan();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ImelBan where Id = :Id", ImelBan.class);
+            Query query = session.createQuery("FROM ImeiBan where Id = :Id", ImeiBan.class);
             query.setParameter("Id", Id);
-            imelBan = (ImelBan) query.getSingleResult();
+            imelBan = (ImeiBan) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return imelBan;
     }
 
-    public ImelBan SelectImelBanByMa(String ma) {
-        ImelBan imelBan = new ImelBan();
+    public ImeiBan SelectImeiBanByMa(String ma) {
+        ImeiBan imelBan = new ImeiBan();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ImelBan where Ma = :ma", ImelBan.class);
+            Query query = session.createQuery("FROM ImeiBan where Ma = :ma", ImeiBan.class);
             query.setParameter("ma", ma);
-            imelBan = (ImelBan) query.getSingleResult();
+            imelBan = (ImeiBan) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return imelBan;
     }
 
-    public Boolean InsertImelBan(ImelBan imelBan) {
+    public Boolean InsertImeiBan(ImeiBan imelBan) {
         try(Session session = HibernatUtil.getSession()) {
             Transaction tran = session.getTransaction();
             tran.begin();
@@ -76,7 +76,7 @@ public class ImelBanRepository {
         return false;
     }
 
-    public Boolean UpdateImelBan(ImelBan imelBan) {
+    public Boolean UpdateImeiBan(ImeiBan imelBan) {
         Transaction tran = null;
         try {
             session = HibernatUtil.getSession();
@@ -92,7 +92,7 @@ public class ImelBanRepository {
         return false;
     }
 
-    public Boolean delete(ImelBan imelb) {
+    public Boolean delete(ImeiBan imelb) {
         Transaction transaction = null;
         try {
             session = HibernatUtil.getSession();
@@ -106,18 +106,34 @@ public class ImelBanRepository {
         return false;
     }
 
-    public List<ImelBan> selectALLImelBan(UUID hdct) {
-        List<ImelBan> listImelBan = new ArrayList<>();
+    public List<ImeiBan> selectALLImeiBan(UUID hdct, String text) {
+        List<ImeiBan> listImeiBan = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM ImelBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 1", ImelBan.class);
+            Query query = session.createQuery("FROM ImeiBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 1 "
+                    + "and ma LIKE concat('%', :text ,'%')", ImeiBan.class);
             query.setParameter("hdct", hdct);
+            query.setParameter("text", text);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                listImelBan = query.getResultList();
+                listImeiBan = query.getResultList();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listImelBan;
+        return listImeiBan;
+    }
+    public List<ImeiBan> selectALLImeiTra(UUID hdct) {
+        List<ImeiBan> listImeiBan = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM ImeiBan WHERE IdHoaDonChiTiet = :hdct and TrangThai = 0", ImeiBan.class);
+            query.setParameter("hdct", hdct);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listImeiBan = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listImeiBan;
     }
 }

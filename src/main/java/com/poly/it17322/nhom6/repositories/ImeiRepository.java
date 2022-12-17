@@ -4,7 +4,7 @@
  */
 package com.poly.it17322.nhom6.repositories;
 
-import com.poly.it17322.nhom6.domainmodels.Imel;
+import com.poly.it17322.nhom6.domainmodels.Imei;
 import com.poly.it17322.nhom6.utilities.HibernatUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,38 +19,38 @@ import org.hibernate.query.Query;
  *
  * @author LiamTrieu
  */
-public class ImelRepository {
+public class ImeiRepository {
 
     private Session session = HibernatUtil.getSession();
 
-    public List<Imel> selectALLImel() {
-        List<Imel> listImel = new ArrayList<>();
+    public List<Imei> selectALLImei() {
+        List<Imei> listImei = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM Imel", Imel.class);
+            Query query = session.createQuery("FROM Imei", Imei.class);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                listImel = query.getResultList();
+                listImei = query.getResultList();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listImel;
+        return listImei;
     }
 
-    public Imel SelectImelById(UUID Id) {
-        Imel imel = new Imel();
+    public Imei SelectImeiById(UUID Id) {
+        Imei imel = new Imei();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM Imel where Id = :Id", Imel.class);
+            Query query = session.createQuery("FROM Imei where Id = :Id", Imei.class);
             query.setParameter("Id", Id);
-            imel = (Imel) query.getSingleResult();
+            imel = (Imei) query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return imel;
     }
 
-    public Boolean InsertImel(Imel imel) {
+    public Boolean InsertImei(Imei imel) {
         try {
             session = HibernatUtil.getSession();
             Transaction tran = session.getTransaction();
@@ -64,7 +64,7 @@ public class ImelRepository {
         return false;
     }
 
-    public Boolean UpdateImel(Imel imel) {
+    public Boolean UpdateImei(Imei imel) {
         Transaction tran = null;
         try {
             session = HibernatUtil.getSession();
@@ -80,32 +80,47 @@ public class ImelRepository {
         return false;
     }
 
-    public List<Imel> Selectmamel(UUID ctSP) {
-        List<Imel> lstImel = new ArrayList<>();
+    public List<Imei> Selectmamel(UUID ctSP, String text) {
+        List<Imei> lstImei = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM Imel WHERE IdChiTietSP = :ctsp and TrangThai = 1", Imel.class);
+            Query query = session.createQuery("FROM Imei WHERE IdChiTietSP = :ctsp and TrangThai = 1 and ma LIKE concat('%', :text ,'%')", Imei.class);
             query.setParameter("ctsp", ctSP);
+            query.setParameter("text", text);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
-                lstImel = query.getResultList();
+                lstImei = query.getResultList();
             }
         } catch (Exception e) {
             return new ArrayList<>();
         }
-        return lstImel;
+        return lstImei;
     }
 
-    public Imel SelectImelBanByMa(String ma) {
-        Imel imel = new Imel();
+    public Imei SelectImeiBanByMa(String ma) {
+        Imei imel = new Imei();
         try {
             session = HibernatUtil.getSession();
-            javax.persistence.Query query = session.createQuery("FROM Imel where ma = :ma", Imel.class);
+            Query query = session.createQuery("FROM Imei where ma = :ma", Imei.class);
             query.setParameter("ma", ma);
-            imel = (Imel) query.getSingleResult();
+            imel = (Imei) query.getSingleResult();
         } catch (NoResultException e) {
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return imel;
     }
+    
+     public Boolean delete(Imei imel) {
+        Transaction transaction = null;
+        try {
+            session = HibernatUtil.getSession();
+            transaction = session.beginTransaction();
+            session.delete(imel);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
+    
 }

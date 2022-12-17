@@ -26,7 +26,20 @@ public class KhachHangRepository {
         List<KhachHang> listKhachHang = new ArrayList<>();
         try {
             session = HibernatUtil.getSession();
-            Query query = session.createQuery("FROM KhachHang", KhachHang.class);
+            Query query = session.createQuery("FROM KhachHang where ma != 'MacDinh' order by ma desc", KhachHang.class);
+            if (query.getResultList() != null && !query.getResultList().isEmpty()) {
+                listKhachHang = query.getResultList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listKhachHang;
+    }
+    public List<KhachHang> selectKHBH() {
+        List<KhachHang> listKhachHang = new ArrayList<>();
+        try {
+            session = HibernatUtil.getSession();
+            Query query = session.createQuery("FROM KhachHang order by ma desc", KhachHang.class);
             if (query.getResultList() != null && !query.getResultList().isEmpty()) {
                 listKhachHang = query.getResultList();
             }
