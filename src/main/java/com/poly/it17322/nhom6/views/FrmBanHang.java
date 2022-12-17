@@ -3163,7 +3163,7 @@ public class FrmBanHang extends javax.swing.JPanel {
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(1500);
                     } catch (InterruptedException e) {
                     }
                     BufferedImage image = null;
@@ -3179,10 +3179,12 @@ public class FrmBanHang extends javax.swing.JPanel {
                         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
                         Reader reader = new MultiFormatReader();
                         result = reader.decode(bitmap);
+                        System.out.println(result);
                     } catch (Exception e) {
                     }
                     if (result != null) {
                         try {
+                            System.out.println(indexHD);
                             if (indexHD != -1 && (dh.getTrangThai() == 0 || dh.getTrangThai() == 1) && dh.getSoLanShip() == 0) {
                                 if (bhs.addSpSanner(result.getText(), lstHoaDon.get(indexHD).getId())) {
                                     fillTableGH();
@@ -3202,7 +3204,11 @@ public class FrmBanHang extends javax.swing.JPanel {
         try {
             dtm = (DefaultTableModel) tblHoaDon.getModel();
             dtm.setRowCount(0);
-            lstHoaDon = bhs.getALLHoaDonBanHang(nhanVien.getId(), cboTrangThaiHoaDon.getSelectedIndex(), nhanVien.getChucVu() == 0, txtSearchHD.getText());
+            try {
+                lstHoaDon = bhs.getALLHoaDonBanHang(nhanVien.getId(), cboTrangThaiHoaDon.getSelectedIndex(), nhanVien.getChucVu() == 0, txtSearchHD.getText());
+            } catch (Exception e) {
+                indexHD = -1;
+            }
             if (lstHoaDon.isEmpty()) {
                 fillTableGH();
                 indexHD = -1;

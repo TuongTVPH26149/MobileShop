@@ -67,6 +67,7 @@ public class InHoaDon {
                 billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
                 billTable.addCell(getBillRowCell(""));
+                billTable.addCell(getBillRowCell(""));
             }
 
             PdfPTable validity = new PdfPTable(1);
@@ -92,7 +93,7 @@ public class InHoaDon {
             accounts.addCell(getAccountsCell("Tổng tiền thanh toán"));
             accounts.addCell(getAccountsCellR(hoaDon.getTongTien() + ""));
             PdfPCell summaryR = new PdfPCell(accounts);
-            summaryR.setColspan(4);
+            summaryR.setColspan(5);
             billTable.addCell(summaryR);
 
             PdfPTable describer = new PdfPTable(1);

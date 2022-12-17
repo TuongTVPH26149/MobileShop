@@ -862,9 +862,13 @@ public class FrmKhachhang extends javax.swing.JPanel {
         if (kt == false) {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng");
             return;
-        }else if(txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))){
-            JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
-            return;
+        }
+        try {
+            if (txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))) {
+                JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
+                return;
+            }
+        } catch (Exception e) {
         }
         KhachHangResponse kh = new KhachHangResponse();
         kh.setMa(ma);
@@ -904,7 +908,7 @@ public class FrmKhachhang extends javax.swing.JPanel {
         if (kt == false) {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng");
             return;
-        }else if(txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))){
+        } else if (txtsdt.getText().trim().equals(tblkhachhang.getValueAt(index, 3))) {
             JOptionPane.showMessageDialog(this, "Không được trùng SỐ điện thoại");
             return;
         }

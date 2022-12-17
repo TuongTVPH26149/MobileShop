@@ -82,18 +82,12 @@ public class ChiTietSPRepository {
         return false;
     }
 
-    public List<ChiTietSP> getSP(String search) {
+    public List<ChiTietSP> getSP() {
         List<ChiTietSP> list = new ArrayList<>();
         try {
             Session session = HibernatUtil.getSession();
-            String hql = "FROM ChiTietSP a Where "
-                    + "(a.sanPham.ten LIKE concat('%', :input ,'%') "
-                    + "or a.ram.ten LIKE concat('%', :input ,'%') "
-                    + "or a.rom.ten LIKE concat('%', :input ,'%') "
-                    + "or a.mauSac.ten LIKE concat('%', :input ,'%')) "
-                    + "and a.soLuong > 0";
+            String hql = "FROM ChiTietSP a Where a.soLuong > 0";
             Query query = session.createQuery(hql,ChiTietSP.class);
-            query.setParameter("input", search);
             list = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();

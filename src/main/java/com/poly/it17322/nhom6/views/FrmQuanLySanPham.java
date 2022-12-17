@@ -3280,6 +3280,7 @@ public class FrmQuanLySanPham extends javax.swing.JPanel {
             FilltoTableSanPham();
             clearFormData();
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Giá phải là số");
             return;
         }
