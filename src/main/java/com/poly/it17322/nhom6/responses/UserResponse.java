@@ -6,9 +6,8 @@ package com.poly.it17322.nhom6.responses;
 
 import com.poly.it17322.nhom6.domainmodels.TaiKhoan;
 import java.util.UUID;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  *
